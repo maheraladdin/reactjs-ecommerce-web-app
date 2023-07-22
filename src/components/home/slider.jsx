@@ -8,7 +8,7 @@ function Slider({advertisements}) {
         setIndex(selectedIndex);
     };
 
-    advertisements = [
+    if(!advertisements) advertisements = [
         {
             id: 1,
             title: "First slide label",
@@ -29,11 +29,13 @@ function Slider({advertisements}) {
         },
     ];
 
+    const sliderTime = 2000;
+
     return (
         <Carousel activeIndex={index} onSelect={handleSelect} className="slider">
             {
                 advertisements.map((advertisement) => (
-                    <Carousel.Item key={advertisement.id}>
+                    <Carousel.Item key={advertisement.id} interval={sliderTime} >
                         <img
                             className="d-block slider-image"
                             src={advertisement.image}
