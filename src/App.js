@@ -1,10 +1,11 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {solid} from "@fortawesome/fontawesome-svg-core/import.macro";
+import Header from "./components/utility/header";
+import HomePage from "./pages/home/homePage";
 
 export const Mailroom = () => (
     <div>
-        <FontAwesomeIcon icon={solid("heart")} style={{color: "#ff0000",}} />
+        <Header />
+        <HomePage />
     </div>
 )
 

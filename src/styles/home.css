@@ -1,0 +1,15 @@
+/*
+    Slider styles
+ */
+.slider {
+    width: 100%;
+    height: calc(100vh - 70px);
+    overflow: hidden;
+}
+
+.slider-image {
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-size: cover;
+    background-position: center;
+}
