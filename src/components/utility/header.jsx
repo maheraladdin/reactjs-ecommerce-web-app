@@ -6,8 +6,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Logo from "../../assets/images/logo.png";
+import {loginRoute} from "../../constants/routes";
 
 export default function Header() {
+
     const expand = 'lg';
 
     const setLocalStorage = (e, storageKey) => {
@@ -19,11 +21,13 @@ export default function Header() {
             <Navbar key={expand} expand={expand} className="bg-body-tertiary" style={{height: "70px"}}>
                 <Container fluid>
                     <Navbar.Brand role={"button"}>
-                        <img
-                            src={Logo}
-                            alt="E-shop"
-                            height="50"
-                        />
+                        <a href="/" target="_self">
+                            <img
+                                src={Logo}
+                                alt="E-shop"
+                                height="50"
+                            />
+                        </a>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                     <Navbar.Offcanvas
@@ -43,8 +47,8 @@ export default function Header() {
                                     title="profile"
                                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                                 >
-                                    <NavDropdown.Item>login</NavDropdown.Item>
-                                    <NavDropdown.Item>sign up</NavDropdown.Item>
+                                    <NavDropdown.Item href={loginRoute} target="_self" >login</NavDropdown.Item>
+                                    <NavDropdown.Item href="/signUp" target="_self" >sign up</NavDropdown.Item>
                                 </NavDropdown>
 
                                 <NavDropdown
