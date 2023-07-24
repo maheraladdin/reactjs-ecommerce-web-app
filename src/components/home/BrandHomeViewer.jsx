@@ -2,11 +2,12 @@ import Container from "react-bootstrap/Container";
 import BrandCard from "../brands/BrandCard";
 import SubTitle from "../utility/subTitle";
 import {Col, Row} from "react-bootstrap";
+import {brandsRoute} from "../../constants/routes";
 
 export default function BrandHomeViewer() {
 	return (
 		<Container>
-			<SubTitle title="Brands" buttonText="View All" />
+			<SubTitle title="Brands" buttonText="View All" route={brandsRoute} />
 			<Row>
 			{
 				Array(6).fill(0).map((_, i) => (

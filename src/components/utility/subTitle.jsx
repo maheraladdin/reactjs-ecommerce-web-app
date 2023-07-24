@@ -1,4 +1,5 @@
 import Button from "react-bootstrap/Button";
+import {Link} from "react-router-dom";
 
 export default function SubTitle({title,buttonText,route}) {
     return (
@@ -7,7 +8,11 @@ export default function SubTitle({title,buttonText,route}) {
                 {title}
             </section>
             <section>
-                <Button title={buttonText} variant="outline-primary" className="me-2">{buttonText}</Button>
+                {buttonText && (() => (
+                    <Link to={route}>
+                        <Button title={buttonText} variant="outline-primary" className="me-2">{buttonText}</Button>
+                    </Link>
+                ))()}
             </section>
         </section>
     );
