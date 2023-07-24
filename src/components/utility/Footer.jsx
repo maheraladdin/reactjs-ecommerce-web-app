@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 export default function Footer() {
 
 	return (
-		<footer className="bg-light border-top border-2 border-dark">
+		<footer className="bg-body-tertiary">
 			<Container>
 				<section className="d-flex justify-content-between flex-wrap">
 					<section className="d-flex gap-2 py-3">

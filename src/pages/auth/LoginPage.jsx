@@ -33,7 +33,7 @@ export default function LoginPage() {
 				<Form.Group className="mb-3" controlId="formBasicCheckbox">
 					<Form.Check type="checkbox" label="Remember me" />
 				</Form.Group>
-				<Button variant="primary" type="submit">
+				<Button className="w-100" variant="primary" type="submit">
 					Login
 				</Button>
 				<Form.Group className="pt-2">
