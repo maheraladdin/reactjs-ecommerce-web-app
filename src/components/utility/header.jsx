@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Logo from "../../assets/images/logo.png";
-import {loginRoute} from "../../constants/routes";
+import {loginRoute, signupRoute} from "../../constants/routes";
 
 export default function Header() {
 
@@ -48,7 +48,7 @@ export default function Header() {
                                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                                 >
                                     <NavDropdown.Item href={loginRoute} target="_self" >login</NavDropdown.Item>
-                                    <NavDropdown.Item href="/signUp" target="_self" >sign up</NavDropdown.Item>
+                                    <NavDropdown.Item href={signupRoute} target="_self" >sign up</NavDropdown.Item>
                                 </NavDropdown>
 
                                 <NavDropdown

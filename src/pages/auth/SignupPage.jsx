@@ -2,10 +2,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from "react-bootstrap/Container";
 import Logo from "../../assets/images/logo.png";
-import {signupRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
+import {loginRoute} from "../../constants/routes";
 
-export default function LoginPage() {
+export default function SignupPage() {
 	return (
 		<Container
 			className="d-flex align-items-center justify-content-center flex-column gap-4"
@@ -18,7 +18,7 @@ export default function LoginPage() {
 				<section>
 					<img width="150px" src={Logo} alt="E-shop logo" className="rounded-circle"/>
 				</section>
-				<h2>Login</h2>
+				<h2>Sign up</h2>
 			</section>
 			<Form style={{width: "300px"}}>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
@@ -30,15 +30,19 @@ export default function LoginPage() {
 					<Form.Label>Password</Form.Label>
 					<Form.Control type="password" placeholder="Password" />
 				</Form.Group>
+				<Form.Group className="mb-3" controlId="formBasicPassword">
+					<Form.Label>Password Confirmation</Form.Label>
+					<Form.Control type="password" placeholder="Password Confirmation" />
+				</Form.Group>
 				<Form.Group className="mb-3" controlId="formBasicCheckbox">
 					<Form.Check type="checkbox" label="Remember me" />
 				</Form.Group>
 				<Button variant="primary" type="submit">
-					Login
+					Sign up
 				</Button>
 				<Form.Group className="pt-2">
 					<Form.Text>
-						Don't have an account? <Link to={signupRoute} className="text-decoration-none text-primary">Sign up</Link>
+						Do have an account? <Link to={loginRoute} className="text-decoration-none text-primary">Login</Link>
 					</Form.Text>
 				</Form.Group>
 			</Form>
