@@ -1,6 +1,6 @@
 import Slider from "../../components/home/slider";
 import CategoryHomeViewer from "../../components/home/CategoryHomeViewer";
-import ProductViewer from "../../components/utility/productViewer";
+import BestProductViewer from "../../components/utility/BestProductViewer";
 import AdvertisementBar from "../../components/home/advertisementBar";
 import BrandHomeViewer from "../../components/home/BrandHomeViewer";
 
@@ -9,10 +9,10 @@ export default function HomePage() {
         <>
             <Slider />
             <CategoryHomeViewer />
-            <ProductViewer />
+            <BestProductViewer />
             <AdvertisementBar />
-            <ProductViewer />
-            <ProductViewer />
+            <BestProductViewer />
+            <BestProductViewer />
             <BrandHomeViewer />
         </>
     );

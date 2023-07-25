@@ -1,10 +1,10 @@
 import SubTitle from "./subTitle";
 import Container from "react-bootstrap/Container";
 import {Col, Row} from "react-bootstrap";
-import ProductCard from "../product/productCard";
+import ProductCard from "../product/ProductCard";
 import {productsRoute} from "../../constants/routes"
 
-export default function ProductViewer({product}) {
+export default function BestProductViewer({product}) {
     if(!product) product = {
         title:"Product",
         description: "this is our awesome product",

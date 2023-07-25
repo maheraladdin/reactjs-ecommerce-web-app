@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 
 export default function ProductsSortAndLength() {
 	return (
-		<section className="d-flex justify-content-between align-items-center py-3 flex-wrap flex-row-reverse">
+		<section className="d-flex justify-content-between align-items-center py-3 flex-wrap">
 			<section className="h4">
 				Results: 5
 			</section>
@@ -14,12 +14,12 @@ export default function ProductsSortAndLength() {
 					</Dropdown.Toggle>
 
 					<Dropdown.Menu>
-						<Dropdown.Item>Menu Item</Dropdown.Item>
-						<Dropdown.Item>Menu Item</Dropdown.Item>
-						<Dropdown.Item>Menu Item</Dropdown.Item>
+						<Dropdown.Item>sold</Dropdown.Item>
+						<Dropdown.Item>rating</Dropdown.Item>
+						<Dropdown.Item>price</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
-				<Button>
+				<Button className="py-0 px-1">
 					<i className="fa-solid fa-sort-up"></i>
 				</Button>
 			</section>

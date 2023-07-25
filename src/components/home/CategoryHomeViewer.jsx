@@ -1,6 +1,6 @@
 import SubTitle from "../utility/subTitle";
 import Container from "react-bootstrap/Container";
-import CategoryCard from "../category/categoryCard";
+import CategoryCard from "../category/CategoryCard";
 import {Col, Row} from "react-bootstrap";
 import {categoriesRoute} from "../../constants/routes";
 

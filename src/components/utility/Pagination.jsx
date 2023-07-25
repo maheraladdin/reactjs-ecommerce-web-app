@@ -6,11 +6,11 @@ export default function Pagination({pageCount,handlePageChange}) {
 	        <ReactPaginate
 				onPageChange={handlePageChange}
 				className="pagination justify-content-center user-select-none"
-				previousLabel={"← Previous"}
-				nextLabel={"Next →"}
+				previousLabel={"←"}
+				nextLabel={"→"}
 				breakLabel={"..."}
 				pageCount={pageCount}
-				marginPagesDisplayed={3}
+				marginPagesDisplayed={1}
 				pageClassName={"page-item"}
 				previousClassName={"page-item rounded-pill"}
 				previousLinkClassName={"page-link"}

@@ -1,5 +1,5 @@
 import {Col, Row} from "react-bootstrap";
-import CategoryCard from "./categoryCard";
+import CategoryCard from "./CategoryCard";
 
 export default function CategoriesBrowser() {
 	return (
