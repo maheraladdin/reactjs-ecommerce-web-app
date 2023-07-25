@@ -2,6 +2,7 @@ import SubTitle from "./subTitle";
 import Container from "react-bootstrap/Container";
 import {Col, Row} from "react-bootstrap";
 import ProductCard from "../product/productCard";
+import {productsRoute} from "../../constants/routes"
 
 export default function ProductViewer({product}) {
     if(!product) product = {
@@ -13,7 +14,7 @@ export default function ProductViewer({product}) {
     }
     return (
         <Container>
-            <SubTitle title="Product" buttonText="View All" route="/products" />
+            <SubTitle title="Product" buttonText="View All" route={productsRoute} />
             <Row>
             {
                 Array(4).fill().map((item,index) => (

@@ -1,1 +1,5 @@
 @import "styles/home.css";
+
+.min-height-100vh {
+    min-height: calc(100vh - 70px)
+}
