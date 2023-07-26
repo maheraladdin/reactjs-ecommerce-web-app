@@ -7,7 +7,7 @@ export default function SidebarFilter() {
 		<Nav className="flex-column" style={{
 			minWidth: "200px",
 		}}>
-
+			{/* Categories Filter */}
 			<Nav.Item className="h5 mb-2">Category</Nav.Item>
 			<Nav variant="pills" className="flex-column">
 				<Nav.Link className="w-fit-content mb-2" eventKey={`All`}>All</Nav.Link>
@@ -17,6 +17,7 @@ export default function SidebarFilter() {
 				<Nav.Link className="w-fit-content mb-2" eventKey={`more`}>More</Nav.Link>
 			</Nav>
 
+			{/* Sub Categories Filter */}
 			<Nav.Item className="h5 mt-3 mb-2">Sub Category</Nav.Item>
 			<Form>
 				<Form.Check // prettier-ignore
@@ -37,6 +38,7 @@ export default function SidebarFilter() {
 				}
 			</Form>
 
+			{/* Brands filter */}
 			<Nav.Item className="h5 mt-3 mb-2">Brands</Nav.Item>
 			<Form class="ps-2">
 				<Form.Check // prettier-ignore
@@ -57,6 +59,7 @@ export default function SidebarFilter() {
 				}
 			</Form>
 
+			{/* Price From To Filter */}
 			<Nav.Item className="h5 mt-3 mb-2">Price</Nav.Item>
 			<Form class="ps-2">
 				<Form.Group className="mb-3" >

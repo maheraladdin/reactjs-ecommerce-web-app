@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
-function Slider({advertisements}) {
+function Slider({advertisements,width,height,className}) {
     const [index, setIndex] = useState(0);
 
     const handleSelect = (selectedIndex) => {
@@ -32,19 +32,36 @@ function Slider({advertisements}) {
     const sliderTime = 2000;
 
     return (
-        <Carousel activeIndex={index} onSelect={handleSelect} className="slider">
+        <Carousel
+            activeIndex={index}
+            onSelect={handleSelect}
+            className={`slider ${className}`}
+            style={{
+                width,
+                height
+            }}
+        >
             {
                 advertisements.map((advertisement) => (
-                    <Carousel.Item key={advertisement.id} interval={sliderTime} >
+                    <Carousel.Item
+                        key={advertisement.id}
+                        interval={sliderTime}
+                        style={{
+                            width,
+                            height
+                        }}
+                    >
                         <img
                             className="d-block slider-image"
                             src={advertisement.image}
                             alt={advertisement.title}
+                            loading={"lazy"}
                         />
+                        {advertisement.title && advertisement.description ?
                         <Carousel.Caption>
-                            <h3>{advertisement.title}</h3>
-                            <p>{advertisement.description}</p>
-                        </Carousel.Caption>
+                            {advertisement.title ? <h3>{advertisement.title}</h3> : null}
+                            {advertisement.description ? <p>{advertisement.description}</p> : null}
+                        </Carousel.Caption> : null}
                     </Carousel.Item>
                 ))
             }

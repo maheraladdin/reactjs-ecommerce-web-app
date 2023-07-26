@@ -5,6 +5,7 @@ import AdvertisementBar from "../../components/home/advertisementBar";
 import BrandHomeViewer from "../../components/home/BrandHomeViewer";
 
 export default function HomePage() {
+
     return (
         <>
             <Slider />

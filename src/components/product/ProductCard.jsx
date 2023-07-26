@@ -1,16 +1,26 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import {productDetailsRoute} from "../../constants/routes";
+import {Link} from "react-router-dom";
 
 
 export default function ProductCard({product}) {
     return (
         <Card>
+            <Button
+                variant="danger"
+                className="position-absolute"
+                style={{
+                    top: "10px",
+                    left: "10px"
+                }}
+            >
+                <i className="fa-solid fa-heart"></i>
+
+            </Button>
+
+            <Link to={productDetailsRoute} className="text-decoration-none text-dark">
             <Card.Img variant="top" src={product.image} />
-            <Card.ImgOverlay style={{zIndex: 1}}>
-                <Button variant="danger">
-                    <i className="fa-solid fa-heart"></i>
-                </Button>
-            </Card.ImgOverlay>
             <Card.Body style={{zIndex: 2}}>
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>{product.description}</Card.Text>
@@ -24,6 +34,7 @@ export default function ProductCard({product}) {
                     </section>
                 </section>
             </Card.Body>
+            </Link>
         </Card>
     );
 }

@@ -6,3 +6,5 @@ export const categoriesRoute = '/categories';
 export const brandsRoute = '/brands';
 
 export const productsRoute = '/products';
+
+export const productDetailsRoute = '/products/:id';
