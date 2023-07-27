@@ -5,6 +5,15 @@ import {Link} from "react-router-dom";
 
 
 export default function ProductCard({product}) {
+
+    if(!product) product = {
+        title:"Product",
+        description: "this is our awesome Product",
+        image:"https://picsum.photos/200",
+        rating: 4.5,
+        price: 50,
+    }
+
     return (
         <Card>
             <Button

@@ -16,7 +16,12 @@ import {
     adminOrdersRoute,
     adminOrderDetailsRoute,
     adminAddBrandRoute,
-    adminAddCategoryRoute, adminAddSubcategoryRoute, adminAddProductRoute, userOrdersRoute
+    adminAddCategoryRoute,
+    adminAddSubcategoryRoute,
+    adminAddProductRoute,
+    userOrdersRoute,
+    userWishlistRoute,
+    userAddressesRoute, userProfileRoute, userAddressUpdateRoute, userAddAddressRoute, userUpdateProfileRoute
 } from "./constants/routes";
 import SignupPage from "./pages/Auth/SignupPage";
 import CategoriesPage from "./pages/Category/CategoriesPage";
@@ -32,6 +37,12 @@ import AdminAddCategoryPage from "./pages/Admin/AdminAddCategoryPage";
 import AdminAddSubcategoryPage from "./pages/Admin/AdminAddSubcategoryPage";
 import AdminAddProductPage from "./pages/Admin/AdminAddProductPage";
 import {UserOrdersManagementPage} from "./pages/User/UserOrdersManagementPage";
+import UserWishListPage from "./pages/User/UserWishListPage";
+import UserAddressesPage from "./pages/User/UserAddressesPage";
+import UserProfilePage from "./pages/User/UserProfilePage";
+import UserAddressUpdatePage from "./pages/User/UserAddressUpdatePage";
+import UserAddNewAddressPage from "./pages/User/UserAddNewAddressPage";
+import UserUpdateProfilePage from "./pages/User/UserUpdateProfilePage";
 
 export default function App() {
     return (
@@ -55,6 +66,12 @@ export default function App() {
                     <Route path={adminAddSubcategoryRoute} element={<AdminAddSubcategoryPage />} />
                     <Route path={adminAddProductRoute} element={<AdminAddProductPage />} />
                     <Route path={userOrdersRoute} element={<UserOrdersManagementPage />} />
+                    <Route path={userWishlistRoute} element={<UserWishListPage />} />
+                    <Route path={userAddressesRoute} element={<UserAddressesPage />} />
+                    <Route path={userAddAddressRoute} element={<UserAddNewAddressPage />} />
+                    <Route path={userAddressUpdateRoute} element={<UserAddressUpdatePage />} />
+                    <Route path={userProfileRoute} element={<UserProfilePage />} />
+                    <Route path={userUpdateProfileRoute} element={<UserUpdateProfilePage />} />
                 </Routes>
             </BrowserRouter>
             <Footer />

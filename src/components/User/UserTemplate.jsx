@@ -20,7 +20,7 @@ export function UserTemplate({title, children, pagination = true}) {
 					xs={12}
 					lg={9}
 				>
-					{title ? <h2 className="pb-2"><Badge>{title}</Badge></h2> : null}
+					{title ? <h2 className="pb-2 text-capitalize"><Badge>{title}</Badge></h2> : null}
 					{children}
 					{pagination ? <Pagination pageCount={100}/> : null}
 				</Col>

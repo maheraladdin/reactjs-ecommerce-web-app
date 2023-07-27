@@ -33,4 +33,10 @@ export const userWishlistRoute = '/user/wishlist';
 
 export const userAddressesRoute = '/user/addresses';
 
-export const userAccountRoute = '/user/account';
+export const userAddAddressRoute = '/user/addAddress';
+
+export const userAddressUpdateRoute = '/user/updateAddress';
+
+export const userProfileRoute = '/user/profile';
+
+export const userUpdateProfileRoute = '/user/updateProfile';

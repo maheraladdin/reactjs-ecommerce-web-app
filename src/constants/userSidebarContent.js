@@ -1,18 +1,20 @@
+import {userAddressesRoute, userOrdersRoute, userProfileRoute, userWishlistRoute} from "./routes";
+
 export const userSidebarContent = [
     {
         text: "Orders management",
-        route: "/user/orders"
+        route: userOrdersRoute
     },
     {
         text: "Wishlist",
-        route: "/user/wishlist"
+        route: userWishlistRoute
     },
     {
         text: "Addresses",
-        route: "/user/addresses"
+        route: userAddressesRoute
     },
     {
         text: "Profile",
-        route: "/user/account"
+        route: userProfileRoute
     }
 ]
