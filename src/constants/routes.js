@@ -15,6 +15,8 @@ export const adminProductsRoute = '/admin/products';
 
 export const adminOrdersRoute = '/admin/orders';
 
+export const adminOrderDetailsRoute = '/admin/orders/:id';
+
 export const adminAddBrandRoute = '/admin/addBrand';
 
 export const adminAddCategoryRoute = '/admin/addCategory';

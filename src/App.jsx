@@ -10,7 +10,7 @@ import {
     categoriesRoute,
     brandsRoute,
     productsRoute,
-    productDetailsRoute, cartRoute, adminProductsRoute, adminOrdersRoute
+    productDetailsRoute, cartRoute, adminProductsRoute, adminOrdersRoute, adminOrderDetailsRoute
 } from "./constants/routes";
 import SignupPage from "./pages/auth/SignupPage";
 import CategoriesPage from "./pages/category/CategoriesPage";
@@ -20,6 +20,7 @@ import ProductDetailsPage from "./pages/product/ProductDetailsPage";
 import CartPage from "./pages/cart/CartPage";
 import {AdminProductsManagementPage} from "./pages/Admin/AdminProductsManagementPage";
 import AdminOrdersManagementPage from "./pages/Admin/AdminOrdersManagementPage";
+import AdminOrderDetailsPage from "./pages/Admin/AdminOrderDetailsPage";
 
 export default function App() {
     return (
@@ -37,6 +38,7 @@ export default function App() {
                     <Route path={cartRoute} element={<CartPage />} />
                     <Route path={adminProductsRoute} element={<AdminProductsManagementPage />} />
                     <Route path={adminOrdersRoute} element={<AdminOrdersManagementPage />} />
+                    <Route path={adminOrderDetailsRoute} element={<AdminOrderDetailsPage />} />
                 </Routes>
             </BrowserRouter>
             <Footer />

@@ -62,7 +62,7 @@ export default function AdminSidebar() {
 									<Link to={item.route} key={i + 1} className="text-decoration-none text-dark">
 										<section
 											key={i + 1}
-											className="d-flex justify-content-between align-items-center gap-3 bg-white p-3 rounded-3"
+											className={`d-flex justify-content-between align-items-center gap-3 bg-white p-3 rounded-3`}
 										>
 											<section>{item.text}</section>
 										</section>
