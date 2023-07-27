@@ -24,3 +24,13 @@ export const adminAddCategoryRoute = '/admin/addCategory';
 export const adminAddSubcategoryRoute = '/admin/addSubcategory';
 
 export const adminAddProductRoute = '/admin/addProduct';
+
+export const userOrdersRoute = '/user/orders';
+
+export const userOrderDetailsRoute = '/user/orders/:id';
+
+export const userWishlistRoute = '/user/wishlist';
+
+export const userAddressesRoute = '/user/addresses';
+
+export const userAccountRoute = '/user/account';

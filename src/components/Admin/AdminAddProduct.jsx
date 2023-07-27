@@ -106,7 +106,7 @@ export default function AdminAddProduct() {
 				</Form.Group>
 			</Form>
 			<section className="d-flex justify-content-end">
-				<Button variant="outline-success"> Add Category </Button>
+				<Button variant="outline-success"> Add Product </Button>
 			</section>
 		</>
 	)

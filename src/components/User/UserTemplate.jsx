@@ -1,10 +1,10 @@
+import Container from "react-bootstrap/Container";
 import {Badge, Col, Row} from "react-bootstrap";
 import LoggedUserSidebar from "../utility/LoggedUserSidebar";
 import Pagination from "../utility/Pagination";
-import Container from "react-bootstrap/Container";
-import {adminSideBarContent} from "../../constants/adminSidebarContent";
+import {userSidebarContent} from "../../constants/userSidebarContent";
 
-export default function AdminTemplate({title, children, pagination = true}) {
+export function UserTemplate({title, children, pagination = true}) {
 	return (
 		<Container className="py-4" style={{
 			minHeight: "calc(100vh - 70px)"
@@ -14,7 +14,7 @@ export default function AdminTemplate({title, children, pagination = true}) {
 					xs={12}
 					lg={3}
 				>
-					<LoggedUserSidebar content={adminSideBarContent} />
+					<LoggedUserSidebar content={userSidebarContent} />
 				</Col>
 				<Col
 					xs={12}

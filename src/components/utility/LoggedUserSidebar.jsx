@@ -1,48 +1,14 @@
-import {
-	adminAddBrandRoute,
-	adminAddCategoryRoute, adminAddProductRoute,
-	adminAddSubcategoryRoute,
-	adminOrdersRoute,
-	adminProductsRoute
-} from "../../constants/routes";
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-export default function AdminSidebar() {
+export default function LoggedUserSidebar({content}) {
 
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-
-	const content = [
-		{
-			text: "Orders management",
-			route: adminOrdersRoute
-		},
-		{
-			text: "Products management",
-			route: adminProductsRoute
-		},
-		{
-			text: "Add Brand",
-			route: adminAddBrandRoute
-		},
-		{
-			text: "Add Category",
-			route: adminAddCategoryRoute
-		},
-		{
-			text: "Add subcategory",
-			route: adminAddSubcategoryRoute
-		},
-		{
-			text: "Add Product",
-			route: adminAddProductRoute
-		}
-	]
 
 	return (
 		<>
