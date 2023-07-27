@@ -14,7 +14,7 @@ export default function AdminTemplate({title, children, pagination = true}) {
 					xs={12}
 					lg={3}
 				>
-					<LoggedUserSidebar content={adminSideBarContent} />
+					<LoggedUserSidebar content={adminSideBarContent} role={"Admin"}/>
 				</Col>
 				<Col
 					xs={12}

@@ -14,7 +14,7 @@ export function UserTemplate({title, children, pagination = true}) {
 					xs={12}
 					lg={3}
 				>
-					<LoggedUserSidebar content={userSidebarContent} />
+					<LoggedUserSidebar content={userSidebarContent} role={"User"}/>
 				</Col>
 				<Col
 					xs={12}

@@ -3,7 +3,7 @@ import {useState} from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-export default function LoggedUserSidebar({content}) {
+export default function LoggedUserSidebar({content,role}) {
 
 	const [show, setShow] = useState(false);
 
@@ -14,11 +14,11 @@ export default function LoggedUserSidebar({content}) {
 		<>
 			{/* small screens */}
 			<Button className="d-lg-none" variant="primary" onClick={handleShow}>
-				Admin Menu
+				{role} Menu
 			</Button>
 			<Offcanvas show={show} onHide={handleClose}>
 				<Offcanvas.Header closeButton>
-					<Offcanvas.Title>Admin Menu</Offcanvas.Title>
+					<Offcanvas.Title>{role} Menu</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
 					<section className="d-flex flex-column flex-wrap  gap-3 bg-light p-3 rounded-3">
