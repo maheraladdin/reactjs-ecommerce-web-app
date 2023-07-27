@@ -12,7 +12,7 @@ export const userSidebarContent = [
         route: "/user/addresses"
     },
     {
-        text: "Account",
+        text: "Profile",
         route: "/user/account"
     }
 ]

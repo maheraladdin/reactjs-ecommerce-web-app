@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from "./components/utility/header";
-import HomePage from "./pages/home/HomePage";
+import HomePage from "./pages/Home/HomePage";
 import Footer from "./components/utility/Footer";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import LoginPage from "./pages/auth/LoginPage";
+import LoginPage from "./pages/Auth/LoginPage";
 import {
     loginRoute,
     signupRoute,
@@ -16,14 +16,14 @@ import {
     adminOrdersRoute,
     adminOrderDetailsRoute,
     adminAddBrandRoute,
-    adminAddCategoryRoute, adminAddSubcategoryRoute, adminAddProductRoute
+    adminAddCategoryRoute, adminAddSubcategoryRoute, adminAddProductRoute, userOrdersRoute
 } from "./constants/routes";
-import SignupPage from "./pages/auth/SignupPage";
-import CategoriesPage from "./pages/category/CategoriesPage";
-import BrandsPage from "./pages/brand/BrandsPage";
-import ProductBrowser from "./pages/product/ProductBrowser"
-import ProductDetailsPage from "./pages/product/ProductDetailsPage";
-import CartPage from "./pages/cart/CartPage";
+import SignupPage from "./pages/Auth/SignupPage";
+import CategoriesPage from "./pages/Category/CategoriesPage";
+import BrandsPage from "./pages/Brand/BrandsPage";
+import ProductBrowser from "./pages/Product/ProductBrowser"
+import ProductDetailsPage from "./pages/Product/ProductDetailsPage";
+import CartPage from "./pages/Cart/CartPage";
 import {AdminProductsManagementPage} from "./pages/Admin/AdminProductsManagementPage";
 import AdminOrdersManagementPage from "./pages/Admin/AdminOrdersManagementPage";
 import AdminOrderDetailsPage from "./pages/Admin/AdminOrderDetailsPage";
@@ -31,6 +31,7 @@ import AdminAddBrandPage from "./pages/Admin/AdminAddBrandPage";
 import AdminAddCategoryPage from "./pages/Admin/AdminAddCategoryPage";
 import AdminAddSubcategoryPage from "./pages/Admin/AdminAddSubcategoryPage";
 import AdminAddProductPage from "./pages/Admin/AdminAddProductPage";
+import {UserOrdersManagementPage} from "./pages/User/UserOrdersManagementPage";
 
 export default function App() {
     return (
@@ -53,6 +54,7 @@ export default function App() {
                     <Route path={adminAddCategoryRoute} element={<AdminAddCategoryPage />} />
                     <Route path={adminAddSubcategoryRoute} element={<AdminAddSubcategoryPage />} />
                     <Route path={adminAddProductRoute} element={<AdminAddProductPage />} />
+                    <Route path={userOrdersRoute} element={<UserOrdersManagementPage />} />
                 </Routes>
             </BrowserRouter>
             <Footer />

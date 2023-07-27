@@ -9,7 +9,7 @@ export const productsRoute = '/products';
 
 export const productDetailsRoute = '/products/:id';
 
-export const cartRoute = '/cart';
+export const cartRoute = '/Cart';
 
 export const adminProductsRoute = '/admin/products';
 

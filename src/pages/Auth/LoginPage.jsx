@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from "react-bootstrap/Container";
 import Logo from "../../assets/images/logo.png";
-import {adminProductsRoute, signupRoute} from "../../constants/routes";
+import {adminProductsRoute, signupRoute, userOrdersRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
 
 export default function LoginPage() {
@@ -44,6 +44,11 @@ export default function LoginPage() {
 				<Form.Group className="pt-2">
 					<Form.Text>
 						<Link to={adminProductsRoute} className="text-decoration-none text-primary"> Sign in as Admin</Link>
+					</Form.Text>
+				</Form.Group>
+				<Form.Group className="pt-2">
+					<Form.Text>
+						<Link to={userOrdersRoute} className="text-decoration-none text-primary"> Sign in as User</Link>
 					</Form.Text>
 				</Form.Group>
 			</Form>

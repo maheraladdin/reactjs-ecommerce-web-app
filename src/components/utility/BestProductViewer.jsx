@@ -7,7 +7,7 @@ import {productsRoute} from "../../constants/routes"
 export default function BestProductViewer({product}) {
     if(!product) product = {
         title:"Product",
-        description: "this is our awesome product",
+        description: "this is our awesome Product",
         image:"https://picsum.photos/200",
         rating: 4.5,
         price: 50,

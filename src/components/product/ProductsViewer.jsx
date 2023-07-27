@@ -6,7 +6,7 @@ export default function ProductsViewer({product, numberOfProducts}) {
 
 	if(!product) product = {
 		title:"Product",
-		description: "this is our awesome product",
+		description: "this is our awesome Product",
 		image:"https://picsum.photos/200",
 		rating: 4.5,
 		price: 50,
