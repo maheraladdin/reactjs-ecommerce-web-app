@@ -16,7 +16,7 @@ import {
     adminOrdersRoute,
     adminOrderDetailsRoute,
     adminAddBrandRoute,
-    adminAddCategoryRoute, adminAddSubcategoryRoute
+    adminAddCategoryRoute, adminAddSubcategoryRoute, adminAddProductRoute
 } from "./constants/routes";
 import SignupPage from "./pages/auth/SignupPage";
 import CategoriesPage from "./pages/category/CategoriesPage";
@@ -30,6 +30,7 @@ import AdminOrderDetailsPage from "./pages/Admin/AdminOrderDetailsPage";
 import AdminAddBrandPage from "./pages/Admin/AdminAddBrandPage";
 import AdminAddCategoryPage from "./pages/Admin/AdminAddCategoryPage";
 import AdminAddSubcategoryPage from "./pages/Admin/AdminAddSubcategoryPage";
+import AdminAddProductPage from "./pages/Admin/AdminAddProductPage";
 
 export default function App() {
     return (
@@ -51,6 +52,7 @@ export default function App() {
                     <Route path={adminAddBrandRoute} element={<AdminAddBrandPage />} />
                     <Route path={adminAddCategoryRoute} element={<AdminAddCategoryPage />} />
                     <Route path={adminAddSubcategoryRoute} element={<AdminAddSubcategoryPage />} />
+                    <Route path={adminAddProductRoute} element={<AdminAddProductPage />} />
                 </Routes>
             </BrowserRouter>
             <Footer />
