@@ -5,7 +5,9 @@ import Container from "react-bootstrap/Container";
 
 export default function AdminTemplate({title, children, pagination = true}) {
 	return (
-		<Container className="py-4">
+		<Container className="py-4" style={{
+			minHeight: "calc(100vh - 70px)"
+		}}>
 			<Row className="py-3 gap-3 gap-lg-0">
 				<Col
 					xs={12}

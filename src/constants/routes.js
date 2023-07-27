@@ -23,4 +23,4 @@ export const adminAddCategoryRoute = '/admin/addCategory';
 
 export const adminAddProductRoute = '/admin/addProduct';
 
-export const adminAddSubcategoryRoute = '/admin/addSubcategory/:id';
+export const adminAddSubcategoryRoute = '/admin/addSubcategory';

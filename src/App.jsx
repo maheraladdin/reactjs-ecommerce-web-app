@@ -10,7 +10,13 @@ import {
     categoriesRoute,
     brandsRoute,
     productsRoute,
-    productDetailsRoute, cartRoute, adminProductsRoute, adminOrdersRoute, adminOrderDetailsRoute
+    productDetailsRoute,
+    cartRoute,
+    adminProductsRoute,
+    adminOrdersRoute,
+    adminOrderDetailsRoute,
+    adminAddBrandRoute,
+    adminAddCategoryRoute, adminAddSubcategoryRoute
 } from "./constants/routes";
 import SignupPage from "./pages/auth/SignupPage";
 import CategoriesPage from "./pages/category/CategoriesPage";
@@ -21,6 +27,9 @@ import CartPage from "./pages/cart/CartPage";
 import {AdminProductsManagementPage} from "./pages/Admin/AdminProductsManagementPage";
 import AdminOrdersManagementPage from "./pages/Admin/AdminOrdersManagementPage";
 import AdminOrderDetailsPage from "./pages/Admin/AdminOrderDetailsPage";
+import AdminAddBrandPage from "./pages/Admin/AdminAddBrandPage";
+import AdminAddCategoryPage from "./pages/Admin/AdminAddCategoryPage";
+import AdminAddSubcategoryPage from "./pages/Admin/AdminAddSubcategoryPage";
 
 export default function App() {
     return (
@@ -39,6 +48,9 @@ export default function App() {
                     <Route path={adminProductsRoute} element={<AdminProductsManagementPage />} />
                     <Route path={adminOrdersRoute} element={<AdminOrdersManagementPage />} />
                     <Route path={adminOrderDetailsRoute} element={<AdminOrderDetailsPage />} />
+                    <Route path={adminAddBrandRoute} element={<AdminAddBrandPage />} />
+                    <Route path={adminAddCategoryRoute} element={<AdminAddCategoryPage />} />
+                    <Route path={adminAddSubcategoryRoute} element={<AdminAddSubcategoryPage />} />
                 </Routes>
             </BrowserRouter>
             <Footer />
