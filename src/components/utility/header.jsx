@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Logo from "../../assets/images/logo.png";
-import {loginRoute, signupRoute} from "../../constants/routes";
+import {cartRoute, loginRoute, signupRoute} from "../../constants/routes";
 
 export default function Header() {
 
@@ -49,6 +49,7 @@ export default function Header() {
                                 >
                                     <NavDropdown.Item href={loginRoute} target="_self" >login</NavDropdown.Item>
                                     <NavDropdown.Item href={signupRoute} target="_self" >sign up</NavDropdown.Item>
+                                    <NavDropdown.Item href={cartRoute} target="_self">cart</NavDropdown.Item>
                                 </NavDropdown>
 
                                 <NavDropdown

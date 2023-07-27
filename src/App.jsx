@@ -10,13 +10,14 @@ import {
     categoriesRoute,
     brandsRoute,
     productsRoute,
-    productDetailsRoute
+    productDetailsRoute, cartRoute
 } from "./constants/routes";
 import SignupPage from "./pages/auth/SignupPage";
 import CategoriesPage from "./pages/category/CategoriesPage";
 import BrandsPage from "./pages/brand/BrandsPage";
 import ProductBrowser from "./pages/product/ProductBrowser"
 import ProductDetailsPage from "./pages/product/ProductDetailsPage";
+import CartPage from "./pages/cart/CartPage";
 
 export default function App() {
     return (
@@ -31,6 +32,7 @@ export default function App() {
                     <Route path={brandsRoute} element={<BrandsPage />} />
                     <Route path={productsRoute} element={<ProductBrowser />} />
                     <Route path={productDetailsRoute} element={<ProductDetailsPage />} />
+                    <Route path={cartRoute} element={<CartPage />} />
                 </Routes>
             </BrowserRouter>
             <Footer />

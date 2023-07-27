@@ -8,3 +8,5 @@ export const brandsRoute = '/brands';
 export const productsRoute = '/products';
 
 export const productDetailsRoute = '/products/:id';
+
+export const cartRoute = '/cart';

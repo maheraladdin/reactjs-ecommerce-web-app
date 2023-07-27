@@ -5,15 +5,15 @@ import Button from "react-bootstrap/Button";
 export default function AddRate() {
 	return (
 		<Form className="d-flex flex-column gap-2">
-			<section className=" h3 d-flex gap-2 align-items-center">
-				<section>username</section>
+			<Form.Text className="d-flex gap-2 align-items-center">
+				<section className="h3">username</section>
 				<section>
 					<ReactStars
 						count={5}
 						onChange={(newRating) => {
 							console.log("new rating: ", newRating)
 						}}
-						size={30}
+						size={24}
 						isHalf={true}
 						emptyIcon={<i className="far fa-star"></i>}
 						halfIcon={<i className="fa fa-star-half-alt"></i>}
@@ -21,7 +21,7 @@ export default function AddRate() {
 						activeColor="#ffc107"
 					/>
 				</section>
-			</section>
+			</Form.Text>
 			<Form.Control
 				as="textarea"
 				rows={3}
