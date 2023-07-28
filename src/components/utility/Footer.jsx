@@ -14,10 +14,14 @@ export default function Footer() {
 						<section><i className="fa-solid fa-phone"></i></section>
 					</section>
 					<section className="py-3">
-						&copy; {new Date().getFullYear()} {process.env.REACT_APP_NAME.replace(/_/g, " ").toUpperCase()}
+						&copy; {new Date().getFullYear()} REACT ECOMMERCE
 					</section>
 					<section className="d-flex gap-4 py-3">
+
+						{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 						<section><a href="#" className="text-decoration-none text-dark">terms and conditions</a></section>
+
+						{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 						<section><a href="#" className="text-decoration-none text-dark">privacy policy</a></section>
 					</section>
 				</section>
