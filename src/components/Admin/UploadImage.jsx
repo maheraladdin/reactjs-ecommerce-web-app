@@ -82,9 +82,8 @@ export default function UploadImage({multiple = false, images, setImages, upload
 			>
 				{images.map((image,index) => {
 					return (
-						<section className="d-flex flex-column gap-2">
+						<section key={index} className="d-flex flex-column gap-2">
 							<img
-								key={index}
 								src={image}
 								alt={`uploaded ${index}`}
 								className="img-fluid rounded-3"
@@ -109,7 +108,7 @@ export default function UploadImage({multiple = false, images, setImages, upload
 				</Modal.Header>
 				<Modal.Body>You can't upload more than 6 photos</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
+					<Button type={"submit"} variant="secondary" onClick={handleClose}>
 						Close
 					</Button>
 				</Modal.Footer>

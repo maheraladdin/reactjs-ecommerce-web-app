@@ -13,18 +13,21 @@ export default function categoryReducer(state = initialState, action) {
                 categories: action.payload.categories,
                 loading: false,
                 numberOfPages: action.payload.numberOfPages,
+                status: action.payload.status,
             }
         case CREATE_CATEGORY:
             return {
                 ...state,
                 category: action.payload.category,
                 loading: false,
+                status: action.payload.status,
             }
         case GET_ERROR:
             return {
                 ...state,
                 loading: true,
-                error: action.payload,
+                error: action.error,
+                status: action.error.response.status,
             }
         default:
             return state;

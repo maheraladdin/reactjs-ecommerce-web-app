@@ -17,6 +17,7 @@ export const getCategories = (page = 1,limit = 12) => useReduxApi("get",
         payload: {
             categories: payload.data.documents,
             numberOfPages: payload.data.paginationResult.numberOfPages,
+            status: payload.status,
         }
     });
 });
@@ -31,10 +32,12 @@ export const getCategories = (page = 1,limit = 12) => useReduxApi("get",
 // eslint-disable-next-line react-hooks/rules-of-hooks
 export const createCategory = (params) => useReduxApi("post", "/categories", params
     ,(dispatch, payload) => {
+    console.log(payload);
     dispatch({
         type: CREATE_CATEGORY,
         payload: {
             category: payload.data.document,
+            status: payload.status,
         }
     });
 });

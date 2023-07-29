@@ -18,7 +18,8 @@ export default function useReduxApi(method, url, params, callbackDispatch) {
         } catch (error) {
             dispatch({
                 type: GET_ERROR,
-                payload: "Error: " + error,
+                error: error,
+                status: error.response.status,
             });
         }
     }
