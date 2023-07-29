@@ -1,26 +1,27 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import UploadImage from "./UploadImage";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import AddImage from "../../assets/images/add-image.png";
 import {createCategory} from "../../Redux/Actions/categoryActions";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Spinner} from "react-bootstrap";
 
 export default function AdminAddCategory() {
 	const [categoryName, setCategoryName] = useState("");
 	const [images, setImages] = useState([AddImage]);
 	const [uploadImages, setUploadImages] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	const dispatch = useDispatch();
-	const loading = useSelector(state => state.categoryReducer.loading);
 
 	// post the category to the server
-	const addCategory = () => {
+	const addCategory = async () => {
 		const formData = new FormData();
 		formData.append("name", categoryName);
 		formData.append("image", uploadImages[0]);
-		dispatch(createCategory({
+		setLoading(true);
+		await dispatch(createCategory({
 			body: formData,
 			config: {
 				headers: {
@@ -29,9 +30,16 @@ export default function AdminAddCategory() {
 				}
 			}
 		}));
-		setImages([AddImage]);
-		setCategoryName("");
+		setLoading(false);
 	}
+
+	useEffect(() => {
+		if(!loading) {
+			setImages([AddImage]);
+			setUploadImages([]);
+			setCategoryName("");
+		}
+	},[loading]);
 
 	return (
 		<>
@@ -51,7 +59,7 @@ export default function AdminAddCategory() {
 			</Form>
 			<section className="d-flex justify-content-end">
 				<Button onClick={addCategory} variant="outline-success">
-					{loading ? <Spinner animation={"border"} size={"sm"} /> : null}
+					<Spinner animation="border" size={"sm"} variant="success" className={`align-self-center me-2 ${loading ? "d-inline-block" : "d-none"}`} />
 					Add Category
 				</Button>
 			</section>
