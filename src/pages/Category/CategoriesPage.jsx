@@ -19,14 +19,18 @@ export default function CategoriesPage() {
 
 
 	return (
-		<Container className="d-flex flex-column my-5" style={{minHeight: "100vh"}}>
+		<Container className={`d-flex flex-column my-5`} style={{minHeight: "100vh"}}>
 			<section className="h1 pb-4">Categories</section>
 			<Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
 			{
 				!loading && (
 					<>
 						<CategoriesBrowser/>
-						<Pagination pageCount={numOfPages} handlePageChange={(page) => dispatch(getCategories(page.selected + 1))}/>
+						{numOfPages > 1 ?
+							<Pagination
+								pageCount={numOfPages}
+								handlePageChange={(page) => dispatch(getCategories(page.selected + 1))}
+							/> : null}
 					</>
 				)
 				}

@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {MultiSelect} from "react-multi-select-component";
 import {useState} from "react";
+import AddImage from "../../assets/images/add-image.png";
 
 export default function AdminAddProduct() {
 
@@ -20,10 +21,13 @@ export default function AdminAddProduct() {
 
 	const [selected, setSelected] = useState([]);
 
+	const [images, setImages] = useState([AddImage]);
+	const [uploadImages, setUploadImages] = useState([]);
+
 	return (
 		<>
 			<section>
-				<UploadImage multiple={true} />
+				<UploadImage multiple={true} images={images} setImages={setImages} setUploadImages={setUploadImages} uploadImages={uploadImages} />
 			</section>
 			<Form className="my-3 d-flex flex-column gap-3">
 				<Form.Group controlId="productName">
