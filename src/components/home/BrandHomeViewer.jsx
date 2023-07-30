@@ -26,7 +26,7 @@ export default function BrandHomeViewer() {
 						xl={2}
 						className="mb-5"
 					>
-						<BrandCard brand={{image: brand.image}}/>
+						<BrandCard brand={{image: brand.image || "https://picsum.photos/200"}}/>
 					</Col>
 				)) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
 			}
