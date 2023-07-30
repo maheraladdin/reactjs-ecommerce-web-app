@@ -1,5 +1,9 @@
 import {CREATE_CATEGORY, GET_CATEGORIES} from "../Types/categoryType";
-import useReduxApi from "../../Hooks/useReduxApi";
+import reduxApi from "../logic/reduxApi";
+
+// Create a hook to use reduxApi
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
 
 /**
  * Get categories from API
@@ -7,8 +11,7 @@ import useReduxApi from "../../Hooks/useReduxApi";
  * @param {number} limit - Limit of categories
  * @return {(function(*): Promise<void>)|*}
  */
-// eslint-disable-next-line react-hooks/rules-of-hooks
-export const getCategories = (page = 1,limit = 12) => useReduxApi("get",
+export const getCategories = (page = 1,limit = 12) => reduxApi("get",
     `/categories?page=${page}&limit=${limit}&sort=createdAt`,
     undefined,
     (dispatch, payload) => {
@@ -29,8 +32,7 @@ export const getCategories = (page = 1,limit = 12) => useReduxApi("get",
  * @param  {Object} params.config - Config of request
  * @return {(function(*): Promise<void>)|*}
  */
-// eslint-disable-next-line react-hooks/rules-of-hooks
-export const createCategory = (params) => useReduxApi("post", "/categories", params
+export const createCategory = (params) => reduxApi("post", "/categories", params
     ,(dispatch, payload) => {
     console.log(payload);
     dispatch({

@@ -1,5 +1,5 @@
-import baseURL from "../Api/BaseURL";
-import {GET_ERROR} from "../Redux/Types/categoryType";
+import baseURL from "../../Api/BaseURL";
+import {GET_ERROR} from "../Types/categoryType";
 
 
 /**
@@ -10,12 +10,15 @@ import {GET_ERROR} from "../Redux/Types/categoryType";
  * @param {Function} callbackDispatch - Callback function to dispatch the response to redux
  * @return {(function(*): Promise<void>)|*}
  */
-export default function useReduxApi(method, url, params, callbackDispatch) {
+export default function reduxApi(method, url, params, callbackDispatch) {
     return async (dispatch) => {
         try {
+            // fetch data from a url endpoint
             const payload = await baseURL[method](url, params && params.body && params.body, params && params.config && params.config);
+            // dispatch the response to redux
             await callbackDispatch(dispatch, payload);
         } catch (error) {
+            // dispatch the error to redux
             dispatch({
                 type: GET_ERROR,
                 error: error,
