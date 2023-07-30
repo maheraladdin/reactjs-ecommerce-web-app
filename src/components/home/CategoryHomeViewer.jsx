@@ -3,21 +3,11 @@ import Container from "react-bootstrap/Container";
 import CategoryCard from "../category/CategoryCard";
 import {Col, Row, Spinner} from "react-bootstrap";
 import {categoriesRoute} from "../../constants/routes";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {getCategories} from "../../Redux/Actions/categoryActions";
+import useGetCategoriesHomePage from "../../Hooks/categories/useGetCategoriesHomePage";
 
 export default function CategoryHomeViewer() {
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getCategories(1, 6))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const loading = useSelector(state => state.categoryReducer.loading);
-    const categories = useSelector(state => state.categoryReducer.categories);
+    const [loading, categories] = useGetCategoriesHomePage();
 
     return (
         <Container>

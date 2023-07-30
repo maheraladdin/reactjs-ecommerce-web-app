@@ -2,7 +2,7 @@ import {Modal} from "react-bootstrap";
 import AddImage from "../../assets/images/add-image.png";
 import Button from "react-bootstrap/Button";
 import useUploadImages from "../../Hooks/useUploadImages";
-export default function UploadImage({multiple = false, images, setImages, uploadImages, setUploadImages}) {
+export default function UploadImage({multiple = false, circle = false, images, setImages, uploadImages, setUploadImages}) {
 
 	const [
 		show,
@@ -40,7 +40,7 @@ export default function UploadImage({multiple = false, images, setImages, upload
 							<img
 								src={image}
 								alt={`uploaded ${index}`}
-								className="img-fluid rounded-3"
+								className={`img-fluid ${circle ? "rounded-circle" : "rounded-3"}"}`}
 								style={{width: "200px", height: "200px", objectFit: "cover"}}
 								onClick={handleImageClick}
 							/>

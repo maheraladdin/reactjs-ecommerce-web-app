@@ -22,7 +22,7 @@ export default function AdminAddCategory() {
 	return (
 		<>
 			<section>
-				<UploadImage setImages={setImages} images={images} uploadImages={uploadImages} setUploadImages={setUploadImages} />
+				<UploadImage circle={true} setImages={setImages} images={images} uploadImages={uploadImages} setUploadImages={setUploadImages} />
 			</section>
 			<Form validated={validated} className="my-3 d-flex flex-column">
 				<Form.Group className="mb-3" controlId="CategoryName">
