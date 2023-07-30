@@ -8,7 +8,7 @@ import AddImage from "../assets/images/add-image.png";
  * @param   {Function} setImages - Function to set images
  * @param   {Array} uploadImages - Array of images to upload
  * @param   {Function} setUploadImages - Function to set images to upload
- * @return  {Array} [show, handleImagesChange, handleImagesDrop, handleImageDragOver, handleImageClick, handleDeleteImage, handleClose]
+ * @return  {Object} [show, handleImagesChange, handleImagesDrop, handleImageDragOver, handleImageClick, handleDeleteImage, handleClose]
  */
 export default function useUploadImages(multiple = false, images, setImages, uploadImages, setUploadImages) {
     const [show, setShow] = useState(false);
@@ -96,7 +96,7 @@ export default function useUploadImages(multiple = false, images, setImages, upl
      */
     const handleClose = () => setShow(false);
 
-    return [
+    return {
         show,
         handleImagesChange,
         handleImagesDrop,
@@ -104,5 +104,5 @@ export default function useUploadImages(multiple = false, images, setImages, upl
         handleImageClick,
         handleDeleteImage,
         handleClose
-    ]
+    }
 }

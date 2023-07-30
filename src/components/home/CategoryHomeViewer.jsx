@@ -7,7 +7,7 @@ import useGetCategoriesHomePage from "../../Hooks/categories/useGetCategoriesHom
 
 export default function CategoryHomeViewer() {
 
-    const [loading, categories] = useGetCategoriesHomePage();
+    const {loading, categories} = useGetCategoriesHomePage();
 
     return (
         <Container>

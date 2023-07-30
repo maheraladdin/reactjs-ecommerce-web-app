@@ -5,7 +5,7 @@ import {Spinner} from "react-bootstrap";
 import useGetCategoriesPage from "../../Hooks/categories/useGetCategoriesPage";
 export default function CategoriesPage() {
 
-	const [loading, numOfPages, handlePageChange] = useGetCategoriesPage();
+	const {loading, numOfPages, handlePageChange} = useGetCategoriesPage();
 
 	return (
 		<Container className={`d-flex flex-column my-5`} style={{minHeight: "100vh"}}>

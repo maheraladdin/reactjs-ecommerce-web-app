@@ -110,7 +110,7 @@ export default function useAddCategory() {
         // eslint-disable-next-line
     }, [errorMessage]);
 
-    return [
+    return {
         categoryName,
         onCategoryNameChange,
         images,
@@ -120,5 +120,5 @@ export default function useAddCategory() {
         loading,
         validated,
         addCategory
-    ]
+    }
 }

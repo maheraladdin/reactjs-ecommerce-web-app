@@ -7,7 +7,7 @@ import {ToastContainer} from "react-toastify";
 
 export default function AdminAddCategory() {
 
-	const [
+	const {
 		categoryName,
 		onCategoryNameChange,
 		images,
@@ -17,7 +17,7 @@ export default function AdminAddCategory() {
 		loading,
 		validated,
 		addCategory
-	] = useAddCategory();
+	} = useAddCategory();
 
 	return (
 		<>

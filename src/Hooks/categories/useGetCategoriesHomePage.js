@@ -13,5 +13,5 @@ export default function useGetCategoriesHomePage() {
     const loading = useSelector(state => state.categoryReducer.loading);
     const categories = useSelector(state => state.categoryReducer.categories);
 
-    return [loading, categories];
+    return {loading, categories};
 }

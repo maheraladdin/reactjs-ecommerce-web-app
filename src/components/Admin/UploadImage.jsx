@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import useUploadImages from "../../Hooks/useUploadImages";
 export default function UploadImage({multiple = false, circle = false, images, setImages, uploadImages, setUploadImages}) {
 
-	const [
+	const {
 		show,
 		handleImagesChange,
 		handleImagesDrop,
@@ -12,7 +12,7 @@ export default function UploadImage({multiple = false, circle = false, images, s
 		handleImageClick,
 		handleDeleteImage,
 		handleClose
-	] = useUploadImages(multiple, images, setImages, uploadImages, setUploadImages);
+	} = useUploadImages(multiple, images, setImages, uploadImages, setUploadImages);
 
 	return (
 		<>

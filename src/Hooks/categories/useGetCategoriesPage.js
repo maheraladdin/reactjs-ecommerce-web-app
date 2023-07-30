@@ -15,5 +15,5 @@ export default function useGetCategoriesPage() {
 
     const handlePageChange = (page) => dispatch(getCategories(page.selected + 1));
 
-    return [loading, numOfPages, handlePageChange];
+    return {loading, numOfPages, handlePageChange};
 }
