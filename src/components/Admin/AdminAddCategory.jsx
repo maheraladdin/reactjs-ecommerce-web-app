@@ -9,7 +9,7 @@ export default function AdminAddCategory() {
 
 	const [
 		categoryName,
-		setCategoryName,
+		onCategoryNameChange,
 		images,
 		setImages,
 		uploadImages,
@@ -32,7 +32,7 @@ export default function AdminAddCategory() {
 						type="text"
 						value={categoryName}
 						placeholder="Category Name"
-						onChange={(e) => setCategoryName(e.target.value)}
+						onChange={onCategoryNameChange}
 					/>
 				</Form.Group>
 				<Button onClick={addCategory} className="align-self-end" variant="outline-success">

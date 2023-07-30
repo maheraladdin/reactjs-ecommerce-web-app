@@ -2,17 +2,22 @@ import {useState} from "react";
 import AddImage from "../assets/images/add-image.png";
 
 /**
- * @desc   This hook is used to upload images
+ * @desc    This hook is used to upload images and handle them (change, drop, drag over, click, delete, close)
  * @param   {Boolean} multiple - Multiple images or not
  * @param   {Array} images - Array of images
  * @param   {Function} setImages - Function to set images
  * @param   {Array} uploadImages - Array of images to upload
  * @param   {Function} setUploadImages - Function to set images to upload
- * @return {Array} [show, handleImagesChange, handleImagesDrop, handleImageDragOver, handleImageClick, handleDeleteImage, handleClose]
+ * @return  {Array} [show, handleImagesChange, handleImagesDrop, handleImageDragOver, handleImageClick, handleDeleteImage, handleClose]
  */
 export default function useUploadImages(multiple = false, images, setImages, uploadImages, setUploadImages) {
     const [show, setShow] = useState(false);
 
+    /**
+     * @desc    This function is used to handle images change
+     * @param   {Object} e - Event object
+     * @return  {*|void}
+     */
     const handleImagesChange = (e) => {
         if (e.target.files) {
             if(e.target.files.length >= 6) return setShow(true);
@@ -34,6 +39,11 @@ export default function useUploadImages(multiple = false, images, setImages, upl
         }
     }
 
+    /**
+     * @desc    This function is used to handle images drop
+     * @param   {Object} e - Event object
+     * @return  {*|void}
+     */
     const handleImagesDrop = (e) => {
         //prevent the browser from opening the image
         e.preventDefault();
@@ -45,12 +55,22 @@ export default function useUploadImages(multiple = false, images, setImages, upl
 
     }
 
+    /**
+     * @desc        This function is used to handle images drag over
+     * @param       {Object} e - Event object
+     * @return      {*|void}
+     */
     const handleImageDragOver = (e) => {
         //prevent the browser from opening the image
         e.preventDefault();
         e.stopPropagation();
     }
 
+    /**
+     * @desc   This function is used to handle image click
+     * @param  {Object} e - Event object
+     * @return {*|void}
+     */
     const handleImageClick = (e) => {
         //prevent the browser from opening the image
         if(e.target.src === AddImage) return;
@@ -58,6 +78,12 @@ export default function useUploadImages(multiple = false, images, setImages, upl
         e.stopPropagation();
     }
 
+    /**
+     * @desc    This function is used to handle image delete
+     * @param   {Object} e - Event object
+     * @param   {Number} index - Index of image
+     * @return  {*}
+     */
     const handleDeleteImage = (e,index) => {
         e.preventDefault();
         if(images.length === 1) return setImages([AddImage]);
@@ -65,6 +91,9 @@ export default function useUploadImages(multiple = false, images, setImages, upl
         setUploadImages(uploadImages.filter((image, i) => i !== index));
     }
 
+    /**
+     * @desc    This function is used to handle close
+     */
     const handleClose = () => setShow(false);
 
     return [

@@ -72,6 +72,15 @@ export default function useAddCategory() {
 
     }
 
+    /**
+     * @description this function is used to update the state of category name
+     * @param  {Event} e
+     * @return {void}
+     */
+    const onCategoryNameChange = (e) => {
+        setCategoryName(e.target.value)
+    };
+
     useEffect(() => {
         if(!loading) {
             // reset the form
@@ -90,18 +99,20 @@ export default function useAddCategory() {
             // show the error toast message
             setErrorMessage(error.response.data.message || error.message);
         }
-    },[status, error, notify]);
+        // eslint-disable-next-line
+    },[status, error]);
 
     useEffect(() => {
         if(errorMessage)
             notify(errorMessage, "error", {
                 onClose: () => setErrorMessage(""), // reset the error message
             });
-    }, [errorMessage, notify]);
+        // eslint-disable-next-line
+    }, [errorMessage]);
 
     return [
         categoryName,
-        setCategoryName,
+        onCategoryNameChange,
         images,
         setImages,
         uploadImages,
