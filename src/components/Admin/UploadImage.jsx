@@ -1,17 +1,15 @@
-import {Modal} from "react-bootstrap";
 import AddImage from "../../assets/images/add-image.png";
 import Button from "react-bootstrap/Button";
 import useUploadImages from "../../Hooks/useUploadImages";
+import {ToastContainer} from "react-toastify";
 export default function UploadImage({multiple = false, circle = false, images, setImages, uploadImages, setUploadImages}) {
 
 	const {
-		show,
 		handleImagesChange,
 		handleImagesDrop,
 		handleImageDragOver,
 		handleImageClick,
 		handleDeleteImage,
-		handleClose
 	} = useUploadImages(multiple, images, setImages, uploadImages, setUploadImages);
 
 	return (
@@ -56,17 +54,17 @@ export default function UploadImage({multiple = false, circle = false, images, s
 					)
 				})}
 			</label>
-			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Problem while uploading Photos</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>You can't upload more than 6 photos</Modal.Body>
-				<Modal.Footer>
-					<Button type={"submit"} variant="secondary" onClick={handleClose}>
-						Close
-					</Button>
-				</Modal.Footer>
-			</Modal>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={true}
+				closeOnClick={true}
+				rtl={false}
+				pauseOnFocusLoss={false}
+				draggable={true}
+				pauseOnHover={false}
+			/>
 		</>
 	)
 }

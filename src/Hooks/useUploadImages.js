@@ -1,5 +1,5 @@
-import {useState} from "react";
 import AddImage from "../assets/images/add-image.png";
+import useNotify from "./useNotify";
 
 /**
  * @desc    This hook is used to upload images and handle them (change, drop, drag over, click, delete, close)
@@ -11,7 +11,8 @@ import AddImage from "../assets/images/add-image.png";
  * @return  {Object} [show, handleImagesChange, handleImagesDrop, handleImageDragOver, handleImageClick, handleDeleteImage, handleClose]
  */
 export default function useUploadImages(multiple = false, images, setImages, uploadImages, setUploadImages) {
-    const [show, setShow] = useState(false);
+
+    const notify = useNotify();
 
     /**
      * @desc    This function is used to handle images change
@@ -20,7 +21,7 @@ export default function useUploadImages(multiple = false, images, setImages, upl
      */
     const handleImagesChange = (e) => {
         if (e.target.files) {
-            if(e.target.files.length >= 6) return setShow(true);
+            if(e.target.files.length >= 6) return notify('You can\'t upload more than 5 images', 'error');
             // in case of canceling the file selection
             if(e.target.files.length === 0) return images ? setImages(images) : setImages([AddImage]);
 
@@ -94,15 +95,12 @@ export default function useUploadImages(multiple = false, images, setImages, upl
     /**
      * @desc    This function is used to handle close
      */
-    const handleClose = () => setShow(false);
 
     return {
-        show,
         handleImagesChange,
         handleImagesDrop,
         handleImageDragOver,
         handleImageClick,
-        handleDeleteImage,
-        handleClose
+        handleDeleteImage
     }
 }

@@ -6,7 +6,7 @@ import AddImage from "../../assets/images/add-image.png";
 
 /**
  * @description this hook is used to add a new category
- * @return [string,((value: (((prevState: string) => string) | string)) => void),*[],((value: (((prevState: *[]) => *[]) | *[])) => void),*[],null,null,null,null]
+ * @return {string,((value: (((prevState: string) => string) | string)) => void),*[],((value: (((prevState: *[]) => *[]) | *[])) => void),*[],null,null,null,null}
  */
 export default function useAddCategory() {
     // state of category name
@@ -81,6 +81,7 @@ export default function useAddCategory() {
         setCategoryName(e.target.value)
     };
 
+    // reset the form after adding a new category
     useEffect(() => {
         if(!loading) {
             // reset the form
@@ -91,6 +92,7 @@ export default function useAddCategory() {
         }
     },[loading]);
 
+    // show the toast message after adding a new category or if there is an error
     useEffect(() => {
         if (status === 201) {
             // show the done toast message
@@ -102,6 +104,7 @@ export default function useAddCategory() {
         // eslint-disable-next-line
     },[status, error]);
 
+    // show the error toast message
     useEffect(() => {
         if(errorMessage)
             notify(errorMessage, "error", {
