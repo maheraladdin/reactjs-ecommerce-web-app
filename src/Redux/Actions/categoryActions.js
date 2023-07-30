@@ -34,7 +34,6 @@ export const getCategories = (page = 1,limit = 12) => reduxApi("get",
  */
 export const createCategory = (params) => reduxApi("post", "/categories", params
     ,(dispatch, payload) => {
-    console.log(payload);
     dispatch({
         type: CREATE_CATEGORY,
         payload: {

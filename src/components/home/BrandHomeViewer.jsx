@@ -1,16 +1,23 @@
 import Container from "react-bootstrap/Container";
 import BrandCard from "../brands/BrandCard";
 import SubTitle from "../utility/subTitle";
-import {Col, Row} from "react-bootstrap";
+import {Col, Row, Spinner} from "react-bootstrap";
 import {brandsRoute} from "../../constants/routes";
+import useGetBrandsHomePage from "../../Hooks/brands/useGetBrandsHomePage";
 
 export default function BrandHomeViewer() {
+
+	const {brands, loading} = useGetBrandsHomePage();
+
 	return (
 		<Container>
 			<SubTitle title="Brands" buttonText="View All" route={brandsRoute} />
-			<Row>
+			<Row
+				style={{minHeight: "250px"}}
+				className="justify-content-center align-items-center"
+			>
 			{
-				Array(6).fill(0).map((_, i) => (
+				!loading ? brands.map((brand, i) => (
 					<Col
 						key={i}
 						xs={6}
@@ -19,9 +26,9 @@ export default function BrandHomeViewer() {
 						xl={2}
 						className="mb-5"
 					>
-						<BrandCard key={i} brand={{image: "https://picsum.photos/200"}}/>
+						<BrandCard brand={{image: brand.image}}/>
 					</Col>
-				))
+				)) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
 			}
 			</Row>
 		</Container>

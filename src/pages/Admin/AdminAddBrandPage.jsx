@@ -3,7 +3,7 @@ import AdminAddBrand from "../../components/Admin/AdminAddBrand";
 
 export default function AdminAddBrandPage() {
 	return (
-		<AdminTemplate pagination={false} title={"add new Brand"}>
+		<AdminTemplate pagination={false} title={"add new Brands"}>
 			<AdminAddBrand />
 		</AdminTemplate>
 	)

@@ -16,7 +16,7 @@ export const adminSideBarContent = [
         route: adminProductsRoute
     },
     {
-        text: "Add Brand",
+        text: "Add Brands",
         route: adminAddBrandRoute
     },
     {

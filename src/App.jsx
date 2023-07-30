@@ -25,7 +25,7 @@ import {
 } from "./constants/routes";
 import SignupPage from "./pages/Auth/SignupPage";
 import CategoriesPage from "./pages/Category/CategoriesPage";
-import BrandsPage from "./pages/Brand/BrandsPage";
+import BrandsPage from "./pages/Brands/BrandsPage";
 import ProductBrowser from "./pages/Product/ProductBrowser"
 import ProductDetailsPage from "./pages/Product/ProductDetailsPage";
 import CartPage from "./pages/Cart/CartPage";

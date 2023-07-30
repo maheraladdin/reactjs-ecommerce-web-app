@@ -1,5 +1,5 @@
 import baseURL from "../../Api/BaseURL";
-import {GET_ERROR} from "../Types/categoryType";
+import {GET_ERROR} from "../Types/errorType";
 
 
 /**

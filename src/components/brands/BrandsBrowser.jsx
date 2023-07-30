@@ -1,12 +1,14 @@
 import {Col, Row} from "react-bootstrap";
 import BrandCard from "./BrandCard";
+import {useSelector} from "react-redux";
 
 export default function BrandsBrowser() {
+	const brands = useSelector(state => state.brandReducer.brands);
 	return (
 		<>
 			<Row>
 				{
-					Array(12).fill(0).map((_, i) => (
+					brands.map((brand, i) => (
 						<Col
 							key={i}
 							xs={6}
@@ -15,7 +17,7 @@ export default function BrandsBrowser() {
 							xl={2}
 							className="mb-5"
 						>
-							<BrandCard key={i} brand={{image: "https://picsum.photos/200"}}/>
+							<BrandCard key={i} brand={{image: brand.image}}/>
 						</Col>
 					))
 				}
