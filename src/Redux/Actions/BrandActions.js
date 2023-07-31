@@ -8,7 +8,7 @@ import reduxApi from "../logic/reduxApi";
 /**
  * Get brands from API
  * @param {number} page - Page number
- * @param {number} limit - Limit of categories
+ * @param {number} limit - Limit of brands
  * @return {(function(*): Promise<void>)|*}
  */
 export const getBrands = (page = 1,limit = 12) => reduxApi("get",

@@ -9,10 +9,11 @@ import reduxApi from "../logic/reduxApi";
  * Get categories from API
  * @param {number} page - Page number
  * @param {number} limit - Limit of categories
+ * @param {string} sort - Sort of categories
  * @return {(function(*): Promise<void>)|*}
  */
-export const getCategories = (page = 1,limit = 12) => reduxApi("get",
-    `/categories?page=${page}&limit=${limit}&sort=createdAt`,
+export const getCategories = (page = 1,limit = 12 ,sort = "-createdAt") => reduxApi("get",
+    `/categories?page=${page}&limit=${limit}&sort=${sort}`,
     undefined,
     (dispatch, payload) => {
     dispatch({

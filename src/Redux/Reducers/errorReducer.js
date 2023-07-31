@@ -12,7 +12,7 @@ export default function errorReducer(state = initialState, action) {
                 ...state,
                 loading: true,
                 error: action.error,
-                status: action.error.response.status,
+                status: action.error && action.error.response && action.error.response.status,
             }
         default:
             return state;

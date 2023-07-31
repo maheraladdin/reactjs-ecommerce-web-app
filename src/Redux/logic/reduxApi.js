@@ -10,7 +10,8 @@ import {GET_ERROR} from "../Types/errorType";
  * @param {Function} callbackDispatch - Callback function to dispatch the response to redux
  * @return {(function(*): Promise<void>)|*}
  */
-export default function reduxApi(method, url, params, callbackDispatch) {
+export default function reduxApi(method, url, params = {}, callbackDispatch) {
+    params.timeout = 10000;
     return async (dispatch) => {
         try {
             // fetch data from a url endpoint
@@ -22,7 +23,7 @@ export default function reduxApi(method, url, params, callbackDispatch) {
             dispatch({
                 type: GET_ERROR,
                 error: error,
-                status: error.response.status,
+                status: error && error.response && error.response.status,
             });
         }
     }
