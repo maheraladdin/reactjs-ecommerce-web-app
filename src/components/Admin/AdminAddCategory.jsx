@@ -50,6 +50,7 @@ export default function AdminAddCategory() {
 				pauseOnFocusLoss={false}
 				draggable={true}
 				pauseOnHover={false}
+				limit={1}
 			/>
 		</>
 	)

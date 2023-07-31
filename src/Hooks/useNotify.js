@@ -8,8 +8,7 @@ import {toast} from "react-toastify";
  * @return {function(*, *, {}=): number | string}
  */
 export default function useNotify(defaultMsg,defaultType,defaultOptions) {
-    return (msg = defaultMsg,type = defaultType,options = defaultOptions || {}) => toast(msg, {
-        type,
+    return (msg = defaultMsg,type = defaultType,options = defaultOptions || {}) => toast[type](msg, {
         ...options
     });
 }

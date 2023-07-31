@@ -8,7 +8,7 @@ import AddImage from "../../assets/images/add-image.png";
  * @description this hook is used to add a new category
  * @return {string,((value: (((prevState: string) => string) | string)) => void),*[],((value: (((prevState: *[]) => *[]) | *[])) => void),*[],null,null,null,null}
  */
-export default function useAddBrand() {
+export default function useAddCategory() {
     // state of category name
     const [categoryName, setCategoryName] = useState("");
     // state of images to be displayed

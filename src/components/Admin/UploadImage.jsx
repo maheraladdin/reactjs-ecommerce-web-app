@@ -1,7 +1,6 @@
 import AddImage from "../../assets/images/add-image.png";
 import Button from "react-bootstrap/Button";
 import useUploadImages from "../../Hooks/useUploadImages";
-import {ToastContainer} from "react-toastify";
 export default function UploadImage({multiple = false, circle = false, images, setImages, uploadImages, setUploadImages}) {
 
 	const {
@@ -54,17 +53,6 @@ export default function UploadImage({multiple = false, circle = false, images, s
 					)
 				})}
 			</label>
-			<ToastContainer
-				position="top-right"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={true}
-				closeOnClick={true}
-				rtl={false}
-				pauseOnFocusLoss={false}
-				draggable={true}
-				pauseOnHover={false}
-			/>
 		</>
 	)
 }

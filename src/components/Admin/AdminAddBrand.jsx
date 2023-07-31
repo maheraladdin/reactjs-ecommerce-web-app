@@ -50,6 +50,7 @@ export default function AdminAddBrand() {
 				pauseOnFocusLoss={false}
 				draggable={true}
 				pauseOnHover={false}
+				limit={1}
 			/>
 		</>
 	)
