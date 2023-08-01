@@ -1,15 +1,20 @@
-import {GET_SUBCATEGORIES, CREATE_SUBCATEGORY} from "../Types/subcategoryTypes";
+import {
+    GET_SUBCATEGORIES,
+    CREATE_SUBCATEGORY,
+    GET_SUBCATEGORIES_FOR_SPECIFIC_CATEGORY
+} from "../Types/subcategoryTypes";
 import reduxApi from "../logic/reduxApi";
 
 
 /**
- * Get brands from API
+ * @desc    Get subcategories from API
  * @param  {number} limit - Limit of subcategories
  * @param  {number} page - Page number
+ * @param  {string} sort - Sort of subcategories
  * @return {(function(*): Promise<void>)|*}
  */
-export const getSubcategories = (page,limit = 12) => reduxApi("get",
-    `/subCategories?page=${page}&limit=${limit}&sort=createdAt`,
+export const getSubcategories = (page,limit = 12, sort = "-createdAt") => reduxApi("get",
+    `/subCategories?page=${page}&limit=${limit}&sort=${sort}`,
     undefined,
     (dispatch, payload) => {
         dispatch({
@@ -22,7 +27,30 @@ export const getSubcategories = (page,limit = 12) => reduxApi("get",
     });
 
 /**
- * Create brand from API
+ * @desc    Get subcategories for specific category from API
+ * @param  {string} categoryId - id of category
+ * @param  {number?} limit - Limit of subcategories
+ * @param  {number?} page - Page number
+ * @param  {string?} sort - Sort of subcategories
+ * @return {(function(*): Promise<void>)|*}
+ */
+export const getSubcategoriesForSpecificCategory = (categoryId, page = 1,limit = 12, sort = "-createdAt") => reduxApi("get",
+    `/Categories/${categoryId}/subCategories?page=${page}&limit=${limit}&sort=${sort}`,
+    undefined,
+    (dispatch, payload) => {
+        dispatch({
+            type: GET_SUBCATEGORIES_FOR_SPECIFIC_CATEGORY,
+            payload: {
+                subcategories: payload.data.documents,
+                status: payload.status,
+            }
+        });
+    });
+
+
+
+/**
+ * @desc    Create subcategory from API
  * @param  {Object} params - Params of request
  * @param  {Object} params.body - Body of request
  * @param  {Object} params.config - Config of request

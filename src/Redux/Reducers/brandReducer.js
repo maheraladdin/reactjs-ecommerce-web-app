@@ -4,6 +4,7 @@ const initialState = {
     brands: [],
     loading: true,
     numberOfPages: 0,
+    brand: {},
 }
 export default function brandReducer(state = initialState, action) {
     switch (action.type) {

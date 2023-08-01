@@ -1,4 +1,8 @@
-import { GET_SUBCATEGORIES, CREATE_SUBCATEGORY} from "../Types/subcategoryTypes";
+import {
+    GET_SUBCATEGORIES,
+    CREATE_SUBCATEGORY,
+    GET_SUBCATEGORIES_FOR_SPECIFIC_CATEGORY
+} from "../Types/subcategoryTypes";
 
 const initialState = {
     subcategory: {},
@@ -11,14 +15,21 @@ export default function subcategoryReducer(state = initialState, action) {
         case GET_SUBCATEGORIES:
             return {
                 ...state,
-                subcategories: action.payload.brands,
+                subcategories: action.payload.subcategories,
                 loading: false,
                 status: action.payload.status,
             }
         case CREATE_SUBCATEGORY:
             return {
                 ...state,
-                subcategory: action.payload.brand,
+                subcategory: action.payload.subcategory,
+                loading: false,
+                status: action.payload.status,
+            }
+        case GET_SUBCATEGORIES_FOR_SPECIFIC_CATEGORY:
+            return {
+                ...state,
+                subcategories: action.payload.subcategories,
                 loading: false,
                 status: action.payload.status,
             }

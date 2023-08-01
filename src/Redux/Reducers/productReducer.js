@@ -1,25 +1,26 @@
-import {CREATE_CATEGORY, GET_CATEGORIES} from "../Types/categoryType";
+import {GET_PRODUCTS, CREATE_PRODUCT} from "../Types/productTypes";
 
 const initialState = {
-    categories: [],
+    products: [],
     loading: true,
     numberOfPages: 0,
-    category: {},
+    product: {},
+    status: 0,
 }
-export default function categoryReducer(state = initialState, action) {
+export default function productReducer(state = initialState, action) {
     switch (action.type) {
-        case GET_CATEGORIES:
+        case GET_PRODUCTS:
             return {
                 ...state,
-                categories: action.payload.categories,
+                products: action.payload.categories,
                 loading: false,
                 numberOfPages: action.payload.numberOfPages,
                 status: action.payload.status,
             }
-        case CREATE_CATEGORY:
+        case CREATE_PRODUCT:
             return {
                 ...state,
-                category: action.payload.category,
+                product: action.payload.category,
                 loading: false,
                 status: action.payload.status,
             }

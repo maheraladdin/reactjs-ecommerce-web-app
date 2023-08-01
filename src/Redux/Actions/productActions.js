@@ -1,4 +1,4 @@
-import { GET_BRANDS, CREATE_BRAND} from "../Types/brandTypes";
+import {GET_PRODUCTS, CREATE_PRODUCT} from "../Types/productTypes";
 import reduxApi from "../logic/reduxApi";
 
 // Create a hook to use reduxApi
@@ -6,20 +6,20 @@ import reduxApi from "../logic/reduxApi";
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
 /**
- * Get brands from API
+ * Get products from API
  * @param {number} page - Page number
- * @param {number} limit - Limit of brands
- * @param {string} sort - Sort of brands
+ * @param {number} limit - Limit of products
+ * @param {string} sort - Sort of products
  * @return {(function(*): Promise<void>)|*}
  */
-export const getBrands = (page = 1,limit = 12,sort = "-createdAt") => reduxApi("get",
-    `/brands?page=${page}&limit=${limit}&sort=${sort}`,
+export const getProducts = (page = 1,limit = 12 ,sort = "-createdAt") => reduxApi("get",
+    `/products?page=${page}&limit=${limit}&sort=${sort}`,
     undefined,
     (dispatch, payload) => {
         dispatch({
-            type: GET_BRANDS,
+            type: GET_PRODUCTS,
             payload: {
-                brands: payload.data.documents,
+                products: payload.data.documents,
                 numberOfPages: payload.data.paginationResult.numberOfPages,
                 status: payload.status,
             }
@@ -27,18 +27,19 @@ export const getBrands = (page = 1,limit = 12,sort = "-createdAt") => reduxApi("
     });
 
 /**
- * Create brand from API
+ * Create product from API
  * @param  {Object} params - Params of request
  * @param  {Object} params.body - Body of request
  * @param  {Object} params.config - Config of request
+ * @param  {Object} params.config.headers - Headers of request
  * @return {(function(*): Promise<void>)|*}
  */
-export const createBrand = (params) => reduxApi("post", "/brands", params
+export const createProduct = (params) => reduxApi("post", "/products", params
     ,(dispatch, payload) => {
         dispatch({
-            type: CREATE_BRAND,
+            type: CREATE_PRODUCT,
             payload: {
-                brand: payload.data.document,
+                product: payload.data.document,
                 status: payload.status,
             }
         });
