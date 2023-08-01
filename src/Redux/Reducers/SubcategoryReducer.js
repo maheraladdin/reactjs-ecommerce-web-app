@@ -7,7 +7,6 @@ const initialState = {
     status: 0,
 }
 export default function subcategoryReducer(state = initialState, action) {
-    console.log(action.payload);
     switch (action.type) {
         case GET_SUBCATEGORIES:
             return {

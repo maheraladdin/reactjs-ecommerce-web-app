@@ -21,9 +21,8 @@ export default function useAddSubcategory() {
     const error = useSelector(state => state.errorReducer.error);
 
 
-
     useEffect(() => {
-        dispatch(getCategories(1, Number.MAX_SAFE_INTEGER, "name"));
+        if(navigator.onLine === true) dispatch(getCategories(1, Number.MAX_SAFE_INTEGER, "name"));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -44,6 +43,8 @@ export default function useAddSubcategory() {
             setValidated(true);
             return notify("please fill all fields", "error")
         }
+
+        if(!navigator.onLine) return notify("please check your internet connection", "error");
 
         setLoading(true);
 
