@@ -106,12 +106,18 @@ export default function useAddProduct() {
     
     const [pickedColor, setPickedColor] = useState("red");
 
+    const [displayColorPicker, setDisplayColorPicker] = useState(false);
+
     const handleSelectedColors = (e) => {
         setSelectedColors([...new Set([...selectedColors, e.target.value])]);
     }
 
     const handlePickedColor = (color) => {
         setPickedColor(color.hex);
+    }
+
+    const handleDisplayColorPicker = () => {
+        setDisplayColorPicker(!displayColorPicker);
     }
 
     useEffect(() => {
@@ -178,6 +184,8 @@ export default function useAddProduct() {
         handleSelectedColors,
         pickedColor,
         handlePickedColor,
+        displayColorPicker,
+        handleDisplayColorPicker
     }
 
 }

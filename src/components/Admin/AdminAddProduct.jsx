@@ -39,9 +39,12 @@ export default function AdminAddProduct() {
 		brands,
 		handleBrand,
 		colors,
+		selectedColors,
 		handleSelectedColors,
 		pickedColor,
 		handlePickedColor,
+		displayColorPicker,
+		handleDisplayColorPicker
 	} = useAddProduct();
 
 
@@ -113,7 +116,7 @@ export default function AdminAddProduct() {
 
 				<Form.Group>
 					<Form.Label>Colors</Form.Label>
-					<section className="d-flex gap-1">
+					<section className="d-flex gap-1 flex-wrap">
 					{
 						colors.map((color, index) => (
 							<>
@@ -127,7 +130,9 @@ export default function AdminAddProduct() {
 										width: "35px",
 										height: "35px",
 										backgroundColor: color,
-									}} />
+									}}
+									onClick={handleSelectedColors}
+								/>
 							</>
 						))
 					}
@@ -138,10 +143,11 @@ export default function AdminAddProduct() {
 								width: "35px",
 								height: "35px",
 							}}
+							onClick={handleDisplayColorPicker}
 						>
 							<section className="fa-solid fa-plus"></section>
-							<ColorPicker color={pickedColor} onChange={handlePickedColor} />
 						</section>
+						<ColorPicker className={displayColorPicker ? ""  : "d-none"} color={pickedColor} onChange={handlePickedColor} />
 					</section>
 				</Form.Group>
 			</Form>
