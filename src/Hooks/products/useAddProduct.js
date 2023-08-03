@@ -23,7 +23,11 @@ export default function useAddProduct() {
     // states for product title
     const [title, setTitle] = useState("");
 
-    // product name handler
+    /**
+     * @desc    this function handle input title
+     * @param   e
+     * @return  void
+     */
     const handleTitle = (e) => {
         setTitle(e.target.value);
     }
@@ -31,7 +35,11 @@ export default function useAddProduct() {
     // states for product description
     const [description, setDescription] = useState("");
 
-    // product description handler
+    /**
+     * @desc    this function handle input Description
+     * @param   e
+     * @return  void
+     */
     const handleDescription = (e) => {
         setDescription(e.target.value);
     }
@@ -39,7 +47,11 @@ export default function useAddProduct() {
     // states for product quantity
     const [quantity, setQuantity] = useState(0);
 
-    // product quantity handler
+    /**
+     * @desc    this function handle input Quantity
+     * @param   e
+     * @return  void
+     */
     const handleQuantity = (e) => {
         setQuantity(e.target.value);
     }
@@ -47,7 +59,11 @@ export default function useAddProduct() {
     // states for product price
     const [price, setPrice] = useState(0);
 
-    // product price handler
+    /**
+     * @desc    this function handle input price
+     * @param   e
+     * @return  void
+     */
     const handlePrice = (e) => {
         setPrice(e.target.value);
     }
@@ -55,7 +71,11 @@ export default function useAddProduct() {
     // states for product discounted price
     const [discountedPrice, setDiscountedPrice] = useState(0);
 
-    // product discounted price handler
+    /**
+     * @desc    this function handle input discounted price
+     * @param   e
+     * @return  void
+     */
     const handleDiscountedPrice = (e) => {
         setDiscountedPrice(e.target.value);
     }
@@ -67,7 +87,11 @@ export default function useAddProduct() {
     const categories = useSelector(state => state.categoryReducer.categories);
 
 
-    // product category handler
+    /**
+     * @desc    this function handle input CategoryId
+     * @param   e
+     * @return  void
+     */
     const handleCategory = (e) => {
         setCategory(e.target.value);
     }
@@ -76,7 +100,7 @@ export default function useAddProduct() {
     const [selectedSubCategories, setSelectedSubCategories] = useState([]);
     const [disabled, setDisabled] = useState(true);
 
-    // get subcategories from redux store
+    // get subcategories from redux store ,then return value as subcategoryId and label as subcategory name
     const subcategories = useSelector(state => state.subcategoryReducer.subcategories).map(subcategory => {
         return {
             value: subcategory._id,
@@ -90,7 +114,11 @@ export default function useAddProduct() {
     // get brands from redux store
     const brands = useSelector(state => state.brandReducer.brands);
 
-    // product brand handler
+    /**
+     * @desc    this function handle input brand
+     * @param   e
+     * @return  void
+     */
     const handleBrand = (e) => {
         setBrand(e.target.value);
     }
@@ -108,14 +136,28 @@ export default function useAddProduct() {
 
     const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
+    /**
+     * @desc    this function handle input selected colors
+     * @param   e
+     * @return  void
+     */
     const handleSelectedColors = (e) => {
         setSelectedColors([...new Set([...selectedColors, e.target.value])]);
     }
 
+    /**
+     * @desc    this function handle input picked colors
+     * @param   {Object} color - picked color
+     * @return  void
+     */
     const handlePickedColor = (color) => {
         setPickedColor(color.hex);
     }
 
+    /**
+     * @desc    this function handle displayed colors
+     * @return  void
+     */
     const handleDisplayColorPicker = () => {
         setDisplayColorPicker(!displayColorPicker);
     }
