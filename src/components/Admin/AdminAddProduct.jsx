@@ -44,7 +44,8 @@ export default function AdminAddProduct() {
 		pickedColor,
 		handlePickedColor,
 		displayColorPicker,
-		handleDisplayColorPicker
+		handleDisplayColorPicker,
+		handleSetColors
 	} = useAddProduct();
 
 
@@ -125,14 +126,17 @@ export default function AdminAddProduct() {
 									key={"color-label-key-" + index}
 									htmlFor={"color-" + index}
 									role="button"
-									className="rounded-circle"
+									className={`rounded-circle text-center`}
 									style={{
 										width: "35px",
 										height: "35px",
 										backgroundColor: color,
+										lineHeight: "35px",
 									}}
 									onClick={handleSelectedColors}
-								/>
+								>
+									{selectedColors.includes(color) ? <section className="fa-solid fa-check text-light-emphasis"></section> : ""}
+								</Form.Label>
 							</>
 						))
 					}
@@ -148,6 +152,17 @@ export default function AdminAddProduct() {
 							<section className="fa-solid fa-plus"></section>
 						</section>
 						<ColorPicker className={displayColorPicker ? ""  : "d-none"} color={pickedColor} onChange={handlePickedColor} />
+						<section
+							role="button"
+							className={`bg-success rounded-circle d-flex justify-content-center align-items-center border border-1 border-light ${displayColorPicker ? ""  : "d-none"}`}
+							style={{
+								width: "35px",
+								height: "35px",
+							}}
+							onClick={handleSetColors}
+						>
+							<section className="fa-solid fa-check text-light"></section>
+						</section>
 					</section>
 				</Form.Group>
 			</Form>

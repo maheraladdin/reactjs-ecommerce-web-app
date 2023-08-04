@@ -136,12 +136,20 @@ export default function useAddProduct() {
 
     const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
+    const handleSetColors = () => {
+        setColors([...new Set([...colors, pickedColor])]);
+    }
+
     /**
      * @desc    this function handle input selected colors
      * @param   e
      * @return  void
      */
     const handleSelectedColors = (e) => {
+        if(selectedColors.includes(e.target.value)) {
+            setSelectedColors(selectedColors.filter(color => color !== e.target.value));
+            return;
+        }
         setSelectedColors([...new Set([...selectedColors, e.target.value])]);
     }
 
@@ -180,12 +188,6 @@ export default function useAddProduct() {
         console.log(selectedColors);
         // eslint-disable-next-line
     }, [selectedColors]);
-
-
-    useEffect(() => {
-        setColors([...new Set([...colors, pickedColor])]);
-        // eslint-disable-next-line
-    },[pickedColor]);
 
 
 
@@ -227,7 +229,8 @@ export default function useAddProduct() {
         pickedColor,
         handlePickedColor,
         displayColorPicker,
-        handleDisplayColorPicker
+        handleDisplayColorPicker,
+        handleSetColors
     }
 
 }
