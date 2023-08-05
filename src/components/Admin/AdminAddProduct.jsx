@@ -172,7 +172,7 @@ export default function AdminAddProduct() {
 			</Form>
 			<section className="d-flex justify-content-end">
 				<Button onClick={handleAddProduct} variant="outline-success">
-					{loading ? <Spinner animation="border" variant="success" /> : ""}
+					{loading ? <Spinner className={"me-2"} size={"sm"} animation="border" variant="success" /> : ""}
 					Add Product
 				</Button>
 			</section>

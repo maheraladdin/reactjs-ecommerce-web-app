@@ -195,7 +195,7 @@ export default function useAddProduct() {
 
         setLoading(true);
         const formData = new FormData();
-        formData.append("coverImage", uploadCoverImage[0]);
+        formData.append("imageCover", uploadCoverImage[0]);
         images.forEach(image => {
             formData.append("images", image);
         })
@@ -211,7 +211,7 @@ export default function useAddProduct() {
             })
         if(brand) formData.append("brand", brand);
         selectedColors.forEach(color => {
-            formData.append("colors", color);
+            if(colors.includes(color)) formData.append("colors", color);
         })
         console.log(formData)
         await dispatch(createProduct({
@@ -225,7 +225,6 @@ export default function useAddProduct() {
         }));
 
         setLoading(false);
-        if(createProductStatus === 200) notify("Product created successfully", "success");
     }
 
     const error = useSelector(state => state.errorReducer.error);
@@ -251,7 +250,7 @@ export default function useAddProduct() {
     }, [category]);
 
     useEffect(() => {
-        if(!loading && createProductStatus === 200) {
+        if(!loading && createProductStatus === 201) {
             setValidated(false);
             setCoverImage([AddImage]);
             setImages([AddImage]);
@@ -269,11 +268,13 @@ export default function useAddProduct() {
     },[loading]);
 
     useEffect(() => {
-        if (error) {
+        if(createProductStatus === 201)
+            notify("Product created successfully", "success");
+        else if (error) {
             setErrorMessage(error.message);
         }
         // eslint-disable-next-line
-    }, [error]);
+    }, [createProductStatus]);
 
 
     useEffect(() => {
