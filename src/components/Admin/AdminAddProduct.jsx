@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import {MultiSelect} from "react-multi-select-component";
 import useAddProduct from "../../Hooks/products/useAddProduct";
 import ColorPicker from "react-pick-color";
+import {Spinner} from "react-bootstrap";
+import {ToastContainer} from "react-toastify";
 
 
 export default function AdminAddProduct() {
@@ -45,13 +47,15 @@ export default function AdminAddProduct() {
 		handlePickedColor,
 		displayColorPicker,
 		handleDisplayColorPicker,
-		handleSetColors
+		handleSetColors,
+		handleAddProduct,
+		validated
 	} = useAddProduct();
 
 
 	return (
 		<>
-			<Form className="my-3 d-flex flex-column gap-3">
+			<Form validated={validated} className="my-3 d-flex flex-column gap-3">
 				<Form.Group>
 					<Form.Label className={"h4"}>Product cover image</Form.Label>
 					<UploadImage id={"coverImage"} images={coverImage} setImages={setCoverImage} setUploadImages={setUploadCoverImage} uploadImages={uploadCoverImage} />
@@ -62,19 +66,19 @@ export default function AdminAddProduct() {
 				</Form.Group>
 				<Form.Group controlId="productName">
 					<Form.Label>Product Name</Form.Label>
-					<Form.Control value={title} onInput={handleTitle} type="text" placeholder="Product Name" />
+					<Form.Control required value={title} onInput={handleTitle} type="text" placeholder="Product Name" />
 				</Form.Group>
 				<Form.Group controlId="productDescription">
 					<Form.Label>Product Description</Form.Label>
-					<Form.Control value={description} onInput={handleDescription} className="resize-none" as="textarea" rows={3} placeholder="Product Description" />
+					<Form.Control required value={description} onInput={handleDescription} className="resize-none" as="textarea" rows={3} placeholder="Product Description" />
 				</Form.Group>
 				<Form.Group controlId="productQuantity">
 					<Form.Label>Product Quantity</Form.Label>
-					<Form.Control value={quantity} onChange={handleQuantity} type={"number"} placeholder="Product Quantity" />
+					<Form.Control required value={quantity} onChange={handleQuantity} type={"number"} placeholder="Product Quantity" />
 				</Form.Group>
 				<Form.Group controlId="productPrice">
 					<Form.Label>Product Price</Form.Label>
-					<Form.Control value={price} onChange={handlePrice} type={"number"} placeholder="Product Price" />
+					<Form.Control required value={price} onChange={handlePrice} type={"number"} placeholder="Product Price" />
 				</Form.Group>
 				<Form.Group controlId="productDiscountedPrice">
 					<Form.Label>Product Discounted Price</Form.Label>
@@ -82,7 +86,7 @@ export default function AdminAddProduct() {
 				</Form.Group>
 				<Form.Group controlId="Category">
 					<Form.Label>Category</Form.Label>
-					<Form.Select value={category} onChange={handleCategory} aria-label="Category">
+					<Form.Select required value={category} onChange={handleCategory} aria-label="Category">
 						<option disabled value={""}>Select Category</option>
 						{
 							categories.map((category, index) => (
@@ -167,8 +171,23 @@ export default function AdminAddProduct() {
 				</Form.Group>
 			</Form>
 			<section className="d-flex justify-content-end">
-				<Button variant="outline-success"> Add Product </Button>
+				<Button onClick={handleAddProduct} variant="outline-success">
+					{loading ? <Spinner animation="border" variant="success" /> : ""}
+					Add Product
+				</Button>
 			</section>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={true}
+				closeOnClick={true}
+				rtl={false}
+				pauseOnFocusLoss={false}
+				draggable={true}
+				pauseOnHover={false}
+				limit={1}
+			/>
 		</>
 	)
 }

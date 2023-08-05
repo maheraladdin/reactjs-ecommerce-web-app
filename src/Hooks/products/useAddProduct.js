@@ -4,11 +4,10 @@ import {useSelector, useDispatch} from "react-redux";
 import {getCategories} from "../../Redux/Actions/categoryActions";
 import {getBrands} from "../../Redux/Actions/BrandActions";
 import {getSubcategoriesForSpecificCategory} from "../../Redux/Actions/subcategoryActions";
+import {createProduct} from "../../Redux/Actions/productActions";
+import useNotify from "../useNotify";
 
 export default function useAddProduct() {
-
-    // loading state
-    const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -136,6 +135,9 @@ export default function useAddProduct() {
 
     const [displayColorPicker, setDisplayColorPicker] = useState(false);
 
+    /**
+     * @desc    this function handle input colors
+     */
     const handleSetColors = () => {
         setColors([...new Set([...colors, pickedColor])]);
     }
@@ -170,6 +172,70 @@ export default function useAddProduct() {
         setDisplayColorPicker(!displayColorPicker);
     }
 
+    // loading state
+    const [loading, setLoading] = useState(false);
+
+    const createProductStatus = useSelector(state => state.productReducer.status);
+
+    /**
+     * @desc    this function handle add product
+     * @param   e
+     * @return  void
+     */
+    const handleAddProduct = async (e) => {
+
+        // prevent the browser from refreshing
+        e.preventDefault();
+
+        // check if the form is valid
+        setValidated(true);
+
+        // check if the form is empty
+        if(!title || !description || !quantity ||!uploadCoverImage || !uploadImages.length || !category || !selectedColors.length) return notify("Please fill all the fields", "error");
+
+        setLoading(true);
+        const formData = new FormData();
+        formData.append("coverImage", uploadCoverImage[0]);
+        images.forEach(image => {
+            formData.append("images", image);
+        })
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("quantity", quantity);
+        formData.append("price", price);
+        formData.append("discountedPrice", discountedPrice);
+        formData.append("category", category);
+        if(subcategories)
+            selectedSubCategories.forEach(subcategory => {
+                formData.append("subcategories", subcategory);
+            })
+        if(brand) formData.append("brand", brand);
+        selectedColors.forEach(color => {
+            formData.append("colors", color);
+        })
+        console.log(formData)
+        await dispatch(createProduct({
+            body: formData,
+            config: {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${process.env.REACT_APP_ADMIN_DEV_TOKEN}`
+                }
+            }
+        }));
+
+        setLoading(false);
+        if(createProductStatus === 200) notify("Product created successfully", "success");
+    }
+
+    const error = useSelector(state => state.errorReducer.error);
+
+    const [errorMessage, setErrorMessage] = useState("");
+    const notify = useNotify();
+
+    // state of form validation
+    const [validated, setValidated] = useState(false);
+
     useEffect(() => {
         dispatch(getCategories(1,Number.MAX_SAFE_INTEGER,"name"));
         dispatch(getBrands(1,Number.MAX_SAFE_INTEGER,"name"));
@@ -185,10 +251,38 @@ export default function useAddProduct() {
     }, [category]);
 
     useEffect(() => {
-        console.log(selectedColors);
+        if(!loading && createProductStatus === 200) {
+            setValidated(false);
+            setCoverImage([AddImage]);
+            setImages([AddImage]);
+            setTitle("");
+            setDescription("");
+            setQuantity(0);
+            setPrice(0);
+            setDiscountedPrice(0);
+            setCategory("");
+            setSelectedSubCategories([]);
+            setBrand("");
+            setSelectedColors([]);
+        }
         // eslint-disable-next-line
-    }, [selectedColors]);
+    },[loading]);
 
+    useEffect(() => {
+        if (error) {
+            setErrorMessage(error.message);
+        }
+        // eslint-disable-next-line
+    }, [error]);
+
+
+    useEffect(() => {
+        if(errorMessage)
+            notify(errorMessage, "error", {
+                onClose: () => setErrorMessage(""), // reset the error message
+            });
+        // eslint-disable-next-line
+    }, [errorMessage]);
 
 
 
@@ -230,7 +324,9 @@ export default function useAddProduct() {
         handlePickedColor,
         displayColorPicker,
         handleDisplayColorPicker,
-        handleSetColors
+        handleSetColors,
+        handleAddProduct,
+        validated
     }
 
 }
