@@ -7,7 +7,11 @@ import {Link} from "react-router-dom";
 export default function ProductCard({product}) {
 
     return (
-        <Card>
+        <Card
+            style={{
+                height: "350px",
+            }}
+        >
             <Button
                 variant="danger"
                 className="position-absolute"
@@ -21,10 +25,15 @@ export default function ProductCard({product}) {
             </Button>
 
             <Link to={productDetailsRoute.replace(":id",product._id)} className="text-decoration-none text-dark">
-            <Card.Img variant="top" src={product.imageCover} />
-            <Card.Body style={{zIndex: 2}}>
+            <Card.Img
+                style={{
+                    height: "200px",
+                    objectFit: "contain"
+                }}
+                variant="top" src={product.imageCover} />
+            <Card.Body className="d-flex flex-column justify-content-between" style={{zIndex: 2}}>
                 <Card.Title>{product.title}</Card.Title>
-                <Card.Text>{product.description}</Card.Text>
+                <Card.Text className={"text-truncate"}>{product.description}</Card.Text>
                 <section className="d-flex justify-content-between align-items-center">
                     <section className="text-end">
                         <i className="fa-solid fa-star me-1 text-warning"></i>
@@ -34,7 +43,8 @@ export default function ProductCard({product}) {
                         {
                             product.discountedPrice ?
                                 <>
-                                    <del>product.price</del> product.discountedPrice
+                                    <del className={"me-2 text-danger"}>{product.price}</del>
+                                    {product.discountedPrice}
                                 </>
                                 : product.price
                         }

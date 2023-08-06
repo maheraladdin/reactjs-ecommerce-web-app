@@ -10,16 +10,15 @@ export default function useGetProductsHomePage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        (async () => {
-            await dispatch(getProducts(1, 4, "-sold"));
-            await setMostSoldProducts([...products]);
-            console.log(mostSoldProducts);
-            await dispatch(getProducts(1, 4, "-createdAt"));
-            await setNewProducts([...products]);
-            console.log(newProducts);
-        })()
+        dispatch(getProducts(1, Number.MAX_SAFE_INTEGER));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        setMostSoldProducts([...products.sort((a, b) => b.sold - a.sold).slice(0,4)]);
+        setNewProducts([...products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0,4)]);
+    }, [products]);
+
 
 
 
