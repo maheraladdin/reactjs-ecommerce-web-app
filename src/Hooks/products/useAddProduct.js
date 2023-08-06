@@ -196,7 +196,7 @@ export default function useAddProduct() {
         setLoading(true);
         const formData = new FormData();
         formData.append("imageCover", uploadCoverImage[0]);
-        images.forEach(image => {
+        uploadImages.forEach(image => {
             formData.append("images", image);
         })
         formData.append("title", title);

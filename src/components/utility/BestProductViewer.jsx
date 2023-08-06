@@ -4,20 +4,17 @@ import {Col, Row} from "react-bootstrap";
 import ProductCard from "../product/ProductCard";
 import {productsRoute} from "../../constants/routes"
 
-export default function BestProductViewer({product}) {
-    if(!product) product = {
-        title:"Product",
-        description: "this is our awesome Product",
-        image:"https://picsum.photos/200",
-        rating: 4.5,
-        price: 50,
-    }
+export default function BestProductViewer({products,title}) {
     return (
-        <Container>
-            <SubTitle title="Product" buttonText="View All" route={productsRoute} />
+        <Container
+            style={{
+                minHeight: "350px",
+            }}
+        >
+            <SubTitle title={title} buttonText="View All" route={productsRoute} />
             <Row>
             {
-                Array(4).fill().map((item,index) => (
+                products.map((product,index) => (
                     <Col
                         className="mb-4"
                         key={index}

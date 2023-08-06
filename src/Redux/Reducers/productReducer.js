@@ -12,7 +12,7 @@ export default function productReducer(state = initialState, action) {
         case GET_PRODUCTS:
             return {
                 ...state,
-                products: action.payload.categories,
+                products: action.payload.products,
                 loading: false,
                 numberOfPages: action.payload.numberOfPages,
                 status: action.payload.status,
@@ -20,7 +20,7 @@ export default function productReducer(state = initialState, action) {
         case CREATE_PRODUCT:
             return {
                 ...state,
-                product: action.payload.category,
+                product: action.payload.product,
                 loading: false,
                 status: action.payload.status,
             }
