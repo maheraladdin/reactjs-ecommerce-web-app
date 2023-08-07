@@ -190,8 +190,15 @@ export default function useAddProduct() {
         // check if the form is valid
         setValidated(true);
 
-        // check if the form is empty
-        if(!title || !description || !quantity ||!uploadCoverImage || !uploadImages.length || !category || !selectedColors.length) return notify("Please fill all the fields", "error");
+        // check if the required fields are filled
+        if(!uploadCoverImage) return notify("Please add cover image", "error");
+        if(!uploadImages.length) return notify("Please add product images", "error");
+        if(!title) return notify("Please enter product name", "error");
+        if(!description) return notify("Please enter product description", "error");
+        if(!quantity) return notify("Please enter product quantity", "error");
+        if(!price) return notify("Please enter product price", "error");
+        if(price >= discountedPrice) return notify("Discounted price must be less than product price", "error");
+        if(!category) return notify("Please select product category", "error");
 
         setLoading(true);
         const formData = new FormData();

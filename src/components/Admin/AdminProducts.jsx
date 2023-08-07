@@ -1,5 +1,6 @@
 import {Col, Row} from "react-bootstrap";
 import AdminProductCard from "./AdminProductCard";
+import Pagination from "../utility/Pagination";
 
 export default function AdminProducts({product}) {
 
@@ -13,22 +14,23 @@ export default function AdminProducts({product}) {
 
 	return (
 		<>
-		<Row className="gap-3 gap-sm-0">
-			{
-				Array(20).fill().map((e,i) => (
-					<Col
-						xl={3}
-						md={4}
-						sm={6}
-						xs={12}
-						key={i}
-						className={"mb-4"}
-					>
-						<AdminProductCard product={product}/>
-					</Col>
-				))
-			}
-		</Row>
+			<Row className="gap-3 gap-sm-0">
+				{
+					Array(20).fill().map((e,i) => (
+						<Col
+							xl={3}
+							md={4}
+							sm={6}
+							xs={12}
+							key={i}
+							className={"mb-4"}
+						>
+							<AdminProductCard product={product}/>
+						</Col>
+					))
+				}
+			</Row>
+			<Pagination />
 		</>
 	)
 }
