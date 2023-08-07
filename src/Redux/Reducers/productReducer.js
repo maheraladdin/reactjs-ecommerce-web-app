@@ -1,7 +1,9 @@
-import {GET_PRODUCTS, CREATE_PRODUCT} from "../Types/productTypes";
+import {GET_PRODUCTS, CREATE_PRODUCT, GET_MOST_USED_PRODUCTS, GET_NEWEST_PRODUCTS} from "../Types/productTypes";
 
 const initialState = {
     products: [],
+    mostSoldProducts: [],
+    newestProducts: [],
     loading: true,
     numberOfPages: 0,
     product: {},
@@ -15,6 +17,20 @@ export default function productReducer(state = initialState, action) {
                 products: action.payload.products,
                 loading: false,
                 numberOfPages: action.payload.numberOfPages,
+                status: action.payload.status,
+            }
+        case GET_MOST_USED_PRODUCTS:
+            return {
+                ...state,
+                mostSoldProducts: action.payload.mostSoldProducts,
+                loading: false,
+                status: action.payload.status,
+            }
+        case GET_NEWEST_PRODUCTS:
+            return {
+                ...state,
+                newestProducts: action.payload.newestProducts,
+                loading: false,
                 status: action.payload.status,
             }
         case CREATE_PRODUCT:

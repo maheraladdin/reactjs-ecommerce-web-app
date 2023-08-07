@@ -1,4 +1,4 @@
-import {GET_PRODUCTS, CREATE_PRODUCT} from "../Types/productTypes";
+import {GET_PRODUCTS, CREATE_PRODUCT, GET_MOST_USED_PRODUCTS, GET_NEWEST_PRODUCTS} from "../Types/productTypes";
 import reduxApi from "../logic/reduxApi";
 
 // Create a hook to use reduxApi
@@ -22,6 +22,46 @@ export const getProducts = (page = 1,limit = 12 ,sort = "-createdAt") => reduxAp
                 products: payload.data.documents,
                 numberOfPages: payload.data.paginationResult.numberOfPages,
                 productRequestStatus: payload.status,
+            }
+        });
+    });
+
+/**
+ * @desc    Get most sold products from API
+ * @param {number} page - Page number
+ * @param {number} limit - Limit of products
+ * @param {string} sort - Sort of products
+ * @return  {(function(*): Promise<void>)|*}
+ */
+export const getMostSoldProducts = (page = 1,limit = 4 ,sort = "-sold") => reduxApi("get",
+    `/products?page=${page}&limit=${limit}&sort=${sort}`,
+    undefined,
+    (dispatch, payload) => {
+        dispatch({
+            type: GET_MOST_USED_PRODUCTS,
+            payload: {
+                mostSoldProducts: payload.data.documents,
+                status: payload.status,
+            }
+        });
+    });
+
+/**
+ * @desc Get newest products from API
+ * @param {number} page - Page number
+ * @param {number} limit - Limit of products
+ * @param {string} sort - Sort of products
+ * @return {(function(*): Promise<void>)|*}
+ */
+export const getNewestProducts = (page = 1,limit = 4 ,sort = "-createdAt") => reduxApi("get",
+    `/products?page=${page}&limit=${limit}&sort=${sort}`,
+    undefined,
+    (dispatch, payload) => {
+        dispatch({
+            type: GET_NEWEST_PRODUCTS,
+            payload: {
+                newestProducts: payload.data.documents,
+                status: payload.status,
             }
         });
     });
