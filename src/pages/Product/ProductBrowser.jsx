@@ -22,7 +22,7 @@ export default function ProductBrowser() {
 						md={8}
 						lg={10}
 					>
-						<ProductsViewer numberOfItemsToView={20} subTitle={false} />
+						<ProductsViewer />
 					</Col>
 				</Row>
 			</Container>

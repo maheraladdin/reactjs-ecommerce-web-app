@@ -6,14 +6,14 @@ import BrandHomeViewer from "../../components/home/BrandHomeViewer";
 import useGetProductsHomePage from "../../Hooks/products/useGetProductsHomePage";
 
 export default function HomePage() {
-    const {newProducts, mostSoldProducts} = useGetProductsHomePage();
+    const {newProducts, mostSoldProducts, loadingNewProducts, loadingMostSoldProducts} = useGetProductsHomePage();
     return (
         <>
             <Slider />
             <CategoryHomeViewer />
-            <BestProductViewer title={"Most Sold"} products={mostSoldProducts} />
+            <BestProductViewer title={"Most Sold"} products={mostSoldProducts} loading={loadingMostSoldProducts}/>
             <AdvertisementBar />
-            <BestProductViewer title={"Added Earlier"} products={newProducts} />
+            <BestProductViewer title={"Added Earlier"} products={newProducts} loading={loadingNewProducts}/>
             <BrandHomeViewer />
         </>
     );

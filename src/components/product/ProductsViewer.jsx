@@ -1,37 +1,31 @@
-import {Col, Row} from "react-bootstrap";
+import {Col, Row, Spinner} from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import Pagination from "../utility/Pagination";
+import useGetProducts from "../../Hooks/products/useGetProducts";
 
-export default function ProductsViewer({product, numberOfProducts}) {
+export default function ProductsViewer() {
 
-	if(!product) product = {
-		title:"Product",
-		description: "this is our awesome Product",
-		image:"https://picsum.photos/200",
-		rating: 4.5,
-		price: 50,
-	}
-
-	if(!numberOfProducts) numberOfProducts = 20;
+	const { loading, products, numberOfPages } = useGetProducts();
 
 	return (
 		<section className="d-flex flex-column">
-			<Row>
+			<Row className={`${loading ? "justify-content-center" : ""} min-height-100vh`}>
 				{
-					Array(numberOfProducts).fill().map((item,index) => (
+					!loading ?
+						products.map((product,index) => (
 						<Col
 							className="mb-4"
-							key={index}
+							key={"product-" + (index + 1)}
 							xs={12}
 							sm={6}
 							lg={3}
 						>
 							<ProductCard product={product} />
 						</Col>
-					))
+					)) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
 				}
 			</Row>
-			<Pagination pageCount={100} />
+			{!loading && <Pagination pageCount={numberOfPages}/>}
 		</section>
 	)
 }
