@@ -6,6 +6,7 @@ import useAddProduct from "../../Hooks/products/useAddProduct";
 import ColorPicker from "react-pick-color";
 import {Spinner} from "react-bootstrap";
 import {ToastContainer} from "react-toastify";
+import {Fragment} from "react";
 
 
 export default function AdminAddProduct() {
@@ -87,10 +88,10 @@ export default function AdminAddProduct() {
 				<Form.Group controlId="Category">
 					<Form.Label>Category</Form.Label>
 					<Form.Select required value={category} onChange={handleCategory} aria-label="Category">
-						<option disabled value={""}>Select Category</option>
+						<option key={"category-key-0"} disabled value={""}>Select Category</option>
 						{
 							categories.map((category, index) => (
-								<option key={"category-key-" + index} value={category._id}>{category.name}</option>
+								<option key={"category-key-" + index + 1} value={category._id}>{category.name}</option>
 							))
 						}
 					</Form.Select>
@@ -110,10 +111,10 @@ export default function AdminAddProduct() {
 				<Form.Group controlId="Brand">
 					<Form.Label>Brand</Form.Label>
 					<Form.Select value={brand} onChange={handleBrand} aria-label="Brand">
-						<option value={""}>No Brand</option>
+						<option key={0} value={""}>No Brand</option>
 						{
 							brands.map((brand, index) => (
-								<option key={"brand-key-" + index} value={brand._id}>{brand.name}</option>
+								<option key={"brand-key-" + index + 1} value={brand._id}>{brand.name}</option>
 							))
 						}
 					</Form.Select>
@@ -124,7 +125,7 @@ export default function AdminAddProduct() {
 					<section className="d-flex gap-1 flex-wrap">
 					{
 						colors.map((color, index) => (
-							<>
+							<Fragment key={"color-key-" + index + 1}>
 								<Form.Check className="d-none" id={"color-" + index} key={"color-check-key-" + index} onChange={handleSelectedColors} value={color} type="checkbox" />
 								<Form.Label
 									key={"color-label-key-" + index}
@@ -141,7 +142,7 @@ export default function AdminAddProduct() {
 								>
 									{selectedColors.includes(color) ? <section className="fa-solid fa-check text-light-emphasis"></section> : ""}
 								</Form.Label>
-							</>
+							</Fragment>
 						))
 					}
 						<section

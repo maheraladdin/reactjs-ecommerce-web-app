@@ -21,7 +21,7 @@ export default function useUploadImages(multiple = false, images, setImages, upl
      */
     const handleImagesChange = (e) => {
         if (e.target.files) {
-            if(e.target.files.length >= 6) return notify('You can\'t upload more than 5 images', 'error');
+            if(e.target.files.length > 5) return notify('You can\'t upload more than 5 images', 'error');
             // in case of canceling the file selection
             if(e.target.files.length === 0) return images ? setImages(images) : setImages([AddImage]);
 
@@ -34,8 +34,8 @@ export default function useUploadImages(multiple = false, images, setImages, upl
 
             // in case of multiple image selection
             setImages(images.filter((image) => image !== AddImage));
-            const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
-            setUploadImages((prevImages) => prevImages.concat(e.target.files));
+            const filesArray = [...e.target.files].map((file) => URL.createObjectURL(file));
+            setUploadImages((prevImages) => prevImages.concat([...e.target.files]));
             setImages((prevImages) => prevImages.concat(filesArray));
         }
     }

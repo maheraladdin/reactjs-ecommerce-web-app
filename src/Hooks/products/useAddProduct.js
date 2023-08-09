@@ -198,24 +198,26 @@ export default function useAddProduct() {
         if(!description) return notify("Please enter product description", "error");
         if(!quantity) return notify("Please enter product quantity", "error");
         if(!price) return notify("Please enter product price", "error");
-        if(price < discountedPrice) return notify("Discounted price must be less than product price", "error");
+        if(Number(price) < Number(discountedPrice)) return notify("Discounted price must be less than product price", "error");
         if(!category) return notify("Please select product category", "error");
 
         setLoading(true);
         const formData = new FormData();
         await (async () => {
             formData.append("imageCover", uploadCoverImage[0]);
-            [...uploadImages].forEach(image => {
-                console.log(image);
-                formData.append("images", image);
-            })
+            // Todo : check if uploadImages is an array or not
+            for(let i = 0; i < uploadImages.length; i++) {
+                console.log("uploadImages", uploadImages)
+                console.log(uploadImages[i]);
+                formData.append("images", uploadImages[i]);
+            }
             formData.append("title", title);
             formData.append("description", description);
             formData.append("quantity", quantity);
             formData.append("price", price);
             formData.append("discountedPrice", discountedPrice);
             formData.append("category", category);
-            if (subcategories)
+            if (subcategories.length > 1)
                 selectedSubCategories.forEach(subcategory => {
                     formData.append("subCategories", subcategory);
                 })
