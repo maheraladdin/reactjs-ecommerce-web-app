@@ -14,7 +14,6 @@ export const getReviewsForSpecificProduct = (productId, page = 1,limit = 6, sort
     undefined,
     (dispatch, payload) => {
     const numberOfRatesInPage = 6;
-    console.log(payload.data)
         dispatch({
             type: GET_REVIEWS,
             payload: {

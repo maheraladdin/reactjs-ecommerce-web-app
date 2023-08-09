@@ -2,7 +2,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {getReviewsForSpecificProduct} from "../../Redux/Actions/reviewActions";
 import {useParams} from "react-router-dom";
 
-export default function useProductRateContainer() {
+/**
+ * @description Custom hook that handles getting reviews for a specific product
+ * @return {{reviews: ([]|*), numberOfPages: (number|*), handlePageChange: (function(*): any)}}
+ */
+export default function useGetReviews() {
     const reviews = useSelector(state => state.reviewReducer.reviews);
     const numberOfPages = useSelector(state => state.reviewReducer.numberOfPages);
 

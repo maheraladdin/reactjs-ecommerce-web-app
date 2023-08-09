@@ -1,11 +1,11 @@
 import Pagination from "../utility/Pagination";
 import UserRate from "./UserRate";
 import AddRate from "./AddRate";
-import useProductRateContainer from "../../Hooks/products/useProductRateContainer";
+import useGetReviews from "../../Hooks/reviews/useGetReviews";
 
 export default function RateContainer() {
 
-	const {reviews, numberOfPages, handlePageChange} = useProductRateContainer();
+	const {reviews, numberOfPages, handlePageChange} = useGetReviews();
 
 	return (
 		<section className="d-flex flex-column gap-4 bg-light px-5 py-4 rounded-5">
