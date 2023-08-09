@@ -12,7 +12,7 @@ export default function SidebarFilter() {
 			<Nav variant="pills" className="flex-column">
 				<Nav.Link className="w-fit-content mb-2" eventKey={`All`}>All</Nav.Link>
 				{
-					Array(3).fill().map((e,i) => <Nav.Link className="w-fit-content mb-2" eventKey={`link-${i + 1}`}>Cat {i + 1}</Nav.Link>)
+					Array(3).fill().map((e,i) => <Nav.Link key={"link-key-" + i + 1} className="w-fit-content mb-2" eventKey={`link-${i + 1}`}>Cat {i + 1}</Nav.Link>)
 				}
 				<Nav.Link className="w-fit-content mb-2" eventKey={`more`}>More</Nav.Link>
 			</Nav>
@@ -22,16 +22,17 @@ export default function SidebarFilter() {
 			<Form>
 				<Form.Check // prettier-ignore
 					type={type}
-					id={`default-${type}`}
+					id={`all-sub-categories-${type}`}
 					label="All"
 				/>
 				{
 					Array(5).fill().map((e,i) => {
 						return (
 							<Form.Check
-							type={type}
-							label={`sub category ${i + 1}`}
-							id={`disabled-default-${type}-${i + 1}`}
+								key={`sub-category-${i + 1}`}
+								type={type}
+								label={`sub category ${i + 1}`}
+								id={`sub-category-${type}-${i + 1}`}
 							/>
 						)
 					})
@@ -40,19 +41,20 @@ export default function SidebarFilter() {
 
 			{/* Brands filter */}
 			<Nav.Item className="h5 mt-3 mb-2">Brands</Nav.Item>
-			<Form class="ps-2">
+			<Form className="ps-2">
 				<Form.Check // prettier-ignore
 					type={type}
-					id={`default-${type}`}
+					id={`all-brands-${type}`}
 					label="All"
 				/>
 				{
 					Array(3).fill().map((e,i) => {
 						return (
 							<Form.Check
+								key={`brand-${i + 1}`}
 								type={type}
 								label={`brand ${i + 1}`}
-								id={`disabled-default-${type}-${i + 1}`}
+								id={`brand-${type}-${i + 1}`}
 							/>
 						)
 					})
@@ -61,7 +63,7 @@ export default function SidebarFilter() {
 
 			{/* Price From To Filter */}
 			<Nav.Item className="h5 mt-3 mb-2">Price</Nav.Item>
-			<Form class="ps-2">
+			<Form className="ps-2">
 				<Form.Group className="mb-3" >
 					<Form.Label>From</Form.Label>
 					<Form.Control type="text" placeholder="0" />

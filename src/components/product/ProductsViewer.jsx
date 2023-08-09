@@ -5,7 +5,7 @@ import useGetProducts from "../../Hooks/products/useGetProducts";
 
 export default function ProductsViewer() {
 
-	const { loading, products, numberOfPages } = useGetProducts();
+	const { loading, products, numberOfPages, handlePageChange } = useGetProducts();
 
 	return (
 		<section className="d-flex flex-column">
@@ -25,7 +25,7 @@ export default function ProductsViewer() {
 					)) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
 				}
 			</Row>
-			{!loading && <Pagination pageCount={numberOfPages}/>}
+			{!loading && <Pagination pageCount={numberOfPages} handlePageChange={handlePageChange} />}
 		</section>
 	)
 }
