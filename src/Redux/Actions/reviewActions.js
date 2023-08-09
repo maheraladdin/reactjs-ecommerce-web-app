@@ -10,16 +10,17 @@ import {CREATE_REVIEW, GET_REVIEWS} from "../Types/reviewTypes";
  * @return  {(function(*): Promise<void>)|*}
  */
 export const getReviewsForSpecificProduct = (productId, page = 1,limit = 6, sort = "-createdAt") => reduxApi("get",
-    `/products/${productId}/reviews?page=${page}&limit=${limit}&sort=${sort}`,
+    `/products/${productId}/reviews?limit=${limit}&sort=${sort}`,
     undefined,
     (dispatch, payload) => {
+    const numberOfRatesInPage = 6;
     console.log(payload.data)
         dispatch({
             type: GET_REVIEWS,
             payload: {
-                reviews: payload.data.documents,
+                reviews: payload.data.documents.slice((page - 1) * numberOfRatesInPage, page * numberOfRatesInPage),
                 status: payload.status,
-                numberOfPages: Math.ceil(payload.data.documents.length),
+                numberOfPages: Math.ceil(payload.data.documents.length / numberOfRatesInPage),
             }
         });
     });
