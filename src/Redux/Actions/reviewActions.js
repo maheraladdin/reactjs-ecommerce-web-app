@@ -3,11 +3,11 @@ import {CREATE_REVIEW, GET_REVIEWS} from "../Types/reviewTypes";
 
 /**
  * @desc    Get reviews for specific product from API
- * @param productId
- * @param page
- * @param limit
- * @param sort
- * @return {(function(*): Promise<void>)|*}
+ * @param   productId
+ * @param   page
+ * @param   limit
+ * @param   sort
+ * @return  {(function(*): Promise<void>)|*}
  */
 export const getReviewsForSpecificProduct = (productId, page = 1,limit = 6, sort = "-createdAt") => reduxApi("get",
     `/products/${productId}/reviews?page=${page}&limit=${limit}&sort=${sort}`,
@@ -22,6 +22,11 @@ export const getReviewsForSpecificProduct = (productId, page = 1,limit = 6, sort
         });
     });
 
+/**
+ * @desc    Create review for specific product from API
+ * @param   params
+ * @return  {(function(*): Promise<void>)|*}
+ */
 export const createReview = (params) => reduxApi("post", "/reviews", params, (dispatch, payload) => {
     dispatch({
         type: CREATE_REVIEW,

@@ -91,8 +91,8 @@ export const getProductById = (id) => reduxApi("get", `/products/${id}`, undefin
  * @return {(function(*): Promise<void>)|*}
  */
 export const createProduct = (params) => reduxApi("post", "/products", params
-    ,(dispatch, payload) => {
-        dispatch({
+    ,async (dispatch, payload) => {
+        await dispatch({
             type: CREATE_PRODUCT,
             payload: {
                 product: payload.data.document,

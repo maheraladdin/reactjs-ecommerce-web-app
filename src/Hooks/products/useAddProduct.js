@@ -192,35 +192,42 @@ export default function useAddProduct() {
         setValidated(true);
 
         // check if the required fields are filled
-        if(!uploadCoverImage) return notify("Please add cover image", "error");
+        if(typeof uploadCoverImage[0] === "string") return notify("Please add cover image", "error");
         if(!uploadImages.length) return notify("Please add product images", "error");
         if(!title) return notify("Please enter product name", "error");
         if(!description) return notify("Please enter product description", "error");
         if(!quantity) return notify("Please enter product quantity", "error");
         if(!price) return notify("Please enter product price", "error");
-        if(Number(price) < Number(discountedPrice)) return notify("Discounted price must be less than product price", "error");
+        if(price < discountedPrice) return notify("Discounted price must be less than product price", "error");
         if(!category) return notify("Please select product category", "error");
 
         setLoading(true);
         const formData = new FormData();
-        formData.append("imageCover", uploadCoverImage[0]);
-        uploadImages.forEach(image => {
-            formData.append("images", image);
-        })
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("quantity", quantity);
-        formData.append("price", price);
-        formData.append("discountedPrice", discountedPrice);
-        formData.append("category", category);
-        if(subcategories)
-            selectedSubCategories.forEach(subcategory => {
-                formData.append("subcategories", subcategory);
+        await (async () => {
+            formData.append("imageCover", uploadCoverImage[0]);
+            [...uploadImages].forEach(image => {
+                console.log(image);
+                formData.append("images", image);
             })
-        if(brand) formData.append("brand", brand);
-        selectedColors.forEach(color => {
-            if(colors.includes(color)) formData.append("colors", color);
-        })
+            formData.append("title", title);
+            formData.append("description", description);
+            formData.append("quantity", quantity);
+            formData.append("price", price);
+            formData.append("discountedPrice", discountedPrice);
+            formData.append("category", category);
+            if (subcategories)
+                selectedSubCategories.forEach(subcategory => {
+                    formData.append("subCategories", subcategory);
+                })
+            if (brand) formData.append("brand", brand);
+            selectedColors.forEach(color => {
+                if (colors.includes(color)) formData.append("colors", color);
+            })
+        })();
+
+        for (const pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]);
+        }
 
         await dispatch(createProduct({
             body: formData,

@@ -97,9 +97,9 @@ export default function useAddCategory() {
         if (status === 201) {
             // show the done toast message
             notify("Category added successfully", "success");
-        } else if((error && error.response && error.response.data && error.response.data.message) || (error && error.message)) {
+        } else if((error && error.response && error.response.data && error.response.data.message) || (error && error.message) || (error && error[0].msg)) {
             // show the error toast message
-            setErrorMessage(error.response.data.message || error.message);
+            setErrorMessage(error.response.data.message || error.message || error[0].msg);
         }
         // eslint-disable-next-line
     },[status, error]);
