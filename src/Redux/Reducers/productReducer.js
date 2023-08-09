@@ -1,4 +1,10 @@
-import {GET_PRODUCTS, CREATE_PRODUCT, GET_MOST_USED_PRODUCTS, GET_NEWEST_PRODUCTS} from "../Types/productTypes";
+import {
+    GET_PRODUCTS,
+    CREATE_PRODUCT,
+    GET_MOST_USED_PRODUCTS,
+    GET_NEWEST_PRODUCTS,
+    GET_PRODUCT_BY_ID
+} from "../Types/productTypes";
 
 const initialState = {
     products: [],
@@ -30,6 +36,13 @@ export default function productReducer(state = initialState, action) {
             return {
                 ...state,
                 newestProducts: action.payload.newestProducts,
+                loading: false,
+                status: action.payload.status,
+            }
+        case GET_PRODUCT_BY_ID:
+            return {
+                ...state,
+                product: action.payload.product,
                 loading: false,
                 status: action.payload.status,
             }

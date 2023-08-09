@@ -1,25 +1,16 @@
 import Slider from "../home/slider";
+import {useSelector} from "react-redux";
 
 export function ProductGallery() {
 
-	const advertisements = [
-		{
-			id: 1,
-			image: "https://picsum.photos/500",
-		},
-		{
-			id: 2,
-			image: "https://picsum.photos/500",
-		},
-		{
-			id: 3,
-			image: "https://picsum.photos/500",
-		},
-	];
+	const images = useSelector(state => state.productReducer.product.images)
 
 	return (
 		<section className="p-4 bg-light rounded-5">
-			<Slider height={500} advertisements={advertisements} className="rounded-4" />
+			<Slider height={500} advertisements={images && images.map((image,index) => ({
+				image: image,
+				id: index + 1,
+			}))} className="rounded-4" />
 		</section>
 	)
 }

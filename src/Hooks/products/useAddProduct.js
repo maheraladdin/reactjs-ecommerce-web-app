@@ -176,6 +176,7 @@ export default function useAddProduct() {
     const [loading, setLoading] = useState(false);
 
     const createProductStatus = useSelector(state => state.productReducer.status);
+    const createdProduct = useSelector(state => state.productReducer.product);
 
     /**
      * @desc    this function handle add product
@@ -197,7 +198,7 @@ export default function useAddProduct() {
         if(!description) return notify("Please enter product description", "error");
         if(!quantity) return notify("Please enter product quantity", "error");
         if(!price) return notify("Please enter product price", "error");
-        if(price >= discountedPrice) return notify("Discounted price must be less than product price", "error");
+        if(Number(price) < Number(discountedPrice)) return notify("Discounted price must be less than product price", "error");
         if(!category) return notify("Please select product category", "error");
 
         setLoading(true);
@@ -220,7 +221,7 @@ export default function useAddProduct() {
         selectedColors.forEach(color => {
             if(colors.includes(color)) formData.append("colors", color);
         })
-        console.log(formData)
+
         await dispatch(createProduct({
             body: formData,
             config: {
@@ -230,6 +231,8 @@ export default function useAddProduct() {
                 }
             }
         }));
+
+        console.log(createdProduct);
 
         setLoading(false);
     }

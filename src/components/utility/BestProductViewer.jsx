@@ -19,7 +19,7 @@ export default function BestProductViewer({products,title,loading}) {
             >
             {
                 !loading ?
-                products.map((product,index) => (
+                    products && products.map((product,index) => (
                     <Col
                         className="mb-4"
                         key={index}

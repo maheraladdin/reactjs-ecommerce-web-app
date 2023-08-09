@@ -1,4 +1,10 @@
-import {GET_PRODUCTS, CREATE_PRODUCT, GET_MOST_USED_PRODUCTS, GET_NEWEST_PRODUCTS} from "../Types/productTypes";
+import {
+    GET_PRODUCTS,
+    CREATE_PRODUCT,
+    GET_MOST_USED_PRODUCTS,
+    GET_NEWEST_PRODUCTS,
+    GET_PRODUCT_BY_ID
+} from "../Types/productTypes";
 import reduxApi from "../logic/reduxApi";
 
 // Create a hook to use reduxApi
@@ -65,6 +71,16 @@ export const getNewestProducts = (page = 1,limit = 4 ,sort = "-createdAt") => re
             }
         });
     });
+
+export const getProductById = (id) => reduxApi("get", `/products/${id}`, undefined, (dispatch, payload) => {
+    dispatch({
+        type: GET_PRODUCT_BY_ID,
+        payload: {
+            product: payload.data.document,
+            status: payload.status,
+        }
+    });
+});
 
 /**
  * Create product from API
