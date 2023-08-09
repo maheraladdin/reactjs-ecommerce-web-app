@@ -14,6 +14,7 @@ export default function reviewReducer(state = initialState, action) {
                 loading: true,
                 reviews: action.payload.reviews,
                 status: action.payload.status,
+                numberOfPages: action.payload.numberOfPages,
             }
         case CREATE_REVIEW:
             return {

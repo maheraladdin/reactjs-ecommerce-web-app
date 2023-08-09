@@ -13,11 +13,13 @@ export const getReviewsForSpecificProduct = (productId, page = 1,limit = 6, sort
     `/products/${productId}/reviews?page=${page}&limit=${limit}&sort=${sort}`,
     undefined,
     (dispatch, payload) => {
+    console.log(payload.data)
         dispatch({
             type: GET_REVIEWS,
             payload: {
                 reviews: payload.data.documents,
                 status: payload.status,
+                numberOfPages: Math.ceil(payload.data.documents.length),
             }
         });
     });

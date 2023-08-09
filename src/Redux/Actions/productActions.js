@@ -29,6 +29,7 @@ export const getProducts = (page = 1,limit = 12 ,sort = "-createdAt") => reduxAp
                 numberOfPages: payload.data.paginationResult.numberOfPages,
                 productRequestStatus: payload.status,
                 length: payload.data.length,
+                numberOfDocuments: payload.data.numberOfDocuments,
             }
         });
     });

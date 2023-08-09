@@ -25,6 +25,7 @@ export default function productReducer(state = initialState, action) {
                 numberOfPages: action.payload.numberOfPages,
                 status: action.payload.status,
                 length: action.payload.length,
+                numberOfDocuments: action.payload.numberOfDocuments,
             }
         case GET_MOST_USED_PRODUCTS:
             return {

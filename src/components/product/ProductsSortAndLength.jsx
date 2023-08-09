@@ -3,11 +3,11 @@ import Button from "react-bootstrap/Button";
 import {useSelector} from "react-redux";
 
 export default function ProductsSortAndLength() {
-	const length = useSelector(state => state.productReducer.length);
+	const numberOfDocuments = useSelector(state => state.productReducer.numberOfDocuments);
 	return (
 		<section className="d-flex justify-content-between align-items-center py-3 flex-wrap">
 			<section className="h4">
-				Results: {length}
+				Results: {numberOfDocuments}
 			</section>
 			<section>
 				<Dropdown className="d-inline mx-2">
