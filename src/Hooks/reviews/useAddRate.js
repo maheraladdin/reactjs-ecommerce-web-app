@@ -3,21 +3,25 @@ import {createReview} from "../../Redux/Actions/reviewActions";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 
+/**
+ * @description Custom hook that handles adding a review
+ * @return {{handleRateChange: (function(*): void), rate: number, handleCommentChange: (function(*): void), comment: string, loading: boolean, handleAddRate: ((function(): Promise<void>)|*)}}
+ */
 export default function useAddRate() {
     const [comment, setComment] = useState("");
     const [rate, setRate] = useState(0.0);
     const [loading, setLoading] = useState(false);
     const {id} = useParams();
 
+    // handle comment change
     const handleCommentChange = (e) => setComment(e.target.value);
 
-    const handleRateChange = (newRating) => {
-        console.log("newRating: ", newRating);
-        setRate(newRating);
-    };
+    // handle rate change
+    const handleRateChange = (newRating) => setRate(newRating);
 
     const dispatch = useDispatch();
 
+    // handle add rate
     const handleAddRate = async () => {
         setLoading(true);
         // Todo: change user id to the user id from token after implementing auth
