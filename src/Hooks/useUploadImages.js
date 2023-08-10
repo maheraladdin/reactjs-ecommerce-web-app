@@ -3,14 +3,13 @@ import useNotify from "./useNotify";
 
 /**
  * @desc    This hook is used to upload images and handle them (change, drop, drag over, click, delete, close)
- * @param   {Boolean} multiple - Multiple images or not
  * @param   {Array} images - Array of images
  * @param   {Function} setImages - Function to set images
  * @param   {Array} uploadImages - Array of images to upload
  * @param   {Function} setUploadImages - Function to set images to upload
  * @return  {Object} [show, handleImagesChange, handleImagesDrop, handleImageDragOver, handleImageClick, handleDeleteImage, handleClose]
  */
-export default function useUploadImages(multiple = false, images, setImages, uploadImages, setUploadImages) {
+export default function useUploadImages(images, setImages, uploadImages, setUploadImages) {
 
     const notify = useNotify();
 
@@ -20,24 +19,18 @@ export default function useUploadImages(multiple = false, images, setImages, upl
      * @return  {*|void}
      */
     const handleImagesChange = (e) => {
-        if (e.target.files) {
-            if(e.target.files.length > 5) return notify('You can\'t upload more than 5 images', 'error');
-            // in case of canceling the file selection
-            if(e.target.files.length === 0) return images ? setImages(images) : setImages([AddImage]);
+        if (!e.target.files) return;
 
-            // in case of single image selection
-            if(!multiple) {
-                setImages([URL.createObjectURL(e.target.files[0])])
-                setUploadImages([e.target.files[0]]);
+        for(let i = 0; i < e.target.files.length; i++) {
+            if(e.target.files[i].size > 1024 * 1024 * 5) {
+                notify('You can\'t upload image with size more than 5MB', 'error');
                 return;
             }
-
-            // in case of multiple image selection
-            setImages(images.filter((image) => image !== AddImage));
-            const filesArray = [...e.target.files].map((file) => URL.createObjectURL(file));
-            setUploadImages((prevImages) => prevImages.concat([...e.target.files]));
-            setImages((prevImages) => prevImages.concat(filesArray));
         }
+
+        setImages([URL.createObjectURL(e.target.files[0])])
+        setUploadImages([e.target.files[0]]);
+
     }
 
     /**
@@ -82,14 +75,11 @@ export default function useUploadImages(multiple = false, images, setImages, upl
     /**
      * @desc    This function is used to handle image delete
      * @param   {Object} e - Event object
-     * @param   {Number} index - Index of image
      * @return  {*}
      */
-    const handleDeleteImage = (e,index) => {
+    const handleDeleteImage = (e) => {
         e.preventDefault();
-        if(images.length === 1) return setImages([AddImage]);
-        setImages(images.filter((image, i) => i !== index));
-        setUploadImages(uploadImages.filter((image, i) => i !== index));
+        return setImages([AddImage]);
     }
 
     /**

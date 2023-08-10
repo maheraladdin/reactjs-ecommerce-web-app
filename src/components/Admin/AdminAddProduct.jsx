@@ -7,6 +7,7 @@ import ColorPicker from "react-pick-color";
 import {Spinner} from "react-bootstrap";
 import {ToastContainer} from "react-toastify";
 import {Fragment} from "react";
+import {UploadImages} from "./UploadImages";
 
 
 export default function AdminAddProduct() {
@@ -63,7 +64,7 @@ export default function AdminAddProduct() {
 				</Form.Group>
 				<Form.Group>
 					<Form.Label className={"h4"}>Product images</Form.Label>
-					<UploadImage multiple={true} images={images} setImages={setImages} setUploadImages={setUploadImages} uploadImages={uploadImages} />
+					<UploadImages />
 				</Form.Group>
 				<Form.Group controlId="productName">
 					<Form.Label>Product Name</Form.Label>

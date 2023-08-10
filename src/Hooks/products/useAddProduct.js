@@ -208,8 +208,8 @@ export default function useAddProduct() {
             // Todo : check if uploadImages is an array or not
             for(let i = 0; i < uploadImages.length; i++) {
                 console.log("uploadImages", uploadImages)
-                console.log(uploadImages[i]);
-                formData.append("images", uploadImages[i]);
+                console.log(uploadImages[0][i]);
+                formData.append("images", uploadImages[0][i]);
             }
             formData.append("title", title);
             formData.append("description", description);

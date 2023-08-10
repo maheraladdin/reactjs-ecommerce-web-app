@@ -1,7 +1,7 @@
 import AddImage from "../../assets/images/add-image.png";
 import Button from "react-bootstrap/Button";
 import useUploadImages from "../../Hooks/useUploadImages";
-export default function UploadImage({multiple = false, circle = false, images, setImages, uploadImages, setUploadImages, id="file"}) {
+export default function UploadImage({circle = false, images, setImages, uploadImages, setUploadImages, id="file"}) {
 
 	const {
 		handleImagesChange,
@@ -9,7 +9,7 @@ export default function UploadImage({multiple = false, circle = false, images, s
 		handleImageDragOver,
 		handleImageClick,
 		handleDeleteImage,
-	} = useUploadImages(multiple, images, setImages, uploadImages, setUploadImages);
+	} = useUploadImages(images, setImages, uploadImages, setUploadImages);
 
 	return (
 		<>
@@ -18,7 +18,6 @@ export default function UploadImage({multiple = false, circle = false, images, s
 				name="file"
 				id={id}
 				className="d-none"
-				multiple={multiple}
 				onChange={handleImagesChange}
 				onClick={(e) => {
 					if (images.length >= 6) e.preventDefault();
@@ -44,7 +43,7 @@ export default function UploadImage({multiple = false, circle = false, images, s
 							{image !== AddImage ?
 								<Button
 									variant={"danger"}
-									onClick={(e) => handleDeleteImage(e,index)}
+									onClick={(e) => handleDeleteImage(e)}
 									style={{zIndex: 2}}
 								>
 									Delete
