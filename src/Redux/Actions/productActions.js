@@ -3,13 +3,10 @@ import {
     CREATE_PRODUCT,
     GET_MOST_USED_PRODUCTS,
     GET_NEWEST_PRODUCTS,
-    GET_PRODUCT_BY_ID
+    GET_PRODUCT_BY_ID, DELETE_PRODUCT
 } from "../Types/productTypes";
 import reduxApi from "../logic/reduxApi";
 
-// Create a hook to use reduxApi
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
 
 /**
  * Get products from API
@@ -102,3 +99,23 @@ export const createProduct = (params) => reduxApi("post", "/products", params
             }
         });
     });
+
+
+/**
+ * @desc    Delete product from API
+ * @param   {string} id - id of product
+ * @param   {Object} params - Params of request
+ * @param   {Object} params.config - Config of request
+ * @param   {Object} params.config.headers - Headers of request
+ * @return  {(function(*): Promise<void>)|*}
+ */
+export const deleteProduct = (id,params) => reduxApi("delete", `/products/${id}`, params,
+    (dispatch, payload) => {
+    dispatch({
+        type: DELETE_PRODUCT,
+        payload: {
+            product: payload.data.document,
+            status: payload.status,
+        }
+    });
+});

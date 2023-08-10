@@ -10,7 +10,7 @@ export function ProductData() {
 			<Form.Label>Category: {product && product.category && product.category.name} </Form.Label>
 			<Form.Text>{product && product.title}</Form.Text>
 			<Form.Label><i className="fa-solid fa-star text-warning"></i> {product && product.ratingsAverage} (quantity: {product.ratingsQuantity})</Form.Label>
-			{product && product.brand && <Form.Text>brand: <span className="h4 text-dark">{product.brand}</span></Form.Text>}
+			{product && product.brand && product.brand.name && <Form.Text>brand: <span className="h4 text-dark">{product.brand.name}</span></Form.Text>}
 			<Form.Group className="d-flex gap-1 py-2">
 			{
 				product && product.colors && product.colors.map((color,i) => {

@@ -17,15 +17,19 @@ export default function useGetProducts() {
 
 
     useEffect(() => {
-        dispatch(getProducts(1, numberOfProducts));
+        (async () => {
+            setLoading(true);
+            await dispatch(getProducts(1, numberOfProducts));
+            setLoading(false);
+        })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
-        if (products.length > 0) {
+        if (!loading) {
             setLoading(false);
         }
-    },[products])
+    },[loading])
 
     /**
      * @desc Function to handle page change

@@ -3,7 +3,7 @@ import {
     CREATE_PRODUCT,
     GET_MOST_USED_PRODUCTS,
     GET_NEWEST_PRODUCTS,
-    GET_PRODUCT_BY_ID
+    GET_PRODUCT_BY_ID, UPDATE_PRODUCT, DELETE_PRODUCT
 } from "../Types/productTypes";
 
 const initialState = {
@@ -49,6 +49,20 @@ export default function productReducer(state = initialState, action) {
                 status: action.payload.status,
             }
         case CREATE_PRODUCT:
+            return {
+                ...state,
+                product: action.payload.product,
+                loading: false,
+                status: action.payload.status,
+            }
+        case UPDATE_PRODUCT:
+            return {
+                ...state,
+                product: action.payload.product,
+                loading: false,
+                status: action.payload.status,
+            }
+        case DELETE_PRODUCT:
             return {
                 ...state,
                 product: action.payload.product,

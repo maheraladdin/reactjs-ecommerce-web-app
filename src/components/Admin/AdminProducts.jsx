@@ -1,36 +1,32 @@
-import {Col, Row} from "react-bootstrap";
+import {Col, Row, Spinner} from "react-bootstrap";
 import AdminProductCard from "./AdminProductCard";
 import Pagination from "../utility/Pagination";
+import useGetProducts from "../../Hooks/products/useGetProducts";
 
-export default function AdminProducts({product}) {
+export default function AdminProducts() {
 
-	if(!product) product = {
-		title:"Product",
-		description: "this is our awesome Product",
-		image:"https://picsum.photos/200",
-		rating: 4.5,
-		price: 50
-	}
+	const { loading, products, numberOfPages, handlePageChange } = useGetProducts();
 
 	return (
 		<>
-			<Row className="gap-3 gap-sm-0">
+			<Row className={`"gap-3 gap-sm-0 ${loading ? "justify-content-center align-items-center" : ""} min-height-100vh"`}>
 				{
-					Array(20).fill().map((e,i) => (
+					!loading ?
+					products.map((product,index) => (
 						<Col
 							xl={3}
 							md={4}
 							sm={6}
 							xs={12}
-							key={i}
+							key={"admin-product-" + (index + 1)}
 							className={"mb-4"}
 						>
 							<AdminProductCard product={product}/>
 						</Col>
-					))
+					)) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
 				}
 			</Row>
-			<Pagination />
+			{!loading && <Pagination pageCount={numberOfPages} handlePageChange={handlePageChange} />}
 		</>
 	)
 }
