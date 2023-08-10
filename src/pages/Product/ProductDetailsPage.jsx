@@ -3,14 +3,16 @@ import ProductDetails from "../../components/product/ProductDetails";
 import RateContainer from "../../components/Rate/RateContainer";
 import BestProductViewer from "../../components/utility/BestProductViewer";
 import useGetProductByID from "../../Hooks/products/useGetProductByID";
+import useGetProductsHomePage from "../../Hooks/products/useGetProductsHomePage";
 
 export default function ProductDetailsPage() {
 	useGetProductByID();
+	const {mostSoldProducts, loadingMostSoldProducts} = useGetProductsHomePage();
 	return (
 		<Container className="d-flex flex-column gap-5 min-height-100vh py-4">
 			<ProductDetails />
 			<RateContainer />
-			<BestProductViewer />
+			<BestProductViewer title={"Most Sold"} products={mostSoldProducts} loading={loadingMostSoldProducts}/>
 		</Container>
 	)
 }
