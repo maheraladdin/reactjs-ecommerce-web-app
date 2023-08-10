@@ -5,7 +5,7 @@ export default function Footer() {
 	return (
 		<footer className="bg-body-tertiary">
 			<Container>
-				<section className="d-flex justify-content-between flex-wrap">
+				<section className="d-flex justify-content-between flex-wrap gap-3">
 					<section className="d-flex gap-2 py-3">
 						<section><a href="https://facebook.com/" className="text-decoration-none text-dark" title="facebook account"><i className="fa-brands fa-facebook-f"></i></a></section>
 						<section><a href="https://instagram.com/" className="text-decoration-none text-dark" title="instagram account"><i className="fa-brands fa-instagram"></i></a></section>

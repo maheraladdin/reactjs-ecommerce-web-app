@@ -10,8 +10,6 @@ export default function AdminAddBrand() {
 	const {
 		brandName,
 		onBrandNameChange,
-		images,
-		setImages,
 		uploadImages,
 		setUploadImages,
 		loading,
@@ -22,7 +20,7 @@ export default function AdminAddBrand() {
 	return (
 		<>
 			<section>
-				<UploadImage setImages={setImages} images={images} uploadImages={uploadImages} setUploadImages={setUploadImages} />
+				<UploadImage uploadImages={uploadImages} setUploadImages={setUploadImages} />
 			</section>
 			<Form validated={validated} className="my-3 d-flex flex-column">
 				<Form.Group className="mb-3" controlId="BrandName">

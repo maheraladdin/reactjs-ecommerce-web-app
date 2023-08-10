@@ -14,13 +14,8 @@ export default function AdminAddProduct() {
 
 	const {
 		loading,
-		coverImage,
-		setCoverImage,
 		uploadCoverImage,
 		setUploadCoverImage,
-		images,
-		setImages,
-		uploadImages,
 		setUploadImages,
 		title,
 		handleTitle,
@@ -60,11 +55,11 @@ export default function AdminAddProduct() {
 			<Form validated={validated} className="my-3 d-flex flex-column gap-3">
 				<Form.Group>
 					<Form.Label className={"h4"}>Product cover image</Form.Label>
-					<UploadImage id={"coverImage"} images={coverImage} setImages={setCoverImage} setUploadImages={setUploadCoverImage} uploadImages={uploadCoverImage} />
+					<UploadImage setUploadImages={setUploadCoverImage} uploadImages={uploadCoverImage} />
 				</Form.Group>
 				<Form.Group>
 					<Form.Label className={"h4"}>Product images</Form.Label>
-					<UploadImages />
+					<UploadImages setUploadImages={setUploadImages}/>
 				</Form.Group>
 				<Form.Group controlId="productName">
 					<Form.Label>Product Name</Form.Label>

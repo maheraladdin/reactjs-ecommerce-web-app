@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategory } from "../../Redux/Actions/categoryActions";
 import useNotify from "../useNotify";
-import AddImage from "../../assets/images/add-image.png";
 
 /**
  * @description this hook is used to add a new category
@@ -11,8 +10,6 @@ import AddImage from "../../assets/images/add-image.png";
 export default function useAddCategory() {
     // state of category name
     const [categoryName, setCategoryName] = useState("");
-    // state of images to be displayed
-    const [images, setImages] = useState([AddImage]);
     // state of images to be uploaded
     const [uploadImages, setUploadImages] = useState([]);
     // state of loading status
@@ -85,7 +82,6 @@ export default function useAddCategory() {
     useEffect(() => {
         if(!loading) {
             // reset the form
-            setImages([AddImage]);
             setUploadImages([]);
             setCategoryName("");
             setValidated(false);
@@ -97,9 +93,9 @@ export default function useAddCategory() {
         if (status === 201) {
             // show the done toast message
             notify("Category added successfully", "success");
-        } else if((error && error.response && error.response.data && error.response.data.message) || (error && error.message) || (error && error[0].msg)) {
+        } else if((error && error.response && error.response.data && error.response.data.message) || (error && error.message)) {
             // show the error toast message
-            setErrorMessage(error.response.data.message || error.message || error[0].msg);
+            setErrorMessage(error.response.data.message || error.message);
         }
         // eslint-disable-next-line
     },[status, error]);
@@ -116,8 +112,6 @@ export default function useAddCategory() {
     return {
         categoryName,
         onCategoryNameChange,
-        images,
-        setImages,
         uploadImages,
         setUploadImages,
         loading,

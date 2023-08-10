@@ -1,5 +1,4 @@
 import {useState, useEffect} from "react";
-import AddImage from "../../assets/images/add-image.png";
 import {useSelector, useDispatch} from "react-redux";
 import {getCategories} from "../../Redux/Actions/categoryActions";
 import {getBrands} from "../../Redux/Actions/BrandActions";
@@ -12,11 +11,9 @@ export default function useAddProduct() {
     const dispatch = useDispatch();
 
     // states for cover image
-    const [coverImage, setCoverImage] = useState([AddImage]);
     const [uploadCoverImage, setUploadCoverImage] = useState([]);
 
     // states for product images
-    const [images, setImages] = useState([AddImage]);
     const [uploadImages, setUploadImages] = useState([]);
 
     // states for product title
@@ -176,7 +173,6 @@ export default function useAddProduct() {
     const [loading, setLoading] = useState(false);
 
     const createProductStatus = useSelector(state => state.productReducer.status);
-    const createdProduct = useSelector(state => state.productReducer.product);
 
     /**
      * @desc    this function handle add product
@@ -205,11 +201,8 @@ export default function useAddProduct() {
         const formData = new FormData();
         await (async () => {
             formData.append("imageCover", uploadCoverImage[0]);
-            // Todo : check if uploadImages is an array or not
             for(let i = 0; i < uploadImages.length; i++) {
-                console.log("uploadImages", uploadImages)
-                console.log(uploadImages[0][i]);
-                formData.append("images", uploadImages[0][i]);
+                formData.append("images", uploadImages[i]);
             }
             formData.append("title", title);
             formData.append("description", description);
@@ -217,19 +210,15 @@ export default function useAddProduct() {
             formData.append("price", price);
             formData.append("discountedPrice", discountedPrice);
             formData.append("category", category);
-            if (subcategories.length > 1)
+            if (subcategories.length > 0)
                 selectedSubCategories.forEach(subcategory => {
-                    formData.append("subCategories", subcategory);
+                    formData.append("subCategories[]", subcategory.value);
                 })
             if (brand) formData.append("brand", brand);
             selectedColors.forEach(color => {
                 if (colors.includes(color)) formData.append("colors", color);
             })
         })();
-
-        for (const pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
-        }
 
         await dispatch(createProduct({
             body: formData,
@@ -240,9 +229,6 @@ export default function useAddProduct() {
                 }
             }
         }));
-
-        console.log(createdProduct);
-
         setLoading(false);
     }
 
@@ -271,8 +257,6 @@ export default function useAddProduct() {
     useEffect(() => {
         if(!loading && createProductStatus === 201) {
             setValidated(false);
-            setCoverImage([AddImage]);
-            setImages([AddImage]);
             setTitle("");
             setDescription("");
             setQuantity(0);
@@ -309,12 +293,8 @@ export default function useAddProduct() {
 
     return {
         loading,
-        coverImage,
-        setCoverImage,
         uploadCoverImage,
         setUploadCoverImage,
-        images,
-        setImages,
         uploadImages,
         setUploadImages,
         title,

@@ -1,7 +1,10 @@
 import AddImage from "../../assets/images/add-image.png";
 import Button from "react-bootstrap/Button";
-import useUploadImages from "../../Hooks/useUploadImages";
-export default function UploadImage({circle = false, images, setImages, uploadImages, setUploadImages, id="file"}) {
+import useUploadImage from "../../Hooks/useUploadImage";
+import {useState} from "react";
+export default function UploadImage({circle = false, uploadImages, setUploadImages, id="file"}) {
+
+	const [images, setImages] = useState([AddImage]);
 
 	const {
 		handleImagesChange,
@@ -9,7 +12,7 @@ export default function UploadImage({circle = false, images, setImages, uploadIm
 		handleImageDragOver,
 		handleImageClick,
 		handleDeleteImage,
-	} = useUploadImages(images, setImages, uploadImages, setUploadImages);
+	} = useUploadImage(images, setImages, uploadImages, setUploadImages);
 
 	return (
 		<>

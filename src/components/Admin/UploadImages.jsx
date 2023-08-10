@@ -1,24 +1,16 @@
-import React,{useState} from 'react';
+import React from 'react';
 import ImageUploading from 'react-images-uploading';
 import Button from "react-bootstrap/Button";
 import addImage from "../../assets/images/add-image.png";
 import {Col, Row} from "react-bootstrap";
+import useUploadImages from "../../Hooks/useUploadImages";
 
 const imageWidth = 200;
 const imageHeight = 200;
 
-export function UploadImages() {
-	const [images, setImages] = useState([]);
-	const maxNumber = 5;
+export function UploadImages({setUploadImages}) {
 
-	const onChange = (imageList, addUpdateIndex) => {
-		// data for submit
-		console.log(imageList, addUpdateIndex);
-		imageList.forEach(image => {
-			console.log(image['file']);
-		});
-		setImages(imageList);
-	};
+	const {images, maxNumber, onChange} = useUploadImages(setUploadImages);
 
 	return (
 		<ImageUploading
@@ -46,6 +38,9 @@ export function UploadImages() {
 							<Col
 								key={index}
 								className="d-flex flex-column justify-content-center align-items-start gap-3"
+								style={{
+									minWidth: imageWidth,
+								}}
 							>
 								<img
 									style={{
@@ -67,26 +62,28 @@ export function UploadImages() {
 								</section>
 							</Col>
 						))}
-					</Row>
-					<section
-						style={isDragging ? { border: "1px solid red" } : undefined}
-						onClick={onImageUpload}
-						{...dragProps}
-						role={"button"}
-						className="w-fit-content"
-					>
-						<img
+						<Col
+							onClick={onImageUpload}
+							{...dragProps}
+							role={"button"}
+							className={`${isDragging && "border border-2 border-danger"} align-self-center`}
 							style={{
-								width: imageWidth,
-								objectFit: "cover",
-								height: imageHeight,
+								minWidth: imageWidth,
 							}}
-							className={`img-fluid ${images.length >= 5 && "d-none"}`}
-							src={addImage}
-							alt="add image avater"
-						/>
-					</section>
-					<Button variant={"outline-danger"} className={`w-100 ${images.length < 2 && "d-none"}`} onClick={onImageRemoveAll}>Remove all images</Button>
+						>
+							<img
+								style={{
+									width: imageWidth,
+									objectFit: "cover",
+									height: imageHeight,
+								}}
+								className={`img-fluid ${images.length >= 5 && "d-none"}`}
+								src={addImage}
+								alt="add"
+							/>
+						</Col>
+					</Row>
+					<Button variant={"outline-danger"} className={`w-100 ${images.length < 2 && "d-none"}`} onClick={() => onImageRemoveAll}>Remove all images</Button>
 				</section>
 			)}
 		</ImageUploading>

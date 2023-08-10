@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createBrand } from "../../Redux/Actions/BrandActions";
 import useNotify from "../useNotify";
-import AddImage from "../../assets/images/add-image.png";
 
 /**
  * @description this hook is used to add a new brand
@@ -11,8 +10,6 @@ import AddImage from "../../assets/images/add-image.png";
 export default function useAddBrand() {
     // state of brand name
     const [brandName, setBrandName] = useState("");
-    // state of images to be displayed
-    const [images, setImages] = useState([AddImage]);
     // state of images to be uploaded
     const [uploadImages, setUploadImages] = useState([]);
     // state of loading status
@@ -85,7 +82,6 @@ export default function useAddBrand() {
     useEffect(() => {
         if(!loading) {
             // reset the form
-            setImages([AddImage]);
             setUploadImages([]);
             setBrandName("");
             setValidated(false);
@@ -116,8 +112,6 @@ export default function useAddBrand() {
     return {
         brandName,
         onBrandNameChange,
-        images,
-        setImages,
         uploadImages,
         setUploadImages,
         loading,
