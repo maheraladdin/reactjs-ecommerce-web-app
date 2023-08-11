@@ -14,13 +14,15 @@ export default function AdminAddCategory() {
 		setUploadImages,
 		loading,
 		validated,
-		addCategory
+		addCategory,
+		image,
+		setImage
 	} = useAddCategory();
 
 	return (
 		<>
 			<section>
-				<UploadImage circle={true} uploadImages={uploadImages} setUploadImages={setUploadImages} />
+				<UploadImage circle={true} image={image} setImage={setImage} uploadImages={uploadImages} setUploadImages={setUploadImages} />
 			</section>
 			<Form validated={validated} className="my-3 d-flex flex-column">
 				<Form.Group className="mb-3" controlId="CategoryName">

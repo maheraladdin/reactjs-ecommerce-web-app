@@ -14,13 +14,15 @@ export default function AdminAddBrand() {
 		setUploadImages,
 		loading,
 		validated,
-		addBrand
+		addBrand,
+		image,
+		setImage
 	} = useAddBrand()
 
 	return (
 		<>
 			<section>
-				<UploadImage uploadImages={uploadImages} setUploadImages={setUploadImages} />
+				<UploadImage image={image} setImage={setImage} uploadImages={uploadImages} setUploadImages={setUploadImages} />
 			</section>
 			<Form validated={validated} className="my-3 d-flex flex-column">
 				<Form.Group className="mb-3" controlId="BrandName">

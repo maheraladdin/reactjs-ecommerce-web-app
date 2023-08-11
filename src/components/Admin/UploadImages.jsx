@@ -8,9 +8,9 @@ import useUploadImages from "../../Hooks/useUploadImages";
 const imageWidth = 200;
 const imageHeight = 200;
 
-export function UploadImages({setUploadImages}) {
+export function UploadImages({setUploadImages,images,setImages}) {
 
-	const {images, maxNumber, onChange} = useUploadImages(setUploadImages);
+	const {maxNumber, onChange} = useUploadImages(setUploadImages,setImages);
 
 	return (
 		<ImageUploading

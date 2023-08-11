@@ -44,18 +44,22 @@ export function AdminEditProduct() {
 		handleDisplayColorPicker,
 		handleSetColors,
 		handleEditProduct,
-		validated
+		validated,
+		image,
+		setImage,
+		images,
+		setImages,
 	} = useEditProduct();
 	return (
 		<>
 			<Form validated={validated} className="my-3 d-flex flex-column gap-3">
 				<Form.Group>
 					<Form.Label className={"h4"}>Product cover image</Form.Label>
-					<UploadImage setUploadImages={setUploadCoverImage} uploadImages={uploadCoverImage} />
+					<UploadImage image={image} setImage={setImage} setUploadImages={setUploadCoverImage} uploadImages={uploadCoverImage} />
 				</Form.Group>
 				<Form.Group>
 					<Form.Label className={"h4"}>Product images</Form.Label>
-					<UploadImages setUploadImages={setUploadImages}/>
+					<UploadImages images={images} setImages={setImages} setUploadImages={setUploadImages}/>
 				</Form.Group>
 				<Form.Group controlId="productName">
 					<Form.Label>Product Name</Form.Label>
@@ -164,9 +168,9 @@ export function AdminEditProduct() {
 				</Form.Group>
 			</Form>
 			<section className="d-flex justify-content-end">
-				<Button onClick={handleEditProduct} variant="outline-success">
+				<Button onClick={handleEditProduct} variant="outline-primary">
 					{loading ? <Spinner className={"me-2"} size={"sm"} animation="border" variant="success" /> : ""}
-					Add Product
+					Update Product
 				</Button>
 			</section>
 			<ToastContainer

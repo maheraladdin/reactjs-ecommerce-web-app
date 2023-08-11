@@ -1,10 +1,8 @@
 import AddImage from "../../assets/images/add-image.png";
 import Button from "react-bootstrap/Button";
 import useUploadImage from "../../Hooks/useUploadImage";
-import {useState} from "react";
-export default function UploadImage({circle = false, uploadImages, setUploadImages, id="file"}) {
 
-	const [images, setImages] = useState([AddImage]);
+export default function UploadImage({circle = false, image, setImage, uploadImages, setUploadImages, id="file"}) {
 
 	const {
 		handleImagesChange,
@@ -12,7 +10,7 @@ export default function UploadImage({circle = false, uploadImages, setUploadImag
 		handleImageDragOver,
 		handleImageClick,
 		handleDeleteImage,
-	} = useUploadImage(images, setImages, uploadImages, setUploadImages);
+	} = useUploadImage(image, setImage, uploadImages, setUploadImages);
 
 	return (
 		<>
@@ -23,7 +21,7 @@ export default function UploadImage({circle = false, uploadImages, setUploadImag
 				className="d-none"
 				onChange={handleImagesChange}
 				onClick={(e) => {
-					if (images.length >= 6) e.preventDefault();
+					if (image.length >= 6) e.preventDefault();
 				}}
 			/>
 			<label
@@ -33,7 +31,7 @@ export default function UploadImage({circle = false, uploadImages, setUploadImag
 				onDrop={handleImagesDrop}
 				role={"button"}
 			>
-				{images.map((image,index) => {
+				{image.map((image,index) => {
 					return (
 						<section key={id + index} className="d-flex flex-column gap-2">
 							<img

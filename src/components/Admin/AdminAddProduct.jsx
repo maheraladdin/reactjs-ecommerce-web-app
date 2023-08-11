@@ -46,7 +46,11 @@ export default function AdminAddProduct() {
 		handleDisplayColorPicker,
 		handleSetColors,
 		handleAddProduct,
-		validated
+		validated,
+		image,
+		images,
+		setImage,
+		setImages,
 	} = useAddProduct();
 
 
@@ -55,11 +59,11 @@ export default function AdminAddProduct() {
 			<Form validated={validated} className="my-3 d-flex flex-column gap-3">
 				<Form.Group>
 					<Form.Label className={"h4"}>Product cover image</Form.Label>
-					<UploadImage setUploadImages={setUploadCoverImage} uploadImages={uploadCoverImage} />
+					<UploadImage image={image} setImage={setImage} setUploadImages={setUploadCoverImage} uploadImages={uploadCoverImage} />
 				</Form.Group>
 				<Form.Group>
 					<Form.Label className={"h4"}>Product images</Form.Label>
-					<UploadImages setUploadImages={setUploadImages}/>
+					<UploadImages images={images} setImages={setImages} setUploadImages={setUploadImages}/>
 				</Form.Group>
 				<Form.Group controlId="productName">
 					<Form.Label>Product Name</Form.Label>

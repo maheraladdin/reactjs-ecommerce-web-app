@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategory } from "../../Redux/Actions/categoryActions";
 import useNotify from "../useNotify";
+import AddImage from "../../assets/images/add-image.png";
 
 /**
  * @description this hook is used to add a new category
@@ -12,6 +13,7 @@ export default function useAddCategory() {
     const [categoryName, setCategoryName] = useState("");
     // state of images to be uploaded
     const [uploadImages, setUploadImages] = useState([]);
+    const [image, setImage] = useState([AddImage]);
     // state of loading status
     const [loading, setLoading] = useState(false);
     // state of form validation
@@ -116,6 +118,8 @@ export default function useAddCategory() {
         setUploadImages,
         loading,
         validated,
-        addCategory
+        addCategory,
+        setImage,
+        image
     }
 }

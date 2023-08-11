@@ -1,7 +1,5 @@
-import {useState} from "react";
 
-export default function useUploadImages(setUploadImages) {
-    const [images, setImages] = useState([]);
+export default function useUploadImages(setUploadImages, setImages) {
     const maxNumber = 5;
 
     const onChange = (imageList) => {
@@ -10,7 +8,6 @@ export default function useUploadImages(setUploadImages) {
     };
 
     return {
-        images,
         maxNumber,
         onChange
     }

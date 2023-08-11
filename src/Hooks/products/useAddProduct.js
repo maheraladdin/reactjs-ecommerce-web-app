@@ -5,6 +5,7 @@ import {getBrands} from "../../Redux/Actions/BrandActions";
 import {getSubcategoriesForSpecificCategory} from "../../Redux/Actions/subcategoryActions";
 import {createProduct} from "../../Redux/Actions/productActions";
 import useNotify from "../useNotify";
+import AddImage from "../../assets/images/add-image.png";
 
 export default function useAddProduct() {
 
@@ -13,8 +14,13 @@ export default function useAddProduct() {
     // states for cover image
     const [uploadCoverImage, setUploadCoverImage] = useState([]);
 
+    const [image, setImage] = useState([AddImage]);
+
     // states for product images
     const [uploadImages, setUploadImages] = useState([]);
+
+    const [images, setImages] = useState([]);
+
 
     // states for product title
     const [title, setTitle] = useState("");
@@ -325,7 +331,11 @@ export default function useAddProduct() {
         handleDisplayColorPicker,
         handleSetColors,
         handleAddProduct,
-        validated
+        validated,
+        image,
+        setImage,
+        images,
+        setImages
     }
 
 }

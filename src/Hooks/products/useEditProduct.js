@@ -6,8 +6,9 @@ import {getSubcategoriesForSpecificCategory} from "../../Redux/Actions/subcatego
 import {getProductById, updateProduct} from "../../Redux/Actions/productActions";
 import useNotify from "../useNotify";
 import {useParams} from "react-router-dom";
+import AddImage from "../../assets/images/add-image.png";
 
-export default function useAddProduct() {
+export default function useEditProduct() {
 
     const {id} = useParams();
 
@@ -18,8 +19,13 @@ export default function useAddProduct() {
     // states for cover image
     const [uploadCoverImage, setUploadCoverImage] = useState([]);
 
+    const [image, setImage] = useState([AddImage]);
+
     // states for product images
     const [uploadImages, setUploadImages] = useState([]);
+
+
+    const [images, setImages] = useState([]);
 
     // states for product title
     const [title, setTitle] = useState("");
@@ -272,6 +278,10 @@ export default function useAddProduct() {
             setSelectedSubCategories([]);
             setBrand("");
             setSelectedColors([]);
+            setImage([]);
+            setImages([])
+            setUploadImages([]);
+            setUploadCoverImage([]);
         }
         // eslint-disable-next-line
     },[loading]);
@@ -295,23 +305,33 @@ export default function useAddProduct() {
     }, [errorMessage]);
 
     useEffect(() => {
-        if(product._id === id) {
+        if(product && product._id === id) {
             setUploadCoverImage([product.imageCover]);
+            setImage([product.imageCover])
+
+            // TODO: display multiple images from the server
             setUploadImages(product.images);
+            setImages(product.images);
+
             setTitle(product.title);
             setDescription(product.description);
             setQuantity(product.quantity);
             setPrice(product.price);
             setDiscountedPrice(product.discountedPrice || 0);
             setCategory(product.category._id);
-            setSelectedSubCategories(product.subCategories);
-            setBrand(product.brand._id);
+            if(product.subCategories) setSelectedSubCategories(product.subCategories.map(subCategory => {
+                return {
+                    label: subCategory.name,
+                    value: subCategory._id,
+                }
+            }));
+            if(product.brand) setBrand(product.brand._id);
             setColors(product.colors || [
                 "red",
                 "green",
                 "blue",
             ]);
-            setSelectedColors(product.colors);
+            if(product.colors)setSelectedColors(product.colors);
         }
         // eslint-disable-next-line
     }, [product]);
@@ -354,7 +374,11 @@ export default function useAddProduct() {
         handleSetColors,
         handleEditProduct,
         validated,
-        product
+        product,
+        image,
+        setImage,
+        images,
+        setImages,
     }
 
 }
