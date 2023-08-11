@@ -21,7 +21,12 @@ import {
     adminAddProductRoute,
     userOrdersRoute,
     userWishlistRoute,
-    userAddressesRoute, userProfileRoute, userAddressUpdateRoute, userAddAddressRoute, userUpdateProfileRoute
+    userAddressesRoute,
+    userProfileRoute,
+    userAddressUpdateRoute,
+    userAddAddressRoute,
+    userUpdateProfileRoute,
+    adminEditProductRoute
 } from "./constants/routes";
 import SignupPage from "./pages/Auth/SignupPage";
 import CategoriesPage from "./pages/Category/CategoriesPage";
@@ -43,6 +48,7 @@ import UserProfilePage from "./pages/User/UserProfilePage";
 import UserAddressUpdatePage from "./pages/User/UserAddressUpdatePage";
 import UserAddNewAddressPage from "./pages/User/UserAddNewAddressPage";
 import UserUpdateProfilePage from "./pages/User/UserUpdateProfilePage";
+import {AdminEditProductPage} from "./pages/Admin/AdminEditProductPage";
 
 export default function App() {
     return (
@@ -72,6 +78,7 @@ export default function App() {
                     <Route path={userAddressUpdateRoute} element={<UserAddressUpdatePage />} />
                     <Route path={userProfileRoute} element={<UserProfilePage />} />
                     <Route path={userUpdateProfileRoute} element={<UserUpdateProfilePage />} />
+                    <Route path={adminEditProductRoute} element={<AdminEditProductPage />}/>
                 </Routes>
             </BrowserRouter>
             <Footer />

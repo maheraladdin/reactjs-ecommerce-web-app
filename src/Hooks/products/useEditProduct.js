@@ -3,12 +3,17 @@ import {useSelector, useDispatch} from "react-redux";
 import {getCategories} from "../../Redux/Actions/categoryActions";
 import {getBrands} from "../../Redux/Actions/BrandActions";
 import {getSubcategoriesForSpecificCategory} from "../../Redux/Actions/subcategoryActions";
-import {createProduct} from "../../Redux/Actions/productActions";
+import {getProductById, updateProduct} from "../../Redux/Actions/productActions";
 import useNotify from "../useNotify";
+import {useParams} from "react-router-dom";
 
 export default function useAddProduct() {
 
+    const {id} = useParams();
+
     const dispatch = useDispatch();
+
+    const product = useSelector(state => state.productReducer.product);
 
     // states for cover image
     const [uploadCoverImage, setUploadCoverImage] = useState([]);
@@ -127,7 +132,7 @@ export default function useAddProduct() {
     ]);
 
     const [selectedColors, setSelectedColors] = useState([]);
-    
+
     const [pickedColor, setPickedColor] = useState("red");
 
     const [displayColorPicker, setDisplayColorPicker] = useState(false);
@@ -172,14 +177,14 @@ export default function useAddProduct() {
     // loading state
     const [loading, setLoading] = useState(false);
 
-    const createProductStatus = useSelector(state => state.productReducer.status);
+    const editProductStatus = useSelector(state => state.productReducer.status);
 
     /**
      * @desc    this function handle add product
      * @param   e
      * @return  void
      */
-    const handleAddProduct = async (e) => {
+    const handleEditProduct = async (e) => {
 
         // prevent the browser from refreshing
         e.preventDefault();
@@ -220,7 +225,7 @@ export default function useAddProduct() {
             })
         })();
 
-        await dispatch(createProduct({
+        await dispatch(updateProduct(id, {
             body: formData,
             config: {
                 headers: {
@@ -243,6 +248,7 @@ export default function useAddProduct() {
     useEffect(() => {
         dispatch(getCategories(1,Number.MAX_SAFE_INTEGER,"name"));
         dispatch(getBrands(1,Number.MAX_SAFE_INTEGER,"name"));
+        dispatch(getProductById(id))
         // eslint-disable-next-line
     }, []);
 
@@ -255,7 +261,7 @@ export default function useAddProduct() {
     }, [category]);
 
     useEffect(() => {
-        if(!loading && createProductStatus === 201) {
+        if(!loading && editProductStatus === 201) {
             setValidated(false);
             setTitle("");
             setDescription("");
@@ -271,13 +277,13 @@ export default function useAddProduct() {
     },[loading]);
 
     useEffect(() => {
-        if(createProductStatus === 201)
+        if(editProductStatus === 201)
             notify("Product created successfully", "success");
         else if (error) {
             setErrorMessage(error.message);
         }
         // eslint-disable-next-line
-    }, [createProductStatus]);
+    }, [editProductStatus]);
 
 
     useEffect(() => {
@@ -287,6 +293,28 @@ export default function useAddProduct() {
             });
         // eslint-disable-next-line
     }, [errorMessage]);
+
+    useEffect(() => {
+        if(product._id === id) {
+            setUploadCoverImage([product.imageCover]);
+            setUploadImages(product.images);
+            setTitle(product.title);
+            setDescription(product.description);
+            setQuantity(product.quantity);
+            setPrice(product.price);
+            setDiscountedPrice(product.discountedPrice || 0);
+            setCategory(product.category._id);
+            setSelectedSubCategories(product.subCategories);
+            setBrand(product.brand._id);
+            setColors(product.colors || [
+                "red",
+                "green",
+                "blue",
+            ]);
+            setSelectedColors(product.colors);
+        }
+        // eslint-disable-next-line
+    }, [product]);
 
 
 
@@ -324,8 +352,9 @@ export default function useAddProduct() {
         displayColorPicker,
         handleDisplayColorPicker,
         handleSetColors,
-        handleAddProduct,
-        validated
+        handleEditProduct,
+        validated,
+        product
     }
 
 }
