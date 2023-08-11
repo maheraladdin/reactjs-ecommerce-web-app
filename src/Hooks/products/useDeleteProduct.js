@@ -1,13 +1,14 @@
-import {deleteProduct} from "../../Redux/Actions/productActions";
+import {deleteProduct, getProducts} from "../../Redux/Actions/productActions";
 import {useDispatch} from "react-redux";
 import {useState} from "react";
 
 export default function useDeleteProduct(id) {
 
     const dispatch = useDispatch();
-    const [hideCard, setHideCard] = useState(false);
     const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false)
     const handleDeleteProduct = async () => {
+        setLoading(true)
         await dispatch(deleteProduct(id, {
             body: {
                 headers: {
@@ -15,16 +16,15 @@ export default function useDeleteProduct(id) {
                 }
             }
         }));
-        setHideCard(true);
         setShow(false);
-        // eslint-disable-next-line no-restricted-globals
-        location.reload();
+        await dispatch(getProducts());
+        setLoading(false)
     }
 
     return {
         handleDeleteProduct,
-        hideCard,
         show,
-        setShow
+        setShow,
+        loading
     }
 }

@@ -12,7 +12,7 @@ export default function AdminProducts() {
 				{
 					!loading ?
 					products.map((product,index) => (
-						<AdminProductCard product={product} index={index}/>
+						<AdminProductCard key={"admin-product-" + (index + 1)} product={product} />
 					)) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
 				}
 			</Row>

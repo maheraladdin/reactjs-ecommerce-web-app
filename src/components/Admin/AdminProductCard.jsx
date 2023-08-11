@@ -3,11 +3,11 @@ import Card from 'react-bootstrap/Card';
 import {productDetailsRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
 import useDeleteProduct from "../../Hooks/products/useDeleteProduct";
-import {Col, Modal} from "react-bootstrap";
+import {Col, Modal, Spinner} from "react-bootstrap";
 
 
-export default function AdminProductCard({product,index}) {
-	const {handleDeleteProduct, hideCard, show, setShow} = useDeleteProduct(product._id);
+export default function AdminProductCard({product}) {
+	const {handleDeleteProduct, show, setShow, loading} = useDeleteProduct(product._id);
 	return (
 		<>
 		<Col
@@ -15,8 +15,7 @@ export default function AdminProductCard({product,index}) {
 			md={4}
 			sm={6}
 			xs={12}
-			key={"admin-product-" + (index + 1)}
-			className={`mb-4 ${hideCard && "d-none"}`}
+			className={`mb-4`}
 		>
 			<Card>
 				<Button
@@ -82,6 +81,7 @@ export default function AdminProductCard({product,index}) {
 						Close
 					</Button>
 					<Button variant="danger" onClick={handleDeleteProduct}>
+						<Spinner size={"sm"} animation="border" variant="light" className={`me-2 ${!loading && "d-none"}`} />
 						Delete
 					</Button>
 				</Modal.Footer>

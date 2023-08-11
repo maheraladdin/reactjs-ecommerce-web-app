@@ -100,13 +100,33 @@ export const createProduct = (params) => reduxApi("post", "/products", params
         });
     });
 
+/**
+ * @desc    Update product by iD
+ * @param   {String} id - product id
+ * @param   {Object} params - request params
+ * @param  {Object} params.body - Body of request
+ * @param  {Object} params.config - Config of request
+ * @param  {Object} params.config.headers - Headers of request
+ * @return {(function(*): Promise<void>)|*}
+ */
+export const updateProduct = (id, params) => reduxApi("put", `/products/${id}`, params,
+    (dispatch, payload) => {
+    dispatch({
+        type: CREATE_PRODUCT,
+        payload: {
+            product: payload.data.document,
+            status: payload.status,
+        }
+    });
+});
+
 
 /**
- * @desc    Delete product from API
+ * @desc    Delete product by id
  * @param   {string} id - id of product
  * @param   {Object} params - Params of request
- * @param   {Object} params.config - Config of request
- * @param   {Object} params.config.headers - Headers of request
+ * @param   {Object} params.body - request body
+ * @param   {Object} params.body.headers - request headers
  * @return  {(function(*): Promise<void>)|*}
  */
 export const deleteProduct = (id, params) => reduxApi("delete", `/products/${id}`, params,
