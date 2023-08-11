@@ -3,64 +3,90 @@ import Card from 'react-bootstrap/Card';
 import {productDetailsRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
 import useDeleteProduct from "../../Hooks/products/useDeleteProduct";
+import {Col, Modal} from "react-bootstrap";
 
 
-export default function AdminProductCard({product}) {
-	const {handleDeleteProduct} = useDeleteProduct(product._id);
+export default function AdminProductCard({product,index}) {
+	const {handleDeleteProduct, hideCard, show, setShow} = useDeleteProduct(product._id);
 	return (
-		<Card>
-			<Button
-				variant="secondary"
-				className="position-absolute"
-				style={{
-					top: "10px",
-					left: "10px"
-				}}
-			>
-				<i className="fa-solid fa-pen-to-square"></i>
-			</Button>
-
-			<Button
-				variant="danger"
-				className="position-absolute"
-				style={{
-					top: "10px",
-					right: "10px"
-				}}
-				onClick={handleDeleteProduct}
-			>
-				<i className="fa-solid fa-trash"></i>
-			</Button>
-
-			<Link to={productDetailsRoute.replace(":id",product._id)} className="text-decoration-none text-dark">
-				<Card.Img
+		<>
+		<Col
+			xl={3}
+			md={4}
+			sm={6}
+			xs={12}
+			key={"admin-product-" + (index + 1)}
+			className={`mb-4 ${hideCard && "d-none"}`}
+		>
+			<Card>
+				<Button
+					variant="secondary"
+					className="position-absolute"
 					style={{
-						height: "200px",
-						objectFit: "contain"
+						top: "10px",
+						left: "10px"
 					}}
-					variant="top" src={product.imageCover} />
-				<Card.Body className="d-flex flex-column justify-content-between" style={{zIndex: 2}}>
-					<Card.Title>{product.title}</Card.Title>
-					<Card.Text className={"text-truncate"}>{product.description}</Card.Text>
-					<section className="d-flex justify-content-between align-items-center">
-						<section className="text-end">
-							<i className="fa-solid fa-star me-1 text-warning"></i>
-							{product.ratingsAverage}
+				>
+					<i className="fa-solid fa-pen-to-square"></i>
+				</Button>
+
+				<Button
+					variant="danger"
+					className="position-absolute"
+					style={{
+						top: "10px",
+						right: "10px"
+					}}
+					onClick={() => setShow(true)}
+				>
+					<i className="fa-solid fa-trash"></i>
+				</Button>
+
+				<Link to={productDetailsRoute.replace(":id",product._id)} className="text-decoration-none text-dark">
+					<Card.Img
+						style={{
+							height: "200px",
+							objectFit: "contain"
+						}}
+						variant="top" src={product.imageCover} />
+					<Card.Body className="d-flex flex-column justify-content-between" style={{zIndex: 2}}>
+						<Card.Title>{product.title}</Card.Title>
+						<Card.Text className={"text-truncate"}>{product.description}</Card.Text>
+						<section className="d-flex justify-content-between align-items-center">
+							<section className="text-end">
+								<i className="fa-solid fa-star me-1 text-warning"></i>
+								{product.ratingsAverage}
+							</section>
+							<section className="h5 fw-light mb-0">
+								{
+									product.discountedPrice ?
+										<>
+											<del className={"me-2 text-danger"}>{product.price}</del>
+											{product.discountedPrice}
+										</>
+										: product.price
+								}
+							</section>
 						</section>
-						<section className="h5 fw-light mb-0">
-							{
-								product.discountedPrice ?
-									<>
-										<del className={"me-2 text-danger"}>{product.price}</del>
-										{product.discountedPrice}
-									</>
-									: product.price
-							}
-						</section>
-					</section>
-				</Card.Body>
-			</Link>
-		</Card>
+					</Card.Body>
+				</Link>
+			</Card>
+		</Col>
+			<Modal show={show} onHide={() => setShow(false)}>
+				<Modal.Header closeButton>
+					<Modal.Title>Delete Product</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>are you sure Product will be deleted forever?</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={() => setShow(false)}>
+						Close
+					</Button>
+					<Button variant="danger" onClick={handleDeleteProduct}>
+						Delete
+					</Button>
+				</Modal.Footer>
+			</Modal>
+		</>
 	);
 }
 

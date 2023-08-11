@@ -109,7 +109,7 @@ export const createProduct = (params) => reduxApi("post", "/products", params
  * @param   {Object} params.config.headers - Headers of request
  * @return  {(function(*): Promise<void>)|*}
  */
-export const deleteProduct = (id,params) => reduxApi("delete", `/products/${id}`, params,
+export const deleteProduct = (id, params) => reduxApi("delete", `/products/${id}`, params,
     (dispatch, payload) => {
     dispatch({
         type: DELETE_PRODUCT,
