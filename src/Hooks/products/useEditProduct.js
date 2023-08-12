@@ -270,28 +270,8 @@ export default function useEditProduct() {
     }, [category]);
 
     useEffect(() => {
-        if(!loading && editProductStatus === 201) {
-            setValidated(false);
-            setTitle("");
-            setDescription("");
-            setQuantity(0);
-            setPrice(0);
-            setDiscountedPrice(0);
-            setCategory("");
-            setSelectedSubCategories([]);
-            setBrand("");
-            setSelectedColors([]);
-            setImage([]);
-            setImages([])
-            setUploadImages([]);
-            setUploadCoverImage([]);
-        }
-        // eslint-disable-next-line
-    },[loading]);
-
-    useEffect(() => {
-        if(editProductStatus === 201)
-            notify("Product created successfully", "success");
+        if(editProductStatus === 200)
+            notify("Product Updated successfully", "success");
         else if (error) {
             setErrorMessage(error.message);
         }
@@ -340,10 +320,6 @@ export default function useEditProduct() {
         }
         // eslint-disable-next-line
     }, [product]);
-    console.log("images", images);
-    console.log("uploadImages", uploadImages);
-    console.log("image", image);
-    console.log("uploadCoverImage", uploadCoverImage);
 
     useEffect(() => {
         if(images.length > 0) setUploadImages(images.map((image,index) => base64ToFile(image.data_url, `image-${index}`)));
@@ -351,6 +327,7 @@ export default function useEditProduct() {
     }, [images]);
 
     useEffect(() => {
+        if(image && typeof image[0] === "string" && image[0] === AddImage) return setUploadCoverImage([]);
         if(image && typeof image[0] === "string") setUploadCoverImage([base64ToFile(image[0], "imageCover")]);
         // eslint-disable-next-line
     }, [image]);

@@ -1,5 +1,6 @@
 import AddImage from "../assets/images/add-image.png";
 import useNotify from "./useNotify";
+import {useFileToBase64} from "./useFileToBase64";
 
 /**
  * @desc    This hook is used to upload images and handle them (change, drop, drag over, click, delete, close)
@@ -13,12 +14,14 @@ export default function useUploadImage(images, setImages, uploadImages, setUploa
 
     const notify = useNotify();
 
+    const fileToBase64 = useFileToBase64();
+
     /**
      * @desc    This function is used to handle images change
      * @param   {Object} e - Event object
      * @return  {*|void}
      */
-    const handleImagesChange = (e) => {
+    const handleImagesChange = async (e) => {
         if (!e.target.files) return;
 
         for(let i = 0; i < e.target.files.length; i++) {
@@ -28,7 +31,7 @@ export default function useUploadImage(images, setImages, uploadImages, setUploa
             }
         }
 
-        setImages([URL.createObjectURL(e.target.files[0])])
+        setImages([await fileToBase64(e.target.files[0])]);
         setUploadImages([e.target.files[0]]);
 
     }
