@@ -8,7 +8,7 @@ export default function AdminProducts() {
 	const { loading, products, numberOfPages, handlePageChange } = useGetProducts();
 	return (
 		<>
-			<Row className={`"gap-3 gap-sm-0 ${loading ? "justify-content-center align-items-center" : ""} min-height-100vh"`}>
+			<Row className={`"gap-3 gap-sm-0 ${loading ? "justify-content-center align-items-center" : ""} min-height-100vh`}>
 				{
 					!loading ?
 					products.map((product,index) => (

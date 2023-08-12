@@ -31,27 +31,23 @@ export default function UploadImage({circle = false, image, setImage, uploadImag
 				onDrop={handleImagesDrop}
 				role={"button"}
 			>
-				{image.map((image,index) => {
-					return (
-						<section key={id + index} className="d-flex flex-column gap-2">
-							<img
-								src={image}
-								alt={`uploaded ${index}`}
-								className={`img-fluid ${circle ? "rounded-circle" : "rounded-3"}"}`}
-								style={{width: "200px", height: "200px", objectFit: "cover"}}
-								onClick={handleImageClick}
-							/>
-							{image !== AddImage ?
-								<Button
-									variant={"danger"}
-									onClick={(e) => handleDeleteImage(e)}
-									style={{zIndex: 2}}
-								>
-									Delete
-								</Button> : null}
-						</section>
-					)
-				})}
+				<section className="d-flex flex-column gap-2">
+					<img
+						src={image}
+						alt={`product-cover`}
+						className={`img-fluid ${circle ? "rounded-circle" : "rounded-3"}"}`}
+						style={{width: "200px", height: "200px", objectFit: "cover"}}
+						onClick={handleImageClick}
+					/>
+					{image[0] !== AddImage ?
+						<Button
+							variant={"danger"}
+							onClick={(e) => handleDeleteImage(e)}
+							style={{zIndex: 2}}
+						>
+							Delete
+						</Button> : null}
+				</section>
 			</label>
 		</>
 	)

@@ -7,12 +7,15 @@ import {getProductById, updateProduct} from "../../Redux/Actions/productActions"
 import useNotify from "../useNotify";
 import {useParams} from "react-router-dom";
 import AddImage from "../../assets/images/add-image.png";
+import {useBase64ToFile} from "../useBase64ToFile";
 
 export default function useEditProduct() {
 
     const {id} = useParams();
 
     const dispatch = useDispatch();
+
+    const base64ToFile = useBase64ToFile();
 
     const product = useSelector(state => state.productReducer.product);
 
@@ -303,15 +306,14 @@ export default function useEditProduct() {
             });
         // eslint-disable-next-line
     }, [errorMessage]);
-
     useEffect(() => {
         if(product && product._id === id) {
-            setUploadCoverImage([product.imageCover]);
-            setImage([product.imageCover])
 
-            // TODO: display multiple images from the server
-            setUploadImages(product.images);
+            const imageCover = base64ToFile(product.imageCover, "imageCover");
+            setUploadCoverImage([imageCover]);
+            setImage([product.imageCover]);
             setImages(product.images);
+            setUploadImages(images.map((image,index) => base64ToFile(image, `image-${index}`)));
 
             setTitle(product.title);
             setDescription(product.description);

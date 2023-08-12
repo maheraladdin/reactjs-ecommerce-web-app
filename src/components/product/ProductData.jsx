@@ -7,7 +7,7 @@ export function ProductData() {
 	const product = useSelector(state => state.productReducer.product)
 	return (
 		<Form className="d-flex flex-column gap-2 bg-light p-5 rounded-5 h-100">
-			<Form.Label>Category: {product && product.category && product.category.name} </Form.Label>
+			<Form.Label>{product && product.category && product.category.name}:</Form.Label>
 			<Form.Text>{product && product.title}</Form.Text>
 			<Form.Label><i className="fa-solid fa-star text-warning"></i> {product && product.ratingsAverage} (quantity: {product.ratingsQuantity})</Form.Label>
 			{product && product.brand && product.brand.name && <Form.Text>brand: <span className="h4 text-dark">{product.brand.name}</span></Form.Text>}
