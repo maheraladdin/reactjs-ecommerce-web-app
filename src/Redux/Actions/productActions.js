@@ -3,7 +3,7 @@ import {
     CREATE_PRODUCT,
     GET_MOST_USED_PRODUCTS,
     GET_NEWEST_PRODUCTS,
-    GET_PRODUCT_BY_ID, DELETE_PRODUCT
+    GET_PRODUCT_BY_ID, DELETE_PRODUCT, UPDATE_PRODUCT
 } from "../Types/productTypes";
 import reduxApi from "../logic/reduxApi";
 
@@ -112,7 +112,7 @@ export const createProduct = (params) => reduxApi("post", "/products", params
 export const updateProduct = (id, params) => reduxApi("put", `/products/${id}`, params,
     (dispatch, payload) => {
     dispatch({
-        type: CREATE_PRODUCT,
+        type: UPDATE_PRODUCT,
         payload: {
             product: payload.data.document,
             status: payload.status,

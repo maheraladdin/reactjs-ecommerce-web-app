@@ -169,7 +169,7 @@ export function AdminEditProduct() {
 			</Form>
 			<section className="d-flex justify-content-end">
 				<Button onClick={handleEditProduct} variant="outline-primary">
-					{loading ? <Spinner className={"me-2"} size={"sm"} animation="border" variant="success" /> : ""}
+					{loading ? <Spinner className={"me-2"} size={"sm"} animation="border" variant="primary" /> : ""}
 					Update Product
 				</Button>
 			</section>

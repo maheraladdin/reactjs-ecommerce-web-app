@@ -306,14 +306,17 @@ export default function useEditProduct() {
             });
         // eslint-disable-next-line
     }, [errorMessage]);
+
     useEffect(() => {
         if(product && product._id === id) {
 
-            const imageCover = base64ToFile(product.imageCover, "imageCover");
-            setUploadCoverImage([imageCover]);
             setImage([product.imageCover]);
-            setImages(product.images);
-            setUploadImages(images.map((image,index) => base64ToFile(image, `image-${index}`)));
+            setImages(product.images.map(image => {
+                return {
+                    data_url: image,
+                }
+            }));
+
 
             setTitle(product.title);
             setDescription(product.description);
@@ -337,6 +340,22 @@ export default function useEditProduct() {
         }
         // eslint-disable-next-line
     }, [product]);
+    console.log("images", images);
+    console.log("uploadImages", uploadImages);
+    console.log("image", image);
+    console.log("uploadCoverImage", uploadCoverImage);
+
+    useEffect(() => {
+        if(images.length > 0) setUploadImages(images.map((image,index) => base64ToFile(image.data_url, `image-${index}`)));
+        // eslint-disable-next-line
+    }, [images]);
+
+    useEffect(() => {
+        if(image && typeof image[0] === "string") setUploadCoverImage([base64ToFile(image[0], "imageCover")]);
+        // eslint-disable-next-line
+    }, [image]);
+
+
 
 
 

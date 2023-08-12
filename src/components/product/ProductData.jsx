@@ -2,6 +2,7 @@ import Form from "react-bootstrap/Form";
 import {Badge} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useSelector} from "react-redux";
+import {ProductLoveButton} from "./ProductLoveButton";
 
 export function ProductData() {
 	const product = useSelector(state => state.productReducer.product)
@@ -46,7 +47,7 @@ export function ProductData() {
 				}
 			</Form.Group>
 			<Form.Group className="d-flex gap-3">
-				<Button variant="outline-danger"><i className="fa-solid fa-heart"></i></Button>
+				<ProductLoveButton absolute={false}/>
 				<Button variant="outline-dark"><i className="fa-solid fa-cart-plus"></i></Button>
 			</Form.Group>
 		</Form>
