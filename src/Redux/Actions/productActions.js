@@ -12,11 +12,11 @@ import reduxApi from "../logic/reduxApi";
  * Get products from API
  * @param {number} page - Page number
  * @param {number} limit - Limit of products
- * @param {string} sort - Sort of products
+ * @param {string} queryString - queryString of products
  * @return {(function(*): Promise<void>)|*}
  */
-export const getProducts = (page = 1,limit = 12 ,sort = "-createdAt") => reduxApi("get",
-    `/products?page=${page}&limit=${limit}&sort=${sort}`,
+export const getProducts = (page = 1,limit = 12 ,queryString = "sort=-createdAt") => reduxApi("get",
+    `/products?page=${page}&limit=${limit}&${queryString}`,
     undefined,
     (dispatch, payload) => {
         dispatch({

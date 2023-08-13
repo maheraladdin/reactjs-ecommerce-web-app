@@ -1,9 +1,14 @@
 import {Dropdown} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {useSelector} from "react-redux";
+import useSortProducts from "../../Hooks/products/useSortProducts";
 
-export default function ProductsSortAndLength() {
-	const numberOfDocuments = useSelector(state => state.productReducer.numberOfDocuments);
+export default function ProductsSortAndLength({setQueryString}) {
+	const {
+		numberOfDocuments,
+		sortHandler,
+		asc,
+		ascHandler,
+	} = useSortProducts(setQueryString);
 	return (
 		<section className="d-flex justify-content-between align-items-center py-3 flex-wrap">
 			<section className="h4">
@@ -16,13 +21,13 @@ export default function ProductsSortAndLength() {
 					</Dropdown.Toggle>
 
 					<Dropdown.Menu>
-						<Dropdown.Item>sold</Dropdown.Item>
-						<Dropdown.Item>rating</Dropdown.Item>
-						<Dropdown.Item>price</Dropdown.Item>
+						<Dropdown.Item onClick={sortHandler}>sold</Dropdown.Item>
+						<Dropdown.Item onClick={sortHandler}>rating</Dropdown.Item>
+						<Dropdown.Item onClick={sortHandler}>price</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
-				<Button className="py-0 px-1">
-					<i className="fa-solid fa-sort-up"></i>
+				<Button onClick={ascHandler} className="py-0 px-1">
+					<i className={`fa-solid fa-sort-${asc ? "down" : "up"}`}></i>
 				</Button>
 			</section>
 		</section>
