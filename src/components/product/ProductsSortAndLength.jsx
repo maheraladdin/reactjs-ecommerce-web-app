@@ -27,7 +27,7 @@ export default function ProductsSortAndLength({setQueryString}) {
 					</Dropdown.Menu>
 				</Dropdown>
 				<Button onClick={ascHandler} className="py-0 px-1">
-					<i className={`fa-solid fa-sort-${asc ? "down" : "up"}`}></i>
+					<i className={`fa-solid fa-sort-${asc ? "up" : "down"}`}></i>
 				</Button>
 			</section>
 		</section>
