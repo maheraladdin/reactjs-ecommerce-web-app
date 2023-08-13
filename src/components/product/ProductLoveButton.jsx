@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 export function ProductLoveButton({absolute = true}) {
 	return (
 		<Button
-			variant="danger"
+			variant="secondary"
 			className={`${absolute && "position-absolute"}`}
 			style={absolute ? {
 				top: "10px",

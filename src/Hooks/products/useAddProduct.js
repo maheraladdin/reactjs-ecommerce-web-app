@@ -235,6 +235,7 @@ export default function useAddProduct() {
                 }
             }
         }));
+        if(createProductStatus === 201) notify("Product created successfully", "success");
         setLoading(false);
     }
 
@@ -277,9 +278,7 @@ export default function useAddProduct() {
     },[loading]);
 
     useEffect(() => {
-        if(createProductStatus === 201)
-            notify("Product created successfully", "success");
-        else if (error) {
+        if (error) {
             setErrorMessage(error.message);
         }
         // eslint-disable-next-line
