@@ -243,6 +243,7 @@ export default function useEditProduct() {
                 }
             }
         }));
+        if(editProductStatus === 200) notify("Product Updated successfully", "success");
         setLoading(false);
     }
 
@@ -270,9 +271,7 @@ export default function useEditProduct() {
     }, [category]);
 
     useEffect(() => {
-        if(editProductStatus === 200)
-            notify("Product Updated successfully", "success");
-        else if (error) {
+        if (error) {
             setErrorMessage(error.message);
         }
         // eslint-disable-next-line

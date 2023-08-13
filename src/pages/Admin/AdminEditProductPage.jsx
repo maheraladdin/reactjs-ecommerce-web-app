@@ -3,7 +3,7 @@ import {AdminEditProduct} from "../../components/Admin/AdminEditProduct";
 
 export function AdminEditProductPage() {
 	return (
-		<AdminTemplate>
+		<AdminTemplate title={"Update Product"}>
 			<AdminEditProduct />
 		</AdminTemplate>
 	)
