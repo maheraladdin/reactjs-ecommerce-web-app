@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Pagination from "../../components/utility/Pagination";
 import {Spinner} from "react-bootstrap";
 import useGetCategoriesPage from "../../Hooks/categories/useGetCategoriesPage";
-import PageTemplate from "../../components/pageTemplate";
+import PageTemplate from "../../components/utility/pageTemplate";
 export default function CategoriesPage() {
 
 	const {loading, numOfPages, handlePageChange} = useGetCategoriesPage();

@@ -2,7 +2,7 @@ import {Badge, Col, Row} from "react-bootstrap";
 import LoggedUserSidebar from "../utility/LoggedUserSidebar";
 import Container from "react-bootstrap/Container";
 import {adminSideBarContent} from "../../constants/adminSidebarContent";
-import PageTemplate from "../pageTemplate";
+import PageTemplate from "../utility/pageTemplate";
 
 export default function AdminTemplate({title, children}) {
 	return (

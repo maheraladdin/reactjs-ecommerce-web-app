@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import {Col, Row} from "react-bootstrap";
 import CartItem from "../../components/Cart/CartItem";
 import {CartPay} from "../../components/Cart/CartPay";
-import PageTemplate from "../../components/pageTemplate";
+import PageTemplate from "../../components/utility/pageTemplate";
 
 export default function CartPage() {
 	return (

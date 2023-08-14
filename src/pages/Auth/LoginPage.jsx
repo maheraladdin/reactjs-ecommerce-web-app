@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Logo from "../../assets/images/logo.png";
 import {adminProductsRoute, signupRoute, userOrdersRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
-import PageTemplate from "../../components/pageTemplate";
+import PageTemplate from "../../components/utility/pageTemplate";
 
 export default function LoginPage() {
 	return (

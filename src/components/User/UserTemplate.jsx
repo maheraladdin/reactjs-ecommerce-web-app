@@ -3,7 +3,7 @@ import {Badge, Col, Row} from "react-bootstrap";
 import LoggedUserSidebar from "../utility/LoggedUserSidebar";
 import Pagination from "../utility/Pagination";
 import {userSidebarContent} from "../../constants/userSidebarContent";
-import PageTemplate from "../pageTemplate";
+import PageTemplate from "../utility/pageTemplate";
 
 export function UserTemplate({title, children, pagination = true}) {
 	return (

@@ -1,5 +1,5 @@
-import Header from "./utility/header";
-import Footer from "./utility/Footer";
+import Header from "./header";
+import Footer from "./Footer";
 
 export default function PageTemplate({children}) {
     return (

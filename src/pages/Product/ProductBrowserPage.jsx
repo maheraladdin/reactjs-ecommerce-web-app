@@ -4,7 +4,7 @@ import SidebarFilter from "../../components/utility/SidebarFilter";
 import ProductsViewer from "../../components/product/ProductsViewer";
 import {Col, Row} from "react-bootstrap";
 import useFilterProducts from "../../Hooks/products/useFilterProducts";
-import PageTemplate from "../../components/pageTemplate";
+import PageTemplate from "../../components/utility/pageTemplate";
 
 export default function ProductBrowserPage() {
 	const {setQueryString} = useFilterProducts();

@@ -4,7 +4,7 @@ import RateContainer from "../../components/Rate/RateContainer";
 import BestProductViewer from "../../components/utility/BestProductViewer";
 import useGetProductByID from "../../Hooks/products/useGetProductByID";
 import useGetProductsHomePage from "../../Hooks/products/useGetProductsHomePage";
-import PageTemplate from "../../components/pageTemplate";
+import PageTemplate from "../../components/utility/pageTemplate";
 
 export default function ProductDetailsPage() {
 	useGetProductByID();

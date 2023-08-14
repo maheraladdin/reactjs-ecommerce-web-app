@@ -6,16 +6,18 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import OffCanvas from 'react-bootstrap/Offcanvas';
 import Logo from "../../assets/images/logo.png";
-import {cartRoute, loginRoute, signupRoute} from "../../constants/routes";
+import {cartRoute, loginRoute, productsRoute, signupRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
+import useHeader from "../../Hooks/useHeader";
 
 export default function Header() {
 
-    const expand = 'lg';
-
-    const setLocalStorage = (e, storageKey) => {
-        localStorage.setItem(storageKey, e.target.textContent);
-    }
+    const {
+        expand,
+        setLocalStorage,
+        keyWord,
+        handleSearch
+    } = useHeader();
 
     return (
         <>
@@ -76,8 +78,12 @@ export default function Header() {
                                     placeholder="Search"
                                     className="me-2"
                                     aria-label="Search"
+                                    value={keyWord}
+                                    onChange={handleSearch}
                                 />
-                                <Button variant="outline-success">Search</Button>
+                                <Link to={productsRoute} className="text-decoration-none">
+                                    <Button variant="outline-success">Search</Button>
+                                </Link>
                             </Form>
                         </OffCanvas.Body>
                     </Navbar.Offcanvas>

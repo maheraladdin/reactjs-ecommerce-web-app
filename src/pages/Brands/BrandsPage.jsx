@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Pagination from "../../components/utility/Pagination";
 import BrandsBrowser from "../../components/brands/BrandsBrowser";
 import useGetBrandsPage from "../../Hooks/brands/useGetBrandsPage";
-import PageTemplate from "../../components/pageTemplate";
+import PageTemplate from "../../components/utility/pageTemplate";
 
 export default function BrandsPage() {
 	const {loading, numOfPages, handlePageChange} = useGetBrandsPage();
