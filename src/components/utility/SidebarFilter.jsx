@@ -1,21 +1,49 @@
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
+import useProductSidebarFilter from "../../Hooks/products/useProductSidebarFilter";
+import Button from "react-bootstrap/Button";
+import {Spinner} from "react-bootstrap";
 
 export default function SidebarFilter() {
-	const type = "checkbox";
+	const {
+		type,
+		categories,
+		subcategories,
+		brands,
+		handleSeeMoreCategories,
+		handleSeeMoreSubcategories,
+		handleSeeMoreBrands,
+		loadingCategories,
+		loadingSubcategories,
+		loadingBrands
+	} = useProductSidebarFilter()
 	return (
 		<Nav className="flex-column" style={{
 			minWidth: "200px",
 		}}>
 			{/* Categories Filter */}
-			<Nav.Item className="h5 mb-2">Category</Nav.Item>
-			<Nav variant="pills" className="flex-column">
-				<Nav.Link className="w-fit-content mb-2" eventKey={`All`}>All</Nav.Link>
+			<Nav.Item className="h5 mt-3 mb-2">Category</Nav.Item>
+			<Form>
+				<Form.Check // prettier-ignore
+					type={type}
+					id={`all-categories-${type}`}
+					label="All"
+				/>
 				{
-					Array(3).fill().map((e,i) => <Nav.Link key={"link-key-" + i + 1} className="w-fit-content mb-2" eventKey={`link-${i + 1}`}>Cat {i + 1}</Nav.Link>)
+					categories.map((category,index) => {
+						return (
+							<Form.Check
+								key={`category-${index + 1}`}
+								type={type}
+								label={category.name}
+								id={`category-${type}-${index + 1}`}
+							/>
+						)
+					})
 				}
-				<Nav.Link className="w-fit-content mb-2" eventKey={`more`}>More</Nav.Link>
-			</Nav>
+				<Button onClick={handleSeeMoreCategories} variant="link" className="p-0">See More</Button>
+				{loadingCategories && <Spinner size={"sm"} className="mt-2" animation="border" variant="primary" />}
+			</Form>
 
 			{/* Sub Categories Filter */}
 			<Nav.Item className="h5 mt-3 mb-2">Sub Category</Nav.Item>
@@ -26,17 +54,19 @@ export default function SidebarFilter() {
 					label="All"
 				/>
 				{
-					Array(5).fill().map((e,i) => {
+					subcategories.map((subcategory, index) => {
 						return (
 							<Form.Check
-								key={`sub-category-${i + 1}`}
+								key={`sub-category-${index + 1}`}
 								type={type}
-								label={`sub category ${i + 1}`}
-								id={`sub-category-${type}-${i + 1}`}
+								label={subcategory.name}
+								id={`sub-category-${type}-${index + 1}`}
 							/>
 						)
 					})
 				}
+				<Button onClick={handleSeeMoreSubcategories} variant="link" className="p-0">See More</Button>
+				{loadingSubcategories && <Spinner size={"sm"} className="mt-2" animation="border" variant="primary" />}
 			</Form>
 
 			{/* Brands filter */}
@@ -48,17 +78,19 @@ export default function SidebarFilter() {
 					label="All"
 				/>
 				{
-					Array(3).fill().map((e,i) => {
+					brands.map((brand,index) => {
 						return (
 							<Form.Check
-								key={`brand-${i + 1}`}
+								key={`brand-${index + 1}`}
 								type={type}
-								label={`brand ${i + 1}`}
-								id={`brand-${type}-${i + 1}`}
+								label={brand.name}
+								id={`brand-${type}-${index + 1}`}
 							/>
 						)
 					})
 				}
+				<Button onClick={handleSeeMoreBrands} variant="link" className="p-0">See More</Button>
+				{loadingBrands && <Spinner size={"sm"} className="mt-2" animation="border" variant="primary" />}
 			</Form>
 
 			{/* Price From To Filter */}
