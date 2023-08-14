@@ -4,9 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import OffCanvas from 'react-bootstrap/Offcanvas';
 import Logo from "../../assets/images/logo.png";
 import {cartRoute, loginRoute, signupRoute} from "../../constants/routes";
+import {Link} from "react-router-dom";
 
 export default function Header() {
 
@@ -21,13 +22,13 @@ export default function Header() {
             <Navbar key={expand} expand={expand} className="bg-body-tertiary" style={{height: "70px"}}>
                 <Container fluid>
                     <Navbar.Brand role={"button"}>
-                        <a href="/" target="_self">
+                        <Link to={"/"}>
                             <img
                                 src={Logo}
                                 alt="E-shop"
                                 height="50"
                             />
-                        </a>
+                        </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                     <Navbar.Offcanvas
@@ -35,21 +36,21 @@ export default function Header() {
                         aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                         placement="end"
                     >
-                        <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                        <OffCanvas.Header closeButton>
+                            <OffCanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
                                 Options
-                            </Offcanvas.Title>
-                        </Offcanvas.Header>
-                        <Offcanvas.Body>
+                            </OffCanvas.Title>
+                        </OffCanvas.Header>
+                        <OffCanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3 mb-3 mb-lg-0">
                                 {/* profile dropdown */}
                                 <NavDropdown
                                     title="profile"
                                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                                 >
-                                    <NavDropdown.Item href={loginRoute} target="_self" >login</NavDropdown.Item>
-                                    <NavDropdown.Item href={signupRoute} target="_self" >sign up</NavDropdown.Item>
-                                    <NavDropdown.Item href={cartRoute} target="_self">cart</NavDropdown.Item>
+                                    <Link to={loginRoute} className="text-decoration-none text-dark w-100 dropdown-item">login</Link>
+                                    <Link to={signupRoute} className="text-decoration-none text-dark w-100 dropdown-item">sign up</Link>
+                                    <Link to={cartRoute} className="text-decoration-none text-dark w-100 dropdown-item">cart</Link>
                                 </NavDropdown>
 
                                 <NavDropdown
@@ -78,7 +79,7 @@ export default function Header() {
                                 />
                                 <Button variant="outline-success">Search</Button>
                             </Form>
-                        </Offcanvas.Body>
+                        </OffCanvas.Body>
                     </Navbar.Offcanvas>
                 </Container>
             </Navbar>

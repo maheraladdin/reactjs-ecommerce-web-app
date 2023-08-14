@@ -4,11 +4,12 @@ import SidebarFilter from "../../components/utility/SidebarFilter";
 import ProductsViewer from "../../components/product/ProductsViewer";
 import {Col, Row} from "react-bootstrap";
 import useFilterProducts from "../../Hooks/products/useFilterProducts";
+import PageTemplate from "../../components/pageTemplate";
 
-export default function ProductBrowser() {
+export default function ProductBrowserPage() {
 	const {setQueryString} = useFilterProducts();
 	return (
-		<section>
+		<PageTemplate>
 			<Container className="min-height-100vh">
 				<ProductsSortAndLength setQueryString={setQueryString}/>
 				<Row>
@@ -28,6 +29,6 @@ export default function ProductBrowser() {
 					</Col>
 				</Row>
 			</Container>
-		</section>
+		</PageTemplate>
 	)
 }

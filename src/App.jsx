@@ -1,7 +1,5 @@
 import React from 'react'
-import Header from "./components/utility/header";
 import HomePage from "./pages/Home/HomePage";
-import Footer from "./components/utility/Footer";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import LoginPage from "./pages/Auth/LoginPage";
 import {
@@ -31,7 +29,7 @@ import {
 import SignupPage from "./pages/Auth/SignupPage";
 import CategoriesPage from "./pages/Category/CategoriesPage";
 import BrandsPage from "./pages/Brands/BrandsPage";
-import ProductBrowser from "./pages/Product/ProductBrowser"
+import ProductBrowserPage from "./pages/Product/ProductBrowserPage"
 import ProductDetailsPage from "./pages/Product/ProductDetailsPage";
 import CartPage from "./pages/Cart/CartPage";
 import {AdminProductsManagementPage} from "./pages/Admin/AdminProductsManagementPage";
@@ -53,7 +51,6 @@ import {AdminEditProductPage} from "./pages/Admin/AdminEditProductPage";
 export default function App() {
     return (
         <>
-            <Header />
             <BrowserRouter>
                 <Routes>
                     <Route index element={<HomePage />} />
@@ -61,7 +58,7 @@ export default function App() {
                     <Route path={signupRoute} element={<SignupPage />} />
                     <Route path={categoriesRoute} element={<CategoriesPage />} />
                     <Route path={brandsRoute} element={<BrandsPage />} />
-                    <Route path={productsRoute} element={<ProductBrowser />} />
+                    <Route path={productsRoute} element={<ProductBrowserPage />} />
                     <Route path={productDetailsRoute} element={<ProductDetailsPage />} />
                     <Route path={cartRoute} element={<CartPage />} />
                     <Route path={adminProductsRoute} element={<AdminProductsManagementPage />} />
@@ -71,6 +68,7 @@ export default function App() {
                     <Route path={adminAddCategoryRoute} element={<AdminAddCategoryPage />} />
                     <Route path={adminAddSubcategoryRoute} element={<AdminAddSubcategoryPage />} />
                     <Route path={adminAddProductRoute} element={<AdminAddProductPage />} />
+                    <Route path={adminEditProductRoute} element={<AdminEditProductPage />}/>
                     <Route path={userOrdersRoute} element={<UserOrdersManagementPage />} />
                     <Route path={userWishlistRoute} element={<UserWishListPage />} />
                     <Route path={userAddressesRoute} element={<UserAddressesPage />} />
@@ -78,10 +76,8 @@ export default function App() {
                     <Route path={userAddressUpdateRoute} element={<UserAddressUpdatePage />} />
                     <Route path={userProfileRoute} element={<UserProfilePage />} />
                     <Route path={userUpdateProfileRoute} element={<UserUpdateProfilePage />} />
-                    <Route path={adminEditProductRoute} element={<AdminEditProductPage />}/>
                 </Routes>
             </BrowserRouter>
-            <Footer />
         </>
     )
 }

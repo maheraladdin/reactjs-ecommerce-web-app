@@ -2,11 +2,12 @@ import Container from "react-bootstrap/Container";
 import Pagination from "../../components/utility/Pagination";
 import BrandsBrowser from "../../components/brands/BrandsBrowser";
 import useGetBrandsPage from "../../Hooks/brands/useGetBrandsPage";
+import PageTemplate from "../../components/pageTemplate";
 
 export default function BrandsPage() {
 	const {loading, numOfPages, handlePageChange} = useGetBrandsPage();
 	return (
-		<>
+		<PageTemplate>
 			<Container className="d-flex flex-column justify-content-center" style={{minHeight: "100vh"}}>
 				<section className="h1 pb-4">Brands</section>
 				{
@@ -22,6 +23,6 @@ export default function BrandsPage() {
 					)
 				}
 			</Container>
-		</>
+		</PageTemplate>
 	)
 }
