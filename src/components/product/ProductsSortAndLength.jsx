@@ -2,13 +2,13 @@ import {Dropdown} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import useSortProducts from "../../Hooks/products/useSortProducts";
 
-export default function ProductsSortAndLength({setQueryString}) {
+export default function ProductsSortAndLength() {
 	const {
 		numberOfDocuments,
 		sortHandler,
 		asc,
 		ascHandler,
-	} = useSortProducts(setQueryString);
+	} = useSortProducts();
 	return (
 		<section className="d-flex justify-content-between align-items-center py-3 flex-wrap">
 			<section className="h4">

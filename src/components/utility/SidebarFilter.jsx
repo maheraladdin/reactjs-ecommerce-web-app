@@ -8,13 +8,10 @@ export default function SidebarFilter() {
 	const {
 		type,
 		categories,
-		subcategories,
 		brands,
 		handleSeeMoreCategories,
-		handleSeeMoreSubcategories,
 		handleSeeMoreBrands,
 		loadingCategories,
-		loadingSubcategories,
 		loadingBrands
 	} = useProductSidebarFilter()
 	return (
@@ -43,30 +40,6 @@ export default function SidebarFilter() {
 				}
 				<Button onClick={handleSeeMoreCategories} variant="link" className="p-0">See More</Button>
 				{loadingCategories && <Spinner size={"sm"} className="mt-2" animation="border" variant="primary" />}
-			</Form>
-
-			{/* Sub Categories Filter */}
-			<Nav.Item className="h5 mt-3 mb-2">Sub Category</Nav.Item>
-			<Form>
-				<Form.Check // prettier-ignore
-					type={type}
-					id={`all-sub-categories-${type}`}
-					label="All"
-				/>
-				{
-					subcategories.map((subcategory, index) => {
-						return (
-							<Form.Check
-								key={`sub-category-${index + 1}`}
-								type={type}
-								label={subcategory.name}
-								id={`sub-category-${type}-${index + 1}`}
-							/>
-						)
-					})
-				}
-				<Button onClick={handleSeeMoreSubcategories} variant="link" className="p-0">See More</Button>
-				{loadingSubcategories && <Spinner size={"sm"} className="mt-2" animation="border" variant="primary" />}
 			</Form>
 
 			{/* Brands filter */}

@@ -7,18 +7,18 @@ import useFilterProducts from "../../Hooks/products/useFilterProducts";
 import PageTemplate from "../../components/utility/pageTemplate";
 
 export default function ProductBrowserPage() {
-	const {setQueryString} = useFilterProducts();
+	useFilterProducts();
 	return (
 		<PageTemplate>
 			<Container className="min-height-100vh">
-				<ProductsSortAndLength setQueryString={setQueryString}/>
+				<ProductsSortAndLength />
 				<Row>
 					<Col
 						sm={12}
 						md={4}
 						lg={2}
 					>
-						<SidebarFilter setQueryString={setQueryString}/>
+						<SidebarFilter />
 					</Col>
 					<Col
 						sm={12}
