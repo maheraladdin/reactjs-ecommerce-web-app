@@ -1,4 +1,14 @@
-import {SET_SORT_BY, SET_KEYWORD, ADD_CATEGORY, REMOVE_CATEGORY, ADD_BRAND, REMOVE_BRAND, SET_LESSER_PRICE, SET_GREATER_PRICE} from "../Types/FilterTypes";
+import {
+    SET_SORT_BY,
+    SET_KEYWORD,
+    ADD_CATEGORY,
+    REMOVE_CATEGORY,
+    ADD_BRAND,
+    REMOVE_BRAND,
+    SET_LESSER_PRICE,
+    SET_GREATER_PRICE,
+    SET_QUERY_STRING
+} from "../Types/FilterTypes";
 
 const initialState = {
     sort: '',
@@ -53,6 +63,11 @@ export default function filterReducer(state = initialState, action) {
             return {
                 ...state,
                 greaterPrice: action.payload.greaterPrice,
+            }
+        case SET_QUERY_STRING:
+            return {
+                ...state,
+                queryString: action.payload.queryString,
             }
         default:
             return state;

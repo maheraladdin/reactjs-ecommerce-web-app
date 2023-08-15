@@ -14,16 +14,16 @@ export default function useGetProducts() {
     const products = useSelector(state => state.productReducer.products);
     const numberOfPages = useSelector(state => state.productReducer.numberOfPages);
     const dispatch = useDispatch();
-
+    const queryString = useSelector(state => state.filterReducer.queryString);
 
     useEffect(() => {
         (async () => {
             setLoading(true);
-            await dispatch(getProducts(1, numberOfProducts));
+            await dispatch(getProducts(1, numberOfProducts, queryString));
             setLoading(false);
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [queryString])
 
     useEffect(() => {
         if (!loading) {
@@ -36,7 +36,7 @@ export default function useGetProducts() {
      * @param page
      * @return {any}
      */
-    const handlePageChange = (page) => dispatch(getProducts(page.selected + 1,numberOfProducts));
+    const handlePageChange = (page) => dispatch(getProducts(page.selected + 1,numberOfProducts, queryString));
 
     return { loading, products, numberOfPages, handlePageChange }
 }

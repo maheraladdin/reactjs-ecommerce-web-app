@@ -16,7 +16,9 @@ export default function Header() {
         expand,
         setLocalStorage,
         keyWord,
-        handleSearch
+        handleSearch,
+        searchTextFieldRef,
+        onClickSearch
     } = useHeader();
 
     return (
@@ -80,9 +82,10 @@ export default function Header() {
                                     aria-label="Search"
                                     value={keyWord}
                                     onChange={handleSearch}
+                                    ref={searchTextFieldRef}
                                 />
                                 <Link to={productsRoute} className="text-decoration-none">
-                                    <Button variant="outline-success">Search</Button>
+                                    <Button onClick={onClickSearch} variant="outline-success">Search</Button>
                                 </Link>
                             </Form>
                         </OffCanvas.Body>

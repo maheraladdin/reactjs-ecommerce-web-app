@@ -1,7 +1,8 @@
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 export default function useSortProducts() {
-    const numberOfDocuments = useSelector(state => state.productReducer.numberOfDocuments);
+    const numberOfDocuments = useSelector(state => state.productReducer.numberOfDocuments)
+
 
     const [asc, setAsc] = useState(true);
     const [sort, setSort] = useState("");
@@ -24,7 +25,6 @@ export default function useSortProducts() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sort,asc]);
-
 
     return {
         numberOfDocuments,

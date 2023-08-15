@@ -10,5 +10,10 @@ export default function useCreateQueryString() {
     for(const brand of state.brands) {
         queryBrands += `&brand=${brand}`;
     }
-    return `sort=${state.sort}&keyword=${state.keyword}${queryCategories}${queryBrands}&price[gt]=${state.lesserPrice}&price[ls]=${state.greaterPrice}`;
+    const sortQuery = state.sort ? `sort=${state.asc ? '-': ''}${state.sort}` : '';
+    const keywordQuery = state.keyword ? `&keyword=${state.keyword}` : '';
+    const priceGreaterThanQuery = state.lesserPrice ? `&price[gt]=${state.lesserPrice}` : '';
+    const priceLessThanQuery = state.greaterPrice ? `&price[lt]=${state.greaterPrice}` : '';
+
+    return () =>  `${sortQuery}${keywordQuery}${queryCategories}${queryBrands}${priceLessThanQuery}${priceGreaterThanQuery}`;
 }

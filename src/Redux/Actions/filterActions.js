@@ -1,4 +1,14 @@
-import {SET_SORT_BY, SET_KEYWORD, ADD_CATEGORY, REMOVE_CATEGORY, ADD_BRAND, REMOVE_BRAND, SET_LESSER_PRICE, SET_GREATER_PRICE} from "../Types/FilterTypes";
+import {
+    SET_SORT_BY,
+    SET_KEYWORD,
+    ADD_CATEGORY,
+    REMOVE_CATEGORY,
+    ADD_BRAND,
+    REMOVE_BRAND,
+    SET_LESSER_PRICE,
+    SET_GREATER_PRICE,
+    SET_QUERY_STRING
+} from "../Types/FilterTypes";
 
 export const setSortBy = (sort,asc) => ({
     type: SET_SORT_BY,
@@ -54,6 +64,13 @@ export const setGreaterPrice = (greaterPrice) => ({
     type: SET_GREATER_PRICE,
     payload: {
         greaterPrice,
+    }
+});
+
+export const setQueryString = (queryString) => ({
+    type: SET_QUERY_STRING,
+    payload: {
+        queryString,
     }
 });
 

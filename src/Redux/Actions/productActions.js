@@ -23,7 +23,7 @@ export const getProducts = (page = 1,limit = 12 ,queryString = "sort=-createdAt"
             type: GET_PRODUCTS,
             payload: {
                 products: payload.data.documents,
-                numberOfPages: payload.data.paginationResult.numberOfPages,
+                numberOfPages: payload.data.numberOfPages,
                 productRequestStatus: payload.status,
                 length: payload.data.length,
                 numberOfDocuments: payload.data.numberOfDocuments,
