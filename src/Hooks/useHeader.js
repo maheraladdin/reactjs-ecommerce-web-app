@@ -1,7 +1,6 @@
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {setQueryString, setKeyword} from "../Redux/Actions/filterActions";
-import useCreateQueryString from "./useCreateQueryString";
 
 export default function useHeader() {
     const expand = 'lg';
@@ -13,16 +12,13 @@ export default function useHeader() {
 
     const [keyWord, setKeyWord] = useState("");
 
-    const queryString = useCreateQueryString();
-
     const handleSearch = (e) => {
         setKeyWord(e.target.value);
     }
 
     const onClickSearch = async () => {
-        if(!keyWord) return;
-        dispatch(setKeyword(keyWord));
-        dispatch(setQueryString(queryString()));
+        await dispatch(setKeyword(keyWord));
+        await dispatch(setQueryString());
     }
 
 

@@ -25,7 +25,7 @@ export default function ProductsViewer() {
 					)) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
 				}
 			</Row>
-			{!loading && <Pagination pageCount={numberOfPages} handlePageChange={handlePageChange} />}
+			{!loading && numberOfPages  && <Pagination pageCount={numberOfPages} handlePageChange={handlePageChange} />}
 		</section>
 	)
 }

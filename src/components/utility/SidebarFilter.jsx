@@ -12,7 +12,10 @@ export default function SidebarFilter() {
 		handleSeeMoreCategories,
 		handleSeeMoreBrands,
 		loadingCategories,
-		loadingBrands
+		loadingBrands,
+		handlePriceGreaterThan,
+		handlePriceLessThan,
+		onClickPriceFilter
 	} = useProductSidebarFilter()
 	return (
 		<Nav className="flex-column" style={{
@@ -25,6 +28,7 @@ export default function SidebarFilter() {
 					type={type}
 					id={`all-categories-${type}`}
 					label="All"
+					checked={true}
 				/>
 				{
 					categories.map((category,index) => {
@@ -49,6 +53,7 @@ export default function SidebarFilter() {
 					type={type}
 					id={`all-brands-${type}`}
 					label="All"
+					checked={true}
 				/>
 				{
 					brands.map((brand,index) => {
@@ -71,12 +76,15 @@ export default function SidebarFilter() {
 			<Form className="ps-2">
 				<Form.Group className="mb-3" >
 					<Form.Label>From</Form.Label>
-					<Form.Control type="text" placeholder="0" />
+					<Form.Control onChange={handlePriceGreaterThan} type="number" placeholder="0" />
 				</Form.Group>
 				<Form.Group className="mb-3" >
 					<Form.Label>To</Form.Label>
-					<Form.Control type="text" placeholder="1000" />
+					<Form.Control onChange={handlePriceLessThan} type="number" placeholder="1000" />
 				</Form.Group>
+				<section className={"d-flex flex-row-reverse mb-5"}>
+					<Button onClick={onClickPriceFilter} variant="primary">Apply</Button>
+				</section>
 			</Form>
 		</Nav>
 	)

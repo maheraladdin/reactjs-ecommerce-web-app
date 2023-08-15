@@ -10,13 +10,15 @@ import {
     SET_QUERY_STRING
 } from "../Types/FilterTypes";
 
-export const setSortBy = (sort,asc) => ({
+export const setSortBy = (sort,asc) => {
+    console.log(sort,asc);
+    return({
     type: SET_SORT_BY,
     payload: {
-        sort: `${asc ? '-' : ''}${sort}`,
-        asc: true
+        sort,
+        asc,
     }
-});
+})};
 
 export const setKeyword = (keyword) => ({
     type: SET_KEYWORD,
@@ -67,10 +69,7 @@ export const setGreaterPrice = (greaterPrice) => ({
     }
 });
 
-export const setQueryString = (queryString) => ({
+export const setQueryString = () => ({
     type: SET_QUERY_STRING,
-    payload: {
-        queryString,
-    }
 });
 

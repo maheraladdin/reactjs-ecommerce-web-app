@@ -1,10 +1,13 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
+import {setQueryString, setSortBy} from "../../Redux/Actions/filterActions";
 export default function useSortProducts() {
     const numberOfDocuments = useSelector(state => state.productReducer.numberOfDocuments)
+    const ascFilter = useSelector(state => state.filterReducer.asc);
 
+    const dispatch = useDispatch();
 
-    const [asc, setAsc] = useState(true);
+    const [asc, setAsc] = useState(ascFilter);
     const [sort, setSort] = useState("");
 
     const sortHandler = (e) => {
@@ -21,7 +24,10 @@ export default function useSortProducts() {
 
     useEffect(() => {
         if(sort) {
-
+            (async () => {
+                await dispatch(setSortBy(sort, asc));
+                await dispatch(setQueryString());
+            })();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sort,asc]);

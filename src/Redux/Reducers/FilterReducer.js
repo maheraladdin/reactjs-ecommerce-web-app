@@ -9,6 +9,7 @@ import {
     SET_GREATER_PRICE,
     SET_QUERY_STRING
 } from "../Types/FilterTypes";
+import createQueryString from "../logic/createQueryString";
 
 const initialState = {
     sort: '',
@@ -67,7 +68,7 @@ export default function filterReducer(state = initialState, action) {
         case SET_QUERY_STRING:
             return {
                 ...state,
-                queryString: action.payload.queryString,
+                queryString: createQueryString(state),
             }
         default:
             return state;
