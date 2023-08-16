@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import {Spinner} from "react-bootstrap";
 
 export default function SidebarFilter() {
+
 	const {
 		type,
 		categories,
@@ -17,6 +18,7 @@ export default function SidebarFilter() {
 		handlePriceLessThan,
 		onClickPriceFilter
 	} = useProductSidebarFilter()
+
 	return (
 		<Nav className="flex-column" style={{
 			minWidth: "200px",
@@ -29,6 +31,8 @@ export default function SidebarFilter() {
 					id={`all-categories-${type}`}
 					label="All"
 					checked={true}
+					value={""}
+					role={"button"}
 				/>
 				{
 					categories.map((category,index) => {
@@ -38,6 +42,8 @@ export default function SidebarFilter() {
 								type={type}
 								label={category.name}
 								id={`category-${type}-${index + 1}`}
+								value={category._id}
+								role={"button"}
 							/>
 						)
 					})
@@ -54,6 +60,8 @@ export default function SidebarFilter() {
 					id={`all-brands-${type}`}
 					label="All"
 					checked={true}
+					value={""}
+					role={"button"}
 				/>
 				{
 					brands.map((brand,index) => {
@@ -63,6 +71,8 @@ export default function SidebarFilter() {
 								type={type}
 								label={brand.name}
 								id={`brand-${type}-${index + 1}`}
+								value={brand._id}
+								role={"button"}
 							/>
 						)
 					})

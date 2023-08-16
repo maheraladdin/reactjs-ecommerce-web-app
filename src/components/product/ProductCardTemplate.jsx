@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {productDetailsRoute} from "../../constants/routes";
 import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
 
 export function ProductCardTemplate({product,children}) {
 	return (
@@ -14,7 +15,7 @@ export function ProductCardTemplate({product,children}) {
 					}}
 					variant="top" src={product.imageCover} />
 				<Card.Body className="d-flex flex-column justify-content-between" style={{zIndex: 2}}>
-					<Card.Title>{product.title}</Card.Title>
+					<Card.Title className={"text-truncate"}>{product.title}</Card.Title>
 					<Card.Text className={"text-truncate"}>{product.description}</Card.Text>
 					<section className="d-flex justify-content-between align-items-center">
 						<section className="text-end">
@@ -25,10 +26,10 @@ export function ProductCardTemplate({product,children}) {
 							{
 								product.discountedPrice ?
 									<>
-										<del className={"me-2 text-danger"}>{product.price}</del>
-										{product.discountedPrice}
+										<Badge bg={"danger"} className={"me-2"} ><del>{product.price}$</del></Badge>
+										<Badge>{product.discountedPrice}$</Badge>
 									</>
-									: product.price
+									: <Badge>{product.price}$</Badge>
 							}
 						</section>
 					</section>
