@@ -7,7 +7,7 @@ import {
     REMOVE_BRAND,
     SET_LESSER_PRICE,
     SET_GREATER_PRICE,
-    SET_QUERY_STRING
+    SET_QUERY_STRING, REMOVE_CATEGORIES, REMOVE_BRANDS
 } from "../Types/FilterTypes";
 
 export const setSortBy = (sort,asc) => {
@@ -41,6 +41,10 @@ export const removeCategory = (category) => ({
     }
 });
 
+export const removeCategories = () => ({
+    type: REMOVE_CATEGORIES,
+});
+
 export const addBrand = (brand) => ({
     type: ADD_BRAND,
     payload: {
@@ -53,6 +57,10 @@ export const removeBrand = (brand) => ({
     payload: {
         brand,
     }
+});
+
+export const removeBrands = () => ({
+    type: REMOVE_BRANDS,
 });
 
 export const setLesserPrice = (lesserPrice) => ({

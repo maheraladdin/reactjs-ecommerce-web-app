@@ -16,8 +16,14 @@ export default function SidebarFilter() {
 		loadingBrands,
 		handlePriceGreaterThan,
 		handlePriceLessThan,
-		onClickPriceFilter
-	} = useProductSidebarFilter()
+		onClickPriceFilter,
+		selectAllCategories,
+		selectAllBrands,
+		onCategoryChecked,
+		onBrandChecked,
+		onSelectAllCategories,
+		onSelectAllBrands,
+	} = useProductSidebarFilter();
 
 	return (
 		<Nav className="flex-column" style={{
@@ -30,9 +36,9 @@ export default function SidebarFilter() {
 					type={type}
 					id={`all-categories-${type}`}
 					label="All"
-					checked={true}
-					value={""}
+					checked={selectAllCategories}
 					role={"button"}
+					onChange={onSelectAllCategories}
 				/>
 				{
 					categories.map((category,index) => {
@@ -44,6 +50,7 @@ export default function SidebarFilter() {
 								id={`category-${type}-${index + 1}`}
 								value={category._id}
 								role={"button"}
+								onChange={onCategoryChecked}
 							/>
 						)
 					})
@@ -59,9 +66,9 @@ export default function SidebarFilter() {
 					type={type}
 					id={`all-brands-${type}`}
 					label="All"
-					checked={true}
-					value={""}
+					checked={selectAllBrands}
 					role={"button"}
+					onChange={onSelectAllBrands}
 				/>
 				{
 					brands.map((brand,index) => {
@@ -73,6 +80,7 @@ export default function SidebarFilter() {
 								id={`brand-${type}-${index + 1}`}
 								value={brand._id}
 								role={"button"}
+								onChange={onBrandChecked}
 							/>
 						)
 					})

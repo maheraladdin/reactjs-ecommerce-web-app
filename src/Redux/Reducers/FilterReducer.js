@@ -7,7 +7,7 @@ import {
     REMOVE_BRAND,
     SET_LESSER_PRICE,
     SET_GREATER_PRICE,
-    SET_QUERY_STRING
+    SET_QUERY_STRING, REMOVE_CATEGORIES, REMOVE_BRANDS
 } from "../Types/FilterTypes";
 import createQueryString from "../logic/createQueryString";
 
@@ -45,6 +45,11 @@ export default function filterReducer(state = initialState, action) {
                 ...state,
                 categories: state.categories.filter(category => category !== action.payload.category),
             }
+        case REMOVE_CATEGORIES:
+            return {
+                ...state,
+                categories: [],
+            }
         case ADD_BRAND:
             return {
                 ...state,
@@ -54,6 +59,11 @@ export default function filterReducer(state = initialState, action) {
             return {
                 ...state,
                 brands: state.brands.filter(brand => brand !== action.payload.brand),
+            }
+        case REMOVE_BRANDS:
+            return {
+                ...state,
+                brands: [],
             }
         case SET_LESSER_PRICE:
             return {

@@ -6,9 +6,13 @@ export const ADD_CATEGORY = "ADD_CATEGORY";
 
 export const REMOVE_CATEGORY = "REMOVE_CATEGORY";
 
+export const REMOVE_CATEGORIES = "REMOVE_CATEGORIES";
+
 export const ADD_BRAND = "ADD_BRAND";
 
 export const REMOVE_BRAND = "REMOVE_BRAND";
+
+export const REMOVE_BRANDS = "REMOVE_BRANDS";
 
 export const SET_LESSER_PRICE = "SET_LESSER_PRICE";
 

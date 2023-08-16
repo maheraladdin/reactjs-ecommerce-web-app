@@ -2,7 +2,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {getCategories} from "../../Redux/Actions/categoryActions";
 import {getBrands} from "../../Redux/Actions/BrandActions";
-import {setQueryString, setGreaterPrice, setLesserPrice} from "../../Redux/Actions/filterActions";
+import {
+    setQueryString,
+    setGreaterPrice,
+    setLesserPrice,
+    addCategory,
+    removeCategory, addBrand, removeBrand, removeCategories, removeBrands
+} from "../../Redux/Actions/filterActions";
 
 export default function useProductSidebarFilter() {
     const type = "checkbox";
@@ -16,6 +22,9 @@ export default function useProductSidebarFilter() {
 
     const [priceGreaterThan, setPriceGreaterThan] = useState(0);
     const [priceLessThan, setPriceLessThan] = useState(0);
+
+    const [selectAllCategories, setSelectAllCategories] = useState(true);
+    const [selectAllBrands, setSelectAllBrands] = useState(true);
 
     useEffect(() => {
         dispatch(getCategories(1,5));
@@ -45,13 +54,49 @@ export default function useProductSidebarFilter() {
         setPriceLessThan(Number(e.target.value));
     }
 
-    const onClickPriceFilter = async () => {
-        await dispatch(setGreaterPrice(priceLessThan));
-        await dispatch(setLesserPrice(priceGreaterThan));
-        await dispatch(setQueryString());
+    const onClickPriceFilter = () => {
+        dispatch(setGreaterPrice(priceLessThan));
+        dispatch(setLesserPrice(priceGreaterThan));
+        dispatch(setQueryString());
     }
 
+    const filterCategories = useSelector(state => state.filterReducer.categories);
 
+    const onCategoryChecked = (e) => {
+        if(e.target.checked) {
+            dispatch(addCategory(e.target.value));
+            if(filterCategories.length > 0) setSelectAllCategories(false);
+        }
+        else dispatch(removeCategory(e.target.value));
+        if(filterCategories.length === 0) setSelectAllCategories(true);
+        dispatch(setQueryString());
+    }
+
+    const onSelectAllCategories = (e) => {
+        if(e.target.checked) {
+            dispatch(removeCategories());
+            setSelectAllCategories(true);
+        }
+    }
+
+    const filterBrands = useSelector(state => state.filterReducer.brands);
+
+    const onBrandChecked = async (e) => {
+        if(e.target.checked) {
+            dispatch(addBrand(e.target.value));
+            if(filterBrands.length > 0) setSelectAllBrands(false);
+        }
+        else dispatch(removeBrand(e.target.value));
+        if(filterBrands.length === 0) setSelectAllBrands(true);
+        dispatch(setQueryString());
+    }
+
+    const onSelectAllBrands = (e) => {
+        if(e.target.checked) {
+            dispatch(removeBrands());
+            setSelectAllBrands(true);
+        }
+    }
 
 
     return {
@@ -64,6 +109,12 @@ export default function useProductSidebarFilter() {
         loadingBrands,
         handlePriceGreaterThan,
         handlePriceLessThan,
-        onClickPriceFilter
+        onClickPriceFilter,
+        selectAllCategories,
+        selectAllBrands,
+        onCategoryChecked,
+        onBrandChecked,
+        onSelectAllCategories,
+        onSelectAllBrands,
     }
 }

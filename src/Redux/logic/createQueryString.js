@@ -1,16 +1,20 @@
 export default function createQueryString(state) {
         let queryCategories = '';
         for (const category of state.categories) {
-            queryCategories += `&category=${category}`;
+            queryCategories += `category[in][]=${category}&`;
         }
         let queryBrands = '';
         for (const brand of state.brands) {
-            queryBrands += `&brand=${brand}`;
+            queryBrands += `brand[in][]=${brand}&`;
         }
-        const sortQuery = state.sort ? `sort=${state.asc ? '-' : ''}${state.sort}` : '';
-        const keywordQuery = state.keyword ? `&keyword=${state.keyword}` : '';
-        const priceGreaterThanQuery = state.lesserPrice ? `&price[gt]=${state.lesserPrice}` : '';
-        const priceLessThanQuery = state.greaterPrice ? `&price[lt]=${state.greaterPrice}` : '';
+        const sortQuery = state.sort ? `sort=${state.asc ? '-' : ''}${state.sort}&` : '';
+        const keywordQuery = state.keyword ? `keyword=${state.keyword}&` : '';
+        const priceGreaterThanQuery = state.lesserPrice ? `price[gt]=${state.lesserPrice}&` : '';
+        const priceLessThanQuery = state.greaterPrice ? `price[lt]=${state.greaterPrice}&` : '';
 
-        return (`${sortQuery}${keywordQuery}${queryCategories}${queryBrands}${priceLessThanQuery}${priceGreaterThanQuery}`);
+        const queryString =  `${sortQuery}${keywordQuery}${queryCategories}${queryBrands}${priceLessThanQuery}${priceGreaterThanQuery}`;
+        if(queryString[queryString.length-1] === '&') {
+            return queryString.slice(0, queryString.length-1);
+        }
+        return queryString;
 }
