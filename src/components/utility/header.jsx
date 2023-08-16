@@ -74,19 +74,19 @@ export default function Header() {
                                     <NavDropdown.Item onClick={(e) => setLocalStorage(e,"language")}>عربي</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
-                            <Form className="d-flex w-100">
-                                <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                    value={keyWord}
-                                    onChange={handleSearch}
-                                    ref={searchTextFieldRef}
-                                />
-                                <Link to={productsRoute} className="text-decoration-none">
-                                    <Button onClick={onClickSearch} variant="outline-success">Search</Button>
+                            <Form className="d-flex w-100 gap-3">
+                                <Link to={productsRoute} className="text-decoration-none w-100">
+                                    <Form.Control
+                                        type="search"
+                                        placeholder="Search"
+                                        className="me-2 w-100"
+                                        aria-label="Search"
+                                        value={keyWord}
+                                        onChange={handleSearch}
+                                        ref={searchTextFieldRef}
+                                    />
                                 </Link>
+                                <Button onClick={onClickSearch} variant="outline-success">Search</Button>
                             </Form>
                         </OffCanvas.Body>
                     </Navbar.Offcanvas>

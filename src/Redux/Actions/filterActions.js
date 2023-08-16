@@ -11,7 +11,6 @@ import {
 } from "../Types/FilterTypes";
 
 export const setSortBy = (sort,asc) => {
-    console.log(sort,asc);
     return({
     type: SET_SORT_BY,
     payload: {

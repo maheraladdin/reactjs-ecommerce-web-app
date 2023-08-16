@@ -11,7 +11,9 @@ export default function useSortProducts() {
     const [sort, setSort] = useState("");
 
     const sortHandler = (e) => {
-        if (e.target.innerText === "rating")
+        if(e.target.innerText === "no sort")
+            setSort("");
+        else if (e.target.innerText === "rating")
             setSort("ratingsAverage")
         else
             setSort(e.target.innerText);

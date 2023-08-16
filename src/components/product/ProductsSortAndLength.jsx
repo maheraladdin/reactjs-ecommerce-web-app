@@ -21,6 +21,7 @@ export default function ProductsSortAndLength() {
 					</Dropdown.Toggle>
 
 					<Dropdown.Menu>
+						<Dropdown.Item onClick={sortHandler}>no sort</Dropdown.Item>
 						<Dropdown.Item onClick={sortHandler}>sold</Dropdown.Item>
 						<Dropdown.Item onClick={sortHandler}>rating</Dropdown.Item>
 						<Dropdown.Item onClick={sortHandler}>price</Dropdown.Item>
