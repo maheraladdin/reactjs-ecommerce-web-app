@@ -17,8 +17,6 @@ export default function SidebarFilter() {
 		handlePriceGreaterThan,
 		handlePriceLessThan,
 		onClickPriceFilter,
-		selectAllCategories,
-		selectAllBrands,
 		onCategoryChecked,
 		onBrandChecked
 	} = useProductSidebarFilter();
@@ -30,15 +28,6 @@ export default function SidebarFilter() {
 			{/* Categories Filter */}
 			<Nav.Item className="h5 mt-3 mb-2">Category</Nav.Item>
 			<Form>
-				<Form.Check // prettier-ignore
-					type={type}
-					id={`all-categories-${type}`}
-					label="All"
-					checked={selectAllCategories}
-					role={"button"}
-					onChange={onCategoryChecked}
-					value={"all"}
-				/>
 				{
 					categories.map((category,index) => {
 						return (
@@ -61,15 +50,6 @@ export default function SidebarFilter() {
 			{/* Brands filter */}
 			<Nav.Item className="h5 mt-3 mb-2">Brands</Nav.Item>
 			<Form className="ps-2">
-				<Form.Check // prettier-ignore
-					type={type}
-					id={`all-brands-${type}`}
-					label="All"
-					checked={selectAllBrands}
-					role={"button"}
-					onChange={onBrandChecked}
-					value={"all"}
-				/>
 				{
 					brands.map((brand,index) => {
 						return (

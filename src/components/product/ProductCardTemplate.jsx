@@ -17,7 +17,7 @@ export function ProductCardTemplate({product,children}) {
 				<Card.Body className="d-flex flex-column justify-content-between" style={{zIndex: 2}}>
 					<Card.Title className={"text-truncate"}>{product.title}</Card.Title>
 					<Card.Text className={"text-truncate"}>{product.description}</Card.Text>
-					<section className="d-flex justify-content-between align-items-center">
+					<section className="d-flex justify-content-between align-items-center gap-5">
 						<section className="text-end">
 							<i className="fa-solid fa-star me-1 text-warning"></i>
 							{product.ratingsAverage}
