@@ -20,9 +20,7 @@ export default function SidebarFilter() {
 		selectAllCategories,
 		selectAllBrands,
 		onCategoryChecked,
-		onBrandChecked,
-		onSelectAllCategories,
-		onSelectAllBrands,
+		onBrandChecked
 	} = useProductSidebarFilter();
 
 	return (
@@ -38,7 +36,8 @@ export default function SidebarFilter() {
 					label="All"
 					checked={selectAllCategories}
 					role={"button"}
-					onChange={onSelectAllCategories}
+					onChange={onCategoryChecked}
+					value={"all"}
 				/>
 				{
 					categories.map((category,index) => {
@@ -68,7 +67,8 @@ export default function SidebarFilter() {
 					label="All"
 					checked={selectAllBrands}
 					role={"button"}
-					onChange={onSelectAllBrands}
+					onChange={onBrandChecked}
+					value={"all"}
 				/>
 				{
 					brands.map((brand,index) => {
