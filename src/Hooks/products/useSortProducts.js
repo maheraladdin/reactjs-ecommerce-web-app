@@ -8,11 +8,13 @@ export default function useSortProducts() {
     const dispatch = useDispatch();
 
     const [asc, setAsc] = useState(ascFilter);
-    const [sort, setSort] = useState("");
+    const [sort, setSort] = useState(`-createAt`);
 
     const sortHandler = (e) => {
-        if(e.target.innerText === "no sort")
-            setSort("");
+        if(e.target.innerText === "no sort") {
+            setSort(`${asc && "-"}createAt`);
+            setAsc(true);
+        }
         else if (e.target.innerText === "rating")
             setSort("ratingsAverage")
         else
@@ -20,16 +22,14 @@ export default function useSortProducts() {
     }
 
     const ascHandler = () => {
-        if(!sort) return;
+        if(sort === "-createAt") return;
         setAsc(!asc);
     }
 
     useEffect(() => {
         if(sort) {
-            (async () => {
-                await dispatch(setSortBy(sort, asc));
-                await dispatch(setQueryString());
-            })();
+            dispatch(setSortBy(sort, asc));
+            dispatch(setQueryString());
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sort,asc]);
