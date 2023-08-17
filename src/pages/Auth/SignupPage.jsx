@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {loginRoute} from "../../constants/routes";
 import PageTemplate from "../../components/utility/pageTemplate";
 import useSignup from "../../Hooks/auth/useSignup";
+import {ToastContainer} from "react-toastify";
 
 export default function SignupPage() {
 
@@ -19,7 +20,8 @@ export default function SignupPage() {
 		handlePasswordConfirmationChange,
 		rememberMe,
 		handleRememberMeChange,
-		validated
+		validated,
+		handleSubmit
 	} = useSignup();
 
 	return (
@@ -35,44 +37,48 @@ export default function SignupPage() {
 					<h2>Sign up</h2>
 				</section>
 				<Form validated={validated} style={{width: "300px"}}>
-					<Form.Group className="mb-3" controlId="formBasicEmail">
-						<Form.Label>Username</Form.Label>
+					<Form.Group className="mb-3">
+						<Form.Label htmlFor={"username"}>Username</Form.Label>
 						<Form.Control
 							required
 							type="text"
 							placeholder="Enter username"
 							value={username}
 							onChange={handleUsernameChange}
+							id={"username"}
 						/>
 					</Form.Group>
-					<Form.Group className="mb-3" controlId="formBasicEmail">
-						<Form.Label>Email address</Form.Label>
+					<Form.Group className="mb-3">
+						<Form.Label htmlFor={"email"}>Email address</Form.Label>
 						<Form.Control
 							required
 							type="email"
 							placeholder="Enter email"
 							value={email}
 							onChange={handleEmailChange}
+							id={"email"}
 						/>
 					</Form.Group>
-					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Label>Password</Form.Label>
+					<Form.Group className="mb-3">
+						<Form.Label htmlFor={"password"}>Password</Form.Label>
 						<Form.Control
 							required
 							type="password"
 							placeholder="Password"
 							value={password}
 							onChange={handlePasswordChange}
+							id={"password"}
 						/>
 					</Form.Group>
-					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Label>Password Confirmation</Form.Label>
+					<Form.Group className="mb-3">
+						<Form.Label htmlFor={"passwordConfirmation"}>Password Confirmation</Form.Label>
 						<Form.Control
 							required
 							type="password"
 							placeholder="Password Confirmation"
 							value={passwordConfirmation}
 							onChange={handlePasswordConfirmationChange}
+							id={"passwordConfirmation"}
 						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -83,7 +89,7 @@ export default function SignupPage() {
 							onChange={handleRememberMeChange}
 						/>
 					</Form.Group>
-					<Button className="w-100" variant="primary" type="submit">
+					<Button onClick={handleSubmit} className="w-100" variant="primary" type="submit">
 						Sign up
 					</Button>
 					<Form.Group className="pt-2">
@@ -92,6 +98,17 @@ export default function SignupPage() {
 						</Form.Text>
 					</Form.Group>
 				</Form>
+				<ToastContainer
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick={false}
+					rtl={false}
+					pauseOnFocusLoss={false}
+					draggable={false}
+					pauseOnHover={false}
+					limit={1}
+				/>
 			</Container>
 		</PageTemplate>
 	);

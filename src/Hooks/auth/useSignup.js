@@ -1,4 +1,6 @@
 import {useState} from "react";
+import baseURL from "../../Api/BaseURL";
+import useNotify from "../useNotify";
 
 export default function useSignup() {
     const [username, setUsername] = useState();
@@ -7,6 +9,8 @@ export default function useSignup() {
     const [passwordConfirmation, setPasswordConfirmation] = useState();
     const [rememberMe, setRememberMe] = useState(false);
     const [validated, setValidated] = useState(false);
+
+    const notify = useNotify();
 
 
     const handleUsernameChange = (event) => {
@@ -29,9 +33,26 @@ export default function useSignup() {
         setRememberMe(event.target.checked);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setValidated(true);
+
+        if(!username) return notify('Username is required', 'error');
+        if(!email) return notify('Email is required', 'error');
+        if(!password) return notify('Password is required', 'error');
+        if(!passwordConfirmation) return notify('Password confirmation is required', 'error');
+        if(password !== passwordConfirmation) return notify('Password do not match password confirmation', 'error');
+
+        await baseURL.post('/auth/signup', {
+            name: username,
+            email: email,
+            password: password,
+            passwordConfirmation: passwordConfirmation,
+        }, {
+            headers: {
+                'remember-me': rememberMe,
+            }
+        });
 
     }
 
@@ -47,5 +68,6 @@ export default function useSignup() {
         rememberMe,
         handleRememberMeChange,
         validated,
+        handleSubmit,
     }
 }
