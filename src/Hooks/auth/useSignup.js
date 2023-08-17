@@ -33,6 +33,7 @@ export default function useSignup() {
         setRememberMe(event.target.checked);
     }
 
+    // TODO: Finish this function
     const handleSubmit = async (event) => {
         event.preventDefault();
         setValidated(true);
@@ -42,17 +43,31 @@ export default function useSignup() {
         if(!password) return notify('Password is required', 'error');
         if(!passwordConfirmation) return notify('Password confirmation is required', 'error');
         if(password !== passwordConfirmation) return notify('Password do not match password confirmation', 'error');
+        try {
 
-        await baseURL.post('/auth/signup', {
-            name: username,
-            email: email,
-            password: password,
-            passwordConfirmation: passwordConfirmation,
-        }, {
-            headers: {
-                'remember-me': rememberMe,
-            }
-        });
+             const payload = await baseURL.post('/auth/signup', {
+                name: username,
+                email: email,
+                password: password,
+                passwordConfirmation: passwordConfirmation,
+            }, {
+                headers: {
+                    'remember-me': rememberMe,
+                }
+            });
+
+            const oneDay = 1000 * 60 * 60 * 24;
+            const thirtyDays = oneDay * 30;
+
+            const expiresAt = rememberMe ?
+                new Date().getTime() + thirtyDays - 10000 :
+                new Date().getTime() + oneDay - 10000;
+
+            document.cookie = `token=${payload.data.token}; expires=${new Date(expiresAt)};`;
+        }
+        catch (e) {
+            notify(e?.response?.data[0]?.msg, 'error');
+        }
 
     }
 
