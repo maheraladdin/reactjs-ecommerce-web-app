@@ -5,6 +5,7 @@ import useNotify from "../useNotify";
 export default function useSignup() {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
+    const [phoneNumber, setPhoneNumber] = useState();
     const [password, setPassword] = useState();
     const [passwordConfirmation, setPasswordConfirmation] = useState();
     const [rememberMe, setRememberMe] = useState(false);
@@ -19,6 +20,10 @@ export default function useSignup() {
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
+    }
+
+    const handlePhoneNumberChange = (event) => {
+        setPhoneNumber(event.target.value);
     }
 
     const handlePasswordChange = (event) => {
@@ -63,7 +68,7 @@ export default function useSignup() {
                 new Date().getTime() + thirtyDays - 10000 :
                 new Date().getTime() + oneDay - 10000;
 
-            document.cookie = `token=${payload.data.token}; expires=${new Date(expiresAt)};`;
+            document.cookie = `token=${payload.data.token}; expires=${new Date(expiresAt)}; path=/;`;
         }
         catch (e) {
             notify(e?.response?.data[0]?.msg, 'error');
@@ -76,6 +81,8 @@ export default function useSignup() {
         handleUsernameChange,
         email,
         handleEmailChange,
+        phoneNumber,
+        handlePhoneNumberChange,
         password,
         handlePasswordChange,
         passwordConfirmation,

@@ -14,6 +14,8 @@ export default function SignupPage() {
 		handleUsernameChange,
 		email,
 		handleEmailChange,
+		phoneNumber,
+		handlePhoneNumberChange,
 		password,
 		handlePasswordChange,
 		passwordConfirmation,
@@ -21,7 +23,7 @@ export default function SignupPage() {
 		rememberMe,
 		handleRememberMeChange,
 		validated,
-		handleSubmit
+		handleSubmit,
 	} = useSignup();
 
 	return (
@@ -36,8 +38,12 @@ export default function SignupPage() {
 				<section className="text-center d-flex flex-column gap-3">
 					<h2>Sign up</h2>
 				</section>
-				<Form validated={validated} style={{width: "300px"}}>
-					<Form.Group className="mb-3">
+				<Form
+					validated={validated}
+					style={{width: "300px"}}
+					className={"d-flex flex-column gap-3"}
+				>
+					<Form.Group>
 						<Form.Label htmlFor={"username"}>Username</Form.Label>
 						<Form.Control
 							required
@@ -48,7 +54,7 @@ export default function SignupPage() {
 							id={"username"}
 						/>
 					</Form.Group>
-					<Form.Group className="mb-3">
+					<Form.Group>
 						<Form.Label htmlFor={"email"}>Email address</Form.Label>
 						<Form.Control
 							required
@@ -59,7 +65,17 @@ export default function SignupPage() {
 							id={"email"}
 						/>
 					</Form.Group>
-					<Form.Group className="mb-3">
+					<Form.Group>
+						<Form.Label htmlFor={"phone"}>Phone number</Form.Label>
+						<Form.Control
+							type="phone"
+							placeholder="Enter phone number"
+							value={phoneNumber}
+							onChange={handlePhoneNumberChange}
+							id={"phone"}
+						/>
+					</Form.Group>
+					<Form.Group>
 						<Form.Label htmlFor={"password"}>Password</Form.Label>
 						<Form.Control
 							required
@@ -70,7 +86,7 @@ export default function SignupPage() {
 							id={"password"}
 						/>
 					</Form.Group>
-					<Form.Group className="mb-3">
+					<Form.Group>
 						<Form.Label htmlFor={"passwordConfirmation"}>Password Confirmation</Form.Label>
 						<Form.Control
 							required
@@ -81,7 +97,7 @@ export default function SignupPage() {
 							id={"passwordConfirmation"}
 						/>
 					</Form.Group>
-					<Form.Group className="mb-3" controlId="formBasicCheckbox">
+					<Form.Group controlId="formBasicCheckbox">
 						<Form.Check
 							type="checkbox"
 							label="Remember me"
@@ -92,7 +108,7 @@ export default function SignupPage() {
 					<Button onClick={handleSubmit} className="w-100" variant="primary" type="submit">
 						Sign up
 					</Button>
-					<Form.Group className="pt-2">
+					<Form.Group>
 						<Form.Text>
 							Do have an account? <Link to={loginRoute} className="text-decoration-none text-primary">Login</Link>
 						</Form.Text>
