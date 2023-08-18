@@ -1,7 +1,8 @@
 import {useState} from "react";
-import baseURL from "../../Api/BaseURL";
 import useNotify from "../useNotify";
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {signup} from "../../Redux/Actions/userActions";
 
 export default function useSignup() {
     const [username, setUsername] = useState();
@@ -14,6 +15,10 @@ export default function useSignup() {
 
     const notify = useNotify();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const token = useSelector(state => state.userReducer.token);
+    const tokenExpireAt = useSelector(state => state.userReducer.tokenExpireAt);
 
     /**
      * @description Handle change username
@@ -82,17 +87,21 @@ export default function useSignup() {
      * @return {Promise<void>}
      */
     const requestSignup = async () => {
-        const payload = await baseURL.post('/auth/signup', {
-            name: username,
-            email,
-            password,
-            passwordConfirmation,
-        }, {
-            headers: {
-                'remember-me': rememberMe,
+        await dispatch(signup({
+            body: {
+                name: username,
+                email,
+                password,
+                passwordConfirmation,
+            },
+            config: {
+                headers: {
+                    'remember-me': rememberMe,
+                }
             }
-        });
-        document.cookie = `token=${payload.data.token};`;
+        }));
+        document.cookie = `token=${token};`;
+        document.cookie = `expires=${tokenExpireAt};`;
         navigate("/");
     }
 

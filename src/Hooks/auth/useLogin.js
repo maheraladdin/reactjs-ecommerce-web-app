@@ -1,7 +1,8 @@
 import {useState} from "react";
 import useNotify from "../useNotify";
-import baseURL from "../../Api/BaseURL";
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {login} from "../../Redux/Actions/userActions";
 
 export default function useLogin() {
     const [email, setEmail] = useState();
@@ -11,6 +12,10 @@ export default function useLogin() {
 
     const notify = useNotify();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const token = useSelector(state => state.userReducer.token);
+    const tokenExpireAt = useSelector(state => state.userReducer.tokenExpireAt);
 
     /**
      * @description Handle change email
@@ -51,17 +56,21 @@ export default function useLogin() {
      * @return {Promise<void>}
      */
     const requestLogin = async () => {
-        const payload = await baseURL.post('/auth/login', {
-            email,
-            password,
-        }, {
-            headers: {
-                'remember-me': rememberMe,
+        await dispatch(login({
+            body: {
+                email,
+                password,
+            },
+            config: {
+                headers: {
+                    'remember-me': rememberMe,
+                }
             }
-        });
-        document.cookie = `token=${payload.data.token};`;
-        if(payload.data.role === "user") navigate("/");
-        else if(payload.data.role === "admin") navigate("/admin/products");
+        }));
+
+        document.cookie = `token=${token};`;
+        document.cookie = `expires=${tokenExpireAt};`;
+        navigate("/");
     }
 
     /**
