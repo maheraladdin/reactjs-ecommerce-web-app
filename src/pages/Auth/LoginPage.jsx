@@ -1,12 +1,23 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from "react-bootstrap/Container";
-import Logo from "../../assets/images/logo.png";
 import {adminProductsRoute, signupRoute, userOrdersRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
 import PageTemplate from "../../components/utility/pageTemplate";
+import useLogin from "../../Hooks/auth/useLogin";
+import {ToastContainer} from "react-toastify";
 
 export default function LoginPage() {
+	const {
+		email,
+		password,
+		rememberMe,
+		handleEmailChange,
+		handlePasswordChange,
+		handleRememberMeChange,
+		handleSubmit,
+		validated
+	} = useLogin();
 	return (
 		<PageTemplate>
 			<Container
@@ -17,25 +28,39 @@ export default function LoginPage() {
 				}}
 			>
 				<section className="text-center d-flex flex-column gap-3">
-					<section>
-						<img width="150px" src={Logo} alt="E-shop logo" className="rounded-circle"/>
-					</section>
 					<h2>Login</h2>
 				</section>
-				<Form style={{width: "300px"}}>
+				<Form validated={validated} style={{width: "300px"}}>
 					<Form.Group className="mb-3" controlId="formBasicEmail">
 						<Form.Label>Email address</Form.Label>
-						<Form.Control type="email" placeholder="Enter email" />
+						<Form.Control
+							required
+							type="email"
+							placeholder="Enter email"
+							value={email}
+							onChange={handleEmailChange}
+						/>
 					</Form.Group>
 
 					<Form.Group className="mb-3" controlId="formBasicPassword">
 						<Form.Label>Password</Form.Label>
-						<Form.Control type="password" placeholder="Password" />
+						<Form.Control
+							required
+							type="password"
+							placeholder="Password"
+							value={password}
+							onChange={handlePasswordChange}
+						/>
 					</Form.Group>
 					<Form.Group className="mb-3" controlId="formBasicCheckbox">
-						<Form.Check type="checkbox" label="Remember me" />
+						<Form.Check
+							type="checkbox"
+							label="Remember me"
+							value={rememberMe}
+							onChange={handleRememberMeChange}
+						/>
 					</Form.Group>
-					<Button className="w-100" variant="primary" type="submit">
+					<Button onClick={handleSubmit} className="w-100" variant="primary" type="submit">
 						Login
 					</Button>
 					<Form.Group className="pt-2">
@@ -54,8 +79,17 @@ export default function LoginPage() {
 						</Form.Text>
 					</Form.Group>
 				</Form>
-
 			</Container>
+			<ToastContainer
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick={false}
+				rtl={false}
+				pauseOnFocusLoss={false}
+				draggable={false}
+				pauseOnHover={false}
+			/>
 		</PageTemplate>
 	);
 }

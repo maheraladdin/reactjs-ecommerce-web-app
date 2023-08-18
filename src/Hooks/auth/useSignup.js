@@ -77,7 +77,7 @@ export default function useSignup() {
                     notify(error.msg, 'error');
                 }
             }
-            else if(e && e.response && e.response.data && e.response.data) {
+            else if(e && e.response && e.response.data) {
                 notify(e.response.data, 'error');
             }
         }
