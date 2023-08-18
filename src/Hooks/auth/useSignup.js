@@ -15,31 +15,58 @@ export default function useSignup() {
     const notify = useNotify();
     const navigate = useNavigate();
 
-
+    /**
+     * @description Handle change username
+     * @param {Object} event - change event object
+     */
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     }
 
+    /**
+     * @description Handle change email
+     * @param {Object} event - change event object
+     */
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
     }
 
+    /**
+     * @description Handle change phone number
+     * @param {Object} event - change event object
+     */
     const handlePhoneNumberChange = (event) => {
         setPhoneNumber(event.target.value);
     }
 
+    /**
+     * @description Handle change password
+     * @param {Object} event - change event object
+     */
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
     }
 
+    /**
+     * @description Handle change password confirmation
+     * @param {Object} event - change event object
+     */
     const handlePasswordConfirmationChange = (event) => {
         setPasswordConfirmation(event.target.value);
     }
 
+    /**
+     * @description Handle change remember me
+     * @param {Object} event - change event object
+     */
     const handleRememberMeChange = (event) => {
         setRememberMe(event.target.checked);
     }
 
+    /**
+     * @description Form validation
+     * @return {number|string|*}
+     */
     const formValidation = () => {
         setValidated(true);
         if(!username) return notify('Username is required', 'error');
@@ -50,6 +77,10 @@ export default function useSignup() {
         if(password !== passwordConfirmation) return notify('Password do not match password confirmation', 'error');
     }
 
+    /**
+     * @description Request signup
+     * @return {Promise<void>}
+     */
     const requestSignup = async () => {
         const payload = await baseURL.post('/auth/signup', {
             name: username,
@@ -65,6 +96,11 @@ export default function useSignup() {
         navigate("/");
     }
 
+    /**
+     * @description Handle submit
+     * @param {Event} event - event submit
+     * @return {Promise<void>}
+     */
     const handleSubmit = async (event) => {
         event.preventDefault();
         formValidation();
@@ -72,6 +108,7 @@ export default function useSignup() {
              await requestSignup();
         }
         catch (e) {
+            document.cookie = ``;
             if(e && e.response && e.response.data && e.response.data.errors) {
                 for (let error of e.response.data.errors) {
                     notify(error.msg, 'error');

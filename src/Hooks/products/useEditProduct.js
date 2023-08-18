@@ -8,12 +8,15 @@ import useNotify from "../useNotify";
 import {useParams} from "react-router-dom";
 import AddImage from "../../assets/images/add-image.png";
 import {useBase64ToFile} from "../useBase64ToFile";
+import useGetToken from "../auth/useGetToken";
 
 export default function useEditProduct() {
 
     const {id} = useParams();
 
     const dispatch = useDispatch();
+
+    const {token} = useGetToken();
 
     const base64ToFile = useBase64ToFile();
 
@@ -239,7 +242,7 @@ export default function useEditProduct() {
             config: {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${process.env.REACT_APP_ADMIN_DEV_TOKEN}`
+                    "Authorization": `Bearer ${token}`
                 }
             }
         }));

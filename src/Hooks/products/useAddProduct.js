@@ -6,10 +6,13 @@ import {getSubcategoriesForSpecificCategory} from "../../Redux/Actions/subcatego
 import {createProduct} from "../../Redux/Actions/productActions";
 import useNotify from "../useNotify";
 import AddImage from "../../assets/images/add-image.png";
+import useGetToken from "../auth/useGetToken";
 
 export default function useAddProduct() {
 
     const dispatch = useDispatch();
+
+    const {token} = useGetToken();
 
     // states for cover image
     const [uploadCoverImage, setUploadCoverImage] = useState([]);
@@ -231,7 +234,7 @@ export default function useAddProduct() {
             config: {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${process.env.REACT_APP_ADMIN_DEV_TOKEN}`
+                    "Authorization": `Bearer ${token}`
                 }
             }
         }));

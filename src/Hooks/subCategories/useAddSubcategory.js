@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {getCategories} from "../../Redux/Actions/categoryActions";
 import {createSubcategory} from "../../Redux/Actions/subcategoryActions";
 import useNotify from "../useNotify";
+import useGetToken from "../auth/useGetToken";
 export default function useAddSubcategory() {
     const [subcategoryName, setSubcategoryName] = useState("");
     const [selectedCategoryId, setSelectedCategoryId] = useState("");
@@ -11,6 +12,8 @@ export default function useAddSubcategory() {
     const [validated, setValidated] = useState(false);
 
     const dispatch = useDispatch();
+
+    const {token} = useGetToken();
 
     const notify = useNotify();
 
@@ -56,7 +59,7 @@ export default function useAddSubcategory() {
             config: {
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${process.env.REACT_APP_ADMIN_DEV_TOKEN}`
+                    "Authorization": `Bearer ${token}`
                 }
             }
         }));

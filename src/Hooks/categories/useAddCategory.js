@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createCategory } from "../../Redux/Actions/categoryActions";
 import useNotify from "../useNotify";
 import AddImage from "../../assets/images/add-image.png";
+import useGetToken from "../auth/useGetToken";
 
 /**
  * @description this hook is used to add a new category
@@ -22,6 +23,8 @@ export default function useAddCategory() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const dispatch = useDispatch();
+
+    const {token} = useGetToken();
 
     // get the status of the request
     const status = useSelector(state => state.categoryReducer.status);
@@ -60,7 +63,7 @@ export default function useAddCategory() {
             config: {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${process.env.REACT_APP_ADMIN_DEV_TOKEN}`
+                    "Authorization": `Bearer ${token}`
                 }
             }
         }));
