@@ -1,6 +1,7 @@
 import {useState} from "react";
 import baseURL from "../../Api/BaseURL";
 import useNotify from "../useNotify";
+import {useNavigate} from "react-router-dom";
 
 export default function useSignup() {
     const [username, setUsername] = useState();
@@ -12,6 +13,7 @@ export default function useSignup() {
     const [validated, setValidated] = useState(false);
 
     const notify = useNotify();
+    const navigate = useNavigate();
 
 
     const handleUsernameChange = (event) => {
@@ -38,40 +40,46 @@ export default function useSignup() {
         setRememberMe(event.target.checked);
     }
 
-    // TODO: Finish this function
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const formValidation = () => {
         setValidated(true);
-
         if(!username) return notify('Username is required', 'error');
         if(!email) return notify('Email is required', 'error');
+        if(phoneNumber && phoneNumber.length <= 10) return notify('Phone number must be at least 10 characters', 'error');
         if(!password) return notify('Password is required', 'error');
         if(!passwordConfirmation) return notify('Password confirmation is required', 'error');
         if(password !== passwordConfirmation) return notify('Password do not match password confirmation', 'error');
+    }
+
+    const requestSignup = async () => {
+        const payload = await baseURL.post('/auth/signup', {
+            name: username,
+            email,
+            password,
+            passwordConfirmation,
+        }, {
+            headers: {
+                'remember-me': rememberMe,
+            }
+        });
+        document.cookie = `token=${payload.data.token}; path=/;`;
+        navigate("/");
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        formValidation();
         try {
-
-             const payload = await baseURL.post('/auth/signup', {
-                name: username,
-                email: email,
-                password: password,
-                passwordConfirmation: passwordConfirmation,
-            }, {
-                headers: {
-                    'remember-me': rememberMe,
-                }
-            });
-
-            const oneDay = 1000 * 60 * 60 * 24;
-            const thirtyDays = oneDay * 30;
-
-            const expiresAt = rememberMe ?
-                new Date().getTime() + thirtyDays - 10000 :
-                new Date().getTime() + oneDay - 10000;
-
-            document.cookie = `token=${payload.data.token}; expires=${new Date(expiresAt)}; path=/;`;
+             await requestSignup();
         }
         catch (e) {
-            notify(e?.response?.data[0]?.msg, 'error');
+            if(e && e.response && e.response.data && e.response.data.errors) {
+                for (let error of e.response.data.errors) {
+                    notify(error.msg, 'error');
+                }
+            }
+            else if(e && e.response && e.response.data && e.response.data) {
+                notify(e.response.data, 'error');
+            }
         }
 
     }

@@ -73,6 +73,7 @@ export default function SignupPage() {
 							value={phoneNumber}
 							onChange={handlePhoneNumberChange}
 							id={"phone"}
+							maxLength={11}
 						/>
 					</Form.Group>
 					<Form.Group>
@@ -123,7 +124,6 @@ export default function SignupPage() {
 					pauseOnFocusLoss={false}
 					draggable={false}
 					pauseOnHover={false}
-					limit={1}
 				/>
 			</Container>
 		</PageTemplate>
