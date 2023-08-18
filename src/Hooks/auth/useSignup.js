@@ -61,7 +61,7 @@ export default function useSignup() {
                 'remember-me': rememberMe,
             }
         });
-        document.cookie = `token=${payload.data.token}; path=/;`;
+        document.cookie = `token=${payload.data.token};`;
         navigate("/");
     }
 
