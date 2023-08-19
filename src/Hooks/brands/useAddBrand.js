@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBrand } from "../../Redux/Actions/BrandActions";
 import useNotify from "../useNotify";
 import AddImage from "../../assets/images/add-image.png";
-import useGetToken from "../auth/useGetToken";
 
 /**
  * @description this hook is used to add a new brand
@@ -24,7 +23,8 @@ export default function useAddBrand() {
 
     const dispatch = useDispatch();
 
-    const {token} = useGetToken();
+    // get the token from redux store
+    const token = useSelector(state => state.userReducer.token);
 
     // get the status of the request
     const status = useSelector(state => state.brandReducer.status);

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import useNotify from "../useNotify";
 import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {signup} from "../../Redux/Actions/userActions";
 
 export default function useSignup() {
@@ -16,9 +16,6 @@ export default function useSignup() {
     const notify = useNotify();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    const token = useSelector(state => state.userReducer.token);
-    const tokenExpireAt = useSelector(state => state.userReducer.tokenExpireAt);
 
     /**
      * @description Handle change username
@@ -100,9 +97,7 @@ export default function useSignup() {
                 }
             }
         }));
-        document.cookie = `token=${token};`;
-        document.cookie = `expires=${tokenExpireAt};`;
-        navigate("/");
+        navigate('/');
     }
 
     /**

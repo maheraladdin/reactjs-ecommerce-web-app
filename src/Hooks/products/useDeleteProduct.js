@@ -1,7 +1,6 @@
 import {deleteProduct, getProducts} from "../../Redux/Actions/productActions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
-import useGetToken from "../auth/useGetToken";
 
 export default function useDeleteProduct(id) {
 
@@ -9,7 +8,9 @@ export default function useDeleteProduct(id) {
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false)
 
-    const {token} = useGetToken();
+    // get the token from redux store
+    const token = useSelector(state => state.userReducer.token);
+
     const handleDeleteProduct = async () => {
         setLoading(true)
         await dispatch(deleteProduct(id, {

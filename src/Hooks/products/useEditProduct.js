@@ -8,7 +8,6 @@ import useNotify from "../useNotify";
 import {useParams} from "react-router-dom";
 import AddImage from "../../assets/images/add-image.png";
 import {useBase64ToFile} from "../useBase64ToFile";
-import useGetToken from "../auth/useGetToken";
 
 export default function useEditProduct() {
 
@@ -16,7 +15,8 @@ export default function useEditProduct() {
 
     const dispatch = useDispatch();
 
-    const {token} = useGetToken();
+    // get the token from redux store
+    const token = useSelector(state => state.userReducer.token);
 
     const base64ToFile = useBase64ToFile();
 

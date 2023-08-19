@@ -1,7 +1,7 @@
 import {useState} from "react";
 import useNotify from "../useNotify";
 import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {login} from "../../Redux/Actions/userActions";
 
 export default function useLogin() {
@@ -13,9 +13,6 @@ export default function useLogin() {
     const notify = useNotify();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    const token = useSelector(state => state.userReducer.token);
-    const tokenExpireAt = useSelector(state => state.userReducer.tokenExpireAt);
 
     /**
      * @description Handle change email
@@ -67,10 +64,7 @@ export default function useLogin() {
                 }
             }
         }));
-
-        document.cookie = `token=${token};`;
-        document.cookie = `expires=${tokenExpireAt};`;
-        navigate("/");
+        navigate('/');
     }
 
     /**

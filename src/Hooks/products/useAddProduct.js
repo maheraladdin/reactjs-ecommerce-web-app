@@ -6,13 +6,13 @@ import {getSubcategoriesForSpecificCategory} from "../../Redux/Actions/subcatego
 import {createProduct} from "../../Redux/Actions/productActions";
 import useNotify from "../useNotify";
 import AddImage from "../../assets/images/add-image.png";
-import useGetToken from "../auth/useGetToken";
 
 export default function useAddProduct() {
 
     const dispatch = useDispatch();
 
-    const {token} = useGetToken();
+    // get the token from redux store
+    const token = useSelector(state => state.userReducer.token);
 
     // states for cover image
     const [uploadCoverImage, setUploadCoverImage] = useState([]);

@@ -1,4 +1,4 @@
-import {SIGNUP, LOGIN, LOGOUT, GET_LOGGED_USER_DATA, CREAT_CSRF_TOKEN} from "../Types/userTypes";
+import {SIGNUP, LOGIN, LOGOUT, GET_LOGGED_USER_DATA, SET_TOKEN} from "../Types/userTypes";
 import reduxApi from "../logic/reduxApi";
 
 /**
@@ -58,7 +58,7 @@ export const logout = () => {
  * @param   {Object} params.config.headers - get logged user data headers params
  * @return  {(function(*): Promise<void>)|*}
  */
-export const getLoggedUserData = (params) => reduxApi("get", "/auth/login", params,
+export const getLoggedUserData = (params) => reduxApi("get", "/users/loggedUser", params,
     (dispatch, payload) => {
         dispatch({
             type: GET_LOGGED_USER_DATA,
@@ -68,20 +68,12 @@ export const getLoggedUserData = (params) => reduxApi("get", "/auth/login", para
         });
     });
 
-/**
- * @desc    create csrf token from API
- * @param   {Object} params - create csrf token params
- * @param   {Object} params.body - create csrf token body params
- * @param   {Object} params.config - create csrf token config params
- * @param   {Object} params.config.headers - create csrf token headers params
- * @return  {(function(*): Promise<void>)|*}
- */
-export const createCsrfToken = (params) => reduxApi("get", "/auth/createCsrfToken", params,
-    (dispatch, payload) => {
-        dispatch({
-            type: CREAT_CSRF_TOKEN,
-            payload: {
-                csrfToken: payload.headers["csrf-token"],
-            }
-        });
-    });
+export const setToken = (tokenFromCookie, tokenExpireAtFromCookie) => {
+    return {
+        type: SET_TOKEN,
+        payload: {
+            token: tokenFromCookie,
+            tokenExpireAt: tokenExpireAtFromCookie,
+        }
+    }
+}

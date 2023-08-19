@@ -1,14 +1,15 @@
-import {SIGNUP, LOGIN, LOGOUT, GET_LOGGED_USER_DATA, CREAT_CSRF_TOKEN} from "../Types/userTypes";
+import {SIGNUP, LOGIN, LOGOUT, GET_LOGGED_USER_DATA, SET_TOKEN} from "../Types/userTypes";
 
 const initialState = {
     user: {},
     token: '',
     tokenExpireAt: '',
-    csrfToken: '',
 }
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case LOGIN:
+            document.cookie = `token=${action.payload.token};`;
+            document.cookie = `expires=${action.payload.tokenExpireAt};`;
             return {
                 ...state,
                 user: action.payload.user,
@@ -16,6 +17,8 @@ export default function userReducer(state = initialState, action) {
                 tokenExpireAt: action.payload.tokenExpireAt,
             }
         case SIGNUP:
+            document.cookie = `token=${action.payload.token};`;
+            document.cookie = `expires=${action.payload.tokenExpireAt};`;
             return {
                 ...state,
                 user: action.payload.user,
@@ -23,16 +26,18 @@ export default function userReducer(state = initialState, action) {
                 tokenExpireAt: action.payload.tokenExpireAt,
             }
         case LOGOUT:
+            document.cookie = `token=;`;
+            document.cookie = `expires=;`;
             return initialState;
         case GET_LOGGED_USER_DATA:
             return {
                 ...state,
                 user: action.payload.user,
             }
-        case CREAT_CSRF_TOKEN:
+        case SET_TOKEN:
             return {
                 ...state,
-                csrfToken: action.payload.csrfToken,
+                token: action.payload.token
             }
         default:
             return state;

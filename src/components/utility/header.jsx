@@ -17,8 +17,10 @@ export default function Header() {
         setLocalStorage,
         keyWord,
         handleSearch,
-        searchTextFieldRef,
-        onClickSearch
+        onClickSearch,
+        isLogin,
+        user,
+        onClickLogout
     } = useHeader();
 
     return (
@@ -48,14 +50,37 @@ export default function Header() {
                         <OffCanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3 mb-3 mb-lg-0">
                                 {/* profile dropdown */}
-                                <NavDropdown
-                                    title="profile"
-                                    id={`offcanvasNavbarDropdown-expand-${expand}`}
-                                >
-                                    <Link to={loginRoute} className="text-decoration-none text-dark w-100 dropdown-item">login</Link>
-                                    <Link to={signupRoute} className="text-decoration-none text-dark w-100 dropdown-item">sign up</Link>
-                                    <Link to={cartRoute} className="text-decoration-none text-dark w-100 dropdown-item">cart</Link>
-                                </NavDropdown>
+                                {/* case of no authorized user */}
+                                {
+                                    isLogin ? (
+                                        user.role === "user" ? (
+                                            <NavDropdown
+                                                title={`Hello, ${user.name}`}
+                                                id={`offcanvasNavbarDropdown-expand-${expand}`}
+                                            >
+                                                <Link to={"/"} className="text-decoration-none text-dark w-100 dropdown-item">profile</Link>
+                                                <Link to={cartRoute} className="text-decoration-none text-dark w-100 dropdown-item">cart</Link>
+                                                <Link to={"/"} onClick={onClickLogout} className="text-decoration-none text-dark w-100 dropdown-item">logout</Link>
+                                            </NavDropdown>
+                                        ):(
+                                            <NavDropdown
+                                                title={`Hello, ${user.name}`}
+                                                id={`offcanvasNavbarDropdown-expand-${expand}`}
+                                            >
+                                                <Link to={cartRoute} className="text-decoration-none text-dark w-100 dropdown-item">cart</Link>
+                                                <Link to={"/"} onClick={onClickLogout} className="text-decoration-none text-dark w-100 dropdown-item">logout</Link>
+                                            </NavDropdown>
+                                        )
+                                    ): (
+                                        <NavDropdown
+                                            title="profile"
+                                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                                        >
+                                            <Link to={loginRoute} className="text-decoration-none text-dark w-100 dropdown-item">login</Link>
+                                            <Link to={signupRoute} className="text-decoration-none text-dark w-100 dropdown-item">sign up</Link>
+                                        </NavDropdown>
+                                    )
+                                }
 
                                 <NavDropdown
                                     title="appearance mode"
@@ -83,7 +108,6 @@ export default function Header() {
                                         aria-label="Search"
                                         value={keyWord}
                                         onChange={handleSearch}
-                                        ref={searchTextFieldRef}
                                     />
                                 </Link>
                                 <Button onClick={onClickSearch} variant="outline-success">Search</Button>

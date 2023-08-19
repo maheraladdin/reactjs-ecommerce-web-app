@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {getCategories} from "../../Redux/Actions/categoryActions";
 import {createSubcategory} from "../../Redux/Actions/subcategoryActions";
 import useNotify from "../useNotify";
-import useGetToken from "../auth/useGetToken";
+
 export default function useAddSubcategory() {
     const [subcategoryName, setSubcategoryName] = useState("");
     const [selectedCategoryId, setSelectedCategoryId] = useState("");
@@ -13,7 +13,8 @@ export default function useAddSubcategory() {
 
     const dispatch = useDispatch();
 
-    const {token} = useGetToken();
+    // get the token from redux store
+    const token = useSelector(state => state.userReducer.token);
 
     const notify = useNotify();
 
