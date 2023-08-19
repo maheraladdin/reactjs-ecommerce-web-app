@@ -87,6 +87,7 @@ export default function useAddCategory() {
     useEffect(() => {
         if(!loading) {
             // reset the form
+            setImage([AddImage]);
             setUploadImages([]);
             setCategoryName("");
             setValidated(false);

@@ -87,6 +87,7 @@ export default function useAddBrand() {
     useEffect(() => {
         if(!loading) {
             // reset the form
+            setImage([AddImage])
             setUploadImages([]);
             setBrandName("");
             setValidated(false);

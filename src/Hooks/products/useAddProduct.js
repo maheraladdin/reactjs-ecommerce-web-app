@@ -266,6 +266,10 @@ export default function useAddProduct() {
 
     useEffect(() => {
         if(!loading && createProductStatus === 201) {
+            setImages([]);
+            setUploadImages([]);
+            setImage([AddImage]);
+            setUploadCoverImage([]);
             setValidated(false);
             setTitle("");
             setDescription("");
