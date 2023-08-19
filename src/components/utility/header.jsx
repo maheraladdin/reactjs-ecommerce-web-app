@@ -9,6 +9,8 @@ import Logo from "../../assets/images/logo.png";
 import {cartRoute, loginRoute, productsRoute, signupRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
 import useHeader from "../../Hooks/useHeader";
+import {adminSideBarContent} from "../../constants/adminSidebarContent";
+import {userSidebarContent} from "../../constants/userSidebarContent";
 
 export default function Header() {
 
@@ -58,7 +60,11 @@ export default function Header() {
                                                 title={`Hello, ${user.name}`}
                                                 id={`offcanvasNavbarDropdown-expand-${expand}`}
                                             >
-                                                <Link to={"/"} className="text-decoration-none text-dark w-100 dropdown-item">profile</Link>
+                                                {
+                                                    userSidebarContent.map((item, index) => (
+                                                        <Link key={index} to={item.route} className="text-decoration-none text-dark w-100 dropdown-item">{item.text}</Link>
+                                                    ))
+                                                }
                                                 <Link to={cartRoute} className="text-decoration-none text-dark w-100 dropdown-item">cart</Link>
                                                 <Link to={"/"} onClick={onClickLogout} className="text-decoration-none text-dark w-100 dropdown-item">logout</Link>
                                             </NavDropdown>
@@ -67,7 +73,11 @@ export default function Header() {
                                                 title={`Hello, ${user.name}`}
                                                 id={`offcanvasNavbarDropdown-expand-${expand}`}
                                             >
-                                                <Link to={cartRoute} className="text-decoration-none text-dark w-100 dropdown-item">cart</Link>
+                                                {
+                                                    adminSideBarContent.map((item, index) => (
+                                                        <Link key={index} to={item.route} className="text-decoration-none text-dark w-100 dropdown-item">{item.text}</Link>
+                                                    ))
+                                                }
                                                 <Link to={"/"} onClick={onClickLogout} className="text-decoration-none text-dark w-100 dropdown-item">logout</Link>
                                             </NavDropdown>
                                         )

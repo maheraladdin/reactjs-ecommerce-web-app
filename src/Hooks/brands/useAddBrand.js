@@ -98,9 +98,12 @@ export default function useAddBrand() {
         if (status === 201) {
             // show the done toast message
             notify("Brand added successfully", "success");
-        } else if((error && error.response && error.response.data && error.response.data.message) || (error && error.message)) {
+        } else if((error && error.response && error.response.data && error.response.data.message)) {
             // show the error toast message
-            setErrorMessage(error.response.data.message || error.message);
+            setErrorMessage(error.response.data.message);
+        } else if (error && error.message) {
+            // show the error toast message
+            setErrorMessage(error.message);
         }
         // eslint-disable-next-line
     },[status, error]);

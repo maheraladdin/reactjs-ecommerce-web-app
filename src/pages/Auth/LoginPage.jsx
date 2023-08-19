@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from "react-bootstrap/Container";
-import {adminProductsRoute, signupRoute, userOrdersRoute} from "../../constants/routes";
+import {signupRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
 import PageTemplate from "../../components/utility/pageTemplate";
 import useLogin from "../../Hooks/auth/useLogin";
@@ -30,8 +30,8 @@ export default function LoginPage() {
 				<section className="text-center d-flex flex-column gap-3">
 					<h2>Login</h2>
 				</section>
-				<Form validated={validated} style={{width: "300px"}}>
-					<Form.Group className="mb-3" controlId="formBasicEmail">
+				<Form className="d-flex flex-column gap-3" validated={validated} style={{width: "300px"}}>
+					<Form.Group controlId="formBasicEmail">
 						<Form.Label>Email address</Form.Label>
 						<Form.Control
 							required
@@ -42,7 +42,7 @@ export default function LoginPage() {
 						/>
 					</Form.Group>
 
-					<Form.Group className="mb-3" controlId="formBasicPassword">
+					<Form.Group controlId="formBasicPassword">
 						<Form.Label>Password</Form.Label>
 						<Form.Control
 							required
@@ -52,7 +52,7 @@ export default function LoginPage() {
 							onChange={handlePasswordChange}
 						/>
 					</Form.Group>
-					<Form.Group className="mb-3" controlId="formBasicCheckbox">
+					<Form.Group controlId="formBasicCheckbox">
 						<Form.Check
 							type="checkbox"
 							label="Remember me"
@@ -63,19 +63,9 @@ export default function LoginPage() {
 					<Button onClick={handleSubmit} className="w-100" variant="primary" type="submit">
 						Login
 					</Button>
-					<Form.Group className="pt-2">
+					<Form.Group>
 						<Form.Text>
 							Don't have an account? <Link to={signupRoute} className="text-decoration-none text-primary">Sign up</Link>
-						</Form.Text>
-					</Form.Group>
-					<Form.Group className="pt-2">
-						<Form.Text>
-							<Link to={adminProductsRoute} className="text-decoration-none text-primary"> Sign in as Admin</Link>
-						</Form.Text>
-					</Form.Group>
-					<Form.Group className="pt-2">
-						<Form.Text>
-							<Link to={userOrdersRoute} className="text-decoration-none text-primary"> Sign in as User</Link>
 						</Form.Text>
 					</Form.Group>
 				</Form>
