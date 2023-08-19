@@ -57,13 +57,14 @@ export default function useHeader() {
                 if(!tokenFromCookie) return setIsLogin(false);
             }
         }
-        dispatch(setToken(tokenFromCookie, tokenExpireAtFromCookie));
+        if(!token) dispatch(setToken(tokenFromCookie, tokenExpireAtFromCookie));
         setTokenLoaded(true);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[user]);
 
     useEffect(() => {
         if(!tokenLoaded) return;
+        if(!token) return;
         dispatch(getLoggedUserData({
             body: {
                 headers: {
