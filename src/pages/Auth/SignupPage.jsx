@@ -68,7 +68,7 @@ export default function SignupPage() {
 					<Form.Group>
 						<Form.Label htmlFor={"phone"}>Phone number</Form.Label>
 						<Form.Control
-							type="phone"
+							type="number"
 							placeholder="Enter phone number"
 							value={phoneNumber}
 							onChange={handlePhoneNumberChange}

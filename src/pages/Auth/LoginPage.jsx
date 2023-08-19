@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from "react-bootstrap/Container";
-import {signupRoute} from "../../constants/routes";
+import {resetPasswordRoute, signupRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
 import PageTemplate from "../../components/utility/pageTemplate";
 import useLogin from "../../Hooks/auth/useLogin";
@@ -51,6 +51,11 @@ export default function LoginPage() {
 							value={password}
 							onChange={handlePasswordChange}
 						/>
+					</Form.Group>
+					<Form.Group>
+						<Form.Text>
+							Do you forget your password? <Link to={resetPasswordRoute} className="text-decoration-none text-primary">Yes</Link>
+						</Form.Text>
 					</Form.Group>
 					<Form.Group controlId="formBasicCheckbox">
 						<Form.Check

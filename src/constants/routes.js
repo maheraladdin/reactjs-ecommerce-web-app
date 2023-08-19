@@ -1,6 +1,12 @@
 export const loginRoute = '/login';
 export const signupRoute = '/signup';
 
+export const resetPasswordRoute = '/resetPassword';
+
+export const verifyPasswordResetTokenRoute = '/verifyPasswordResetToken';
+
+export const resetForgottenPasswordRoute = '/resetForgottenPassword';
+
 export const categoriesRoute = '/categories';
 
 export const brandsRoute = '/brands';
@@ -42,3 +48,4 @@ export const userAddressUpdateRoute = '/user/updateAddress';
 export const userProfileRoute = '/user/profile';
 
 export const userUpdateProfileRoute = '/user/updateProfile';
+

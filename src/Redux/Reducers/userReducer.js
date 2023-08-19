@@ -1,9 +1,18 @@
-import {SIGNUP, LOGIN, LOGOUT, GET_LOGGED_USER_DATA, SET_TOKEN} from "../Types/userTypes";
+import {
+    SIGNUP,
+    LOGIN,
+    LOGOUT,
+    GET_LOGGED_USER_DATA,
+    SET_TOKEN,
+    RESET_PASSWORD,
+    RESET_FORGOTTEN_PASSWORD
+} from "../Types/userTypes";
 
 const initialState = {
     user: {},
     token: '',
     tokenExpireAt: '',
+    resetPasswordByEmail: '',
 }
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
@@ -38,6 +47,18 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 token: action.payload.token
+            }
+        case RESET_PASSWORD:
+            return {
+                ...state,
+                resetPasswordByEmail: action.payload.resetPasswordByEmail
+            }
+        case RESET_FORGOTTEN_PASSWORD:
+            document.cookie = `token=${action.payload.token};`;
+            document.cookie = `expires=${action.payload.tokenExpireAt};`;
+            return {
+                ...state,
+                token: action.payload.token,
             }
         default:
             return state;

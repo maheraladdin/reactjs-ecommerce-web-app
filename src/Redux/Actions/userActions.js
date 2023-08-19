@@ -1,4 +1,12 @@
-import {SIGNUP, LOGIN, LOGOUT, GET_LOGGED_USER_DATA, SET_TOKEN} from "../Types/userTypes";
+import {
+    SIGNUP,
+    LOGIN,
+    LOGOUT,
+    GET_LOGGED_USER_DATA,
+    SET_TOKEN,
+    RESET_PASSWORD,
+    RESET_FORGOTTEN_PASSWORD
+} from "../Types/userTypes";
 import reduxApi from "../logic/reduxApi";
 
 /**
@@ -77,3 +85,24 @@ export const setToken = (tokenFromCookie, tokenExpireAtFromCookie) => {
         }
     }
 }
+
+export const resetPassword = email => {
+    return {
+        type: RESET_PASSWORD,
+        payload: {
+            resetPasswordByEmail: email,
+        }
+    }
+};
+
+export const resetForgottenPassword = params => reduxApi("patch", "/auth/resetPassword", params,
+    (dispatch, payload) => {
+        const tokenExpireAt = new Date(new Date().getTime() + 1000 * 60 * 60 * 24);
+        dispatch({
+            type: RESET_FORGOTTEN_PASSWORD,
+            payload: {
+                token: payload.data.token,
+                tokenExpireAt: tokenExpireAt.toUTCString(),
+            }
+        });
+    });
