@@ -5,13 +5,40 @@ import useGetReviews from "../../Hooks/reviews/useGetReviews";
 
 export default function RateContainer() {
 
-	const {reviews, numberOfPages, handlePageChange} = useGetReviews();
+	const {
+		reviews,
+		numberOfPages,
+		handlePageChange,
+		user,
+		isReviewed,
+	} = useGetReviews();
 
 	return (
 		<section className="d-flex flex-column gap-4 bg-light px-5 py-4 rounded-5">
-			<AddRate />
 			{
-				reviews.map((review,index) => <UserRate rate={review.rating} name={review.user.name} comment={review.comment} profileImg={review.profileImg} key={"review-key-" + index + 1} />)
+				isReviewed ? reviews.map((review,index) => {
+					if(user._id === review.user._id)
+						return (
+							<UserRate
+								reviewId={review._id}
+								rate={review.rating}
+								name={review.user.name}
+								comment={review.comment}
+								profileImg={review.profileImg}
+								key={"review-key-" + index + 1}
+								myRate={true}
+							/>
+						)
+				})  : <AddRate />
+			}
+			{
+				reviews.map((review,index) => {
+					if(user._id !== review.user._id)
+					return (
+						<UserRate rate={review.rating} name={review.user.name} comment={review.comment}
+							  profileImg={review.profileImg} key={"review-key-" + index + 1}/>
+					)
+				})
 			}
 			{numberOfPages > 1 && <Pagination pageCount={numberOfPages} handlePageChange={handlePageChange}/>}
 		</section>

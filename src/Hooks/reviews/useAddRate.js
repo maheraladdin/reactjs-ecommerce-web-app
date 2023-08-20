@@ -27,6 +27,7 @@ export default function useAddRate() {
 
     const dispatch = useDispatch();
 
+
     // handle add rate
     const handleAddRate = async () => {
         if(!rate) return notify("Please rate the product", "error");
@@ -64,6 +65,6 @@ export default function useAddRate() {
         handleCommentChange,
         handleRateChange,
         handleAddRate,
-        loading
+        loading,
     }
 }

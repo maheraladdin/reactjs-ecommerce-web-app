@@ -18,5 +18,5 @@ export default function useGetProductByID() {
         dispatch(getReviewsForSpecificProduct(id, 1, Number.MAX_SAFE_INTEGER));
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [id]);
 }
