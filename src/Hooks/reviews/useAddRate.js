@@ -1,17 +1,23 @@
 import {useEffect, useState} from "react";
-import {createReview} from "../../Redux/Actions/reviewActions";
-import {useDispatch} from "react-redux";
+import {createReview, getReviewsForSpecificProduct} from "../../Redux/Actions/reviewActions";
+import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
+import useNotify from "../useNotify";
 
 /**
  * @description Custom hook that handles adding a review
  * @return {{handleRateChange: (function(*): void), rate: number, handleCommentChange: (function(*): void), comment: string, loading: boolean, handleAddRate: ((function(): Promise<void>)|*)}}
  */
 export default function useAddRate() {
+
     const [comment, setComment] = useState("");
     const [rate, setRate] = useState(0.0);
     const [loading, setLoading] = useState(false);
     const {id} = useParams();
+
+    const user = useSelector(state => state.userReducer.user);
+    const token = useSelector(state => state.userReducer.token);
+    const notify = useNotify();
 
     // handle comment change
     const handleCommentChange = (e) => setComment(e.target.value);
@@ -23,27 +29,32 @@ export default function useAddRate() {
 
     // handle add rate
     const handleAddRate = async () => {
+        if(!rate) return notify("Please rate the product", "error");
+        if(!user) return notify("Please login to add a review", "error");
         setLoading(true);
-        // Todo: change user id to the user id from token after implementing auth
         await dispatch(createReview({
             body: {
                 "rating": rate,
-                "comment": comment,
+                "comment": comment ? comment : "No comment",
                 "product": id,
-                "user": "5f7d5b9b5f3b9b2b1c7d7b1c",
+                "user": user._id,
+            },
+            config: {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
             }
         }));
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-        // setLoading(false);
+        setLoading(false);
     };
 
     useEffect(() => {
         if (!loading) {
             setComment("");
             setRate(0);
+            dispatch(getReviewsForSpecificProduct(id));
         }
+        // eslint-disable-next-line
     }, [loading]);
 
 

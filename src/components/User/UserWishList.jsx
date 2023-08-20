@@ -6,7 +6,7 @@ export default function UserWishList() {
 	const user = useSelector(state => state.userReducer.user);
 	return (
 		<Row>
-				{	user.wishlist.length > 0 ?
+				{	user.wishlist.length > 0 && false ?
 					Array(20).fill().map((item, i) => (
 						<Col
 							xs={12}
