@@ -15,7 +15,7 @@ export default function useGetProductByID() {
     useEffect(() => {
         // fetch product from api
         dispatch(getProductById(id));
-        dispatch(getReviewsForSpecificProduct(id, 1, Number.MAX_SAFE_INTEGER));
+        dispatch(getReviewsForSpecificProduct(id));
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);

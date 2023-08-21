@@ -59,7 +59,7 @@ export default function UserRate({name,rate,comment,profileImg,myRate,reviewId})
 						</Form.Group>
 						<Form.Group controlId="exampleForm.ControlTextarea1">
 							<Form.Label>Comment</Form.Label>
-							<Form.Control as="textarea" rows={3}  onChange={handleCommentChange} value={newComment} />
+							<Form.Control className={"resize-none"} as="textarea" rows={3}  onChange={handleCommentChange} value={newComment} />
 						</Form.Group>
 						<Button variant={"primary"} onClick={handleUpdateReview} disabled={loading}>
 							{loading ? "Loading..." : "Update"}

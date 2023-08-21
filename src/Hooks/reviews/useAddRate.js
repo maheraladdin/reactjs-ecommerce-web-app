@@ -32,6 +32,7 @@ export default function useAddRate() {
     const handleAddRate = async () => {
         if(!rate) return notify("Please rate the product", "error");
         if(!user) return notify("Please login to add a review", "error");
+        if(user.role !== "user") return notify("Only users can add reviews", "error");
         setLoading(true);
         await dispatch(createReview({
             body: {
