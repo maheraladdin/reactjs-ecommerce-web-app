@@ -1,5 +1,5 @@
 import reduxApi from "../logic/reduxApi";
-import {CREATE_REVIEW, GET_REVIEWS} from "../Types/reviewTypes";
+import {CREATE_REVIEW, DELETE_REVIEW, GET_REVIEWS, UPDATE_REVIEW} from "../Types/reviewTypes";
 
 /**
  * @desc    Get reviews for specific product from API
@@ -34,6 +34,38 @@ export const createReview = (params) => reduxApi("post", "/reviews", params, (di
         type: CREATE_REVIEW,
         payload: {
             review: payload.data.document,
+            status: payload.status,
+        }
+    });
+});
+
+/**
+ * @desc    Update review from API
+ * @param   reviewId
+ * @param   params
+ * @return  {(function(*): Promise<void>)|*}
+ */
+export const updateReview = (reviewId, params) => reduxApi("put", `/reviews/${reviewId}`, params, (dispatch, payload) => {
+    dispatch({
+        type: UPDATE_REVIEW,
+        payload: {
+            review: payload.data.document,
+            status: payload.status,
+        }
+    });
+});
+
+/**
+ * @desc    Delete review from API
+ * @param   reviewId
+ * @param   params
+ * @return  {(function(*): Promise<void>)|*}
+ */
+export const deleteReview = (reviewId, params) => reduxApi("delete", `/reviews/${reviewId}`, params, (dispatch, payload) => {
+    dispatch({
+        type: DELETE_REVIEW,
+        payload: {
+            review: {},
             status: payload.status,
         }
     });
