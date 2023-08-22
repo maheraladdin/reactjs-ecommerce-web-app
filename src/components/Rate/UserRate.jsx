@@ -26,7 +26,11 @@ export default function UserRate({name,rate,comment,profileImg,myRate,reviewId})
 				<img src={profileImg || "https://picsum.photos/50/50"} alt="user" className="rounded-circle" />
 			</section>
 			<section className="d-flex flex-column gap-2">
-				<section>{name} <i className="fa-solid fa-star text-warning"></i> {rate}</section>
+				<section>{name} {
+					rate > 2.5 ?
+						<i className="fa-solid fa-star text-warning"></i> :
+						<i className="fa fa-star-half-alt text-warning"></i>
+						} {rate}</section>
 				<section>{comment}</section>
 			</section>
 			{

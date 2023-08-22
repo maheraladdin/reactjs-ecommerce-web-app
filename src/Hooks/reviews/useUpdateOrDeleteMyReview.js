@@ -33,6 +33,7 @@ export default function useUpdateOrDeleteMyReview(reviewId,reviewRate,reviewComm
 
         // handle update rate
         const handleUpdateReview = async () => {
+                if(rate < 1) return notify("Please rate the product", "error");
                 setLoading(true);
                 await dispatch(updateReview(reviewId, {
                         body: {
