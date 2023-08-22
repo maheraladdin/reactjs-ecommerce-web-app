@@ -7,6 +7,7 @@ import productReducer from "./productReducer";
 import reviewReducer from "./reviewReducer";
 import filterReducer from "./FilterReducer";
 import userReducer from "./userReducer";
+import wishlistReducer from "./wishlistReducer";
 export default combineReducers({
     categoryReducer,
     errorReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
     reviewReducer,
     filterReducer,
     userReducer,
+    wishlistReducer,
 });

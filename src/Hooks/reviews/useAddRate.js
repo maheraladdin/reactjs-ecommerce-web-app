@@ -66,5 +66,6 @@ export default function useAddRate() {
         handleRateChange,
         handleAddRate,
         loading,
+        username: user ? user.name : "username",
     }
 }

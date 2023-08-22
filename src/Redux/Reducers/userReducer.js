@@ -46,7 +46,8 @@ export default function userReducer(state = initialState, action) {
         case SET_TOKEN:
             return {
                 ...state,
-                token: action.payload.token
+                token: action.payload.token,
+                tokenExpireAt: action.payload.tokenExpireAt,
             }
         case RESET_PASSWORD:
             return {

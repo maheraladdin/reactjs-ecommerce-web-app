@@ -3,11 +3,11 @@ import ProductCard from "../product/ProductCard";
 import {useSelector} from "react-redux";
 
 export default function UserWishList() {
-	const user = useSelector(state => state.userReducer.user);
+	const wishlist = useSelector(state => state.wishlistReducer.wishlist);
 	return (
 		<Row>
-				{	user.wishlist.length > 0 && false ?
-					Array(20).fill().map((item, i) => (
+				{	wishlist.length > 0 ?
+					wishlist.map((wishlistProduct, i) => (
 						<Col
 							xs={12}
 							sm={6}
@@ -16,7 +16,7 @@ export default function UserWishList() {
 							className="mb-4"
 						>
 							{/*TODO: add product prop*/}
-							<ProductCard key={i + 1} />
+							<ProductCard key={i + 1} product={wishlistProduct}/>
 						</Col>
 					)) : (
 						<Col xs={12}>

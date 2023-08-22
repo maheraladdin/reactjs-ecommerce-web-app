@@ -47,7 +47,7 @@ export function ProductData() {
 				}
 			</Form.Group>
 			<Form.Group className="d-flex gap-3">
-				<ProductLoveButton absolute={false}/>
+				<ProductLoveButton absolute={false} product={product}/>
 				<Button variant="outline-dark"><i className="fa-solid fa-cart-plus"></i></Button>
 			</Form.Group>
 		</Form>

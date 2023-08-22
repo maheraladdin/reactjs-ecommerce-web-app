@@ -11,6 +11,8 @@ import {Link} from "react-router-dom";
 import useHeader from "../../Hooks/useHeader";
 import {adminSideBarContent} from "../../constants/adminSidebarContent";
 import {userSidebarContent} from "../../constants/userSidebarContent";
+import useGetWishList from "../../Hooks/wishlist/useGetWishList";
+import useGetLoggedUser from "../../Hooks/auth/useGetLoggedUser";
 
 export default function Header() {
 
@@ -20,10 +22,15 @@ export default function Header() {
         keyWord,
         handleSearch,
         onClickSearch,
+    } = useHeader();
+
+    const {
         isLogin,
         user,
-        onClickLogout
-    } = useHeader();
+        onClickLogout,
+    } = useGetLoggedUser();
+
+    useGetWishList();
 
     return (
         <>

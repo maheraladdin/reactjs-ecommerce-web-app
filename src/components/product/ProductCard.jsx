@@ -6,7 +6,7 @@ export default function ProductCard({product}) {
 
     return (
         <ProductCardTemplate product={product}>
-            <ProductLoveButton/>
+            <ProductLoveButton product={product}/>
         </ProductCardTemplate>
     );
 }

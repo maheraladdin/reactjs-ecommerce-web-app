@@ -5,11 +5,11 @@ import useAddRate from "../../Hooks/reviews/useAddRate";
 import {Spinner} from "react-bootstrap";
 
 export default function AddRate() {
-	const {comment, rate, handleCommentChange, handleRateChange, handleAddRate, loading} = useAddRate();
+	const {comment, rate, handleCommentChange, handleRateChange, handleAddRate, loading, username} = useAddRate();
 	return (
 		<Form className="d-flex flex-column gap-2">
 			<Form.Text className="d-flex gap-2 align-items-center">
-				<section className="h3">username</section>
+				<section className="h3 m-0">{username}</section>
 				<section>
 					<ReactStars
 						count={5}

@@ -81,7 +81,7 @@ export const setToken = (tokenFromCookie, tokenExpireAtFromCookie) => {
         type: SET_TOKEN,
         payload: {
             token: tokenFromCookie,
-            tokenExpireAt: tokenExpireAtFromCookie,
+            tokenExpireAt: tokenExpireAtFromCookie.toString(),
         }
     }
 }
