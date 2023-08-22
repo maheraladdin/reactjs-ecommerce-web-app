@@ -29,7 +29,9 @@ export default function RateContainer() {
 								myRate={true}
 							/>
 						)
-				})  : <AddRate />
+					else
+						return null;
+				})  : user.role === "user" ? <AddRate /> : null
 			}
 			{
 				reviews.map((review,index) => {
@@ -38,6 +40,8 @@ export default function RateContainer() {
 						<UserRate rate={review.rating} name={review.user.name} comment={review.comment}
 							  profileImg={review.profileImg} key={"review-key-" + index + 1}/>
 					)
+					else
+						return null;
 				})
 			}
 			{numberOfPages > 1 && <Pagination pageCount={numberOfPages} handlePageChange={handlePageChange}/>}
