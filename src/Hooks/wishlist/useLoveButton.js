@@ -1,7 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {addProductToWishlist, deleteProductFromWishlist, getWishlist} from "../../Redux/Actions/wishlistActions";
-import {useParams} from "react-router-dom";
+import {addProductToWishlist, deleteProductFromWishlist} from "../../Redux/Actions/wishlistActions";
 
 
 export default function useLoveButton(product) {
@@ -10,7 +9,6 @@ export default function useLoveButton(product) {
     const [isLoved, setIsLoved] = useState(false);
     const userReducer = useSelector(state => state.userReducer);
     const {token} = userReducer;
-    const {id} = useParams();
 
     useEffect(() => {
         setIsLoved(false);
@@ -18,18 +16,8 @@ export default function useLoveButton(product) {
             if(wishlistProduct._id === product._id) setIsLoved(true);
         })
         // eslint-disable-next-line
-    },[wishlist])
+    },[wishlist]);
 
-    useEffect(()=>{
-         dispatch(getWishlist({
-            body: {
-                headers: {
-                    "Authorization": `Bearer ${token} `,
-                }
-            },
-        }));
-         // eslint-disable-next-line
-    },[id])
     const handleLoveButton = async () => {
         if(isLoved) {
             // delete product from wishlist

@@ -1,14 +1,14 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {getWishlist} from "../../Redux/Actions/wishlistActions";
 
+let lock = 0;
 export default function useGetWishList() {
     const dispatch = useDispatch();
     const userReducer = useSelector(state => state.userReducer);
     const {user, token} = userReducer;
-    const [isFetched, setIsFetched] = useState(false);
     useEffect(() => {
-        if(token && !isFetched && user.role === "user")
+        if(token && !lock && user.role === "user")
         (async () => {
                 await dispatch(getWishlist({
                     body: {
@@ -17,7 +17,7 @@ export default function useGetWishList() {
                         }
                     },
                 }));
-                setIsFetched(true);
+                lock += 1;
         })();
         // eslint-disable-next-line
     }, [token,user]);
