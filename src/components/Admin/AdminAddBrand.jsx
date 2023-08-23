@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import UploadImage from "./UploadImage";
 import useAddBrand from "../../Hooks/brands/useAddBrand";
 import {Spinner} from "react-bootstrap";
-import {ToastContainer} from "react-toastify";
 
 export default function AdminAddBrand() {
 
@@ -40,18 +39,6 @@ export default function AdminAddBrand() {
 					Add Brand
 				</Button>
 			</Form>
-			<ToastContainer
-				position="top-right"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={true}
-				closeOnClick={true}
-				rtl={false}
-				pauseOnFocusLoss={false}
-				draggable={true}
-				pauseOnHover={false}
-				limit={1}
-			/>
 		</>
 	)
 }

@@ -1,8 +1,6 @@
-
 import PageTemplate from "../../components/utility/pageTemplate";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import {ToastContainer} from "react-toastify";
 import Button from "react-bootstrap/Button";
 import useResetForgottenPassword from "../../Hooks/auth/useResetForgottenPassword";
 
@@ -52,16 +50,6 @@ export default function ResetForgottenPasswordPage() {
                         Reset Password
                     </Button>
                 </Form>
-                <ToastContainer
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss={false}
-                    draggable={false}
-                    pauseOnHover={false}
-                />
             </Container>
         </PageTemplate>
     );

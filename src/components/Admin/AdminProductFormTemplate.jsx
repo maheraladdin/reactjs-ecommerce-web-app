@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import {MultiSelect} from "react-multi-select-component";
 import ColorPicker from "react-pick-color";
 import {Spinner} from "react-bootstrap";
-import {ToastContainer} from "react-toastify";
 import {Fragment} from "react";
 import {UploadImages} from "./UploadImages";
 
@@ -173,18 +172,6 @@ export default function AdminProductFormTemplate({
 					{SubmitButtonTitle}
 				</Button>
 			</section>
-			<ToastContainer
-				position="top-right"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={true}
-				closeOnClick={true}
-				rtl={false}
-				pauseOnFocusLoss={false}
-				draggable={true}
-				pauseOnHover={false}
-				limit={1}
-			/>
 		</>
 	)
 }

@@ -5,7 +5,6 @@ import {resetPasswordRoute, signupRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
 import PageTemplate from "../../components/utility/pageTemplate";
 import useLogin from "../../Hooks/auth/useLogin";
-import {ToastContainer} from "react-toastify";
 
 export default function LoginPage() {
 	const {
@@ -75,16 +74,6 @@ export default function LoginPage() {
 					</Form.Group>
 				</Form>
 			</Container>
-			<ToastContainer
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick={false}
-				rtl={false}
-				pauseOnFocusLoss={false}
-				draggable={false}
-				pauseOnHover={false}
-			/>
 		</PageTemplate>
 	);
 }

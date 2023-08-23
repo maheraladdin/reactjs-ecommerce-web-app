@@ -2,7 +2,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import useAddSubcategory from "../../Hooks/subCategories/useAddSubcategory";
 import {Spinner} from "react-bootstrap";
-import {ToastContainer} from "react-toastify";
 
 export default function AdminAddSubcategory() {
 	const {loading ,validated ,handleAddSubcategory ,subcategoryName ,handleSelectedCategoryIdChange ,categories ,handleSubcategoryNameChange} = useAddSubcategory();
@@ -31,18 +30,6 @@ export default function AdminAddSubcategory() {
 					</Button>
 				</Form.Group>
 			</Form>
-			<ToastContainer
-				position="top-right"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={true}
-				closeOnClick={true}
-				rtl={false}
-				pauseOnFocusLoss={false}
-				draggable={true}
-				pauseOnHover={false}
-				limit={1}
-			/>
 		</>
 	)
 }

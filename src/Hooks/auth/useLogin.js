@@ -39,16 +39,6 @@ export default function useLogin() {
     }
 
     /**
-     * @description Form validation
-     * @return {number|string|*}
-     */
-    const formValidation = () => {
-        setValidated(true);
-        if(!email) return notify('Email is required', 'error');
-        if(!password) return notify('Password is required', 'error');
-    }
-
-    /**
      * @description Request login
      * @return {Promise<void>}
      */
@@ -74,7 +64,12 @@ export default function useLogin() {
      */
     const handleSubmit = async (event) => {
         event.preventDefault();
-        formValidation();
+
+        // validate form
+        setValidated(true);
+        if(!email) return notify('Email is required', 'error');
+        if(!password) return notify('Password is required', 'error');
+
         try {
             await requestLogin();
         } catch (e) {

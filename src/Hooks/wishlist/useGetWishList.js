@@ -2,11 +2,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getWishlist} from "../../Redux/Actions/wishlistActions";
 
-let lock = 0;
+
 export default function useGetWishList() {
     const dispatch = useDispatch();
     const userReducer = useSelector(state => state.userReducer);
     const {user, token} = userReducer;
+    let lock = 0;
     useEffect(() => {
         if(token && !lock && user.role === "user")
         (async () => {
@@ -17,6 +18,7 @@ export default function useGetWishList() {
                         }
                     },
                 }));
+            // eslint-disable-next-line react-hooks/exhaustive-deps
                 lock += 1;
         })();
         // eslint-disable-next-line

@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import {loginRoute} from "../../constants/routes";
 import PageTemplate from "../../components/utility/pageTemplate";
 import useSignup from "../../Hooks/auth/useSignup";
-import {ToastContainer} from "react-toastify";
 
 export default function SignupPage() {
 
@@ -115,16 +114,6 @@ export default function SignupPage() {
 						</Form.Text>
 					</Form.Group>
 				</Form>
-				<ToastContainer
-					autoClose={5000}
-					hideProgressBar={false}
-					newestOnTop={false}
-					closeOnClick={false}
-					rtl={false}
-					pauseOnFocusLoss={false}
-					draggable={false}
-					pauseOnHover={false}
-				/>
 			</Container>
 		</PageTemplate>
 	);

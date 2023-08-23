@@ -1,14 +1,18 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {addProductToWishlist, deleteProductFromWishlist} from "../../Redux/Actions/wishlistActions";
+import useNotify from "../useNotify";
 
 
 export default function useLoveButton(product) {
     const dispatch = useDispatch();
-    const wishlist = useSelector(state => state.wishlistReducer.wishlist);
+    const wishlistReducer = useSelector(state => state.wishlistReducer);
+    const {wishlist} = wishlistReducer;
     const [isLoved, setIsLoved] = useState(false);
     const userReducer = useSelector(state => state.userReducer);
-    const {token} = userReducer;
+    const {user, token} = userReducer;
+
+    const notify = useNotify();
 
     useEffect(() => {
         setIsLoved(false);
@@ -19,6 +23,8 @@ export default function useLoveButton(product) {
     },[wishlist]);
 
     const handleLoveButton = async () => {
+        if(!token) return notify("You must login first", "error");
+        if(user.role !== "user") return notify("You must login as user first", "error");
         if(isLoved) {
             // delete product from wishlist
             await dispatch(deleteProductFromWishlist(product._id, {
@@ -28,6 +34,7 @@ export default function useLoveButton(product) {
                     }
                 },
             }));
+            notify("Product removed from wishlist", "success");
         }
         else {
             // add product to wishlist
@@ -41,6 +48,7 @@ export default function useLoveButton(product) {
                     }
                 }
             }));
+            notify("Product added to wishlist", "success");
         }
     }
 

@@ -5,7 +5,6 @@ import BestProductViewer from "../../components/utility/BestProductViewer";
 import useGetProductByID from "../../Hooks/products/useGetProductByID";
 import useGetProductsHomePage from "../../Hooks/products/useGetProductsHomePage";
 import PageTemplate from "../../components/utility/pageTemplate";
-import {ToastContainer} from "react-toastify";
 
 export default function ProductDetailsPage() {
 	useGetProductByID();
@@ -17,14 +16,6 @@ export default function ProductDetailsPage() {
 				<RateContainer />
 				<BestProductViewer title={"Most Sold"} products={mostSoldProducts} loading={loadingMostSoldProducts}/>
 			</Container>
-			<ToastContainer
-				autoClose={5000}
-				newestOnTop={false}
-				closeOnClick={true}
-				rtl={false}
-				pauseOnFocusLoss={true}
-				draggable={true}
-			/>
 		</PageTemplate>
 	)
 }
