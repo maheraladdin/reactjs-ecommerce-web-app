@@ -1,14 +1,17 @@
 import Button from "react-bootstrap/Button";
 import {Table} from "react-bootstrap";
+import useGetCoupons from "../../Hooks/coupons/useGetCoupons";
+import Pagination from "../utility/Pagination";
 
 export default function AdminCouponManagement() {
+    const {coupons, numberOfPages, handlePageChange} = useGetCoupons();
     return (
         <section className="d-flex flex-column gap-2">
             <Button className="w-fit-content">
                 <i className="fas fa-plus me-2"></i>
                 Create Coupon
             </Button>
-            <Table striped hover>
+            <Table className="text-nowrap" Times striped hover responsive>
                 <thead>
                     <tr>
                         <th scope="col">Coupon Code</th>
@@ -18,21 +21,36 @@ export default function AdminCouponManagement() {
                         <th scope="col">Usage</th>
                         <th scope="col">Max Usage</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 {
-                    Array(10).fill(0).map((item, index) => {
+                    coupons.map((coupon, index) => {
                         return (
                             <tr key={`table-row-${index + 1}`}>
-                                <td>COUPONCODE</td>
-                                <td>10%</td>
-                                <td>10000</td>
-                                <td>2021-12-31</td>
-                                <td>1 Times</td>
-                                <td>3 Times</td>
-                                <td>Active</td>
+                                <td>{coupon.name}</td>
+                                <td>{coupon.discount}%</td>
+                                <td>{coupon.maxDiscount || "-"}</td>
+                                <td>{(() => {
+                                    console.log(coupon.expireAt);
+                                    let expireDate = new Date(coupon.expireAt)
+                                    return `${expireDate.getDate()}/${expireDate.getMonth() + 1}/${expireDate.getFullYear()}`
+                                })()}</td>
+                                <td>{coupon.numberOfUsage} Times</td>
+                                <td>{coupon.maxNumberOfUsage} Times</td>
+                                <td>{
+                                    (() => {
+                                        const now = new Date();
+                                        const expireAt = new Date(coupon.expireAt);
+                                        if (now.getTime() > expireAt.getTime() || coupon.maxNumberOfUsage === coupon.numberOfUsage) {
+                                            return <span className="text-danger">Expired</span>
+                                        }
+                                        else {
+                                            return <span className="text-success">Active</span>
+                                        }
+                                    })()
+                                }</td>
                                 <td className="d-flex gap-3">
                                     <Button size={"sm"}>
                                         <i className="fas fa-edit"></i>
@@ -47,7 +65,7 @@ export default function AdminCouponManagement() {
                 }
                 </tbody>
             </Table>
-
+            {coupons.length > 12 && <Pagination numberOfPages={numberOfPages} handlePageChange={handlePageChange}/>}
         </section>
     )
 }

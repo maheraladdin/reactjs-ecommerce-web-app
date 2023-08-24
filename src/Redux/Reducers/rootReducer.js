@@ -8,6 +8,7 @@ import reviewReducer from "./reviewReducer";
 import filterReducer from "./FilterReducer";
 import userReducer from "./userReducer";
 import wishlistReducer from "./wishlistReducer";
+import couponReducer from "./couponReducer";
 export default combineReducers({
     categoryReducer,
     errorReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
     filterReducer,
     userReducer,
     wishlistReducer,
+    couponReducer,
 });

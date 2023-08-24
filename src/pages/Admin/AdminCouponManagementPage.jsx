@@ -3,7 +3,7 @@ import AdminCouponManagement from "../../components/Admin/AdminCouponManagement"
 
 export default function AdminCouponManagementPage() {
     return (
-        <AdminTemplate pagination={false} title={"Coupons Management"}>
+        <AdminTemplate title={"Coupons Management"}>
             <AdminCouponManagement />
         </AdminTemplate>
     )
