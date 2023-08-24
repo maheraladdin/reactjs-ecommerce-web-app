@@ -36,15 +36,47 @@ export default function useUpdateCoupon() {
             },
         }));
     }
+
+    /**
+     * @desc    handle show modal
+     */
     const handleClose = () => setShow(!show);
 
     // handle set data from form
+    /**
+     * @desc    handle set name
+     * @param e
+     */
     const handleSetName = (e) => setName(e.target.value);
+
+    /**
+     * @desc    handle set expire at
+     * @param e
+     */
     const handleSetExpireAt = (e) => setExpireAt(e.target.value);
+
+    /**
+     * @desc    handle set discount
+     * @param e
+     */
     const handleSetDiscount = (e) => setDiscount(e.target.value);
+
+    /**
+     * @desc    handle set max discount
+     * @param e
+     */
     const handleSetMaxDiscount = (e) => setMaxDiscount(e.target.value);
+
+    /**
+     * @desc    handle set max number of usage
+     * @param e
+     */
     const handleSetMaxNumberOfUsage = (e) => setMaxNumberOfUsage(e.target.value);
 
+    /**
+     * @desc    handle update coupon
+     * @return {Promise<void>}
+     */
     const handleUpdateCoupon = async () => {
         setLoading(true)
         setValidated(true);
@@ -107,6 +139,7 @@ export default function useUpdateCoupon() {
         setDiscount(coupon.discount);
         if(coupon.maxDiscount) setMaxDiscount(coupon.maxDiscount);
         if(coupon.maxNumberOfUsage) setMaxNumberOfUsage(coupon.maxNumberOfUsage);
+        else setMaxNumberOfUsage(0);
         // eslint-disable-next-line
     },[coupon]);
 
