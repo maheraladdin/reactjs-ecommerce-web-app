@@ -1,5 +1,5 @@
 import reduxApi from "../logic/reduxApi";
-import {CREATE_ADDRESS, DELETE_ADDRESS, GET_ADDRESSES, UPDATE_ADDRESS} from "../Types/addressTypes";
+import {CREATE_ADDRESS, DELETE_ADDRESS, GET_ADDRESSES, UPDATE_ADDRESS, GET_ADDRESS_BY_ID} from "../Types/addressTypes";
 
 export const getAddresses = (params) => reduxApi("get", "/addresses", params,
     (dispatch,payload) =>{
@@ -15,7 +15,7 @@ export const getAddresses = (params) => reduxApi("get", "/addresses", params,
 export const getAddressById = (address, params) => reduxApi("get", `/addresses/${address}`, params,
     (dispatch,payload) => {
         dispatch({
-            type: GET_ADDRESSES,
+            type: GET_ADDRESS_BY_ID,
             payload: {
                 address: payload.data.address,
                 status: payload.status,

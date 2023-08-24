@@ -1,5 +1,7 @@
 export const GET_ADDRESSES = 'GET_ADDRESSES';
 
+export const GET_ADDRESS_BY_ID = 'GET_ADDRESS_BY_ID';
+
 export const CREATE_ADDRESS = 'CREATE_ADDRESS';
 
 export const UPDATE_ADDRESS = 'UPDATE_ADDRESS';
