@@ -24,12 +24,40 @@ export default function useCreateCoupon() {
     const handleClose = () => setShow(!show);
 
     // handle set data from form
+    /**
+     * @desc    handle set name
+     * @param e
+     */
     const handleSetName = (e) => setName(e.target.value);
+
+    /**
+     * @desc    handle set expire at
+     * @param e
+     */
     const handleSetExpireAt = (e) => setExpireAt(e.target.value);
+
+    /**
+     * @desc    handle set discount
+     * @param e
+     */
     const handleSetDiscount = (e) => setDiscount(e.target.value);
+
+    /**
+     * @desc    handle set max discount
+     * @param e
+     */
     const handleSetMaxDiscount = (e) => setMaxDiscount(e.target.value);
+
+    /**
+     * @desc    handle set max number of usage
+     * @param e
+     */
     const handleSetMaxNumberOfUsage = (e) => setMaxNumberOfUsage(e.target.value);
 
+    /**
+     * @desc    handle create coupon
+     * @return {Promise<void>}
+     */
     const handleCreateCoupon = async () => {
         setLoading(true)
         setValidated(true);
@@ -83,6 +111,7 @@ export default function useCreateCoupon() {
         }));
         setLoading(false);
         setValidated(false);
+        notify("Coupon created successfully", "success");
     }
 
     return {

@@ -6,11 +6,14 @@ import CreateCouponModel from "../coupons/createCouponModel";
 import useCreateCoupon from "../../Hooks/coupons/useCreateCoupon";
 import UpdateCouponModel from "../coupons/updateCouponModel";
 import useUpdateCoupon from "../../Hooks/coupons/useUpdateCoupon";
+import DeleteCouponModel from "../coupons/DeleteCouponModel";
+import useDeleteCoupon from "../../Hooks/coupons/useDeleteCoupon";
 
 export default function AdminCouponManagement() {
     const {coupons, numberOfPages, handlePageChange} = useGetCoupons();
     const {handleClose: handleCloseCreateModel, show: showCreateModel} = useCreateCoupon();
-    const {handleClose: handleCloseUpdateModel, show: showUpdateModel, setDefault} = useUpdateCoupon();
+    const {handleClose: handleCloseUpdateModel, show: showUpdateModel, setDefault: setDefaultUpdate} = useUpdateCoupon();
+    const {handleClose: handleCloseDeleteModel, show: showDeleteModel, setDefault: setDefaultDelete} = useDeleteCoupon();
     return (
         <section className="d-flex flex-column gap-2">
             <Button onClick={handleCloseCreateModel} className="w-fit-content">
@@ -60,14 +63,19 @@ export default function AdminCouponManagement() {
                                     <Button
                                         onClick={async () => {
                                             console.log(coupon._id);
-                                            await setDefault(coupon._id);
+                                            await setDefaultUpdate(coupon._id);
                                             handleCloseUpdateModel();
                                         }}
                                         size={"sm"}
                                     >
                                         <i className="fas fa-edit"></i>
                                     </Button>
-                                    <Button size={"sm"} variant="danger">
+                                    <Button
+                                        onClick={async () => {
+                                            await setDefaultDelete(coupon._id);
+                                            handleCloseDeleteModel();
+                                        }}
+                                        size={"sm"} variant="danger">
                                         <i className="fas fa-trash"></i>
                                     </Button>
                                 </td>
@@ -80,6 +88,7 @@ export default function AdminCouponManagement() {
             {coupons.length > 12 && <Pagination numberOfPages={numberOfPages} handlePageChange={handlePageChange}/>}
             <CreateCouponModel handleClose={handleCloseCreateModel} show={showCreateModel} />
             <UpdateCouponModel handleClose={handleCloseUpdateModel} show={showUpdateModel} />
+            <DeleteCouponModel handleClose={handleCloseDeleteModel} show={showDeleteModel} />
         </section>
     )
 }

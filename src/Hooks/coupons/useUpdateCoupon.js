@@ -130,6 +130,7 @@ export default function useUpdateCoupon() {
         }));
         setLoading(false);
         setValidated(false);
+        notify("Coupon updated successfully", "success");
     }
 
     useEffect(() => {
