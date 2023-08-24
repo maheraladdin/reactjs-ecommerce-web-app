@@ -8,7 +8,9 @@ export default function useGetAddresses() {
     const token = useSelector(state => state.userReducer.token);
 
     useEffect(() => {
-        token && (async () => {
+        if(!token) return;
+        if(addresses.length > 0) return;
+        (async () => {
             await dispatch(getAddresses({
                 body: {
                     headers: {

@@ -7,9 +7,11 @@ export default function useGetWishList() {
     const dispatch = useDispatch();
     const userReducer = useSelector(state => state.userReducer);
     const {user, token} = userReducer;
-    let lock = 0;
+    const wishlist = useSelector(state => state.wishlistReducer.wishlist);
     useEffect(() => {
-        if(token && !lock && user.role === "user")
+        if(!token) return;
+        if(user.role !== "user") return;
+        if(Object.keys(wishlist).length > 0) return;
         (async () => {
                 await dispatch(getWishlist({
                     body: {
@@ -19,7 +21,6 @@ export default function useGetWishList() {
                     },
                 }));
             // eslint-disable-next-line react-hooks/exhaustive-deps
-                lock += 1;
         })();
         // eslint-disable-next-line
     }, [token,user]);
