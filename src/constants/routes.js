@@ -45,7 +45,7 @@ export const userAddressesRoute = '/user/addresses';
 
 export const userAddAddressRoute = '/user/addAddress';
 
-export const userAddressUpdateRoute = '/user/updateAddress';
+export const userAddressUpdateRoute = '/user/updateAddress/:id';
 
 export const userProfileRoute = '/user/profile';
 
