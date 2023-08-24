@@ -8,8 +8,8 @@ export default function useGetCoupons() {
     const coupons = useSelector(state => state.couponReducer.coupons);
     const numberOfPages = useSelector(state => state.couponReducer.numberOfPages);
     useEffect(() => {
-        (async () => {
-            if(token) await dispatch(getCoupons(1,12, {
+        token && (async () => {
+            await dispatch(getCoupons(1,12, {
                     body: {
                         headers: {
                             "Authorization": `Bearer ${token}`,
@@ -18,7 +18,7 @@ export default function useGetCoupons() {
                 }));
         })();
         // eslint-disable-next-line
-    },[]);
+    },[token]);
 
     async function handlePageChange(page) {
         if(token) await dispatch(getCoupons(page,12, {

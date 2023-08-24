@@ -3,32 +3,35 @@ import {Link} from "react-router-dom";
 import {userAddressUpdateRoute} from "../../constants/routes";
 import {Modal} from "react-bootstrap";
 import {useState} from "react";
+import useDeleteAddress from "../../Hooks/addresses/useDeleteAddress";
 
-export default function UserAddressCard() {
-
-	const [show, setShow] = useState(false);
-
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
-
+export default function UserAddressCard({address}) {
+	const {
+		show,
+		handleClose,
+		handleDeleteAddress,
+		loading
+	} = useDeleteAddress(address._id);
 	return (
 		<section className="d-flex flex-column gap-2 bg-white p-3 rounded-3">
 			<section className="d-flex justify-content-between align-items-center">
-				<section className="h4">Home</section>
+				<section className="h4">{address.alias}</section>
 				<section className="d-flex gap-3">
-					<Link to={userAddressUpdateRoute}>
+					<Link to={userAddressUpdateRoute.replace(":id",address._id)}>
 						<Button variant={"secondary"}>
 							<i className="fa-solid fa-edit"></i>
 						</Button>
 					</Link>
 
-					<Button variant={"danger"} onClick={handleShow}>
+					<Button variant={"danger"} onClick={handleClose}>
 						<i className="fa-solid fa-trash"></i>
 					</Button>
 				</section>
 			</section>
-			<section>Address Description</section>
-			<section>phone number: 0000000000000</section>
+			<section>City: {address.city}</section>
+			<section>Description: {address.details}</section>
+			<section>Postal code: {address.postalCode}</section>
+			<section>Phone number: {address.phone}</section>
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Delete Address</Modal.Title>
@@ -36,10 +39,10 @@ export default function UserAddressCard() {
 				<Modal.Body>Are you sure you want to delete this address ?</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
-						No
+						Cancel
 					</Button>
-					<Button variant="danger" onClick={handleClose}>
-						Yes
+					<Button variant="danger" onClick={handleDeleteAddress} disabled={loading}>
+						{loading ? "Loading..." : "Delete"}
 					</Button>
 				</Modal.Footer>
 			</Modal>
