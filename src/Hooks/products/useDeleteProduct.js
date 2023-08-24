@@ -6,7 +6,7 @@ export default function useDeleteProduct(id) {
 
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     // get the token from redux store
     const token = useSelector(state => state.userReducer.token);

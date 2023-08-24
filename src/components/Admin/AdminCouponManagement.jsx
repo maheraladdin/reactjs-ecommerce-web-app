@@ -2,12 +2,18 @@ import Button from "react-bootstrap/Button";
 import {Table} from "react-bootstrap";
 import useGetCoupons from "../../Hooks/coupons/useGetCoupons";
 import Pagination from "../utility/Pagination";
+import CreateCouponModel from "../coupons/createCouponModel";
+import useCreateCoupon from "../../Hooks/coupons/useCreateCoupon";
+import UpdateCouponModel from "../coupons/updateCouponModel";
+import useUpdateCoupon from "../../Hooks/coupons/useUpdateCoupon";
 
 export default function AdminCouponManagement() {
     const {coupons, numberOfPages, handlePageChange} = useGetCoupons();
+    const {handleClose: handleCloseCreateModel, show: showCreateModel} = useCreateCoupon();
+    const {handleClose: handleCloseUpdateModel, show: showUpdateModel, setDefault} = useUpdateCoupon();
     return (
         <section className="d-flex flex-column gap-2">
-            <Button className="w-fit-content">
+            <Button onClick={handleCloseCreateModel} className="w-fit-content">
                 <i className="fas fa-plus me-2"></i>
                 Create Coupon
             </Button>
@@ -33,7 +39,6 @@ export default function AdminCouponManagement() {
                                 <td>{coupon.discount}%</td>
                                 <td>{coupon.maxDiscount || "-"}</td>
                                 <td>{(() => {
-                                    console.log(coupon.expireAt);
                                     let expireDate = new Date(coupon.expireAt)
                                     return `${expireDate.getDate()}/${expireDate.getMonth() + 1}/${expireDate.getFullYear()}`
                                 })()}</td>
@@ -52,7 +57,14 @@ export default function AdminCouponManagement() {
                                     })()
                                 }</td>
                                 <td className="d-flex gap-3">
-                                    <Button size={"sm"}>
+                                    <Button
+                                        onClick={async () => {
+                                            console.log(coupon._id);
+                                            await setDefault(coupon._id);
+                                            handleCloseUpdateModel();
+                                        }}
+                                        size={"sm"}
+                                    >
                                         <i className="fas fa-edit"></i>
                                     </Button>
                                     <Button size={"sm"} variant="danger">
@@ -66,6 +78,8 @@ export default function AdminCouponManagement() {
                 </tbody>
             </Table>
             {coupons.length > 12 && <Pagination numberOfPages={numberOfPages} handlePageChange={handlePageChange}/>}
+            <CreateCouponModel handleClose={handleCloseCreateModel} show={showCreateModel} />
+            <UpdateCouponModel handleClose={handleCloseUpdateModel} show={showUpdateModel} />
         </section>
     )
 }
