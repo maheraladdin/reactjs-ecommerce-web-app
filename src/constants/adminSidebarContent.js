@@ -1,7 +1,9 @@
 import {
     adminAddBrandRoute,
-    adminAddCategoryRoute, adminAddProductRoute,
+    adminAddCategoryRoute,
+    adminAddProductRoute,
     adminAddSubcategoryRoute,
+    adminCouponsRoute,
     adminOrdersRoute,
     adminProductsRoute
 } from "./routes";
@@ -14,6 +16,10 @@ export const adminSideBarContent = [
     {
         text: "Products management",
         route: adminProductsRoute
+    },
+    {
+        text: "Coupons management",
+        route: adminCouponsRoute,
     },
     {
         text: "Add Brands",

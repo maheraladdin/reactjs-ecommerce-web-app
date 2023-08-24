@@ -33,6 +33,8 @@ export const adminAddProductRoute = '/admin/addProduct';
 
 export const adminEditProductRoute = '/admin/products/edit/:id'
 
+export const adminCouponsRoute = '/admin/coupons';
+
 export const userOrdersRoute = '/user/orders';
 
 export const userOrderDetailsRoute = '/user/orders/:id';

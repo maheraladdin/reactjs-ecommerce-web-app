@@ -24,7 +24,11 @@ import {
     userAddressUpdateRoute,
     userAddAddressRoute,
     userUpdateProfileRoute,
-    adminEditProductRoute, resetPasswordRoute, verifyPasswordResetTokenRoute, resetForgottenPasswordRoute
+    adminEditProductRoute,
+    resetPasswordRoute,
+    verifyPasswordResetTokenRoute,
+    resetForgottenPasswordRoute,
+    adminCouponsRoute
 } from "./constants/routes";
 import SignupPage from "./pages/Auth/SignupPage";
 import CategoriesPage from "./pages/Category/CategoriesPage";
@@ -50,6 +54,7 @@ import {AdminEditProductPage} from "./pages/Admin/AdminEditProductPage";
 import ResetPasswordPage from "./pages/Auth/ResetPasswordPage";
 import VerifyPasswordResetTokenPage from "./pages/Auth/VerifyPasswordResetTokenPage";
 import ResetForgottenPasswordPage from "./pages/Auth/ResetForgottenPasswordPage";
+import AdminCouponManagementPage from "./pages/Admin/AdminCouponManagementPage";
 
 export default function App() {
     return (
@@ -72,6 +77,7 @@ export default function App() {
                     <Route path={adminAddSubcategoryRoute} element={<AdminAddSubcategoryPage />} />
                     <Route path={adminAddProductRoute} element={<AdminAddProductPage />} />
                     <Route path={adminEditProductRoute} element={<AdminEditProductPage />}/>
+                    <Route path={adminCouponsRoute} element={<AdminCouponManagementPage />} />
                     <Route path={userOrdersRoute} element={<UserOrdersManagementPage />} />
                     <Route path={userWishlistRoute} element={<UserWishListPage />} />
                     <Route path={userAddressesRoute} element={<UserAddressesPage />} />
