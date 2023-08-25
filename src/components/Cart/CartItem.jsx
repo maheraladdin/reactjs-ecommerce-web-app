@@ -2,14 +2,17 @@ import {Badge, Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useUpdateItemQuantity from "../../Hooks/cart/useUpdateItemQuantity";
+import useDeleteItemFromLoggedUserCart from "../../Hooks/cart/useDeleteItemFromLoggedUserCart";
 
 export default function CartItem({item}) {
 	const {
 		quantity,
-		loading,
+		loading: updateLoading,
 		handleChangeQuantity,
 		handleUpdateItemQuantity,
 	} = useUpdateItemQuantity(item);
+
+	const {loading: deleteLoading, handleDeleteItemFromLoggedUserCart} = useDeleteItemFromLoggedUserCart(item);
 	return (
 		<Row className="bg-light p-3 rounded-3 gap-3 gap-md-0">
 			<Col
@@ -30,7 +33,9 @@ export default function CartItem({item}) {
 			>
 				<section className="d-flex justify-content-between align-items-center">
 					<section>{item.product.category.name}</section>
-					<Button variant="outline-danger">Delete</Button>
+					<Button onClick={handleDeleteItemFromLoggedUserCart} variant="outline-danger" disabled={deleteLoading}>
+						{deleteLoading ? "Loading..." : "Delete"}
+					</Button>
 				</section>
 				<section>Product {item.product.title}</section>
 				<section>Brand: {item.product.brand.name}</section>
@@ -46,8 +51,8 @@ export default function CartItem({item}) {
 					<Form className="d-flex gap-3 align-items-center">
 						<Form.Text>Quantity:</Form.Text>
 						<Form.Control onChange={handleChangeQuantity} type={"number"} value={quantity}/>
-						<Button onClick={handleUpdateItemQuantity} variant={"outline-success"} disabled={loading}>
-							{loading ? "Loading..." : "Update"}
+						<Button onClick={handleUpdateItemQuantity} variant={"outline-success"} disabled={updateLoading}>
+							{updateLoading ? "Loading..." : "Update"}
 						</Button>
 					</Form>
 					<section>

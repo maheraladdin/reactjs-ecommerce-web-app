@@ -27,7 +27,7 @@ export const addToCart = params => reduxApi("post", "/cart", params,
         });
     });
 
-export const removeFromCart = params => reduxApi("delete", "/cart", params,
+export const removeFromCart = (id,params) => reduxApi("delete", `/cart/${id}`, params,
     (dispatch, payload) => {
         dispatch({
             type: REMOVE_FROM_CART,
