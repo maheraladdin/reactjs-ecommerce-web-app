@@ -1,13 +1,19 @@
 import {
+    GET_LOGGED_USER_DATA,
+    UPDATE_LOGGED_USER_DATA,
+    UPDATE_LOGGED_USER_PASSWORD,
+} from "../Types/userTypes";
+import {
     SIGNUP,
     LOGIN,
     LOGOUT,
-    GET_LOGGED_USER_DATA,
     SET_TOKEN,
     RESET_PASSWORD,
     RESET_FORGOTTEN_PASSWORD
-} from "../Types/userTypes";
+} from "../Types/authTypes";
 import reduxApi from "../logic/reduxApi";
+
+// auth actions
 
 /**
  * @desc    login user from API
@@ -58,24 +64,6 @@ export const logout = () => {
     }
 }
 
-/**
- * @desc    get logged user data from API
- * @param   {Object} params - get logged user data params
- * @param   {Object} params.body - get logged user data body params
- * @param   {Object} params.config - get logged user data config params
- * @param   {Object} params.config.headers - get logged user data headers params
- * @return  {(function(*): Promise<void>)|*}
- */
-export const getLoggedUserData = (params) => reduxApi("get", "/users/loggedUser", params,
-    (dispatch, payload) => {
-        dispatch({
-            type: GET_LOGGED_USER_DATA,
-            payload: {
-                user: payload.data.document,
-            }
-        });
-    });
-
 export const setToken = (tokenFromCookie, tokenExpireAtFromCookie) => {
     return {
         type: SET_TOKEN,
@@ -101,6 +89,68 @@ export const resetForgottenPassword = params => reduxApi("patch", "/auth/resetPa
         dispatch({
             type: RESET_FORGOTTEN_PASSWORD,
             payload: {
+                token: payload.data.token,
+                tokenExpireAt: tokenExpireAt.toUTCString(),
+            }
+        });
+    });
+
+
+// user actions
+
+/**
+ * @desc    get logged user data from API
+ * @param   {Object} params - get logged user data params
+ * @param   {Object} params.body - get logged user data body params
+ * @param   {Object} params.config - get logged user data config params
+ * @param   {Object} params.config.headers - get logged user data headers params
+ * @return  {(function(*): Promise<void>)|*}
+ */
+export const getLoggedUserData = (params) => reduxApi("get", "/users/loggedUser", params,
+    (dispatch, payload) => {
+        dispatch({
+            type: GET_LOGGED_USER_DATA,
+            payload: {
+                user: payload.data.document,
+            }
+        });
+    });
+
+/**
+ * @desc update logged user data from API
+ * @param params
+ * @param params.body
+ * @param params.config
+ * @param params.config.headers
+ * @param params.config.headers.Authorization
+ * @return {(function(*): Promise<void>)|*}
+ */
+export const updateLoggedUserData = params => reduxApi("put", "/users/updateLoggedUserData", params,
+    (dispatch, payload) => {
+        dispatch({
+            type: UPDATE_LOGGED_USER_DATA,
+            payload: {
+                user: payload.data.document,
+            }
+        });
+    });
+
+/**
+ * @desc update logged user password from API
+ * @param params
+ * @param params.body
+ * @param params.config
+ * @param params.config.headers
+ * @param params.config.headers.Authorization
+ * @return {(function(*): Promise<void>)|*}
+ */
+export const updateLoggedUserPassword = params => reduxApi("patch", "/users/changeLoggedUserPassword", params,
+    (dispatch, payload) => {
+        const tokenExpireAt = new Date(new Date().getTime() + 1000 * 60 * 60 * 24);
+        dispatch({
+            type: UPDATE_LOGGED_USER_PASSWORD,
+            payload: {
+                user: payload.data.document,
                 token: payload.data.token,
                 tokenExpireAt: tokenExpireAt.toUTCString(),
             }
