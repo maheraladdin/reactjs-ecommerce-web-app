@@ -8,8 +8,11 @@ export default function UserChangePassword() {
 	const {
 		loading,
 		validated,
+		currentPassword,
 		handleCurrentPassword,
+		password,
 		handlePassword,
+		passwordConfirmation,
 		handlePasswordConfirmation,
 		updateLoggedUserPasswordHandler
 	} = useUpdateLoggedUserPassword();
@@ -21,15 +24,15 @@ export default function UserChangePassword() {
 			</h3>
 			<Form.Group controlId={"CurrentPassword"}>
 				<Form.Label>Current Password</Form.Label>
-				<Form.Control onChange={handleCurrentPassword} type={"password"} placeholder={"Current Password"} />
+				<Form.Control required onChange={handleCurrentPassword} value={currentPassword} type={"password"} placeholder={"Current Password"} />
 			</Form.Group>
 			<Form.Group controlId={"NewPassword"}>
 				<Form.Label>New Password</Form.Label>
-				<Form.Control onChange={handlePassword} type={"password"} placeholder={"New Password"} />
+				<Form.Control required onChange={handlePassword} value={password} type={"password"} placeholder={"New Password"} />
 			</Form.Group>
 			<Form.Group controlId={"ConfirmNewPassword"}>
 				<Form.Label>New Password Confirmation</Form.Label>
-				<Form.Control onChange={handlePasswordConfirmation} type={"password"} placeholder={"New Password Confirmation"} />
+				<Form.Control required onChange={handlePasswordConfirmation} value={passwordConfirmation} type={"password"} placeholder={"New Password Confirmation"} />
 			</Form.Group>
 			<Button onClick={updateLoggedUserPasswordHandler} className="align-self-end" variant={"primary"} disabled={loading}>
 				{loading ? "Loading..." : "Update Password"}

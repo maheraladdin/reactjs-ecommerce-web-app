@@ -58,8 +58,11 @@ export default function useUpdateLoggedUserPassword() {
     return {
         loading,
         validated,
+        currentPassword,
         handleCurrentPassword,
+        password,
         handlePassword,
+        passwordConfirmation,
         handlePasswordConfirmation,
         updateLoggedUserPasswordHandler
     }
