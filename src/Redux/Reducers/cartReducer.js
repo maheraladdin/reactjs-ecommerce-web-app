@@ -4,7 +4,6 @@ const initialState = {
     cart: {},
     totalCartPrice: 0,
     status: 0,
-    totalCartDiscountedPrice: 0,
 }
 export default function cartReducer(state = initialState, action) {
     switch (action.type) {
@@ -12,43 +11,36 @@ export default function cartReducer(state = initialState, action) {
             return {
                 ...state,
                 cart: action.payload.cart,
-                totalCartPrice: action.payload.cart.totalCartPrice,
                 status: action.payload.status,
             }
         case ADD_TO_CART:
             return {
                 ...state,
                 cart: action.payload.cart,
-                totalCartPrice: action.payload.cart.totalCartPrice,
                 status: action.payload.status,
             }
         case REMOVE_FROM_CART:
             return {
                 ...state,
                 cart: action.payload.cart,
-                totalCartPrice: action.payload.cart.totalCartPrice,
                 status: action.payload.status,
             }
         case UPDATE_ITEM_QUANTITY:
             return {
                 ...state,
                 cart: action.payload.cart,
-                totalCartPrice: action.payload.cart.totalCartPrice,
                 status: action.payload.status,
             }
         case CLEAR_CART:
             return {
                 ...state,
                 cart: action.payload.cart,
-                totalCartPrice: action.payload.cart.totalCartPrice,
                 status: action.payload.status,
             }
         case APPLY_COUPON:
             return {
                 ...state,
                 cart: action.payload.cart,
-                totalCartPrice: action.payload.cart.totalCartPrice,
-                totalCartDiscountedPrice: action.payload.totalCartDiscountedPrice,
                 status: action.payload.status,
             }
         default:

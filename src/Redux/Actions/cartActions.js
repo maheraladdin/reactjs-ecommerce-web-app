@@ -7,9 +7,7 @@ export const getCart = params => reduxApi("get", "/cart", params,
             type: GET_CART,
             payload: {
                 cart: payload.data.cart,
-                totalCartPrice: payload.data.totalCartPrice,
                 status: payload.status,
-                totalCartDiscountedPrice: undefined,
             }
         });
     });
@@ -20,9 +18,7 @@ export const addToCart = params => reduxApi("post", "/cart", params,
             type: ADD_TO_CART,
             payload: {
                 cart: payload.data.cart,
-                totalCartPrice: payload.data.totalCartPrice,
                 status: payload.status,
-                totalCartDiscountedPrice: undefined,
             }
         });
     });
@@ -33,9 +29,7 @@ export const removeFromCart = (id,params) => reduxApi("delete", `/cart/${id}`, p
             type: REMOVE_FROM_CART,
             payload: {
                 cart: payload.data.cart,
-                totalCartPrice: payload.data.totalCartPrice,
                 status: payload.status,
-                totalCartDiscountedPrice: undefined,
             }
         });
     });
@@ -46,34 +40,28 @@ export const updateItemQuantity = (id, params) => reduxApi("patch", `/cart/${id}
             type: UPDATE_ITEM_QUANTITY,
             payload: {
                 cart: payload.data.cart,
-                totalCartPrice: payload.data.totalCartPrice,
                 status: payload.status,
-                totalCartDiscountedPrice: undefined,
             }
         });
     });
 
-export const clearCart = params => reduxApi("delete", "/cart/clear", params,
+export const clearCart = params => reduxApi("delete", "/cart", params,
     (dispatch, payload) => {
         dispatch({
             type: CLEAR_CART,
             payload: {
                 cart: payload.data.cart,
-                totalCartPrice: payload.data.totalCartPrice,
                 status: payload.status,
-                totalCartDiscountedPrice: undefined,
             }
         });
     });
 
-export const applyCoupon = params => reduxApi("post", "/cart/coupon", params,
+export const applyCoupon = params => reduxApi("patch", "/cart/applyCoupon", params,
     (dispatch, payload) => {
         dispatch({
             type: APPLY_COUPON,
             payload: {
                 cart: payload.data.cart,
-                totalCartPrice: payload.data.totalCartPrice,
-                totalCartDiscountedPrice: payload.data.totalCartDiscountedPrice,
                 status: payload.status,
             }
         });
