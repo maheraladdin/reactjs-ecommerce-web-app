@@ -9,6 +9,9 @@ export default function useDeleteItemFromLoggedUserCart(item) {
     const token = useSelector(state => state.userReducer.token);
 
     const [loading, setLoading] = useState(false);
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(!show);
 
     const handleDeleteItemFromLoggedUserCart = async () => {
         setLoading(true);
@@ -26,5 +29,7 @@ export default function useDeleteItemFromLoggedUserCart(item) {
     return {
         loading,
         handleDeleteItemFromLoggedUserCart,
+        handleClose,
+        show,
     }
 }

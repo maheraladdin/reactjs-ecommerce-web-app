@@ -1,32 +1,42 @@
 import Form from "react-bootstrap/Form";
-import {Badge} from "react-bootstrap";
+import {Badge, Spinner} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {useSelector} from "react-redux";
 import {ProductLoveButton} from "./ProductLoveButton";
+import useAddItemToLoggedUserCart from "../../Hooks/cart/useAddItemToLoggedUserCart";
 
 export function ProductData() {
-	const product = useSelector(state => state.productReducer.product)
+	const {
+		handleAddItemToLoggedUserCart,
+		onClickSelectColor,
+		loading,
+		product,
+		selectedColor,
+	} = useAddItemToLoggedUserCart();
 	return (
 		<Form className="d-flex flex-column gap-2 bg-light p-5 rounded-5 h-100">
-			<Form.Label>{product && product.category && product.category.name}:</Form.Label>
-			<Form.Text>{product && product.title}</Form.Text>
-			<Form.Label><i className="fa-solid fa-star text-warning"></i> {product && product.ratingsAverage} (quantity: {product.ratingsQuantity})</Form.Label>
-			{product && product.brand && product.brand.name && <Form.Text>brand: <span className="h4 text-dark">{product.brand.name}</span></Form.Text>}
+			<Form.Label>{product?.category?.name}:</Form.Label>
+			<Form.Text>{product?.title}</Form.Text>
+			<Form.Label><i className="fa-solid fa-star text-warning"></i> {product?.ratingsAverage} (quantity: {product?.ratingsQuantity})</Form.Label>
+			{product?.brand?.name && <Form.Text>brand: <span className="h4 text-dark">{product.brand.name}</span></Form.Text>}
 			<Form.Group className="d-flex gap-1 py-2">
 			{
-				product && product.colors && product.colors.map((color,i) => {
+				product?.colors?.map((color,i) => {
 					return (
-						<section
-							key={i + 1}
-							className="rounded-circle border border-1 border-light"
-							style={{
-								width: "30px",
-								height: "30px",
-								backgroundColor: color
-							}}
-						>
-
-						</section>
+						<Form.Group key={`select-color-${i + 1}`}>
+							<Form.Label
+								className="rounded-circle border border-1 border-light d-flex justify-content-center align-items-center"
+								style={{
+									width: "30px",
+									height: "30px",
+									backgroundColor: color
+								}}
+								role={"button"}
+								htmlFor={`form-radio-${i + 1}`}
+							>
+								{selectedColor === color && <i className="fa-solid fa-check text-success"></i>}
+							</Form.Label>
+							<Form.Control onClick={onClickSelectColor} id={`form-radio-${i + 1}`} type={"radio"} name={"color"} value={color} className={"d-none"}/>
+						</Form.Group>
 					)
 				})
 			}
@@ -35,20 +45,27 @@ export function ProductData() {
 				Product Description:
 			</Form.Label>
 			<Form.Text>
-				{product && product.description}
+				{product?.description}
 			</Form.Text>
 			<Form.Group className="d-flex flex-wrap h2 gap-3 pt-2">
-				{	!product.discountedPrice ?
-					(<Badge>{product && product.price} EGP</Badge>)
+				{	!product?.discountedPrice ?
+					(<Badge>{product?.price} EGP</Badge>)
 					: (<>
-						<Badge bg="danger"><del>{product && product.price} EGP</del></Badge>
-						<Badge>{product && product.discountedPrice} EGP</Badge>
+						<Badge bg="danger"><del>{product?.price} EGP</del></Badge>
+						<Badge>{product?.discountedPrice} EGP</Badge>
 					</>)
 				}
 			</Form.Group>
 			<Form.Group className="d-flex gap-3">
 				<ProductLoveButton absolute={false} product={product}/>
-				<Button variant="outline-dark"><i className="fa-solid fa-cart-plus"></i></Button>
+				<Button onClick={handleAddItemToLoggedUserCart} variant="outline-dark" disabled={loading}>
+					{
+						loading ?
+							<Spinner animation="border" variant="dark" size="sm" />
+						:
+							<i className="fa-solid fa-cart-plus"></i>
+					}
+				</Button>
 			</Form.Group>
 		</Form>
 	)
