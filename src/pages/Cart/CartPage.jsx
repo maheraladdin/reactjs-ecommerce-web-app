@@ -3,8 +3,10 @@ import {Col, Row} from "react-bootstrap";
 import CartItem from "../../components/Cart/CartItem";
 import {CartPay} from "../../components/Cart/CartPay";
 import PageTemplate from "../../components/utility/pageTemplate";
+import useGetLoggedUserCart from "../../Hooks/cart/useGetLoggedUserCart";
 
 export default function CartPage() {
+	const {cart} = useGetLoggedUserCart();
 	return (
 		<PageTemplate>
 			<Container className="min-height-100vh my-5">
@@ -16,9 +18,7 @@ export default function CartPage() {
 						className="d-flex flex-column gap-3"
 					>
 						{
-							Array(4).fill().map((_,i) => {
-								return 	<CartItem key={i} />
-							})
+							cart?.items?.map((item,index) => <CartItem key={`cart-item-${index + 1}`} item={item} />)
 						}
 					</Col>
 					<Col

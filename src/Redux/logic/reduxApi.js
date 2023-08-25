@@ -20,7 +20,7 @@ export default function reduxApi(method, url, params = {}, callbackDispatch) {
     return async (dispatch) => {
         try {
             // fetch data from a url endpoint
-            const payload = await baseURL[method](url, params && params.body && params.body, params && params.config && params.config);
+            const payload = await baseURL[method](url, params?.body, params?.config);
             // dispatch the response to redux
             await callbackDispatch(dispatch, payload);
         } catch (error) {
