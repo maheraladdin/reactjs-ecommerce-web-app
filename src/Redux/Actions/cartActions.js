@@ -40,7 +40,7 @@ export const removeFromCart = params => reduxApi("delete", "/cart", params,
         });
     });
 
-export const updateItemQuantity = params => reduxApi("patch", "/cart", params,
+export const updateItemQuantity = (id, params) => reduxApi("patch", `/cart/${id}`, params,
     (dispatch, payload) => {
         dispatch({
             type: UPDATE_ITEM_QUANTITY,

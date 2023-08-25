@@ -1,8 +1,15 @@
 import {Badge, Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import useUpdateItemQuantity from "../../Hooks/cart/useUpdateItemQuantity";
 
 export default function CartItem({item}) {
+	const {
+		quantity,
+		loading,
+		handleChangeQuantity,
+		handleUpdateItemQuantity,
+	} = useUpdateItemQuantity(item);
 	return (
 		<Row className="bg-light p-3 rounded-3 gap-3 gap-md-0">
 			<Col
@@ -13,6 +20,7 @@ export default function CartItem({item}) {
 					src={item.product.imageCover}
 					alt="logo"
 					className="bg-white p-3 rounded-3 w-100"
+					loading={"lazy"}
 				/>
 			</Col>
 			<Col
@@ -37,8 +45,10 @@ export default function CartItem({item}) {
 				<section className="d-flex justify-content-between align-items-center flex-wrap gap-2">
 					<Form className="d-flex gap-3 align-items-center">
 						<Form.Text>Quantity:</Form.Text>
-						<Form.Control type={"number"} value={item.quantity}/>
-						<Button variant={"outline-success"}>Update</Button>
+						<Form.Control onChange={handleChangeQuantity} type={"number"} value={quantity}/>
+						<Button onClick={handleUpdateItemQuantity} variant={"outline-success"} disabled={loading}>
+							{loading ? "Loading..." : "Update"}
+						</Button>
 					</Form>
 					<section>
 						<Badge className="p-2">{item.product.price} EGP</Badge>
