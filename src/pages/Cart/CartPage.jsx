@@ -7,41 +7,39 @@ import useGetLoggedUserCart from "../../Hooks/cart/useGetLoggedUserCart";
 import Button from "react-bootstrap/Button";
 import useClearCart from "../../Hooks/cart/useClearCart";
 import DeleteItemFromLoggedUserCartModel from "../../components/Cart/ClearCartModel";
-import {useSelector} from "react-redux";
-import {Navigate} from "react-router-dom";
-import {loginRoute} from "../../constants/routes";
+import ProtectRoute from "../../components/utility/ProtectRoute";
 
 export default function CartPage() {
 	const {cart} = useGetLoggedUserCart();
 	const {handleClose, show} = useClearCart();
-	const userReducer = useSelector(state => state.userReducer);
-	const {user, token} = userReducer;
-	return token && user ? (
-		<PageTemplate>
-			<Container className="min-height-100vh my-5">
-				<section className="h1 d-flex justify-content-between align-items-center">
-					<section>Cart</section>
-					<Button variant={"danger"} onClick={handleClose} >Clear Cart</Button>
-				</section>
-				<Row className="gap-5 gap-lg-0">
-					<Col
-						xs={12}
-						lg={9}
-						className="d-flex flex-column gap-3"
-					>
-						{
-							cart?.items?.map((item,index) => <CartItem key={`cart-item-${index + 1}`} item={item} />)
-						}
-					</Col>
-					<Col
-						xs={12}
-						lg={3}
-					>
-						<CartPay />
-					</Col>
-				</Row>
-			</Container>
-			<DeleteItemFromLoggedUserCartModel show={show} handleClose={handleClose} />
-		</PageTemplate>
-	) : <Navigate to={loginRoute} />
+	return (
+		<ProtectRoute role={"user"}>
+			<PageTemplate>
+				<Container className="min-height-100vh my-5">
+					<section className="h1 d-flex justify-content-between align-items-center">
+						<section>Cart</section>
+						<Button variant={"danger"} onClick={handleClose} >Clear Cart</Button>
+					</section>
+					<Row className="gap-5 gap-lg-0">
+						<Col
+							xs={12}
+							lg={9}
+							className="d-flex flex-column gap-3"
+						>
+							{
+								cart?.items?.map((item,index) => <CartItem key={`cart-item-${index + 1}`} item={item} />)
+							}
+						</Col>
+						<Col
+							xs={12}
+							lg={3}
+						>
+							<CartPay />
+						</Col>
+					</Row>
+				</Container>
+				<DeleteItemFromLoggedUserCartModel show={show} handleClose={handleClose} />
+			</PageTemplate>
+		</ProtectRoute>
+	);
 }
