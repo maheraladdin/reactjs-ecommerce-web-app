@@ -2,7 +2,6 @@ import { GET_CART, ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART, UPDATE_ITEM_QUANTI
 
 const initialState = {
     cart: {},
-    totalCartPrice: 0,
     status: 0,
 }
 export default function cartReducer(state = initialState, action) {
