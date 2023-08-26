@@ -7,7 +7,7 @@ import {
     REMOVE_BRAND,
     SET_LESSER_PRICE,
     SET_GREATER_PRICE,
-    SET_QUERY_STRING, REMOVE_CATEGORIES, REMOVE_BRANDS
+    SET_QUERY_STRING, REMOVE_CATEGORIES, REMOVE_BRANDS, REMOVE_FILTERS
 } from "../Types/FilterTypes";
 import createQueryString from "../logic/createQueryString";
 
@@ -80,6 +80,8 @@ export default function filterReducer(state = initialState, action) {
                 ...state,
                 queryString: createQueryString(state),
             }
+        case REMOVE_FILTERS:
+            return initialState;
         default:
             return state;
     }

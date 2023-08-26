@@ -7,7 +7,7 @@ import {
     REMOVE_BRAND,
     SET_LESSER_PRICE,
     SET_GREATER_PRICE,
-    SET_QUERY_STRING, REMOVE_CATEGORIES, REMOVE_BRANDS
+    SET_QUERY_STRING, REMOVE_CATEGORIES, REMOVE_BRANDS, REMOVE_FILTERS
 } from "../Types/FilterTypes";
 
 export const setSortBy = (sort,asc) => {
@@ -79,4 +79,8 @@ export const setGreaterPrice = (greaterPrice) => ({
 export const setQueryString = () => ({
     type: SET_QUERY_STRING,
 });
+
+export const removeFilters = () => ({
+    type: REMOVE_FILTERS,
+})
 
