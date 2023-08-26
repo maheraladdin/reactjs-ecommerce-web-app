@@ -4,9 +4,14 @@ import LoggedUserSidebar from "../utility/LoggedUserSidebar";
 import Pagination from "../utility/Pagination";
 import {userSidebarContent} from "../../constants/userSidebarContent";
 import PageTemplate from "../utility/pageTemplate";
+import {useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
+import {loginRoute} from "../../constants/routes";
 
 export function UserTemplate({title, children, pagination = true}) {
-	return (
+	const userReducer = useSelector(state => state.userReducer);
+	const {user, token} = userReducer;
+	return token && user ? (
 		<PageTemplate>
 			<Container className="py-4" style={{
 				minHeight: "calc(100vh - 70px)"
@@ -29,5 +34,5 @@ export function UserTemplate({title, children, pagination = true}) {
 				</Row>
 			</Container>
 		</PageTemplate>
-	)
+	) : <Navigate to={loginRoute} />
 }

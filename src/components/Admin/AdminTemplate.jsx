@@ -3,9 +3,14 @@ import LoggedUserSidebar from "../utility/LoggedUserSidebar";
 import Container from "react-bootstrap/Container";
 import {adminSideBarContent} from "../../constants/adminSidebarContent";
 import PageTemplate from "../utility/pageTemplate";
+import {useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
+import {loginRoute} from "../../constants/routes";
 
 export default function AdminTemplate({title, children}) {
-	return (
+	const userReducer = useSelector(state => state.userReducer);
+	const {user, token} = userReducer;
+	return token && user.role === "admin" ? (
 		<PageTemplate>
 			<Container className="py-4" style={{
 				minHeight: "calc(100vh - 70px)"
@@ -27,5 +32,5 @@ export default function AdminTemplate({title, children}) {
 				</Row>
 			</Container>
 		</PageTemplate>
-	)
+	) : <Navigate to={loginRoute} />;
 }

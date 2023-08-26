@@ -7,11 +7,16 @@ import useGetLoggedUserCart from "../../Hooks/cart/useGetLoggedUserCart";
 import Button from "react-bootstrap/Button";
 import useClearCart from "../../Hooks/cart/useClearCart";
 import DeleteItemFromLoggedUserCartModel from "../../components/Cart/ClearCartModel";
+import {useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
+import {loginRoute} from "../../constants/routes";
 
 export default function CartPage() {
 	const {cart} = useGetLoggedUserCart();
 	const {handleClose, show} = useClearCart();
-	return (
+	const userReducer = useSelector(state => state.userReducer);
+	const {user, token} = userReducer;
+	return token && user ? (
 		<PageTemplate>
 			<Container className="min-height-100vh my-5">
 				<section className="h1 d-flex justify-content-between align-items-center">
@@ -38,5 +43,5 @@ export default function CartPage() {
 			</Container>
 			<DeleteItemFromLoggedUserCartModel show={show} handleClose={handleClose} />
 		</PageTemplate>
-	)
+	) : <Navigate to={loginRoute} />
 }

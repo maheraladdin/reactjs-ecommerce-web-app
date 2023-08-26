@@ -68,7 +68,6 @@ export default function App() {
                     <Route path={brandsRoute} element={<BrandsPage />} />
                     <Route path={productsRoute} element={<ProductBrowserPage />} />
                     <Route path={productDetailsRoute} element={<ProductDetailsPage />} />
-                    <Route path={cartRoute} element={<CartPage />} />
                     <Route path={adminProductsRoute} element={<AdminProductsManagementPage />} />
                     <Route path={adminOrdersRoute} element={<AdminOrdersManagementPage />} />
                     <Route path={adminOrderDetailsRoute} element={<AdminOrderDetailsPage />} />
@@ -78,6 +77,7 @@ export default function App() {
                     <Route path={adminAddProductRoute} element={<AdminAddProductPage />} />
                     <Route path={adminEditProductRoute} element={<AdminEditProductPage />}/>
                     <Route path={adminCouponsRoute} element={<AdminCouponManagementPage />} />
+                    <Route path={cartRoute} element={<CartPage />} />
                     <Route path={userOrdersRoute} element={<UserOrdersManagementPage />} />
                     <Route path={userWishlistRoute} element={<UserWishListPage />} />
                     <Route path={userAddressesRoute} element={<UserAddressesPage />} />
