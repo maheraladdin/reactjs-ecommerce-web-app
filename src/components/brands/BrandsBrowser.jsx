@@ -17,7 +17,7 @@ export default function BrandsBrowser() {
 							xl={2}
 							className="mb-5"
 						>
-							<BrandCard key={i} brand={{image: brand.image || "https://picsum.photos/200"}}/>
+							<BrandCard key={i} brand={brand}/>
 						</Col>
 					))
 				}

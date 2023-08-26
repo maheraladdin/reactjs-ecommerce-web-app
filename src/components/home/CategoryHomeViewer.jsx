@@ -24,7 +24,7 @@ export default function CategoryHomeViewer() {
                         lg={2}
                         className="mb-5"
                     >
-                        <CategoryCard category={{name: category.name,image: category.image || "https://picsum.photos/200"}} />
+                        <CategoryCard category={category} />
                     </Col>
                 )) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
             }

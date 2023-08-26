@@ -16,7 +16,7 @@ export default function CategoriesBrowser() {
 							lg={2}
 							className="mb-5"
 						>
-							<CategoryCard category={{name: category.name,image: category.image || "https://picsum.photos/200"}} />
+							<CategoryCard category={category} />
 						</Col>
 					))
 				}

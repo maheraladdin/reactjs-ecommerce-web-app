@@ -18,7 +18,9 @@ export default function SidebarFilter() {
 		handlePriceLessThan,
 		onClickPriceFilter,
 		onCategoryChecked,
-		onBrandChecked
+		onBrandChecked,
+		checkedCategories,
+		checkedBrands,
 	} = useProductSidebarFilter();
 
 	return (
@@ -39,6 +41,7 @@ export default function SidebarFilter() {
 								value={category._id}
 								role={"button"}
 								onChange={onCategoryChecked}
+								checked={checkedCategories.includes(category._id)}
 							/>
 						)
 					})
@@ -61,6 +64,7 @@ export default function SidebarFilter() {
 								value={brand._id}
 								role={"button"}
 								onChange={onBrandChecked}
+								checked={checkedBrands.includes(brand._id)}
 							/>
 						)
 					})

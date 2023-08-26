@@ -16,6 +16,8 @@ export default function useProductSidebarFilter() {
 
     const categories = useSelector(state => state.categoryReducer.categories);
     const brands = useSelector(state => state.brandReducer.brands);
+    const checkedCategories = useSelector(state => state.filterReducer.categories);
+    const checkedBrands = useSelector(state => state.filterReducer.brands);
 
     const [loadingCategories, setLoadingCategories] = useState(false);
     const [loadingBrands, setLoadingBrands] = useState(false);
@@ -90,6 +92,8 @@ export default function useProductSidebarFilter() {
         handlePriceLessThan,
         onClickPriceFilter,
         onCategoryChecked,
-        onBrandChecked
+        onBrandChecked,
+        checkedCategories,
+        checkedBrands,
     }
 }
