@@ -24,7 +24,7 @@ export default function useGetAllOrders() {
     },[token]);
 
     const handlePageChange = async (page) => {
-        await dispatch(getAllOrders(page, 3, {
+        await dispatch(getAllOrders(page.selected + 1, 3, {
             body: {
                 headers: {
                     "Authorization": `Bearer ${token}`,

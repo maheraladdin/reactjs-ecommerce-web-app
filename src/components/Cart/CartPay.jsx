@@ -8,6 +8,7 @@ import useCheckout from "../../Hooks/orders/useCheckout";
 export function CartPay() {
 	const {cart, handleApplyCoupon, onChangeCoupon, loading} = useApplyCoupon();
 	const {addresses} = useGetAddresses();
+
 	const {
 		address,
 		onChangePaymentMethod,
@@ -16,6 +17,7 @@ export function CartPay() {
 		loading: checkoutLoading,
 		paymentMethod,
 	} = useCheckout();
+
 	return (
 		<section className="d-flex flex-column bg-light p-3 rounded-3 gap-3">
 			<Form className="d-flex gap-3">

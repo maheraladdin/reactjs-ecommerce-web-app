@@ -13,7 +13,7 @@ export default function UserOrdersBrowser() {
 					)
 				})
 			}
-			{numberOfPages > 1 && <Pagination numberOfPages={numberOfPages} handlePageChange={handlePageChange} />}
+			{numberOfPages > 1 && <Pagination pageCount={numberOfPages} handlePageChange={handlePageChange} />}
 		</section>
 	)
 }

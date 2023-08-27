@@ -14,15 +14,15 @@ export default function useAddItemToLoggedUserCart() {
 
 
     const handleAddItemToLoggedUserCart = async () => {
-        if(product.colors.length === 0) setSelectedColor("black");
         if (!token) return notify("You need to login first", "error");
-        if (!selectedColor) return notify("You need to select a color first", "error");
+        if (product.colors.length && !selectedColor) return notify("You need to select a color first", "error");
+        const body = {
+            product: product._id,
+        }
+        if (selectedColor) body.color = selectedColor;
         setLoading(true);
         await dispatch(addToCart({
-            body: {
-                product: product._id,
-                color: selectedColor,
-            },
+            body,
             config: {
                 headers: {
                     Authorization: `Bearer ${token}`,
