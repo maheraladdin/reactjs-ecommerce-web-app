@@ -1,18 +1,18 @@
 import {Col, Row} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
-export default function UserOrderCardProduct() {
+export default function UserOrderCardProduct({item}) {
 	return (
 		<Row className="py-3 bg-white rounded-3 flex-column flex-sm-row align-items-center text-center text-sm-start gap-3 gap-sm-0">
 			<Col xs={3}>
 				<img
-					src="https://via.placeholder.com/150"
+					src={item?.product?.imageCover}
 					alt="placeholder"
 					className="img-fluid"
 				/>
 			</Col>
 			<Col xs={9} className="d-flex flex-column gap-2">
-				<h5>Product name</h5>
+				<h5>{item?.product?.title}</h5>
 				<section className="d-flex align-items-center gap-2">
 					<section className="h5 m-0">
 						Color:
@@ -20,7 +20,7 @@ export default function UserOrderCardProduct() {
 					<section className="d-inline-block rounded-circle" style={{
 						width: "20px",
 						height: "20px",
-						backgroundColor: "red"
+						backgroundColor: item?.color,
 					}}></section>
 				</section>
 				<Form className="d-flex flex-column gap-2">
@@ -28,7 +28,7 @@ export default function UserOrderCardProduct() {
 						<Form.Label className="h5 m-0">Quantity:</Form.Label>
 						<Form.Control style={{
 							maxWidth: "100px"
-						}} type="number" value={3} disabled />
+						}} type="number" value={item?.quantity} disabled />
 					</Form.Group>
 				</Form>
 			</Col>

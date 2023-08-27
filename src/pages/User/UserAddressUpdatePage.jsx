@@ -3,7 +3,7 @@ import UserAddressUpdate from "../../components/User/UserAddressUpdate";
 
 export default function UserAddressUpdatePage() {
 	return (
-		<UserTemplate title={"Update Address"} pagination={false}>
+		<UserTemplate title={"Update Address"} >
 			<UserAddressUpdate />
 		</UserTemplate>
 	)

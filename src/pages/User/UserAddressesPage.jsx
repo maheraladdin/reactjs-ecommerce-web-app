@@ -3,7 +3,7 @@ import UserAddresses from "../../components/User/UserAddresses";
 
 export default function UserAddressesPage() {
 	return (
-		<UserTemplate title="Addresses" pagination={false}>
+		<UserTemplate title="Addresses" >
 			<UserAddresses />
 		</UserTemplate>
 	)
