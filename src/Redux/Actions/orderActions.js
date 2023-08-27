@@ -9,6 +9,7 @@ export const getAllOrders = (page, limit, params) => reduxApi("get", `/orders?pa
                 numberOfPages: payload.data.paginationResult.numberOfPages,
                 orders: payload.data.documents,
                 status: payload.status,
+                currentPage: payload.data.paginationResult.currentPage,
             }
         })
     });
@@ -42,6 +43,36 @@ export const getPaymentSession = (params) => reduxApi("get", `/orders/payment-se
             type: GET_PAYMENT_SESSION,
             payload: {
                 paymentSession: payload.data.paymentSession,
+                status: payload.status,
+            }
+        })
+    });
+
+export const updateOrderPayStatus = (id, params) => reduxApi("patch", `/orders/${id}/pay`, params,
+    (dispatch,payload) => {
+        dispatch({
+            type: UPDATE_ORDER_PAY_STATUS,
+            payload: {
+                status: payload.status,
+            }
+        })
+    });
+
+export const updateOrderDeliveryStatus = (id, params) => reduxApi("patch", `/orders/${id}/deliver`, params,
+    (dispatch,payload) => {
+        dispatch({
+            type: UPDATE_ORDER_DELIVERY_STATUS,
+            payload: {
+                status: payload.status,
+            }
+        })
+    });
+
+export const updateOrderCancelStatus = (id, params) => reduxApi("patch", `/orders/${id}/cancel`, params,
+    (dispatch,payload) => {
+        dispatch({
+            type: UPDATE_ORDER_CANCEL_STATUS,
+            payload: {
                 status: payload.status,
             }
         })

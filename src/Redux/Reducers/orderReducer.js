@@ -5,6 +5,7 @@ const initialState = {
     order: {},
     status: 0,
     numberOfPages: 0,
+    currentPage: 1,
 }
 
 export default function orderReducer(state = initialState, action) {
@@ -14,7 +15,8 @@ export default function orderReducer(state = initialState, action) {
                 ...state,
                 orders: action.payload.orders,
                 status: action.payload.status,
-                numberOfPages: action.payload.numberOfPages
+                numberOfPages: action.payload.numberOfPages,
+                currentPage: action.payload.currentPage,
             }
         case GET_ORDER_BY_ID:
             return {
@@ -30,20 +32,22 @@ export default function orderReducer(state = initialState, action) {
         case GET_PAYMENT_SESSION:
             return {
                 ...state,
-
+                status: action.payload.status,
             }
         case UPDATE_ORDER_PAY_STATUS:
             return {
                 ...state,
-                
+                status: action.payload.status,
             }
         case UPDATE_ORDER_DELIVERY_STATUS:
             return {
                 ...state,
+                status: action.payload.status,
             }
         case UPDATE_ORDER_CANCEL_STATUS:
             return {
                 ...state,
+                status: action.payload.status,
             }
         default:
             return state;
