@@ -8,7 +8,7 @@ import OffCanvas from 'react-bootstrap/Offcanvas';
 import Logo from "../../assets/images/logo.png";
 import {cartRoute, loginRoute, productsRoute, signupRoute} from "../../constants/routes";
 import {Link} from "react-router-dom";
-import useHeader from "../../Hooks/useHeader";
+import useSearch from "../../Hooks/useSearch";
 import {adminSideBarContent} from "../../constants/adminSidebarContent";
 import {userSidebarContent} from "../../constants/userSidebarContent";
 import useGetWishList from "../../Hooks/wishlist/useGetWishList";
@@ -22,7 +22,7 @@ export default function Header() {
         keyWord,
         handleSearch,
         onClickSearch,
-    } = useHeader();
+    } = useSearch();
 
     const {
         isLogin,
@@ -67,12 +67,14 @@ export default function Header() {
                                                 title={`Hello, ${user.name}`}
                                                 id={`offcanvasNavbarDropdown-expand-${expand}`}
                                             >
+                                                <Link to={cartRoute} className="text-decoration-none text-dark w-100 dropdown-item">cart</Link>
+                                                <section className={"dropdown-divider"} />
                                                 {
                                                     userSidebarContent.map((item, index) => (
                                                         <Link key={index} to={item.route} className="text-decoration-none text-dark w-100 dropdown-item">{item.text}</Link>
                                                     ))
                                                 }
-                                                <Link to={cartRoute} className="text-decoration-none text-dark w-100 dropdown-item">cart</Link>
+                                                <section className={"dropdown-divider"} />
                                                 <Link to={"/"} onClick={onClickLogout} className="text-decoration-none text-dark w-100 dropdown-item">logout</Link>
                                             </NavDropdown>
                                         ):(

@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {setQueryString, setKeyword} from "../Redux/Actions/filterActions";
 
-export default function useHeader() {
+export default function useSearch() {
     const expand = 'lg';
     const dispatch = useDispatch();
 
