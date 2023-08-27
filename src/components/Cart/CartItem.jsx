@@ -6,6 +6,7 @@ import useDeleteItemFromLoggedUserCart from "../../Hooks/cart/useDeleteItemFromL
 import DeleteItemFromLoggedUserCartModel from "./DeleteItemFromLoggedUserCartModel";
 
 export default function CartItem({item}) {
+	console.log(item);
 	const {
 		quantity,
 		loading,
@@ -38,16 +39,16 @@ export default function CartItem({item}) {
 						Delete
 					</Button>
 				</section>
-				<section>Product {item?.product?.title}</section>
-				<section>Brand: {item?.product?.brand?.name}</section>
-				<section className="d-flex align-items-center gap-3">
+				<section>Product: {item?.product?.title}</section>
+				{item?.product?.brand?.name && <section>Brand: {item?.product?.brand?.name}</section>}
+				{item?.color && <section className="d-flex align-items-center gap-3">
 					<section>Color:</section>
 					<section className="rounded-circle" style={{
-					width: "30px",
-					height: "30px",
-					backgroundColor: item?.color,
-				}}></section>
-				</section>
+						width: "30px",
+						height: "30px",
+						backgroundColor: item?.color,
+					}}></section>
+				</section>}
 				<section className="d-flex justify-content-between align-items-center flex-wrap gap-2">
 					<Form className="d-flex gap-3 align-items-center">
 						<Form.Text>Quantity:</Form.Text>
