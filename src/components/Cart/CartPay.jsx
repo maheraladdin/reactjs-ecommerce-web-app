@@ -13,7 +13,8 @@ export function CartPay() {
 		onChangePaymentMethod,
 		onChangeAddress,
 		checkout,
-		loading: checkoutLoading
+		loading: checkoutLoading,
+		paymentMethod,
 	} = useCheckout();
 	return (
 		<section className="d-flex flex-column bg-light p-3 rounded-3 gap-3">
@@ -36,11 +37,11 @@ export function CartPay() {
 			<Form>
 				<Form.Group className="d-flex gap-2 justify-content-between flex-wrap">
 					<Form.Group className="d-flex gap-2">
-						<Form.Check id={"card"} value={"card"} checked onChange={onChangePaymentMethod} name={"payment-method"} type={"radio"} role={"button"} />
+						<Form.Check id={"card"} value={"card"} checked={paymentMethod === "card"} onChange={onChangePaymentMethod} name={"payment-method"} type={"radio"} role={"button"} />
 						<Form.Label role="button" htmlFor={"card"}> card </Form.Label>
 					</Form.Group>
 					<Form.Group className="d-flex gap-2">
-						<Form.Check id={"cash"} value={"cash"} onChange={onChangePaymentMethod} name={"payment-method"} type={"radio"} role={"button"} />
+						<Form.Check id={"cash"} value={"cash"} checked={paymentMethod === "cash"} onChange={onChangePaymentMethod} name={"payment-method"} type={"radio"} role={"button"} />
 						<Form.Label role="button" htmlFor={"cash"}> on delivered </Form.Label>
 					</Form.Group>
 				</Form.Group>

@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
-import {createNewCashOrder} from "../../Redux/Actions/orderActions";
+import {createNewCashOrder, getAllOrders} from "../../Redux/Actions/orderActions";
 import useNotify from "../useNotify";
 
 export default function useCheckout() {
@@ -34,6 +34,13 @@ export default function useCheckout() {
                     }
                 }
             }))
+            await dispatch(getAllOrders(1, 3, {
+                body: {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                    }
+                }
+            }));
             setLoading(false);
             notify("Order created successfully", "success");
         }
@@ -47,7 +54,8 @@ export default function useCheckout() {
         onChangePaymentMethod,
         onChangeAddress,
         checkout,
-        loading
+        loading,
+        paymentMethod,
     }
 
 }

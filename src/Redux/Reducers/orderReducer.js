@@ -26,7 +26,7 @@ export default function orderReducer(state = initialState, action) {
             return {
                 ...state,
                 status: action.payload.status,
-            };
+            }
         case GET_PAYMENT_SESSION:
             return {
                 ...state,

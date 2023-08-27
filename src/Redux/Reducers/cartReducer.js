@@ -1,4 +1,5 @@
 import { GET_CART, ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART, UPDATE_ITEM_QUANTITY, APPLY_COUPON} from "../Types/cartTypes";
+import {CREATE_NEW_CASH_ORDER} from "../Types/orderTypes";
 
 const initialState = {
     cart: {},
@@ -42,6 +43,8 @@ export default function cartReducer(state = initialState, action) {
                 cart: action.payload.cart,
                 status: action.payload.status,
             }
+        case CREATE_NEW_CASH_ORDER:
+            return initialState;
         default:
             return state;
     }
