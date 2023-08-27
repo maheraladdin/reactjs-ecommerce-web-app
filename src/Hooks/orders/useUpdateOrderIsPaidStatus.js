@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useNotify from "../useNotify";
 import {getAllOrders, updateOrderPayStatus} from "../../Redux/Actions/orderActions";
@@ -31,6 +31,10 @@ export default function useUpdateOrderIsPaidStatus(order) {
         }));
         notify("Order isPaid status updated successfully", "success");
     }
+
+    useEffect(() => {
+        setIsPaid(order?.isPaid)
+    },[order]);
 
     return {isPaid, handleIsPaidChange};
 }

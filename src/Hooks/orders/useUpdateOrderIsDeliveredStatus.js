@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useNotify from "../useNotify";
 import {getAllOrders, updateOrderDeliveryStatus} from "../../Redux/Actions/orderActions";
@@ -31,6 +31,10 @@ export default function useUpdateOrderIsDeliveredStatus(order) {
         }));
         notify("Order isDelivered status updated successfully", "success");
     }
+
+    useEffect(() => {
+        setIsDelivered(order?.isDelivered)
+    },[order]);
 
     return {isDelivered, handleIsDeliveredChange};
 }

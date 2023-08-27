@@ -6,7 +6,6 @@ import useDeleteItemFromLoggedUserCart from "../../Hooks/cart/useDeleteItemFromL
 import DeleteItemFromLoggedUserCartModel from "./DeleteItemFromLoggedUserCartModel";
 
 export default function CartItem({item}) {
-	console.log(item);
 	const {
 		quantity,
 		loading,

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useNotify from "../useNotify";
 import {getAllOrders, updateOrderCancelStatus} from "../../Redux/Actions/orderActions";
@@ -31,6 +31,10 @@ export default function useUpdateOrderIsCancelledStatus(order) {
         }));
         notify("Order isCancelled status updated successfully", "success");
     }
+
+    useEffect(() => {
+        setIsCancelled(order?.isCancelled)
+    },[order]);
 
     return {isCancelled, handleIsCancelledChange};
 }

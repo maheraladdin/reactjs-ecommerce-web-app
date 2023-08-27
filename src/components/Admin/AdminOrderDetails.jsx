@@ -9,6 +9,7 @@ export default function AdminOrderDetails({order}) {
 	const {isPaid, handleIsPaidChange} = useUpdateOrderIsPaidStatus(order)
 	const {isDelivered, handleIsDeliveredChange} = useUpdateOrderIsDeliveredStatus(order);
 	const {isCancelled, handleIsCancelledChange} = useUpdateOrderIsCancelledStatus(order);
+
 	return (
 		<section className="d-flex flex-column gap-3">
 			{
