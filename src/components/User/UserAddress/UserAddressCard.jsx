@@ -1,9 +1,8 @@
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
-import {userAddressUpdateRoute} from "../../constants/routes";
+import {userAddressUpdateRoute} from "../../../constants/routes";
 import {Modal} from "react-bootstrap";
-import {useState} from "react";
-import useDeleteAddress from "../../Hooks/addresses/useDeleteAddress";
+import useDeleteAddress from "../../../Hooks/addresses/useDeleteAddress";
 
 export default function UserAddressCard({address}) {
 	const {

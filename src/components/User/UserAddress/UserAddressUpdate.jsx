@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import useUpdateAddress from "../../Hooks/addresses/useUpdateAddress";
+import useUpdateAddress from "../../../Hooks/addresses/useUpdateAddress";
 
 export default function UserAddressUpdate() {
 	const {

@@ -1,6 +1,6 @@
 import AdminOrderCard from "./AdminOrderCard";
-import useGetAllOrders from "../../Hooks/orders/useGetAllOrders";
-import Pagination from "../utility/Pagination";
+import useGetAllOrders from "../../../Hooks/orders/useGetAllOrders";
+import Pagination from "../../utility/Pagination";
 
 export default function AdminOrders() {
 	const {orders, numberOfPages, handlePageChange} = useGetAllOrders();

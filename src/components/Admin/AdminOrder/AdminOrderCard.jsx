@@ -1,7 +1,7 @@
 import {Badge, Col, Row} from "react-bootstrap";
-import Logo from "../../assets/images/logo.png"
+import Logo from "../../../assets/images/logo.png"
 import {Link} from "react-router-dom";
-import {adminOrderDetailsRoute} from "../../constants/routes";
+import {adminOrderDetailsRoute} from "../../../constants/routes";
 import AdminOrderStatusForm from "./AdminOrderStatusForm";
 
 export default function AdminOrderCard({order}) {

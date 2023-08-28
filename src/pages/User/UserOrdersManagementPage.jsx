@@ -1,5 +1,5 @@
 import {UserTemplate} from "../../components/User/UserTemplate";
-import UserOrdersBrowser from "../../components/User/UserOrdersBrowser";
+import UserOrdersBrowser from "../../components/User/UserOrder/UserOrdersBrowser";
 
 export function UserOrdersManagementPage() {
 	return (

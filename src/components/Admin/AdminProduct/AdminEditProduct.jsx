@@ -1,4 +1,4 @@
-import useEditProduct from "../../Hooks/products/useEditProduct";
+import useEditProduct from "../../../Hooks/products/useEditProduct";
 import AdminProductFormTemplate from "./AdminProductFormTemplate";
 
 export function AdminEditProduct() {

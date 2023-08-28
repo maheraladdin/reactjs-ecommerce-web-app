@@ -1,11 +1,11 @@
-import UploadImage from "./UploadImage";
+import UploadImage from "../../utility/UploadImage";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {MultiSelect} from "react-multi-select-component";
 import ColorPicker from "react-pick-color";
 import {Spinner} from "react-bootstrap";
 import {Fragment} from "react";
-import {UploadImages} from "./UploadImages";
+import {UploadImages} from "../../utility/UploadImages";
 
 
 export default function AdminProductFormTemplate({

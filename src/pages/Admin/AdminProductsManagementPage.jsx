@@ -1,4 +1,4 @@
-import AdminProducts from "../../components/Admin/AdminProducts";
+import AdminProducts from "../../components/Admin/AdminProduct/AdminProducts";
 import AdminTemplate from "../../components/Admin/AdminTemplate";
 
 export function AdminProductsManagementPage() {

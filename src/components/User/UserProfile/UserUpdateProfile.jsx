@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import useUpdateLoggedUser from "../../Hooks/user/useUpdateLoggedUser";
+import useUpdateLoggedUser from "../../../Hooks/user/useUpdateLoggedUser";
 
 export default function UserUpdateProfile() {
 	const {

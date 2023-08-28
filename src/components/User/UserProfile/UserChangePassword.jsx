@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {Badge} from "react-bootstrap";
-import useUpdateLoggedUserPassword from "../../Hooks/user/useUpdateLoggedUserPassword";
+import useUpdateLoggedUserPassword from "../../../Hooks/user/useUpdateLoggedUserPassword";
 
 export default function UserChangePassword() {
 

@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
-import {userUpdateProfileRoute} from "../../constants/routes";
+import {userUpdateProfileRoute} from "../../../constants/routes";
 import {useSelector} from "react-redux";
 
 export default function UserProfileDetails() {

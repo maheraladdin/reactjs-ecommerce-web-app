@@ -1,4 +1,4 @@
-import CartItem from "../Cart/CartItem";
+import CartItem from "../../Cart/CartItem";
 import AdminOrderStatusForm from "./AdminOrderStatusForm";
 
 export default function AdminOrderDetails({order}) {

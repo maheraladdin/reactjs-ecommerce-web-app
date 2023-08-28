@@ -1,5 +1,5 @@
 import {UserTemplate} from "../../components/User/UserTemplate";
-import UserAddressUpdate from "../../components/User/UserAddressUpdate";
+import UserAddressUpdate from "../../components/User/UserAddress/UserAddressUpdate";
 
 export default function UserAddressUpdatePage() {
 	return (

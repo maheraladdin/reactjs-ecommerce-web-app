@@ -1,5 +1,5 @@
 import AdminTemplate from "../../components/Admin/AdminTemplate";
-import AdminAddProduct from "../../components/Admin/AdminAddProduct";
+import AdminAddProduct from "../../components/Admin/AdminProduct/AdminAddProduct";
 
 export default function AdminAddProductPage() {
 	return (

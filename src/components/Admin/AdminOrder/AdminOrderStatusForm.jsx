@@ -1,8 +1,8 @@
 import Form from "react-bootstrap/Form";
 import Switch from "react-switch";
-import useUpdateOrderIsPaidStatus from "../../Hooks/orders/useUpdateOrderIsPaidStatus";
-import useUpdateOrderIsDeliveredStatus from "../../Hooks/orders/useUpdateOrderIsDeliveredStatus";
-import useUpdateOrderIsCancelledStatus from "../../Hooks/orders/useUpdateOrderIsCanceledStatus";
+import useUpdateOrderIsPaidStatus from "../../../Hooks/orders/useUpdateOrderIsPaidStatus";
+import useUpdateOrderIsDeliveredStatus from "../../../Hooks/orders/useUpdateOrderIsDeliveredStatus";
+import useUpdateOrderIsCancelledStatus from "../../../Hooks/orders/useUpdateOrderIsCanceledStatus";
 
 export default function AdminOrderStatusForm({order}) {
     const {handleIsPaidChange} = useUpdateOrderIsPaidStatus(order)

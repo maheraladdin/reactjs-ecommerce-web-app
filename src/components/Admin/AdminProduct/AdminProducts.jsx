@@ -1,7 +1,7 @@
 import {Row, Spinner} from "react-bootstrap";
 import AdminProductCard from "./AdminProductCard";
-import Pagination from "../utility/Pagination";
-import useGetProducts from "../../Hooks/products/useGetProducts";
+import Pagination from "../../utility/Pagination";
+import useGetProducts from "../../../Hooks/products/useGetProducts";
 
 export default function AdminProducts() {
 

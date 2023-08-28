@@ -1,5 +1,5 @@
 import AdminTemplate from "../../components/Admin/AdminTemplate";
-import AdminOrderDetails from "../../components/Admin/AdminOrderDetails";
+import AdminOrderDetails from "../../components/Admin/AdminOrder/AdminOrderDetails";
 import useGetOrderById from "../../Hooks/orders/useGetOrderById";
 
 export default function AdminOrderDetailsPage() {

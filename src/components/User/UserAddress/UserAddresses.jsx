@@ -1,8 +1,8 @@
 import UserAddressCard from "./UserAddressCard";
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
-import {userAddAddressRoute} from "../../constants/routes";
-import useGetAddresses from "../../Hooks/addresses/useGetAddresses";
+import {userAddAddressRoute} from "../../../constants/routes";
+import useGetAddresses from "../../../Hooks/addresses/useGetAddresses";
 
 export default function UserAddresses() {
 	const {addresses} = useGetAddresses();

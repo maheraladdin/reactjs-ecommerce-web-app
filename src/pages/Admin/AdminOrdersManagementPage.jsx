@@ -1,5 +1,5 @@
 import AdminTemplate from "../../components/Admin/AdminTemplate";
-import AdminOrders from "../../components/Admin/AdminOrders";
+import AdminOrders from "../../components/Admin/AdminOrder/AdminOrders";
 
 export default function  AdminOrdersManagementPage() {
 	return (

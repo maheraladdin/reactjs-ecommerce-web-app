@@ -1,5 +1,5 @@
 import {UserTemplate} from "../../components/User/UserTemplate";
-import UserProfile from "../../components/User/UserProfile";
+import UserProfile from "../../components/User/UserProfile/UserProfile";
 
 export default function UserProfilePage() {
 	return (

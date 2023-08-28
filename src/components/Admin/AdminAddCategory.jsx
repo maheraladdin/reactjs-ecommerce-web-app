@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import UploadImage from "./UploadImage";
+import UploadImage from "../utility/UploadImage";
 import {Spinner} from "react-bootstrap";
 import useAddCategory from "../../Hooks/categories/useAddCategory";
 

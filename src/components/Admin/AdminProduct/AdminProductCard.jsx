@@ -1,9 +1,9 @@
 import Button from 'react-bootstrap/Button';
-import {adminEditProductRoute} from "../../constants/routes";
+import {adminEditProductRoute} from "../../../constants/routes";
 import {Link} from "react-router-dom";
-import useDeleteProduct from "../../Hooks/products/useDeleteProduct";
+import useDeleteProduct from "../../../Hooks/products/useDeleteProduct";
 import {Col, Modal, Spinner} from "react-bootstrap";
-import {ProductCardTemplate} from "../product/ProductCardTemplate";
+import {ProductCardTemplate} from "../../product/ProductCardTemplate";
 
 
 export default function AdminProductCard({product}) {

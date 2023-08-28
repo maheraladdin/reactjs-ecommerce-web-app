@@ -1,4 +1,4 @@
-import useAddProduct from "../../Hooks/products/useAddProduct";
+import useAddProduct from "../../../Hooks/products/useAddProduct";
 import AdminProductFormTemplate from "./AdminProductFormTemplate";
 
 
