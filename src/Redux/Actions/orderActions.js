@@ -37,12 +37,12 @@ export const createNewCashOrder = (id, params) => reduxApi("post", `/orders/${id
 
 
 // TODO: repair this
-export const getPaymentSession = (params) => reduxApi("get", `/orders/payment-session`, params,
+export const createPaymentSession = (id, params) => reduxApi("post", `/orders/${id}/checkout-session`, params,
     (dispatch,payload) => {
         dispatch({
             type: GET_PAYMENT_SESSION,
             payload: {
-                paymentSession: payload.data.paymentSession,
+                session: payload.data.session,
                 status: payload.status,
             }
         })
