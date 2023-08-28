@@ -20,7 +20,6 @@ export default function Pagination({pageCount,handlePageChange}) {
 				activeClassName={"active"}
 				pageLinkClassName={"page-link"}
 				breakLinkClassName={"page-link"}
-				initialPage={1}
 			/>
 		</nav>
 	)
