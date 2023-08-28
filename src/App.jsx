@@ -55,12 +55,15 @@ import ResetPasswordPage from "./pages/Auth/ResetPasswordPage";
 import VerifyPasswordResetTokenPage from "./pages/Auth/VerifyPasswordResetTokenPage";
 import ResetForgottenPasswordPage from "./pages/Auth/ResetForgottenPasswordPage";
 import AdminCouponManagementPage from "./pages/Admin/AdminCouponManagementPage";
+import LoadingPage from "./pages/status/LoadingPage";
 
 export default function App() {
     return (
         <>
             <BrowserRouter>
                 <Routes>
+                    {/*public routes*/}
+
                     <Route index element={<HomePage />} />
                     <Route path={loginRoute} element={<LoginPage />} />
                     <Route path={signupRoute} element={<SignupPage />} />
@@ -68,6 +71,13 @@ export default function App() {
                     <Route path={brandsRoute} element={<BrandsPage />} />
                     <Route path={productsRoute} element={<ProductBrowserPage />} />
                     <Route path={productDetailsRoute} element={<ProductDetailsPage />} />
+                    <Route path={resetPasswordRoute} element={<ResetPasswordPage />} />
+                    <Route path={verifyPasswordResetTokenRoute} element={<VerifyPasswordResetTokenPage />} />
+                    <Route path={resetForgottenPasswordRoute} element={<ResetForgottenPasswordPage />} />
+                    <Route path={"/loading"} element={<LoadingPage />} />
+
+                    {/*admin routes*/}
+
                     <Route path={adminProductsRoute} element={<AdminProductsManagementPage />} />
                     <Route path={adminOrdersRoute} element={<AdminOrdersManagementPage />} />
                     <Route path={adminOrderDetailsRoute} element={<AdminOrderDetailsPage />} />
@@ -77,6 +87,9 @@ export default function App() {
                     <Route path={adminAddProductRoute} element={<AdminAddProductPage />} />
                     <Route path={adminEditProductRoute} element={<AdminEditProductPage />}/>
                     <Route path={adminCouponsRoute} element={<AdminCouponManagementPage />} />
+
+                    {/*user routes*/}
+
                     <Route path={cartRoute} element={<CartPage />} />
                     <Route path={userOrdersRoute} element={<UserOrdersManagementPage />} />
                     <Route path={userWishlistRoute} element={<UserWishListPage />} />
@@ -85,9 +98,7 @@ export default function App() {
                     <Route path={userAddressUpdateRoute} element={<UserAddressUpdatePage />} />
                     <Route path={userProfileRoute} element={<UserProfilePage />} />
                     <Route path={userUpdateProfileRoute} element={<UserUpdateProfilePage />} />
-                    <Route path={resetPasswordRoute} element={<ResetPasswordPage />} />
-                    <Route path={verifyPasswordResetTokenRoute} element={<VerifyPasswordResetTokenPage />} />
-                    <Route path={resetForgottenPasswordRoute} element={<ResetForgottenPasswordPage />} />
+
                 </Routes>
             </BrowserRouter>
         </>
