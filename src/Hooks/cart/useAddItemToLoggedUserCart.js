@@ -6,7 +6,8 @@ import {addToCart} from "../../Redux/Actions/cartActions";
 export default function useAddItemToLoggedUserCart() {
     const dispatch = useDispatch();
     const notify = useNotify();
-    const token = useSelector(state => state.userReducer.token);
+    const userReducer = useSelector(state => state.userReducer);
+    const {token, user} = userReducer;
     const product = useSelector(state => state.productReducer.product);
 
     const [loading, setLoading] = useState(false);
@@ -15,6 +16,7 @@ export default function useAddItemToLoggedUserCart() {
 
     const handleAddItemToLoggedUserCart = async () => {
         if (!token) return notify("You need to login first", "error");
+        if (user.role === "admin") return notify("Admins can't add items to cart", "error");
         if (product.colors.length && !selectedColor) return notify("You need to select a color first", "error");
         const body = {
             product: product._id,
