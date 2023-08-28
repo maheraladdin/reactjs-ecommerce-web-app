@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useNotify from "../useNotify";
 import {getAllOrders, updateOrderPayStatus} from "../../Redux/Actions/orderActions";
@@ -8,13 +7,11 @@ export default function useUpdateOrderIsPaidStatus(order) {
     const notify = useNotify();
     const token = useSelector(state => state.userReducer.token);
     const currentPage = useSelector(state => state.orderReducer.currentPage);
-    const [isPaid, setIsPaid] = useState(order?.isPaid);
 
-    const handleIsPaidChange = async () => {
-        await setIsPaid(!isPaid);
+    const handleIsPaidChange = async (checked) => {
         await dispatch(updateOrderPayStatus(order._id, {
             body: {
-                isPaid,
+                isPaid: checked,
             },
             config: {
                 headers: {
@@ -32,9 +29,5 @@ export default function useUpdateOrderIsPaidStatus(order) {
         notify("Order isPaid status updated successfully", "success");
     }
 
-    useEffect(() => {
-        setIsPaid(order?.isPaid)
-    },[order]);
-
-    return {isPaid, handleIsPaidChange};
+    return {handleIsPaidChange};
 }

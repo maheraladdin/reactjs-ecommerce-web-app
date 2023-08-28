@@ -8,6 +8,7 @@ export default function useGetAllOrders() {
     const orderReducer = useSelector(state => state.orderReducer);
     const {orders, numberOfPages} = orderReducer;
 
+
     useEffect(() => {
         if(Object.keys(orders).length > 0) return;
         if(!token) return;

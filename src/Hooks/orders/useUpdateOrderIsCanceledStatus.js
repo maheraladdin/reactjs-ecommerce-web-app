@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useNotify from "../useNotify";
 import {getAllOrders, updateOrderCancelStatus} from "../../Redux/Actions/orderActions";
@@ -8,13 +7,11 @@ export default function useUpdateOrderIsCancelledStatus(order) {
     const notify = useNotify();
     const token = useSelector(state => state.userReducer.token);
     const currentPage = useSelector(state => state.orderReducer.currentPage);
-    const [isCancelled, setIsCancelled] = useState(order?.isCancelled);
 
-    const handleIsCancelledChange = async () => {
-        await setIsCancelled(!isCancelled);
+    const handleIsCancelledChange = async (checked) => {
         await dispatch(updateOrderCancelStatus(order._id, {
             body: {
-                isCancelled,
+                isCancelled: checked,
             },
             config: {
                 headers: {
@@ -32,9 +29,5 @@ export default function useUpdateOrderIsCancelledStatus(order) {
         notify("Order isCancelled status updated successfully", "success");
     }
 
-    useEffect(() => {
-        setIsCancelled(order?.isCancelled)
-    },[order]);
-
-    return {isCancelled, handleIsCancelledChange};
+    return {handleIsCancelledChange};
 }

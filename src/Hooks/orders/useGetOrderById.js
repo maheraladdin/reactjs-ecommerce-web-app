@@ -20,7 +20,7 @@ export default function useGetOrderById() {
             }))
         })();
         // eslint-disable-next-line
-    },[id]);
+    },[id, order?.isPaid, order?.isDelivered, order?.isCancelled]);
 
     return {order};
 }

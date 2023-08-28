@@ -54,6 +54,7 @@ export const updateOrderPayStatus = (id, params) => reduxApi("patch", `/orders/$
             type: UPDATE_ORDER_PAY_STATUS,
             payload: {
                 status: payload.status,
+                order: payload.data.order,
             }
         })
     });
@@ -64,6 +65,7 @@ export const updateOrderDeliveryStatus = (id, params) => reduxApi("patch", `/ord
             type: UPDATE_ORDER_DELIVERY_STATUS,
             payload: {
                 status: payload.status,
+                order: payload.data.order,
             }
         })
     });
@@ -74,6 +76,7 @@ export const updateOrderCancelStatus = (id, params) => reduxApi("patch", `/order
             type: UPDATE_ORDER_CANCEL_STATUS,
             payload: {
                 status: payload.status,
+                order: payload.data.order,
             }
         })
     });

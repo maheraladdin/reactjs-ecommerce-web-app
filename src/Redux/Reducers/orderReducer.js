@@ -38,16 +38,19 @@ export default function orderReducer(state = initialState, action) {
             return {
                 ...state,
                 status: action.payload.status,
+                order: action.payload.order
             }
         case UPDATE_ORDER_DELIVERY_STATUS:
             return {
                 ...state,
                 status: action.payload.status,
+                order: action.payload.order
             }
         case UPDATE_ORDER_CANCEL_STATUS:
             return {
                 ...state,
                 status: action.payload.status,
+                order: action.payload.order
             }
         default:
             return state;

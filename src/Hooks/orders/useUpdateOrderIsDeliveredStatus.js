@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useNotify from "../useNotify";
 import {getAllOrders, updateOrderDeliveryStatus} from "../../Redux/Actions/orderActions";
@@ -8,13 +7,11 @@ export default function useUpdateOrderIsDeliveredStatus(order) {
     const notify = useNotify();
     const token = useSelector(state => state.userReducer.token);
     const currentPage = useSelector(state => state.orderReducer.currentPage);
-    const [isDelivered, setIsDelivered] = useState(order?.isDelivered);
 
-    const handleIsDeliveredChange = async () => {
-        await setIsDelivered(!isDelivered);
+    const handleIsDeliveredChange = async (checked) => {
         await dispatch(updateOrderDeliveryStatus(order._id, {
             body: {
-                isDelivered,
+                isDelivered: checked,
             },
             config: {
                 headers: {
@@ -32,9 +29,5 @@ export default function useUpdateOrderIsDeliveredStatus(order) {
         notify("Order isDelivered status updated successfully", "success");
     }
 
-    useEffect(() => {
-        setIsDelivered(order?.isDelivered)
-    },[order]);
-
-    return {isDelivered, handleIsDeliveredChange};
+    return {handleIsDeliveredChange};
 }
