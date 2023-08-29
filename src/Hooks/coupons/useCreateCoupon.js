@@ -59,23 +59,18 @@ export default function useCreateCoupon() {
      * @return {Promise<void>}
      */
     const handleCreateCoupon = async () => {
-        setLoading(true)
+
         setValidated(true);
-        if(!name) {
-            notify("Name is required", "error");
-            setLoading(false);
-            return;
-        }
-        if(!discount) {
-            notify("Discount is required", "error");
-            setLoading(false);
-            return;
-        }
-        if(!expireAt) {
-            notify("Expire at is required", "error");
-            setLoading(false);
-            return;
-        }
+
+        if(!name) return notify("Name is required", "error");
+
+        if(!discount) return notify("Discount is required", "error");
+
+        if(!expireAt) return notify("Expire at is required", "error");
+
+        setLoading(true);
+
+        // check if expire at is greater than today
         if((() => {
             const expireAtDate = new Date(expireAt);
             const today = new Date();
@@ -89,6 +84,7 @@ export default function useCreateCoupon() {
         const requestBody = {};
         if(maxNumberOfUsage) requestBody.maxNumberOfUsage = maxNumberOfUsage;
         if(maxDiscount) requestBody.maxDiscount = maxDiscount;
+
         await dispatch(createCoupon({
             body: {
                 name,
@@ -102,6 +98,7 @@ export default function useCreateCoupon() {
                 }
             }
         }));
+
         await dispatch(getCoupons(1,12, {
             body: {
                 headers: {
@@ -109,9 +106,9 @@ export default function useCreateCoupon() {
                 },
             },
         }));
+
         setLoading(false);
         setValidated(false);
-        notify("Coupon created successfully", "success");
     }
 
     return {

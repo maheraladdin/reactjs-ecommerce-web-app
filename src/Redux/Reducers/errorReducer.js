@@ -1,7 +1,6 @@
 import {GET_ERROR, CLEAR_ERROR} from "../Types/errorType";
 
 const initialState = {
-    loading: true,
     error: {},
     status: 0,
 }
@@ -10,7 +9,6 @@ export default function errorReducer(state = initialState, action) {
         case GET_ERROR:
             return {
                 ...state,
-                loading: true,
                 error: action.error,
                 status: action.error && action.error.response && action.error.response.status,
             }

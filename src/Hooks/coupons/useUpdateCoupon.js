@@ -78,23 +78,16 @@ export default function useUpdateCoupon() {
      * @return {Promise<void>}
      */
     const handleUpdateCoupon = async () => {
-        setLoading(true)
+
         setValidated(true);
-        if(!name) {
-            notify("Name is required", "error");
-            setLoading(false);
-            return;
-        }
-        if(!discount) {
-            notify("Discount is required", "error");
-            setLoading(false);
-            return;
-        }
-        if(!expireAt) {
-            notify("Expire at is required", "error");
-            setLoading(false);
-            return;
-        }
+
+        if(!name) return notify("Name is required", "error");
+
+        if(!discount) return notify("Discount is required", "error");
+
+        if(!expireAt) return notify("Expire at is required", "error");
+
+
         if((() => {
             const expireAtDate = new Date(expireAt);
             const today = new Date();
@@ -105,9 +98,12 @@ export default function useUpdateCoupon() {
             }
         })()) return;
 
+
         const requestBody = {};
         if(maxNumberOfUsage) requestBody.maxNumberOfUsage = maxNumberOfUsage;
         if(maxDiscount) requestBody.maxDiscount = maxDiscount;
+
+        setLoading(true);
         await dispatch(updateCoupon(coupon._id, {
             body: {
                 name,
@@ -130,7 +126,6 @@ export default function useUpdateCoupon() {
         }));
         setLoading(false);
         setValidated(false);
-        notify("Coupon updated successfully", "success");
     }
 
     useEffect(() => {

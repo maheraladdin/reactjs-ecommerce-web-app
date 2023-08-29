@@ -1,11 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
-import useNotify from "../useNotify";
 import {useState} from "react";
 import {getCouponById, getCoupons, deleteCoupon} from "../../Redux/Actions/couponActions";
 
 export default function useDeleteCoupon() {
     const dispatch = useDispatch();
-    const notify = useNotify();
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -55,7 +53,6 @@ export default function useDeleteCoupon() {
             },
         }));
         setLoading(false);
-        notify("Coupon deleted successfully", "success");
     }
 
     return {
