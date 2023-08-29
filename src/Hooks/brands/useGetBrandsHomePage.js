@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getBrands} from "../../Redux/Actions/BrandActions";
 
 /**
@@ -8,15 +8,17 @@ import {getBrands} from "../../Redux/Actions/BrandActions";
  */
 export default function useGetBrandsHomePage() {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     // request 6 brands for home page
     useEffect(() => {
-        dispatch(getBrands(1, 6))
+        (async () => {
+            setLoading(true);
+            await dispatch(getBrands(1, 6));
+            setLoading(false);
+        })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // get loading status from redux
-    const loading = useSelector(state => state.brandReducer.loading);
 
     // get brands from redux
     const brands = useSelector(state => state.brandReducer.brands);

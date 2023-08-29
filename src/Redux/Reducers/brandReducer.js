@@ -2,7 +2,6 @@ import { GET_BRANDS, CREATE_BRAND} from "../Types/brandTypes";
 
 const initialState = {
     brands: [],
-    loading: true,
     numberOfPages: 0,
     brand: {},
 }
@@ -12,7 +11,6 @@ export default function brandReducer(state = initialState, action) {
             return {
                 ...state,
                 brands: action.payload.brands,
-                loading: false,
                 numberOfPages: action.payload.numberOfPages,
                 status: action.payload.status,
             }
@@ -20,7 +18,6 @@ export default function brandReducer(state = initialState, action) {
             return {
                 ...state,
                 brand: action.payload.brand,
-                loading: false,
                 status: action.payload.status,
             }
         default:

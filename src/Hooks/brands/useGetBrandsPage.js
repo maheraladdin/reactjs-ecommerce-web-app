@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getBrands} from "../../Redux/Actions/BrandActions";
 
 /**
@@ -8,17 +8,19 @@ import {getBrands} from "../../Redux/Actions/BrandActions";
  */
 export default function useGetBrandsPage() {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        dispatch(getBrands(1))
+        (async () => {
+            setLoading(true);
+            await dispatch(getBrands(1));
+            setLoading(false);
+        })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // get number of pages from redux
     const numOfPages = useSelector(state => state.brandReducer.numberOfPages);
-
-    // get loading status from redux
-    const loading = useSelector(state => state.brandReducer.loading);
 
     // handle page change
     const handlePageChange = (page) => dispatch(getBrands(page.selected + 1));

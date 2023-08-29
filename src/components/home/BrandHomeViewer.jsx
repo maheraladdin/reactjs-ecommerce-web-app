@@ -17,18 +17,19 @@ export default function BrandHomeViewer() {
 				className="justify-content-center align-items-center"
 			>
 			{
-				!loading ? brands.map((brand, i) => (
-					<Col
-						key={i}
-						xs={6}
-						md={4}
-						lg={3}
-						xl={2}
-						className="mb-5"
-					>
-						<BrandCard brand={brand}/>
-					</Col>
-				)) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
+				loading ? <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
+					: brands.length <= 0 ? null : brands.map((brand, i) => (
+						<Col
+							key={i}
+							xs={6}
+							md={4}
+							lg={3}
+							xl={2}
+							className="mb-5"
+						>
+							<BrandCard brand={brand}/>
+						</Col>
+					))
 			}
 			</Row>
 		</Container>
