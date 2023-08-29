@@ -32,7 +32,7 @@ export default function useAddItemToLoggedUserCart() {
             }
         }));
         setLoading(false);
-        notify("Item added to cart", "success")
+        setSelectedColor("");
     }
 
     const onClickSelectColor = (e) => {

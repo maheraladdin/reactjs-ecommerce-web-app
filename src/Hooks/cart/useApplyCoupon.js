@@ -1,11 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
-import useNotify from "../useNotify";
 import {useState} from "react";
 import {applyCoupon} from "../../Redux/Actions/cartActions";
 
 export default function useApplyCoupon() {
     const dispatch = useDispatch();
-    const notify = useNotify();
     const token = useSelector(state => state.userReducer.token);
     const cart  = useSelector(state => state.cartReducer.cart);
 
@@ -27,7 +25,6 @@ export default function useApplyCoupon() {
             }
         }));
         setLoading(false);
-        notify("Coupon applied successfully", "success");
     }
 
     return {

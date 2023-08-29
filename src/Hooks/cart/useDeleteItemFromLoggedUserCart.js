@@ -1,11 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
-import useNotify from "../useNotify";
 import {removeFromCart} from "../../Redux/Actions/cartActions";
 import {useState} from "react";
 
 export default function useDeleteItemFromLoggedUserCart(item) {
     const dispatch = useDispatch();
-    const notify = useNotify();
     const token = useSelector(state => state.userReducer.token);
 
     const [loading, setLoading] = useState(false);
@@ -23,7 +21,6 @@ export default function useDeleteItemFromLoggedUserCart(item) {
             }
         }));
         setLoading(false);
-        notify("Item removed from cart successfully", "success");
     }
 
     return {

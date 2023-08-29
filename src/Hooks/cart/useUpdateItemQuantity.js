@@ -27,7 +27,6 @@ export default function useUpdateItemQuantity(item) {
             }
         }));
         setLoading(false);
-        notify("Item quantity updated successfully", "success");
     }
 
     return {

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useNotify from "../useNotify";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -56,7 +56,6 @@ export default function useLogin() {
                 }
             }
         }));
-        if(status === 200) navigate('/');
     }
 
     /**
@@ -71,7 +70,12 @@ export default function useLogin() {
         if(!email) return notify('Email is required', 'error');
         if(!password) return notify('Password is required', 'error');
         await requestLogin();
-        }
+    }
+
+    useEffect(() => {
+        if(status.toString().startsWith("2")) navigate('/');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[status]);
 
     return {
         email,
