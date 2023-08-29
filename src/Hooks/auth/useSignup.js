@@ -1,7 +1,7 @@
 import {useState} from "react";
 import useNotify from "../useNotify";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {signup} from "../../Redux/Actions/userActions";
 
 export default function useSignup() {
@@ -16,6 +16,7 @@ export default function useSignup() {
     const notify = useNotify();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const status = useSelector(state => state.userReducer.status);
 
     /**
      * @description Handle change username
@@ -66,20 +67,6 @@ export default function useSignup() {
     }
 
     /**
-     * @description Form validation
-     * @return {number|string|*}
-     */
-    const formValidation = () => {
-        setValidated(true);
-        if(!username) return notify('Username is required', 'error');
-        if(!email) return notify('Email is required', 'error');
-        if(phoneNumber && phoneNumber.length <= 10) return notify('Phone number must be at least 10 characters', 'error');
-        if(!password) return notify('Password is required', 'error');
-        if(!passwordConfirmation) return notify('Password confirmation is required', 'error');
-        if(password !== passwordConfirmation) return notify('Password do not match password confirmation', 'error');
-    }
-
-    /**
      * @description Request signup
      * @return {Promise<void>}
      */
@@ -97,7 +84,7 @@ export default function useSignup() {
                 }
             }
         }));
-        navigate('/');
+        if(status.toString().startsWith("2")) navigate('/');
     }
 
     /**
@@ -107,22 +94,17 @@ export default function useSignup() {
      */
     const handleSubmit = async (event) => {
         event.preventDefault();
-        formValidation();
-        try {
-             await requestSignup();
-        }
-        catch (e) {
-            document.cookie = ``;
-            if(e && e.response && e.response.data && e.response.data.errors) {
-                for (let error of e.response.data.errors) {
-                    notify(error.msg, 'error');
-                }
-            }
-            else if(e && e.response && e.response.data) {
-                notify(e.response.data, 'error');
-            }
-        }
 
+        // validate form
+        setValidated(true);
+        if(!username) return notify('Username is required', 'error');
+        if(!email) return notify('Email is required', 'error');
+        if(phoneNumber && phoneNumber.length <= 10) return notify('Phone number must be at least 10 characters', 'error');
+        if(!password) return notify('Password is required', 'error');
+        if(!passwordConfirmation) return notify('Password confirmation is required', 'error');
+        if(password !== passwordConfirmation) return notify('Password do not match password confirmation', 'error');
+
+        await requestSignup();
     }
 
     return {

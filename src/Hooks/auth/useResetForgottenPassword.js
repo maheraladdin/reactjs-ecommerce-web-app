@@ -12,7 +12,8 @@ export default function useResetForgottenPassword() {
     const notify = useNotify();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const resetPasswordByEmail = useSelector(state => state.userReducer.resetPasswordByEmail);
+    const userReducer = useSelector(state => state.userReducer);
+    const {resetPasswordByEmail, status} = userReducer;
 
 
     const handlePasswordChange = (e) => {
@@ -39,10 +40,7 @@ export default function useResetForgottenPassword() {
                 passwordConfirmation: confirmPassword,
             }
         }))
-        notify("password reset successfully", 'success');
-        setTimeout(() => {
-            navigate("/");
-        }, 1000);
+        if(status.toString().startsWith("2")) navigate("/");
     }
 
     return {

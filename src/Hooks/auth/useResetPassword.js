@@ -5,6 +5,8 @@ import {resetPassword} from "../../Redux/Actions/userActions";
 import baseURL from "../../Api/BaseURL";
 import {useNavigate} from "react-router-dom";
 import {verifyPasswordResetTokenRoute} from "../../constants/routes";
+import {toast} from "react-toastify";
+import {GET_ERROR} from "../../Redux/Types/errorType";
 
 export default function useResetPassword() {
     const [email, setEmail] = useState('');
@@ -31,19 +33,26 @@ export default function useResetPassword() {
         // send reset code to email
         try {
             const payload = await baseURL.post('/auth/forgetPassword', {email});
-            notify(payload.massage, 'success');
-            setTimeout(() => {
-                navigate(verifyPasswordResetTokenRoute);
-            });
+            notify(payload.data.massage, 'success');
+            if(payload.status.toString().startsWith("2")) navigate(verifyPasswordResetTokenRoute);
         } catch (e) {
-            if(e && e.response && e.response.data && e.response.data.errors) {
-                for(let error of e.response.data.errors) {
-                    notify(error.msg, 'error');
+            if(e?.response?.data?.errors) {
+                for (let error of e.response.data.errors) {
+                    toast.error(error.msg);
                 }
             }
-            if(e && e.response && e.response.data) {
-                notify(e.response.data, 'error');
+            else if(e?.response?.data?.message) {
+                toast.error(e.response.data.message);
             }
+            else if(e?.response?.data) {
+                toast.error(e.response.data);
+            }
+            // dispatch the error to redux
+            dispatch({
+                type: GET_ERROR,
+                error: e,
+                status: e?.response?.status,
+            });
         }
 
 

@@ -3,6 +3,9 @@ import useNotify from "../useNotify";
 import baseURL from "../../Api/BaseURL";
 import {resetForgottenPasswordRoute} from "../../constants/routes";
 import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+import {GET_ERROR} from "../../Redux/Types/errorType";
+import {useDispatch} from "react-redux";
 
 export default function useVerifyResetCode() {
     const [resetCode, setResetCode] = useState('');
@@ -10,6 +13,7 @@ export default function useVerifyResetCode() {
 
     const notify = useNotify();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleResetCodeChange = (e) => {
         setResetCode(e.target.value);
@@ -23,19 +27,29 @@ export default function useVerifyResetCode() {
         // verify the reset code
          try {
             const payload = await baseURL.post('/auth/verifyPasswordResetToken', {passwordResetToken: resetCode});
-             notify(payload.massage, 'success');
-             setTimeout(() => {
-                 navigate(resetForgottenPasswordRoute);
-             }, 1000);
+             notify(payload.data.massage, 'success');
+             if(payload.status.toString().startsWith("2"))
+                 setTimeout(() => {
+                     navigate(resetForgottenPasswordRoute);
+                 }, 1000);
          } catch (e) {
-             if(e && e.response && e.response.data && e.response.data.errors) {
-                 for(let error of e.response.data.errors) {
-                     notify(error.msg, 'error');
+             if(e?.response?.data?.errors) {
+                 for (let error of e.response.data.errors) {
+                     toast.error(error.msg);
                  }
              }
-             if(e && e.response && e.response.data) {
-                 notify(e.response.data, 'error');
+             else if(e?.response?.data?.message) {
+                 toast.error(e.response.data.message);
              }
+             else if(e?.response?.data) {
+                 toast.error(e.response.data);
+             }
+             // dispatch the error to redux
+             dispatch({
+                 type: GET_ERROR,
+                 error: e,
+                 status: e?.response?.status,
+             });
          }
      }
 

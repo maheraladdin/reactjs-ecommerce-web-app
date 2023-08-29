@@ -87,6 +87,7 @@ export default function Header() {
                                                         <Link key={index} to={item.route} className="text-decoration-none text-dark w-100 dropdown-item">{item.text}</Link>
                                                     ))
                                                 }
+                                                <section className={"dropdown-divider"} />
                                                 <Link to={"/"} onClick={onClickLogout} className="text-decoration-none text-dark w-100 dropdown-item">logout</Link>
                                             </NavDropdown>
                                         )
