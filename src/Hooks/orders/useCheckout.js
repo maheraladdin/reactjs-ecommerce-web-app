@@ -20,6 +20,47 @@ export default function useCheckout() {
     const onChangePaymentMethod = (e) => setPaymentMethod(e.target.value);
     const onChangeAddress = (e) => setAddress(e.target.value);
 
+    /**
+     * @desc    checkout with cash
+     * @return {Promise<void>}
+     */
+    const checkoutCash = async () => {
+        await dispatch(createNewCashOrder(cart._id, {
+            body: {
+                shippingAddress: address,
+            },
+            config: {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            }
+        }))
+        await dispatch(getAllOrders(1, 3, {
+            body: {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            }
+        }));
+    }
+
+    /**
+     * @desc    checkout with card
+     * @return {Promise<void>}
+     */
+    const checkoutCard = async () => {
+        await dispatch(createPaymentSession(cart._id, {
+            body: {
+                shippingAddress: address,
+            },
+            config: {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            }
+        }));
+    }
+
     const checkout = async () => {
         if(!token) return notify("Please login to continue", "error");
         if(!cart) return notify("Please add items to your cart", "error");
@@ -28,37 +69,12 @@ export default function useCheckout() {
         switch (paymentMethod) {
             // checkout with cash
             case "cash":
-                await dispatch(createNewCashOrder(cart._id, {
-                    body: {
-                        shippingAddress: address,
-                    },
-                    config: {
-                        headers: {
-                            "Authorization": `Bearer ${token}`,
-                        }
-                    }
-                }))
-                await dispatch(getAllOrders(1, 3, {
-                    body: {
-                        headers: {
-                            "Authorization": `Bearer ${token}`,
-                        }
-                    }
-                }));
+                await checkoutCash();
                 break;
 
             // checkout with card
             case "card":
-                await dispatch(createPaymentSession(cart._id, {
-                    body: {
-                        shippingAddress: address,
-                    },
-                    config: {
-                        headers: {
-                            "Authorization": `Bearer ${token}`,
-                        }
-                    }
-                }));
+                await checkoutCard();
                 break;
 
             // checkout with invalid payment method
@@ -66,7 +82,6 @@ export default function useCheckout() {
                 notify("choose valid payment method", "error");
         }
         setLoading(false);
-        notify("payment processed successfully", "success");
     }
 
     useEffect(() => {
