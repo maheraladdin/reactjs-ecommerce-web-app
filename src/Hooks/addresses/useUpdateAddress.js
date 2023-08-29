@@ -34,7 +34,7 @@ export default function useUpdateAddress() {
         const body = {};
 
         // validation layer
-        if(address) body.alias = address;
+        if(address && addressObj?.alias !== address) body.alias = address;
         if(city) body.city = city;
         if(description) body.details = description;
         if(postalCode) body.postalCode = postalCode; 
@@ -63,14 +63,17 @@ export default function useUpdateAddress() {
                    }
                }
             }));
-            setAddress(addressObj.alias);
-            setCity(addressObj.city);
-            setDescription(addressObj.details);
-            setPostalCode(addressObj.postalCode);
-            setPhone(addressObj.phone);
         })()
         // eslint-disable-next-line
-    },[id,token,addressObj])
+    },[id,token]);
+
+    useEffect(() => {
+        setAddress(addressObj.alias);
+        setCity(addressObj.city);
+        setDescription(addressObj.details);
+        setPostalCode(addressObj.postalCode);
+        setPhone(addressObj.phone);
+    },[addressObj]);
 
 
 

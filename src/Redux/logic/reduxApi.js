@@ -24,7 +24,8 @@ export default function reduxApi(method, url, params = {}, callbackDispatch) {
             // dispatch the response to redux
             await callbackDispatch(dispatch, payload);
             // toast the success message
-            if(payload?.message) toast.success(payload.message);
+            // if(method !== "get")
+                toast.success(payload.data.message);
         } catch (e) {
             if(e?.response?.data?.errors) {
                 for (let error of e.response.data.errors) {

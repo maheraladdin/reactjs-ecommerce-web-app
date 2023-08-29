@@ -1,11 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {updateLoggedUserData} from "../../Redux/Actions/userActions";
-import useNotify from "../useNotify";
 
 export default function useUpdateLoggedUser() {
     const dispatch = useDispatch();
-    const notify = useNotify();
     const userReducer = useSelector(state => state.userReducer);
     const {token, user} = userReducer;
 
@@ -41,7 +39,6 @@ export default function useUpdateLoggedUser() {
             }
         }));
         setLoading(false);
-        notify("User data updated successfully", "success");
     }
 
     useEffect(() => {
