@@ -16,7 +16,9 @@ export default function CategoryHomeViewer() {
                 style={{minHeight: "250px"}}
                 className="justify-content-center align-items-center">
             {
-                !loading ? categories.map((category,index) => (
+                loading ? <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
+                    : categories.length > 0 ?
+                    categories.map((category,index) => (
                     <Col
                         key={index}
                         xs={6}
@@ -26,7 +28,7 @@ export default function CategoryHomeViewer() {
                     >
                         <CategoryCard category={category} />
                     </Col>
-                )) : <Spinner animation="border" variant="primary" className={`align-self-center ${loading ? "visible" : "invisible"}`} />
+                )) : <h3 className="text-center">No Category Found</h3>
             }
             </Row>
         </Container>

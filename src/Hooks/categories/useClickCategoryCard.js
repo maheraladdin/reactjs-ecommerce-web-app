@@ -8,7 +8,6 @@ export default function useClickCategoryCard(category) {
     const dispatch = useDispatch();
     const handleOnClickCategoryCard = () => {
         dispatch(removeFilters());
-        console.log(category);
         dispatch(addCategory(category._id));
         dispatch(setQueryString());
         navigate(productsRoute);

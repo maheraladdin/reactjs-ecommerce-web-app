@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getCategories} from "../../Redux/Actions/categoryActions";
 
 /**
@@ -8,15 +8,16 @@ import {getCategories} from "../../Redux/Actions/categoryActions";
  */
 export default function useGetCategoriesHomePage() {
     const dispatch = useDispatch();
-
+    const [loading, setLoading] = useState(false);
     // request 6 categories for home page
     useEffect(() => {
-        dispatch(getCategories(1, 6))
+        (async () => {
+            setLoading(true);
+            await dispatch(getCategories(1, 6));
+            setLoading(false);
+        })()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // get loading status from redux
-    const loading = useSelector(state => state.categoryReducer.loading);
 
     // get categories from redux
     const categories = useSelector(state => state.categoryReducer.categories);

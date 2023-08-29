@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getCategories} from "../../Redux/Actions/categoryActions";
 
 /**
@@ -8,17 +8,19 @@ import {getCategories} from "../../Redux/Actions/categoryActions";
  */
 export default function useGetCategoriesPage() {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        dispatch(getCategories(1))
+        (async () => {
+            setLoading(true);
+            await dispatch(getCategories(1));
+            setLoading(false);
+        })()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // get number of pages from redux
     const numOfPages = useSelector(state => state.categoryReducer.numberOfPages);
-
-    // get loading status from redux
-    const loading = useSelector(state => state.categoryReducer.loading);
 
     // handle page change
     const handlePageChange = (page) => dispatch(getCategories(page.selected + 1));

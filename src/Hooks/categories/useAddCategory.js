@@ -18,19 +18,11 @@ export default function useAddCategory() {
     const [loading, setLoading] = useState(false);
     // state of form validation
     const [validated, setValidated] = useState(false);
-    // state of error message
-    const [errorMessage, setErrorMessage] = useState("");
 
     const dispatch = useDispatch();
 
     // get the token from redux store
     const token = useSelector(state => state.userReducer.token);
-
-    // get the status of the request
-    const status = useSelector(state => state.categoryReducer.status);
-
-    // get error object
-    const error = useSelector(state => state.errorReducer.error);
 
     // get the notify function
     const notify = useNotify();
@@ -93,27 +85,6 @@ export default function useAddCategory() {
             setValidated(false);
         }
     },[loading]);
-
-    // show the toast message after adding a new category or if there is an error
-    useEffect(() => {
-        if (status === 201) {
-            // show the done toast message
-            notify("Category added successfully", "success");
-        } else if((error && error.response && error.response.data && error.response.data.message) || (error && error.message)) {
-            // show the error toast message
-            setErrorMessage(error.response.data.message || error.message);
-        }
-        // eslint-disable-next-line
-    },[status, error]);
-
-    // show the error toast message
-    useEffect(() => {
-        if(errorMessage)
-            notify(errorMessage, "error", {
-                onClose: () => setErrorMessage(""), // reset the error message
-            });
-        // eslint-disable-next-line
-    }, [errorMessage]);
 
     return {
         categoryName,

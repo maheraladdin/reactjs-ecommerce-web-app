@@ -2,7 +2,6 @@ import {CREATE_CATEGORY, GET_CATEGORIES} from "../Types/categoryType";
 
 const initialState = {
     categories: [],
-    loading: true,
     numberOfPages: 0,
     category: {},
 }
@@ -12,7 +11,6 @@ export default function categoryReducer(state = initialState, action) {
             return {
                 ...state,
                 categories: action.payload.categories,
-                loading: false,
                 numberOfPages: action.payload.numberOfPages,
                 status: action.payload.status,
             }
@@ -20,7 +18,6 @@ export default function categoryReducer(state = initialState, action) {
             return {
                 ...state,
                 category: action.payload.category,
-                loading: false,
                 status: action.payload.status,
             }
         default:
