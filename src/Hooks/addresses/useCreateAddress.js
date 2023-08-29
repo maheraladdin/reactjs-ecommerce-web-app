@@ -30,36 +30,20 @@ export default function useCreateAddress() {
     const handlePhoneChange = (e) => setPhone(e.target.value);
 
     const handleCreateAddress = async () => {
-        setLoading(true);
         setValidated(true);
 
         // validation layer
-        if(!address) {
-            notify("Address is required", "error");
-            setLoading(false);
-            return;
-        }
-        if(!city) {
-            notify("City is required", "error");
-            setLoading(false);
-            return;
-        }
-        if(!description) {
-            notify("Description is required", "error");
-            setLoading(false);
-            return;
-        }
-        if(!postalCode) {
-            notify("Postal Code is required", "error");
-            setLoading(false);
-            return;
-        }
-        if(!phone) {
-            notify("Phone is required", "error");
-            setLoading(false);
-            return;
-        }
+        if(!address) return notify("Address is required", "error");
 
+        if(!city) return notify("City is required", "error");
+
+        if(!description) return notify("Description is required", "error");
+
+        if(!postalCode) return notify("Postal Code is required", "error");
+
+        if(!phone) return notify("Phone is required", "error");
+
+        setLoading(true);
         // create address
         await dispatch(createAddress({
             body: {
@@ -74,11 +58,9 @@ export default function useCreateAddress() {
                     "Authorization": `Bearer ${token}`,
                 }
             }
-
         }));
         setValidated(false)
         setLoading(false);
-        notify("Address created successfully", "success");
         navigate(-1);
     }
 

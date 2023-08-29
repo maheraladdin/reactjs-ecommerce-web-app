@@ -8,6 +8,11 @@ export default function useUpdateOrderIsCancelledStatus(order) {
     const token = useSelector(state => state.userReducer.token);
     const currentPage = useSelector(state => state.orderReducer.currentPage);
 
+    /**
+     * @desc    Handle isCancelled change
+     * @param   {Boolean}  checked - isCancelled status
+     * @return  {Promise<void>}
+     */
     const handleIsCancelledChange = async (checked) => {
         await dispatch(updateOrderCancelStatus(order._id, {
             body: {

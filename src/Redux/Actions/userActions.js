@@ -29,6 +29,7 @@ export const login = params => reduxApi("post", "/auth/login", params,
                 user: payload.data.data.user,
                 token: payload.data.token,
                 tokenExpireAt: tokenExpireAt.toUTCString(),
+                status: payload.status,
             }
         });
     });
@@ -50,6 +51,7 @@ export const signup = params => reduxApi("post", "/auth/signup", params,
                 user: payload.data.document,
                 token: payload.data.token,
                 tokenExpireAt: tokenExpireAt.toUTCString(),
+                status: payload.status,
             }
         });
     });
@@ -64,24 +66,22 @@ export const logout = () => {
     }
 }
 
-export const setToken = (tokenFromCookie, tokenExpireAtFromCookie) => {
-    return {
-        type: SET_TOKEN,
-        payload: {
-            token: tokenFromCookie,
-            tokenExpireAt: tokenExpireAtFromCookie.toString(),
-        }
-    }
-}
+export const setToken = (tokenFromCookie, tokenExpireAtFromCookie) => ({
+    type: SET_TOKEN,
+    payload: {
+        token: tokenFromCookie,
+        tokenExpireAt: tokenExpireAtFromCookie.toString(),
+        status: 200,
+    },
+})
 
-export const resetPassword = email => {
-    return {
-        type: RESET_PASSWORD,
-        payload: {
-            resetPasswordByEmail: email,
-        }
+export const resetPassword = email => ({
+    type: RESET_PASSWORD,
+    payload: {
+        resetPasswordByEmail: email,
+        status: 200,
     }
-};
+});
 
 export const resetForgottenPassword = params => reduxApi("patch", "/auth/resetPassword", params,
     (dispatch, payload) => {
@@ -91,6 +91,7 @@ export const resetForgottenPassword = params => reduxApi("patch", "/auth/resetPa
             payload: {
                 token: payload.data.token,
                 tokenExpireAt: tokenExpireAt.toUTCString(),
+                status: payload.status,
             }
         });
     });
@@ -112,6 +113,7 @@ export const getLoggedUserData = (params) => reduxApi("get", "/users/loggedUser"
             type: GET_LOGGED_USER_DATA,
             payload: {
                 user: payload.data.document,
+                status: payload.status,
             }
         });
     });
@@ -131,6 +133,7 @@ export const updateLoggedUserData = params => reduxApi("put", "/users/updateLogg
             type: UPDATE_LOGGED_USER_DATA,
             payload: {
                 user: payload.data.document,
+                status: payload.status,
             }
         });
     });
@@ -153,6 +156,7 @@ export const updateLoggedUserPassword = params => reduxApi("patch", "/users/chan
                 user: payload.data.document,
                 token: payload.data.token,
                 tokenExpireAt: tokenExpireAt.toUTCString(),
+                status: payload.status,
             }
         });
     });

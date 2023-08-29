@@ -18,6 +18,7 @@ const initialState = {
     token: '',
     tokenExpireAt: '',
     resetPasswordByEmail: '',
+    status: 0,
 }
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
@@ -30,6 +31,7 @@ export default function userReducer(state = initialState, action) {
                 user: action.payload.user,
                 token: action.payload.token,
                 tokenExpireAt: action.payload.tokenExpireAt,
+                status: action.payload.status,
             }
         case SIGNUP:
             document.cookie = `token=${action.payload.token}; expires=${action.payload.tokenExpireAt}; path=/;`;
@@ -39,6 +41,7 @@ export default function userReducer(state = initialState, action) {
                 user: action.payload.user,
                 token: action.payload.token,
                 tokenExpireAt: action.payload.tokenExpireAt,
+                status: action.payload.status,
             }
         case LOGOUT:
             document.cookie = `token=; expires=; path=/;`;
@@ -49,11 +52,13 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 token: action.payload.token,
                 tokenExpireAt: action.payload.tokenExpireAt,
+                status: action.payload.status,
             }
         case RESET_PASSWORD:
             return {
                 ...state,
-                resetPasswordByEmail: action.payload.resetPasswordByEmail
+                resetPasswordByEmail: action.payload.resetPasswordByEmail,
+                status: action.payload.status,
             }
         case RESET_FORGOTTEN_PASSWORD:
             document.cookie = `token=${action.payload.token}; expires=${action.payload.tokenExpireAt}; path=/;`;
@@ -62,17 +67,20 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 token: action.payload.token,
                 tokenExpireAt: action.payload.tokenExpireAt,
+                status: action.payload.status,
             }
         // user reducer
         case GET_LOGGED_USER_DATA:
             return {
                 ...state,
                 user: action.payload.user,
+                status: action.payload.status,
             }
         case UPDATE_LOGGED_USER_DATA:
             return {
                 ...state,
                 user: action.payload.user,
+                status: action.payload.status,
             }
         case UPDATE_LOGGED_USER_PASSWORD:
             document.cookie = `token=${action.payload.token}; expires=${action.payload.tokenExpireAt}; path=/;`;
@@ -82,6 +90,7 @@ export default function userReducer(state = initialState, action) {
                 user: action.payload.user,
                 token: action.payload.token,
                 tokenExpireAt: action.payload.tokenExpireAt,
+                status: action.payload.status,
             }
         default:
             return state;

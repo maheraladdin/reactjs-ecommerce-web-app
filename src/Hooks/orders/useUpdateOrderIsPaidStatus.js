@@ -8,6 +8,11 @@ export default function useUpdateOrderIsPaidStatus(order) {
     const token = useSelector(state => state.userReducer.token);
     const currentPage = useSelector(state => state.orderReducer.currentPage);
 
+    /**
+     * @desc    Handle isPaid change
+     * @param   {Boolean} checked - isPaid status
+     * @return  {Promise<void>}
+     */
     const handleIsPaidChange = async (checked) => {
         await dispatch(updateOrderPayStatus(order._id, {
             body: {

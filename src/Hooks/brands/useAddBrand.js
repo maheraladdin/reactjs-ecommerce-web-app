@@ -18,19 +18,12 @@ export default function useAddBrand() {
     const [loading, setLoading] = useState(false);
     // state of form validation
     const [validated, setValidated] = useState(false);
-    // state of error message
-    const [errorMessage, setErrorMessage] = useState("");
+
 
     const dispatch = useDispatch();
 
     // get the token from redux store
     const token = useSelector(state => state.userReducer.token);
-
-    // get the status of the request
-    const status = useSelector(state => state.brandReducer.status);
-
-    // get error object
-    const error = useSelector(state => state.errorReducer.error);
 
     // get the notify function
     const notify = useNotify();
@@ -47,8 +40,11 @@ export default function useAddBrand() {
         // check if the form is valid
         setValidated(true);
 
-        // check if the form is empty
-        if(!brandName || !uploadImages.length) return notify("Please fill all the fields", "error");
+        // check if the brand name is empty
+        if(!brandName) return notify("Please fill brand name", "error");
+
+        // check if the image is empty
+        if(!uploadImages.length) return notify("Please upload brand image", "error");
 
         // create the form data
         const formData = new FormData();
@@ -76,7 +72,9 @@ export default function useAddBrand() {
 
     /**
      * @description this function is used to update the state of brand name
-     * @param  {Event} e
+     * @param  {Event} e - the event object
+     * @param  {Object} e.target - the target of the event
+     * @param  {string} e.target.value - the value of the input
      * @return {void}
      */
     const onBrandNameChange = (e) => {
@@ -93,30 +91,6 @@ export default function useAddBrand() {
             setValidated(false);
         }
     },[loading]);
-
-    // show the toast message after adding a new brand or if there is an error
-    useEffect(() => {
-        if (status === 201) {
-            // show the done toast message
-            notify("Brand added successfully", "success");
-        } else if((error && error.response && error.response.data && error.response.data.message)) {
-            // show the error toast message
-            setErrorMessage(error.response.data.message);
-        } else if (error && error.message) {
-            // show the error toast message
-            setErrorMessage(error.message);
-        }
-        // eslint-disable-next-line
-    },[status, error]);
-
-    // show the error toast message
-    useEffect(() => {
-        if(errorMessage)
-            notify(errorMessage, "error", {
-                onClose: () => setErrorMessage(""), // reset the error message
-            });
-        // eslint-disable-next-line
-    }, [errorMessage]);
 
     return {
         brandName,

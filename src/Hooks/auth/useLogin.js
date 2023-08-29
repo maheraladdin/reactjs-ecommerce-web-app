@@ -1,7 +1,7 @@
 import {useState} from "react";
 import useNotify from "../useNotify";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../Redux/Actions/userActions";
 
 export default function useLogin() {
@@ -13,6 +13,8 @@ export default function useLogin() {
     const notify = useNotify();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const status = useSelector(state => state.userReducer.status);
+
 
     /**
      * @description Handle change email
@@ -54,7 +56,7 @@ export default function useLogin() {
                 }
             }
         }));
-        navigate('/');
+        if(status === 200) navigate('/');
     }
 
     /**
@@ -64,29 +66,11 @@ export default function useLogin() {
      */
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         // validate form
         setValidated(true);
         if(!email) return notify('Email is required', 'error');
         if(!password) return notify('Password is required', 'error');
-
-        try {
-            await requestLogin();
-        } catch (e) {
-            if(e && e.response && e.response.data && e.response.data.errors) {
-                for (let error of e.response.data.errors) {
-                    notify(error.msg, 'error');
-                }
-            }
-            else if(e && e.response && e.response.data && e.response.data.message) {
-                notify(e.response.data.message, 'error');
-            }
-            else if(e && e.response && e.response.data) {
-                notify(e.response.data, 'error');
-            }
-
-            }
-
+        await requestLogin();
         }
 
     return {

@@ -1,12 +1,10 @@
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {createAddress, getAddressById, updateAddress} from "../../Redux/Actions/addressActions";
-import useNotify from "../useNotify";
+import {getAddressById, updateAddress} from "../../Redux/Actions/addressActions";
 import {useNavigate, useParams} from "react-router-dom";
 
 export default function useUpdateAddress() {
     const dispatch = useDispatch();
-    const notify = useNotify();
     const navigate = useNavigate();
     const token = useSelector(state => state.userReducer.token);
     const addressObj = useSelector(state => state.addressReducer.address);
@@ -53,24 +51,23 @@ export default function useUpdateAddress() {
         }));
         setValidated(false);
         setLoading(false);
-        notify("Address updated successfully", "success");
         navigate(-1);
     }
 
     useEffect(() => {
-        token && (async () => {
-           await dispatch(getAddressById(id, {
+            token && (async () => {
+            await dispatch(getAddressById(id, {
                body: {
                    headers: {
                        "Authorization": `Bearer ${token}`,
                    }
                }
-           }));
-            setAddress(addressObj.alias);
-            setCity(addressObj.city);
-            setDescription(addressObj.details);
-            setPostalCode(addressObj.postalCode);
-            setPhone(addressObj.phone);
+            }));
+            setAddress(addressObj?.alias);
+            setCity(addressObj?.city);
+            setDescription(addressObj?.details);
+            setPostalCode(addressObj?.postalCode);
+            setPhone(addressObj?.phone);
         })()
         // eslint-disable-next-line
     },[id,token])

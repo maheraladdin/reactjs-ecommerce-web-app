@@ -1,6 +1,6 @@
 import baseURL from "../../Api/BaseURL";
 import {GET_ERROR} from "../Types/errorType";
-
+import {toast} from "react-toastify";
 
 /**
  * @description This hook is used to Request data with any method from API, dispatch the response to redux, and handle errors
@@ -23,12 +23,25 @@ export default function reduxApi(method, url, params = {}, callbackDispatch) {
             const payload = await baseURL[method](url, params?.body, params?.config);
             // dispatch the response to redux
             await callbackDispatch(dispatch, payload);
-        } catch (error) {
+            // toast the success message
+            if(payload?.message) toast.success(payload.message);
+        } catch (e) {
+            if(e?.response?.data?.errors) {
+                for (let error of e.response.data.errors) {
+                    toast.error(error.msg);
+                }
+            }
+            else if(e?.response?.data?.message) {
+                toast.error(e.response.data.message);
+            }
+            else if(e?.response?.data) {
+                toast.error(e.response.data);
+            }
             // dispatch the error to redux
             dispatch({
                 type: GET_ERROR,
-                error: error,
-                status: error && error.response && error.response.status,
+                error: e,
+                status: e?.response?.status,
             });
         }
     }

@@ -24,6 +24,12 @@ export default function useGetAllOrders() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[token]);
 
+    /**
+     * @desc    Handle page change for pagination component
+     * @param   {Object} page - Selected page
+     * @param   {Object} page.selected - Selected page number
+     * @return  {Promise<void>}
+     */
     const handlePageChange = async (page) => {
         await dispatch(getAllOrders(page.selected + 1, 3, {
             body: {

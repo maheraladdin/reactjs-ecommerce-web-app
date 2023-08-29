@@ -8,6 +8,11 @@ export default function useUpdateOrderIsDeliveredStatus(order) {
     const token = useSelector(state => state.userReducer.token);
     const currentPage = useSelector(state => state.orderReducer.currentPage);
 
+    /**
+     * @desc    Handle isDelivered change
+     * @param   {Boolean} checked - isDelivered status
+     * @return  {Promise<void>}
+     */
     const handleIsDeliveredChange = async (checked) => {
         await dispatch(updateOrderDeliveryStatus(order._id, {
             body: {
