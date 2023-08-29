@@ -55,7 +55,7 @@ export default function useUpdateAddress() {
     }
 
     useEffect(() => {
-            token && (async () => {
+        token && (async () => {
             await dispatch(getAddressById(id, {
                body: {
                    headers: {
@@ -63,14 +63,14 @@ export default function useUpdateAddress() {
                    }
                }
             }));
-            setAddress(addressObj?.alias);
-            setCity(addressObj?.city);
-            setDescription(addressObj?.details);
-            setPostalCode(addressObj?.postalCode);
-            setPhone(addressObj?.phone);
+            setAddress(addressObj.alias);
+            setCity(addressObj.city);
+            setDescription(addressObj.details);
+            setPostalCode(addressObj.postalCode);
+            setPhone(addressObj.phone);
         })()
         // eslint-disable-next-line
-    },[id,token])
+    },[id,token,addressObj])
 
 
 
