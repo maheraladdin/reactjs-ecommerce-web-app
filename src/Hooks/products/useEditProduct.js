@@ -62,36 +62,36 @@ export default function useEditProduct() {
 
     /**
      * @desc    this function handle input Quantity
-     * @param   e
+     * @param   {Event} e - event object
+     * @param   {Object} e.target - event target
+     * @param   {Number} e.target.value - event target value
      * @return  void
      */
-    const handleQuantity = (e) => {
-        setQuantity(e.target.value);
-    }
+    const handleQuantity = (e) => setQuantity(e.target.value);
 
     // states for product price
     const [price, setPrice] = useState(0);
 
     /**
      * @desc    this function handle input price
-     * @param   e
+     * @param   {Event} e - event object
+     * @param   {Object} e.target - event target
+     * @param   {Number} e.target.value - event target value
      * @return  void
      */
-    const handlePrice = (e) => {
-        setPrice(e.target.value);
-    }
+    const handlePrice = (e) => setPrice(e.target.value);
 
     // states for product discounted price
     const [discountedPrice, setDiscountedPrice] = useState(0);
 
     /**
      * @desc    this function handle input discounted price
-     * @param   e
+     * @param   {Event} e - event object
+     * @param   {Object} e.target - event target
+     * @param   {Number} e.target.value - event target value
      * @return  void
      */
-    const handleDiscountedPrice = (e) => {
-        setDiscountedPrice(e.target.value);
-    }
+    const handleDiscountedPrice = (e) => setDiscountedPrice(e.target.value);
 
     // states for product category
     const [category, setCategory] = useState("");
@@ -102,12 +102,12 @@ export default function useEditProduct() {
 
     /**
      * @desc    this function handle input CategoryId
-     * @param   e
+     * @param   {Event} e - event object
+     * @param   {Object} e.target - event target
+     * @param   {string} e.target.value - event target value
      * @return  void
      */
-    const handleCategory = (e) => {
-        setCategory(e.target.value);
-    }
+    const handleCategory = (e) => setCategory(e.target.value);
 
     // states for multiselect subcategories
     const [selectedSubCategories, setSelectedSubCategories] = useState([]);
@@ -189,8 +189,6 @@ export default function useEditProduct() {
     // loading state
     const [loading, setLoading] = useState(false);
 
-    const editProductStatus = useSelector(state => state.productReducer.status);
-
     /**
      * @desc    this function handle add product
      * @param   e
@@ -246,48 +244,33 @@ export default function useEditProduct() {
                 }
             }
         }));
-        if(editProductStatus === 200) notify("Product Updated successfully", "success");
+
         setLoading(false);
     }
 
-    const error = useSelector(state => state.errorReducer.error);
-
-    const [errorMessage, setErrorMessage] = useState("");
     const notify = useNotify();
 
     // state of form validation
     const [validated, setValidated] = useState(false);
 
     useEffect(() => {
-        dispatch(getCategories(1,Number.MAX_SAFE_INTEGER,"name"));
-        dispatch(getBrands(1,Number.MAX_SAFE_INTEGER,"name"));
-        dispatch(getProductById(id))
+        (async () => {
+            await dispatch(getCategories(1, Number.MAX_SAFE_INTEGER, "name"));
+            await dispatch(getBrands(1, Number.MAX_SAFE_INTEGER, "name"));
+            await dispatch(getProductById(id))
+        })();
         // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         if (category) {
             setDisabled(false);
-            dispatch(getSubcategoriesForSpecificCategory(category, 1, Number.MAX_SAFE_INTEGER, "name"));
+            (async () => {
+                await dispatch(getSubcategoriesForSpecificCategory(category, 1, Number.MAX_SAFE_INTEGER, "name"));
+            })()
         }
         // eslint-disable-next-line
     }, [category]);
-
-    useEffect(() => {
-        if (error) {
-            setErrorMessage(error.message);
-        }
-        // eslint-disable-next-line
-    }, [editProductStatus]);
-
-
-    useEffect(() => {
-        if(errorMessage)
-            notify(errorMessage, "error", {
-                onClose: () => setErrorMessage(""), // reset the error message
-            });
-        // eslint-disable-next-line
-    }, [errorMessage]);
 
     useEffect(() => {
         if(product && product._id === id) {
@@ -318,7 +301,7 @@ export default function useEditProduct() {
                 "green",
                 "blue",
             ]);
-            if(product.colors)setSelectedColors(product.colors);
+            if(product.colors) setSelectedColors(product.colors);
         }
         // eslint-disable-next-line
     }, [product]);

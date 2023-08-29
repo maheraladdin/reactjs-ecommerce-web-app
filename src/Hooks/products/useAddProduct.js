@@ -238,13 +238,11 @@ export default function useAddProduct() {
                 }
             }
         }));
-        if(createProductStatus === 201) notify("Product created successfully", "success");
+
         setLoading(false);
     }
 
-    const error = useSelector(state => state.errorReducer.error);
 
-    const [errorMessage, setErrorMessage] = useState("");
     const notify = useNotify();
 
     // state of form validation
@@ -283,22 +281,6 @@ export default function useAddProduct() {
         }
         // eslint-disable-next-line
     },[loading]);
-
-    useEffect(() => {
-        if (error) {
-            setErrorMessage(error.message);
-        }
-        // eslint-disable-next-line
-    }, [createProductStatus]);
-
-
-    useEffect(() => {
-        if(errorMessage)
-            notify(errorMessage, "error", {
-                onClose: () => setErrorMessage(""), // reset the error message
-            });
-        // eslint-disable-next-line
-    }, [errorMessage]);
 
 
 
