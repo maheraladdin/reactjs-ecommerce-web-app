@@ -22,7 +22,8 @@ export default function useGetReviews() {
             if(review.user._id === user._id) return setIsReviewed(true);
         }
         setIsReviewed(false);
-    },[reviews])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[reviews]);
 
     return {
         reviews,

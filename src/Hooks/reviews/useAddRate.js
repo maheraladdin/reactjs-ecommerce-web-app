@@ -10,14 +10,17 @@ import useNotify from "../useNotify";
  */
 export default function useAddRate() {
 
+    const notify = useNotify();
+    const dispatch = useDispatch();
+
+
+    const {id} = useParams();
+    const user = useSelector(state => state.userReducer.user);
+    const token = useSelector(state => state.userReducer.token);
+
     const [comment, setComment] = useState("");
     const [rate, setRate] = useState(0.0);
     const [loading, setLoading] = useState(false);
-    const {id} = useParams();
-
-    const user = useSelector(state => state.userReducer.user);
-    const token = useSelector(state => state.userReducer.token);
-    const notify = useNotify();
 
     // handle comment change
     const handleCommentChange = (e) => setComment(e.target.value);
@@ -25,21 +28,23 @@ export default function useAddRate() {
     // handle rate change
     const handleRateChange = (newRating) => setRate(newRating);
 
-    const dispatch = useDispatch();
 
 
     // handle add rate
     const handleAddRate = async () => {
-        if(!rate) return notify("Please rate the product", "error");
         if(!user) return notify("Please login to add a review", "error");
+        if(!rate) return notify("Please rate the product", "error");
         setLoading(true);
+        const body = {
+            "rating": rate,
+            "product": id,
+            "user": user._id,
+        }
+        // add comment if it exists
+        if(comment) body.comment = comment;
+
         await dispatch(createReview({
-            body: {
-                "rating": rate,
-                "comment": comment ? comment : "No comment",
-                "product": id,
-                "user": user._id,
-            },
+            body,
             config: {
                 headers: {
                     "Authorization": `Bearer ${token}`,

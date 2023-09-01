@@ -6,16 +6,18 @@ import {useParams} from "react-router-dom";
 
 export default function useUpdateOrDeleteMyReview(reviewId,reviewRate,reviewComment) {
 
+        const dispatch = useDispatch();
+        const notify = useNotify();
+
+        const {id} = useParams();
+        const token = useSelector(state => state.userReducer.token);
+
+
         const [comment, setComment] = useState(reviewComment);
         const [rate, setRate] = useState(reviewRate);
         const [loading, setLoading] = useState(false);
         const [showUpdateModel, setShowUpdateModel] = useState(false);
         const [showDeleteModel, setShowDeleteModel] = useState(false);
-
-        const token = useSelector(state => state.userReducer.token);
-        const ReviewStatus = useSelector(state => state.reviewReducer.status);
-        const {id} = useParams();
-        const notify = useNotify();
 
         // handle show update model
         const handleShowUpdateModel = () => setShowUpdateModel(!showUpdateModel);
@@ -29,7 +31,6 @@ export default function useUpdateOrDeleteMyReview(reviewId,reviewRate,reviewComm
         // handle rate change
         const handleRateChange = (newRating) => setRate(newRating);
 
-        const dispatch = useDispatch();
 
         // handle update rate
         const handleUpdateReview = async () => {
@@ -46,12 +47,6 @@ export default function useUpdateOrDeleteMyReview(reviewId,reviewRate,reviewComm
                                 }
                         }
                 }));
-                if (ReviewStatus === 200) {
-                        notify("Review Updated Successfully", "success");
-                }
-                else {
-                        notify("Something went wrong", "error");
-                }
                 await dispatch(getReviewsForSpecificProduct(id));
                 setLoading(false);
                 setShowUpdateModel(false);
@@ -66,12 +61,6 @@ export default function useUpdateOrDeleteMyReview(reviewId,reviewRate,reviewComm
                                 }
                         }
                 }));
-                if (ReviewStatus === 200) {
-                        notify("Review Deleted Successfully", "success");
-                }
-                else {
-                        notify("Something went wrong", "error");
-                }
                 await dispatch(getReviewsForSpecificProduct(id));
                 setLoading(false);
         }
