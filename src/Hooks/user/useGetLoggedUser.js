@@ -46,10 +46,10 @@ export default function useGetLoggedUser() {
     },[user]);
 
     useEffect(() => {
+        if(!tokenLoaded) return;
+        if(!token) return;
+        if(Object.keys(user).length > 0) return;
         (async () => {
-            if(!tokenLoaded) return;
-            if(!token) return;
-            if(Object.keys(user).length > 0) return;
             await dispatch(getLoggedUserData({
                 body: {
                     headers: {

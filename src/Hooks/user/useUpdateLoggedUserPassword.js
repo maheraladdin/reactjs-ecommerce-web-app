@@ -25,6 +25,7 @@ export default function useUpdateLoggedUserPassword() {
     // form submit
     const updateLoggedUserPasswordHandler = async () => {
         if(!token) return;
+
         setValidated(true);
         if(!currentPassword) return notify("Current password is required", "error");
         if(!password) return notify("New Password is required", "error");
@@ -45,7 +46,6 @@ export default function useUpdateLoggedUserPassword() {
         }));
         setLoading(false);
         setValidated(false);
-        notify("Password updated successfully", "success");
     }
 
     useEffect(() => {

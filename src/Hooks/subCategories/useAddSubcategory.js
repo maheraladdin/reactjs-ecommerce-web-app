@@ -5,24 +5,21 @@ import {createSubcategory} from "../../Redux/Actions/subcategoryActions";
 import useNotify from "../useNotify";
 
 export default function useAddSubcategory() {
+
+    const dispatch = useDispatch();
+    const notify = useNotify();
+
+
     const [subcategoryName, setSubcategoryName] = useState("");
     const [selectedCategoryId, setSelectedCategoryId] = useState("");
     const [loading, setLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
     const [validated, setValidated] = useState(false);
-
-    const dispatch = useDispatch();
 
     // get the token from redux store
     const token = useSelector(state => state.userReducer.token);
 
-    const notify = useNotify();
-
+    // get the categories from redux store
     const categories = useSelector(state => state.categoryReducer.categories);
-
-    const subcategoryStatus = useSelector(state => state.subcategoryReducer.status);
-
-    const error = useSelector(state => state.errorReducer.error);
 
 
     useEffect(() => {
@@ -74,21 +71,6 @@ export default function useAddSubcategory() {
             setValidated(false);
         }
     }, [loading]);
-
-
-    useEffect(() => {
-        if (subcategoryStatus === 201) return notify("subcategory is added successfully", "success");
-        else if (error) setErrorMessage(error.message);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [subcategoryStatus, error]);
-
-    useEffect(() => {
-        if (errorMessage)
-            notify(errorMessage, "error", {
-                onClose: () => setErrorMessage(""),
-            });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [errorMessage]);
 
 
     return {
