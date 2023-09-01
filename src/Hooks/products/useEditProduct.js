@@ -12,13 +12,11 @@ import {useBase64ToFile} from "../useBase64ToFile";
 export default function useEditProduct() {
 
     const {id} = useParams();
-
+    const base64ToFile = useBase64ToFile();
     const dispatch = useDispatch();
 
     // get the token from redux store
     const token = useSelector(state => state.userReducer.token);
-
-    const base64ToFile = useBase64ToFile();
 
     const product = useSelector(state => state.productReducer.product);
 
@@ -273,7 +271,7 @@ export default function useEditProduct() {
     }, [category]);
 
     useEffect(() => {
-        if(product && product._id === id) {
+        if(product?._id === id) {
 
             setImage([product.imageCover]);
             setImages(product.images.map(image => {

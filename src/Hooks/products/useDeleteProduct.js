@@ -20,8 +20,8 @@ export default function useDeleteProduct(id) {
                 }
             }
         }));
-        setShow(false);
         await dispatch(getProducts());
+        setShow(false);
         setLoading(false)
     }
 

@@ -10,8 +10,11 @@ export default function useGetProductsHomePage() {
     const newProducts = useSelector(state => state.productReducer.newestProducts);
 
     useEffect(() => {
-        if (mostSoldProducts.length === 0) dispatch(getMostSoldProducts());
-        if (newProducts.length === 0) dispatch(getNewestProducts());
+        if (mostSoldProducts.length > 0 || newProducts.length > 0) return;
+        (async () => {
+            await dispatch(getMostSoldProducts());
+            await dispatch(getNewestProducts());
+        })()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 

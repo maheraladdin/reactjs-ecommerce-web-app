@@ -8,7 +8,7 @@ import useNotify from "../useNotify";
 import AddImage from "../../assets/images/add-image.png";
 
 export default function useAddProduct() {
-
+    const notify = useNotify();
     const dispatch = useDispatch();
 
     // get the token from redux store
@@ -33,9 +33,7 @@ export default function useAddProduct() {
      * @param   e
      * @return  void
      */
-    const handleTitle = (e) => {
-        setTitle(e.target.value);
-    }
+    const handleTitle = (e) => setTitle(e.target.value);
 
     // states for product description
     const [description, setDescription] = useState("");
@@ -45,9 +43,7 @@ export default function useAddProduct() {
      * @param   e
      * @return  void
      */
-    const handleDescription = (e) => {
-        setDescription(e.target.value);
-    }
+    const handleDescription = (e) => setDescription(e.target.value);
 
     // states for product quantity
     const [quantity, setQuantity] = useState(0);
@@ -241,9 +237,6 @@ export default function useAddProduct() {
 
         setLoading(false);
     }
-
-
-    const notify = useNotify();
 
     // state of form validation
     const [validated, setValidated] = useState(false);
