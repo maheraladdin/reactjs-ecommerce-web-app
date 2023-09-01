@@ -6,8 +6,7 @@ import useNotify from "../useNotify";
 
 export default function useLoveButton(product) {
     const dispatch = useDispatch();
-    const wishlistReducer = useSelector(state => state.wishlistReducer);
-    const {wishlist} = wishlistReducer;
+    const wishlist = useSelector(state => state.wishlistReducer.wishlist);
     const [isLoved, setIsLoved] = useState(false);
     const userReducer = useSelector(state => state.userReducer);
     const {user, token} = userReducer;
@@ -25,7 +24,7 @@ export default function useLoveButton(product) {
     const handleLoveButton = async () => {
         if(!token) return notify("You must login first", "error");
         if(user.role !== "user") return notify("You must login as user first", "error");
-        if(isLoved) {
+        if(isLoved)
             // delete product from wishlist
             await dispatch(deleteProductFromWishlist(product._id, {
                 body: {
@@ -34,9 +33,7 @@ export default function useLoveButton(product) {
                     }
                 },
             }));
-            notify("Product removed from wishlist", "success");
-        }
-        else {
+        else
             // add product to wishlist
             await dispatch(addProductToWishlist({
                 body: {
@@ -48,8 +45,6 @@ export default function useLoveButton(product) {
                     }
                 }
             }));
-            notify("Product added to wishlist", "success");
-        }
     }
 
     return {

@@ -16,7 +16,6 @@ export const getWishlist = (params) => reduxApi("get",
             payload: {
                 wishlist: payload.data.wishlist,
                 status: payload.status,
-                message: payload.data.message,
             }
         });
     });
@@ -34,7 +33,6 @@ export const addProductToWishlist = (params) => reduxApi("post", "/wishlist", pa
             type: ADD_PRODUCT_TO_WISHLIST,
             payload: {
                 status: payload.status,
-                message: payload.data.message,
                 wishlist: payload.data.wishlist,
             }
         });
@@ -52,7 +50,6 @@ export const deleteProductFromWishlist = (id, params) => reduxApi("delete", `/wi
         dispatch({
             type: DELETE_PRODUCT_FROM_WISHLIST,
             payload: {
-                message: payload.data.message,
                 wishlist: payload.data.wishlist,
                 status: payload.status
             }
