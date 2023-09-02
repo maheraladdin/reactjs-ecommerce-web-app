@@ -86,7 +86,7 @@ export function UploadImages({setUploadImages,images,setImages}) {
 							</Col>
 						</Row>
 						<Button variant={"outline-danger"} className={`w-100 ${images.length < 2 && "d-none"}`}
-								onClick={() => onImageRemoveAll}>Remove all images</Button>
+								onClick={onImageRemoveAll}>Remove all images</Button>
 					</section>
 				)
 			}

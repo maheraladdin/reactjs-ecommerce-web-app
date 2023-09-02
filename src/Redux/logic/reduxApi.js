@@ -16,7 +16,6 @@ import {toast} from "react-toastify";
  * @return {(function(*): Promise<void>)|*}
  */
 export default function reduxApi(method, url, params = {}, callbackDispatch) {
-    params.timeout = 10000;
     return async (dispatch) => {
         try {
             // fetch data from a url endpoint
