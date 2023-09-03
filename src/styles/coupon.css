@@ -1,0 +1,9 @@
+.table th:first-child {
+    position: sticky;
+    left: 0;
+}
+
+.table td:first-child {
+    position: sticky;
+    left: 0;
+}
