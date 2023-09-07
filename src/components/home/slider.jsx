@@ -36,26 +36,21 @@ function Slider({advertisements,width,height,className}) {
             activeIndex={index}
             onSelect={handleSelect}
             className={`slider ${className}`}
-            style={{
-                width,
-                height
-            }}
+            width={width}
+            height={height}
         >
             {
                 advertisements.map((advertisement) => (
                     <Carousel.Item
                         key={advertisement.id}
                         interval={sliderTime}
-                        style={{
-                            width,
-                            height
-                        }}
+                        width={width}
+                        height={height}
                     >
                         <img
                             className="d-block slider-image"
                             src={advertisement.image}
                             alt={advertisement.title}
-                            loading={"lazy"}
                         />
                         {advertisement.title && advertisement.description ?
                         <Carousel.Caption>

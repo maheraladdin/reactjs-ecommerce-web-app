@@ -11,7 +11,9 @@ export default function AdvertisementBar() {
                 Advertisement
             </section>
             <section>
-                <img className="w-100" src="https://via.placeholder.com/728x90.png?text=adv+image" alt="Advertisement img" />
+                <img style={{
+                    aspectRatio: 728/90,
+                }} className="w-100" src="https://via.placeholder.com/728x90.png?text=adv+image" alt="Advertisement img" />
             </section>
         </Container>
     );

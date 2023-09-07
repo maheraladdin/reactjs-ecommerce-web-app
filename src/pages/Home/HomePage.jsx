@@ -10,7 +10,7 @@ export default function HomePage() {
     const {newProducts, mostSoldProducts, loadingNewProducts, loadingMostSoldProducts} = useGetProductsHomePage();
     return (
         <PageTemplate>
-            <Slider />
+            <Slider width={"100vw"} height={"100%"} />
             <CategoryHomeViewer />
             <BestProductViewer title={"Most Sold"} products={mostSoldProducts} loading={loadingMostSoldProducts}/>
             <AdvertisementBar />

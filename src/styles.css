@@ -13,3 +13,7 @@
 .resize-none {
     resize: none;
 }
+
+img {
+    aspect-ratio: 1/1;
+}
