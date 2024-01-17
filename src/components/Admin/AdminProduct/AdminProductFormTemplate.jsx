@@ -2,7 +2,7 @@ import UploadImage from "../../utility/UploadImage";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {MultiSelect} from "react-multi-select-component";
-import ColorPicker from "react-pick-color";
+import { SketchPicker } from 'primeobjects-react-color'
 import {Spinner} from "react-bootstrap";
 import {Fragment} from "react";
 import {UploadImages} from "../../utility/UploadImages";
@@ -151,7 +151,7 @@ export default function AdminProductFormTemplate({
 						>
 							<section className="fa-solid fa-plus"></section>
 						</section>
-						<ColorPicker className={displayColorPicker ? ""  : "d-none"} color={pickedColor} onChange={handlePickedColor} />
+						<SketchPicker className={displayColorPicker ? ""  : "d-none"} color={pickedColor} onChange={handlePickedColor} />
 						<section
 							role="button"
 							className={`bg-success rounded-circle d-flex justify-content-center align-items-center border border-1 border-light ${displayColorPicker ? ""  : "d-none"}`}

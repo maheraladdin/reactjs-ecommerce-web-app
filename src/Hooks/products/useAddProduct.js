@@ -15,7 +15,7 @@ export default function useAddProduct() {
     const token = useSelector(state => state.userReducer.token);
 
     // states for cover image
-    const [uploadCoverImage, setUploadCoverImage] = useState([]);
+    const [uploadCoverImage, setUploadCoverImage] = useState(null);
 
     const [image, setImage] = useState([AddImage]);
 
@@ -204,26 +204,24 @@ export default function useAddProduct() {
 
         setLoading(true);
         const formData = new FormData();
-        await (async () => {
-            formData.append("imageCover", uploadCoverImage[0]);
-            for(let i = 0; i < uploadImages.length; i++) {
-                formData.append("images", uploadImages[i]);
-            }
-            formData.append("title", title);
-            formData.append("description", description);
-            formData.append("quantity", quantity);
-            formData.append("price", price);
-            formData.append("discountedPrice", discountedPrice);
-            formData.append("category", category);
-            if (subcategories.length > 0)
-                selectedSubCategories.forEach(subcategory => {
-                    formData.append("subCategories[]", subcategory.value);
-                })
-            if (brand) formData.append("brand", brand);
-            selectedColors.forEach(color => {
-                if (colors.includes(color)) formData.append("colors", color);
+        formData.append("imageCover", uploadCoverImage[0]);
+        for(let i = 0; i < uploadImages.length; i++) {
+            formData.append("images", uploadImages[i]);
+        }
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("quantity", quantity);
+        formData.append("price", price);
+        formData.append("discountedPrice", discountedPrice);
+        formData.append("category", category);
+        if (subcategories.length > 0)
+            selectedSubCategories.forEach(subcategory => {
+                formData.append("subCategories[]", subcategory.value);
             })
-        })();
+        if (brand) formData.append("brand", brand);
+        selectedColors.forEach(color => {
+            if (colors.includes(color)) formData.append("colors", color);
+        });
 
         await dispatch(createProduct({
             body: formData,
