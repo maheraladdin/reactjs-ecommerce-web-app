@@ -6,10 +6,6 @@ export default function useSearch() {
     const expand = 'lg';
     const dispatch = useDispatch();
 
-    const setLocalStorage = (e, storageKey) => {
-        localStorage.setItem(storageKey, e.target.textContent);
-    }
-
     const [keyWord, setKeyWord] = useState("");
 
     const handleSearch = (e) => {
@@ -25,7 +21,6 @@ export default function useSearch() {
 
     return {
         expand,
-        setLocalStorage,
         keyWord,
         handleSearch,
         onClickSearch

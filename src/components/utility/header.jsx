@@ -18,7 +18,6 @@ export default function Header() {
 
     const {
         expand,
-        setLocalStorage,
         keyWord,
         handleSearch,
         onClickSearch,
@@ -101,23 +100,6 @@ export default function Header() {
                                         </NavDropdown>
                                     )
                                 }
-
-                                <NavDropdown
-                                    title="appearance mode"
-                                    id={`offcanvasNavbarDropdown-expand-${expand}`}
-                                >
-                                    <NavDropdown.Item onClick={e => setLocalStorage(e,"appearanceMode")}>System mode</NavDropdown.Item>
-                                    <NavDropdown.Item onClick={e => setLocalStorage(e,"appearanceMode")}>light mode</NavDropdown.Item>
-                                    <NavDropdown.Item onClick={e => setLocalStorage(e,"appearanceMode")}>dark mode</NavDropdown.Item>
-                                </NavDropdown>
-
-                                <NavDropdown
-                                    title="language"
-                                    id={`offcanvasNavbarDropdown-expand-${expand}`}
-                                >
-                                    <NavDropdown.Item onClick={(e) => setLocalStorage(e,"language")}>English</NavDropdown.Item>
-                                    <NavDropdown.Item onClick={(e) => setLocalStorage(e,"language")}>عربي</NavDropdown.Item>
-                                </NavDropdown>
                             </Nav>
                             <Form className="d-flex w-100 gap-3">
                                 <Link to={productsRoute} className="text-decoration-none w-100">
