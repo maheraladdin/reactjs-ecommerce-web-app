@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import {useId, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import Sales1 from "../../assets/images/sales1.jpg";
+import Sales2 from "../../assets/images/sales2.jpg";
+import Sales3 from "../../assets/images/sales3.jpg";
+import Sales4 from "../../assets/images/sales4.jpg";
 
 function Slider({advertisements,width,height,className}) {
     const [index, setIndex] = useState(0);
+    const id = useId();
 
     const handleSelect = (selectedIndex) => {
         setIndex(selectedIndex);
@@ -10,22 +15,24 @@ function Slider({advertisements,width,height,className}) {
 
     if(!advertisements) advertisements = [
         {
-            id: 1,
             title: "First slide label",
             description: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-            image: "https://via.placeholder.com/800x400?text=First+slide",
+            image: Sales1,
         },
         {
-            id: 2,
             title: "Second slide label",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            image: "https://via.placeholder.com/800x400?text=Second+slide",
+            image: Sales2,
         },
         {
-            id: 3,
             title: "Third slide label",
             description: "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-            image: "https://via.placeholder.com/800x400?text=Third+slide",
+            image: Sales3,
+        },
+        {
+            title: "Fourth slide label",
+            description: "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
+            image: Sales4,
         },
     ];
 
@@ -42,7 +49,7 @@ function Slider({advertisements,width,height,className}) {
             {
                 advertisements.map((advertisement) => (
                     <Carousel.Item
-                        key={advertisement.id}
+                        key={`${id}-${advertisement.title}`}
                         interval={sliderTime}
                         width={width}
                         height={height}
