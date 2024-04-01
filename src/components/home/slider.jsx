@@ -1,9 +1,9 @@
 import {useId, useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import Sales1 from "../../assets/images/sales1.jpg";
-import Sales2 from "../../assets/images/sales2.jpg";
-import Sales3 from "../../assets/images/sales3.jpg";
-import Sales4 from "../../assets/images/sales4.jpg";
+import Sales1 from "../../assets/images/sales/sale_1.jpeg";
+import Sales2 from "../../assets/images/sales/sale_2.jpeg";
+import Sales3 from "../../assets/images/sales/sale_3.jpeg";
+import Sales4 from "../../assets/images/sales/sale_4.jpeg";
 
 function Slider({advertisements,width,height,className}) {
     const [index, setIndex] = useState(0);
